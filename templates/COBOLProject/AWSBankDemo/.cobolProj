@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="cobolProject" name="AWSBankDemo" uuid="416aa1ce-96e7-4f12-a76a-c3ab9265e3db" version="5.0">
+   <settings xsi:type="projectSettingsContainer">
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="true" name="/AWSBankDemo" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/BMS" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COBOL" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES/COPYBOOK" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/JCL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/System/Loadlib" type="mfpath"/>
+      </copybook-paths>
+      <build-precedence-paths xsi:type="buildPrecedenceSettings">
+         <path enabled="true" name="/AWSBankDemo" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES/BMS" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES/COBOL" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES/COPYBOOK" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/SOURCES/JCL" type="mfpath"/>
+         <path enabled="true" name="/AWSBankDemo/System/Loadlib" type="mfpath"/>
+      </build-precedence-paths>
+      <configurations default="New Configuration" linkedWith="2017" xsi:type="buildConfigurationsContainer">
+         <configuration description="New Configuration" type="all_dll" xsi:type="cobolBuildConfiguration">
+            <targetdir name="AWSBankDemo"/>
+            <application_configuration xsi:type="runtimeConfigurationSettings">
+               <cobol_switches xsi:type="projectCobolSwitches"/>
+               <rts_switches xsi:type="projectRtsSwitches">
+                  <rts_switch name="A" value="on" index="1"/>
+                  <rts_switch name="D" value="off" index="0"/>
+                  <rts_switch name="F" value="on" index="0"/>
+                  <rts_switch name="I" value="off" index="2"/>
+                  <rts_switch name="O" value="on" index="0"/>
+                  <rts_switch name="S" value="off" index="5"/>
+               </rts_switches>
+               <deployment>
+                  <tunable name="reuse_container" value="true" index="0"/>
+                  <tunable name="reuse_container_after_error" value="true" index="0"/>
+                  <tunable name="app_always_exits" value="true" index="0"/>
+               </deployment>
+               <envScriptParameters></envScriptParameters>
+               <envScriptPath></envScriptPath>
+               <inheritBuildEnv>false</inheritBuildEnv>
+               <tunables>
+                  <tunable name="screen_lines" value="25" index="0"/>
+                  <tunable name="screen_cols" value="80" index="0"/>
+                  <tunable name="default_cancel_mode" value="2" index="0"/>
+               </tunables>
+            </application_configuration>
+            <link_settings xsi:type="linkSettings">
+               <options>
+                  <option id="targetName" name="linkSettings" value="AWSBankDemo"/>
+                  <option id="applicationType" name="linkSettings" value="console"/>
+                  <option id="outputDirectory" name="linkSettings" value="System/Loadlib"/>
+                  <option id="type" name="linkSettings" value="all_dll"/>
+                  <option id="threadedRts" name="linkSettings" value="threadedRts"/>
+                  <option id="runtimeModel" name="linkSettings" value="shared"/>
+                  <option id="platform" name="linkSettings" value="Windows"/>
+                  <option id="bitism" name="linkSettings" value="32 bit"/>
+               </options>
+               <additional_files/>
+            </link_settings>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="System/Loadlib/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </configuration>
+      </configurations>
+      <ims_settings xsi:type="additionalImsSettings">
+         <generatedFileDir name=""/>
+         <imsDatabaseDir name=""/>
+      </ims_settings>
+      <imscopy-paths xsi:type="imsCopyPathsSettings">
+         <path enabled="true" name="/AWSBankDemo" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/BMS" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COBOL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COPYBOOK" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/JCL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/System/Loadlib" type="mfpath"/>
+      </imscopy-paths>
+      <jcl-include-paths xsi:type="jclIncludePathsSettings">
+         <path enabled="true" name="/AWSBankDemo" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/BMS" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COBOL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COPYBOOK" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/JCL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/System/Loadlib" type="mfpath"/>
+      </jcl-include-paths>
+      <asmmacro-paths xsi:type="assemblerMacroPathsSettings">
+         <path enabled="true" name="/AWSBankDemo" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/BMS" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COBOL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/COPYBOOK" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/SOURCES/JCL" type="mfpath"/>
+         <path enabled="false" name="/AWSBankDemo/System/Loadlib" type="mfpath"/>
+      </asmmacro-paths>
+      <dependent-projects xsi:type="dependentProjectsSettings"/>
+      <asm_link_settings xsi:type="assemblerLinkSettings">
+         <options>
+            <option id="link_create_debug_info" name="mf370lnk" value="ANIM"/>
+            <option id="link_mark_reentrant" name="mf370lnk" value="RENT"/>
+            <option id="link_addressing_mode" name="mf370lnk" value="AMODE(31)"/>
+            <option id="link_residency_mode" name="mf370lnk" value="RMODE(31)"/>
+            <option id="link_generate_listing" name="mf370lnk" value="NOLIST"/>
+            <option id="link_mark_reusable" name="mf370lnk" value="REUS"/>
+            <option id="link_linker_output" name="mf370lnk" value="OMF(390)"/>
+            <option id="link_resolve_external" name="mf370lnk" value="CALL"/>
+         </options>
+      </asm_link_settings>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="macro" xsi:type="cobolFileContainer"/>
+      <filetype type="cobol" xsi:type="cobolFileContainer"/>
+      <filetype type="asm" xsi:type="cobolFileContainer"/>
+      <filetype type="psb" xsi:type="cobolFileContainer"/>
+      <filetype type="jcl" xsi:type="cobolFileContainer"/>
+      <filetype type="rexx" xsi:type="cobolFileContainer"/>
+      <filetype type="bms" xsi:type="cobolFileContainer"/>
+      <filetype type="mfs" xsi:type="cobolFileContainer"/>
+      <filetype type="clist" xsi:type="cobolFileContainer"/>
+      <filetype type="easytrieve" xsi:type="cobolFileContainer"/>
+      <filetype type="cobol.copybook" xsi:type="cobolFileContainer"/>
+      <filetype type="lin" xsi:type="cobolFileContainer"/>
+      <filetype type="dbd" xsi:type="cobolFileContainer"/>
+      <folders xsi:type="cobolFolderContainer">
+         <folder compile="true" path="SOURCES/COBOL" xsi:type="cobolFolder"/>
+         <folder compile="true" path="SOURCES/BMS" xsi:type="cobolFolder"/>
+         <folder compile="true" path="SOURCES/JCL" xsi:type="cobolFolder"/>
+         <folder compile="true" path="SOURCES" xsi:type="cobolFolder"/>
+      </folders>
+   </files>
+</project>

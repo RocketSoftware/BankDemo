@@ -1,0 +1,13 @@
+{"ResourceGroups": [
+  {
+    "entName": "BANKGRP",
+    "resNm": "BANKGRP",
+    "resDesc": "Resource Group for the BANKDEMO Application"
+  },
+  {
+    "entName": "BANKGRP2",
+    "resNm": "BANKGRP2",
+    "resDesc": "Resource Group 2 for the BANKDEMO Application"
+  }
+]
+}

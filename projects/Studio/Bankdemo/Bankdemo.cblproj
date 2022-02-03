@@ -1,0 +1,58 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{F117DB58-F1AB-4089-9CE8-F8D922885A08}</ProjectGuid>
+    <ProjectTypeGuids>{6710734B-1D50-4f99-AF91-F73BB8168F21};{535C04D7-A2A5-47c7-83E0-B340A995CD1F}</ProjectTypeGuids>
+    <OutputName>Bankdemo</OutputName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bankdemo</RootNamespace>
+    <LinkMultiDlls>true</LinkMultiDlls>
+    <MFProjectType>Native</MFProjectType>
+    <COBOLDir>False</COBOLDir>
+    <BmsCopybookOutputLocation>C:\MFETDUSER\BANKDEMO\SOURCES\copybook</BmsCopybookOutputLocation>
+    <BmsLoadModuleOutputLocation>C:\MFETDUSER\BANKDEMO\System\loadlib\</BmsLoadModuleOutputLocation>
+    <MFDependencyPaths>C:\MFETDUSER\BankDemo\Sources\copybook</MFDependencyPaths>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>C:\MFETDUSER\BANKDEMO\System\loadlib\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>5</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>ASCII</Charset>
+    <WarningLevel>0</WarningLevel>
+    <AdditionalDirectives>APOST
+CHANGEMESSAGE(10 W 1082 W)
+NOREENTRANT
+NOLIST
+NOTRUNCCALLNAME
+NOTRUNCCOPY
+NOMAPNAME
+NOFLAG
+FLAGAS(E)
+DEFAULTBYTE(00)
+DIRECTIVES-IN-COMMENTS
+NOHOSTFD</AdditionalDirectives>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>.\bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>100</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>EBCDIC</Charset>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.COBOL.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

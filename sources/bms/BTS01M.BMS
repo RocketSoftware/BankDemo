@@ -1,0 +1,59 @@
+*********************************************************************** 00000100
+*                                                                     * 00000200
+*   Copyright (C) 2010-2021 Micro Focus. All Rights Reserved.         * 00000300
+*   This demonstration program is provided for use by users           * 00000400
+*   of Micro Focus products and may be used, modified and             * 00000500
+*   distributed as part of your application provided that             * 00000600
+*   you properly acknowledge the copyright of Micro Focus             * 00000700
+*   in this material.                                                 * 00000800
+*                                                                     * 00000900
+*********************************************************************** 00001000
+BTS01M  DFHMSD BASE=MAPAREA,                                           -00001100
+               LANG=COBOL,                                             -00001200
+               MODE=INOUT,                                             -00001300
+               TIOAPFX=YES,                                            -00001400
+               TYPE=&&SYSPARM                                           00001500
+BTS01A  DFHMDI DSATTS=(COLOR,HILIGHT,PS,VALIDN),                       -00001600
+               MAPATTS=(COLOR,HILIGHT,PS,VALIDN),                      -00001700
+               SIZE=(24,80)                                             00001800
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -00001900
+               COLOR=BLUE,                                             -00002000
+               LENGTH=24,                                              -00002100
+               POS=(1,1),                                              -00002200
+               INITIAL='0101 BTS SCREEN 01 L01C0'                       00002300
+USERID  DFHMDF ATTRB=(FSET,IC,NORM,UNPROT),                            -00002400
+               COLOR=GREEN,                                            -00002500
+               LENGTH=8,                                               -00002600
+               POS=(3,1),                                              -00002700
+               INITIAL='12345678'                                       00002800
+        DFHMDF ATTRB=(ASKIP,NORM,PROT),                                -00002900
+               COLOR=GREEN,                                            -00003000
+               LENGTH=31,                                              -00003100
+               POS=(3,10),                                             -00003200
+               INITIAL='0301 USERID FSET IC NORM UNPROT'                00003300
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -00003400
+               COLOR=GREEN,                                            -00003500
+               LENGTH=0,                                               -00003600
+               POS=(3,32)                                               00003700
+        DFHMDF LENGTH=0,                                               -00003800
+               POS=(3,42)                                               00003900
+PSWD    DFHMDF ATTRB=(DRK,FSET,UNPROT),                                -00004000
+               COLOR=GREEN,                                            -00004100
+               LENGTH=8,                                               -00004200
+               POS=(4,1),                                              -00004300
+               INITIAL='PASSWORD'                                       00004400
+        DFHMDF ATTRB=(ASKIP,NORM,PROT),                                -00004500
+               COLOR=GREEN,                                            -00004600
+               LENGTH=25,                                              -00004700
+               POS=(4,10),                                             -00004800
+               INITIAL='0401 PSWD DRK FSET UNPROT'                      00004900
+        DFHMDF LENGTH=0,                                               -00005000
+               POS=(4,36)                                               00005100
+        DFHMDF ATTRB=(ASKIP,NORM),                                     -00005200
+               COLOR=BLUE,                                             -00005300
+               LENGTH=11,                                              -00005400
+               POS=(5,1),                                              -00005500
+               INITIAL='0501 Line 5'                                    00005600
+        DFHMSD TYPE=FINAL                                               00005700
+        END                                                             00005800
+* $ Version 7.00a sequenced on Thursday 20 Sep 2012 at 3:30pm           00005900
