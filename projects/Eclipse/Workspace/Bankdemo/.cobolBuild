@@ -1,0 +1,137 @@
+<project name="Bankdemo" default="build" basedir=".">
+    <taskdef name="cobol" classname="com.microfocus.ant.TaskCobol"/>
+    <taskdef name="cobolclean" classname="com.microfocus.ant.TaskCobolClean"/>
+    <taskdef name="cobollink" classname="com.microfocus.ant.TaskCobolLink"/>
+    <typedef name="mffilelist" classname="com.microfocus.ant.TypeFileList"/>
+    <typedef name="mfdirlist" classname="com.microfocus.ant.TypeDirectiveList"/>
+    <typedef name="mfdestfilelist" classname="com.microfocus.ant.TypeDestinationFileList"/>
+    
+    <!-- ****************************** -->
+    <!-- * OS-specific initialisation * -->
+    <!-- ****************************** -->
+    
+    <target name="os.init">
+        <condition property="windows">
+            <os family="windows"/>
+        </condition>
+        <condition property="unix">
+            <os family="unix"/>
+        </condition>
+    </target>
+    
+    <target name="os.init.windows" if="windows">
+        <property name="dllext" value=".dll"/>
+        <property name="exeext" value=".exe"/>
+        <property name="objext" value=".obj"/>
+        <property name="equalsInDir" value="="/>
+        <property name="pathVar.pS" value=";"/>
+        <property name="shell" value="cmd"/>
+        <property name="shell.ext" value=".bat"/>
+        <property name="shell.arg" value="/c"/>
+        <property name="script.header" value="@rem MS-DOS Batch File"/>
+    </target>
+    
+    <target name="os.init.unix" if="unix">
+        <property name="dllext" value=".so"/>
+        <property name="exeext" value=""/>
+        <property name="objext" value=".o"/>
+        <property name="equalsInDir" value="="/>
+        <property name="pathVar.pS" value=":"/>
+        <property name="shell" value="sh"/>
+        <property name="shell.ext" value=".sh"/>
+        <property name="shell.arg" value="-c"/>
+        <property name="script.header" value="#!/bin/sh"/>
+    </target>
+    
+    <!-- ***************************** -->
+    <!-- * COBOL compiler directives * -->
+    <!-- ***************************** -->
+    
+    <!-- ********************** -->
+    <!-- * COBOL source files * -->
+    <!-- ********************** -->
+    
+    
+    <!-- **************************************** -->
+    <!-- * COBOL Source Files and Directive Set * -->
+    <!-- **************************************** -->
+    
+    <!-- **************************** -->
+    <!-- * COBOL copybook locations * -->
+    <!-- **************************** -->
+    
+    <mffilelist id="cobol.copybook.locations">
+        <path type="copybook" name="${Bankdemo}"/>
+    </mffilelist>
+    
+    <!-- **************** -->
+    <!-- * Object files * -->
+    <!-- **************** -->
+    
+    <!-- ************************* -->
+    <!-- * Configuration targets * -->
+    <!-- ************************* -->
+    
+    <!-- cfg.New_Configuration -->
+    
+    <target name="cfg.New_Configuration" depends="init">
+        <echo message="No files to compile"/>
+    </target>
+    <target name="New_Configuration.FileCompile" depends="init"/>
+    
+    <target name="clean.cfg.New_Configuration" depends="init"/>
+    
+    <target name="pre.build.cfg.New_Configuration" depends="init"/>
+    
+    <target name="post.build.cfg.New_Configuration" depends="init">
+        <tempfile property="temp.file" destdir="." prefix="script" suffix="${shell.ext}"/>
+        <touch file="${temp.file}"/>
+        <echo file="${temp.file}" append="false">${script.header}
+copy C:\MFETDUSER\BankDemo\Projects\Eclipse\Bankdemo\New_Configuration.bin\*.* C:\MFETDUSER\BankDemo\System\loadlib
+        </echo>
+        <chmod file="${temp.file}" perm="ugo+rx"/>
+        <exec dir="." executable="${shell}" failonerror="true">
+            <arg value="${shell.arg}"/>
+            <arg value="&quot;${temp.file}&quot;"/>
+        </exec>
+        <delete file="${temp.file}"/>
+    </target>
+    
+    <!-- ******************* -->
+    <!-- * General targets * -->
+    <!-- ******************* -->
+    
+    <target name="init.New_Configuration" if="isNew_Configuration">
+        <property name="cfgtargetdir" value="New_Configuration.bin"/>
+    </target>
+    
+    <target name="init" depends="os.init,os.init.windows,os.init.unix">
+        <property environment="env"/>
+        <property name="Bankdemo" value="${basedir}"/>
+        <property name="cfg" value="New_Configuration"/>
+        <property name="cfgtarget" value="cfg.${cfg}"/>
+        <property name="forceCompile" value="true"/>
+        
+        <condition property="isNew_Configuration">
+            <equals arg1="${cfg}" arg2="New_Configuration"/>
+        </condition>
+        <property name="pathVar.ECLIPSE_HOME" value="${env.ECLIPSE_HOME}"/>
+        <property name="pathVar.PARENT_LOC" value="${env.PARENT_LOC}"/>
+        <property name="pathVar.WORKSPACE_LOC" value="${env.WORKSPACE_LOC}"/>
+        <property name="pathVar.PROJECT_LOC" value="${env.PROJECT_LOC}"/>
+    </target>
+    
+    <target name="build" depends="init,init.New_Configuration">
+        <antcall target="pre.build.${cfgtarget}" inheritAll="true"/>
+        <antcall target="${cfgtarget}" inheritAll="true"/>
+        <antcall target="post.build.${cfgtarget}" inheritAll="true"/>
+    </target>
+    
+    <target name="compile" depends="init,init.New_Configuration">
+        <antcall target="${cfg}.FileCompile" inheritAll="true"/>
+    </target>
+    
+    <target name="clean" depends="init,init.New_Configuration">
+        <antcall target="clean.${cfgtarget}" inheritAll="true"/>
+    </target>
+</project>

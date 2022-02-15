@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Bankdemo</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.microfocus.eclipse.project.cobolBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.microfocus.eclipse.project.cobolNature</nature>
+		<nature>com.microfocus.eclipse.edt.core.edtNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>loadlib</name>
+			<type>2</type>
+			<locationURI>loadlib</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>loadlib</name>
+			<value>$%7BPARENT-3-PROJECT_LOC%7D/System/loadlib</value>
+		</variable>
+	</variableList>
+</projectDescription>

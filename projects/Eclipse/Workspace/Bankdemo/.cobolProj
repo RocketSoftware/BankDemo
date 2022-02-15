@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="cobolProject" name="Bankdemo" version="2.3">
+   <settings xsi:type="projectSettingsContainer">
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+      </copybook-paths>
+      <build-precedence-paths xsi:type="buildPrecedenceSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+      </build-precedence-paths>
+      <configurations default="loadlib" xsi:type="buildConfigurationsContainer">
+         <configuration is64bit="false" description="loadlib" platform="Windows" type="all_dll" xsi:type="buildConfiguration">
+            <targetdir name="loadlib"/>
+            <link_settings xsi:type="linkSettings">
+               <additional_options value=""/>
+               <rts_bind value="false"/>
+               <custom_link_command value=""/>
+               <debug value="false"/>
+               <entry_point name=""/>
+               <error_undefined_syms value="false"/>
+               <application_type value="console"/>
+               <include_cpp value="false"/>
+               <additional_files/>
+               <rcfile path=""/>
+               <rts_type value="shared"/>
+               <target path="loadlib/Bankdemo"/>
+               <targettype type="dll/cso"/>
+               <threaded_rts value="true"/>
+               <verbose value="false"/>
+            </link_settings>
+            <build_events xsi:type="buildEventsSettings">
+               <post_build_script></post_build_script>
+               <pre_build_script></pre_build_script>
+            </build_events>
+            <application_configuration xsi:type="runtimeConfigurationSettings">
+               <cobol_switches xsi:type="projectCobolSwitches"/>
+               <rts_switches xsi:type="projectRtsSwitches"/>
+               <tunables>
+                  <tunable index="0" value="1" name="default_cancel_mode"/>
+                  <tunable index="0" value="4" name="program_search_order"/>
+                  <tunable index="0" value="false" name="arguments_are_initial"/>
+                  <tunable index="0" value="false" name="command_line_accept"/>
+                  <tunable index="0" value="0" name="sort_memory"/>
+                  <tunable index="0" value="2147483647" name="dynamic_memory_limit"/>
+                  <tunable index="0" value="100" name="memory_free_check_size"/>
+                  <tunable index="0" value="1" name="memory_strategy"/>
+                  <tunable index="0" value="false" name="ansi_input_mode"/>
+                  <tunable index="0" value="25" name="screen_lines"/>
+                  <tunable index="0" value="80" name="screen_cols"/>
+                  <tunable index="0" value="0" name="current_year"/>
+                  <tunable index="0" value="0" name="current_month"/>
+                  <tunable index="0" value="0" name="current_day"/>
+                  <tunable index="0" value="false" name="datewarp_dynamic"/>
+                  <tunable index="0" value="-1" name="current_hour"/>
+                  <tunable index="0" value="-1" name="current_minute"/>
+                  <tunable index="0" value="-1" name="current_second"/>
+                  <tunable index="0" value="false" name="timewarp_dynamic"/>
+               </tunables>
+            </application_configuration>
+         </configuration>
+      </configurations>
+      <cobol_settings xsi:type="cobolSettings">
+         <options>
+            <option name="SOURCEFORMAT" value="fixed"/>
+            <option name="DIALECT" value="ENTCOBOL"/>
+            <option name="CHARSET" value="EBCDIC"/>
+            <option name="MAX-ERROR" value="100"/>
+         </options>
+         <debug value="true"/>
+         <verbose value="false"/>
+         <retainDirectivesFile value="false"/>
+      </cobol_settings>
+      <sql_settings enabled="false" type="OpenESQL" xsi:type="sqlSettings"/>
+      <bms_settings xsi:type="bmsSettings">
+         <options>
+            <option id="sdf" name="/IGNORE"/>
+            <option id="map" name="/SYSPARM" value="MAP"/>
+            <option id="decimalchar" name="/DP" value="."/>
+            <option id="dsectname" name="" value=""/>
+            <option id="dsect" name="/SYSPARM" value="DSECT"/>
+            <option id="longmacros" name=""/>
+            <option id="additional" name="" value=""/>
+            <option id="mapname" name="" value=""/>
+            <option id="align" name=""/>
+            <option id="currencychar" name="/CS" value="$"/>
+            <option id="sdfprefix" name="" value=""/>
+            <option id="level" name="" value=""/>
+         </options>
+         <asmdir name=""/>
+         <coboldir name=""/>
+         <plidir name=""/>
+         <targetdir name=""/>
+         <verbose value="false"/>
+      </bms_settings>
+      <dependent-projects xsi:type="dependentProjectsSettings"/>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="cobol" xsi:type="cobolFileContainer"/>
+      <filetype type="cobol.copybook" xsi:type="cobolFileContainer"/>
+      <filetype type="bms" xsi:type="cobolFileContainer"/>
+      <filetype xsi:type="cobolFileContainer"/>
+      <filetype type="jcl" xsi:type="cobolFileContainer"/>
+   </files>
+</project>
