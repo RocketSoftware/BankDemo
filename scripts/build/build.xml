@@ -77,9 +77,6 @@ WITH THIS SOFTWARE.
 	<!--  **********************  -->
 	<!-- cobol_file_set_1 -->
 	<fileset dir="${basedir}" id="cobol_file_set_1">
-		<include name="cobol/online/*.CBL"/>
-		<include name="cobol/other/*.CBL"/>
-		<include name="cobol/data/${dataversion}/*.CBL"/>
 		<include name="cobol/online/*.cbl"/>
 		<include name="cobol/other/*.cbl"/>
 		<include name="cobol/data/${dataversion}/*.cbl"/>
@@ -90,7 +87,7 @@ WITH THIS SOFTWARE.
 	<!--  **********************  -->
 	<!-- bms_file_set_1 -->
 	<fileset dir="${basedir}" id="bms_file_set_1">
-		<include name="**/*.BMS"/>
+		<include name="bms/cobol/*.bms"/>
 	</fileset>
 
 	<!-- **************** -->

@@ -1,0 +1,377 @@
+ /****************************************************************
+ *                                                               *
+ *   Copyright (C) 1998.2010 Micro Focus. All Rights Reserved,   *
+ *   This demonstration program is provided for use by users     *
+ *   of Micro Focus products and may be used, modified and       *
+ *   distributed as part of your application provided that       *
+ *   you properly acknowledge the copyright of Micro Focus       *
+ *   in this material,                                           *
+ *                                                               *
+ ****************************************************************/
+
+ /****************************************************************
+ * Program:     SBANK00P.pli (CICS Version)                      *
+ * Layer:       Screen handling                                  *
+ * Function:    Screen handling control module                   *
+ ****************************************************************/
+
+ SBANK00P:PROC(COMMPTR) OPTIONS(MAIN);
+ 
+ DCL COMMPTR POINTER;
+
+ DCL 1 WS_MISC_STORAGE,
+    05  WS_PROGRAM_ID                         CHAR(8)
+        INIT('SBANK00P'),
+    05  WS_TRAN_ID                            CHAR(4),
+    05  WS_SCREEN_LOGIC_PGM                   CHAR(8)
+        INIT(''),
+    05  WS_DYNAMIC_PGM                        CHAR(8)
+        INIT('UNKNOWN'),
+    05  WS_ABSTIME                            FIXED DEC(15),
+    05  WS_RESP                               FIXED BIN(31),
+    05  WS_INPUT_SOURCE_MSG,
+      10  FILL01                              CHAR(20)
+          INIT('Input received from '),
+      10  WS_INPUT_SOURCE_MSG_CALL_TYPE       CHAR(8),
+    05  WS_TSQ_LK                             CHAR(8);
+ DCL 1 WS_BANK_DATA_AREAS,
+    05  WS_BANK_DATA,
+ %INCLUDE CBANKDAT;
+    05  WS_BANK_EXT_DATA,
+ %INCLUDE CBANKEXT;
+
+ DCL WS_BANK_DATA_AREAS_CHAR CHAR(STG(WS_BANK_DATA_AREAS))
+     BASED(ADDR(WS_BANK_DATA_AREAS));
+
+ DCL WS_BANK_DATA_CHAR CHAR(STG(WS_BANK_DATA))
+     BASED(ADDR(WS_BANK_DATA));
+
+ DCL WS_BANK_EXT_DATA_CHAR CHAR(STG(WS_BANK_EXT_DATA))
+     BASED(ADDR(WS_BANK_EXT_DATA));
+
+ %INCLUDE CBANKDAX; /* PL/1 extensions to CBANKDAT */
+
+ DCL 1 TS_DATA,
+    05  TS_QUEUE_NAME                         CHAR(8),
+    05  TS_QUEUE_LEN                          FIXED BIN(15),
+    05  TS_QUEUE_ITEM                         FIXED BIN(15),
+    05  TS_QUEUE_DATA                         CHAR(6144);
+ DCL 1 TS_QUEUE_NAME_PARTS BASED(ADDR(TS_QUEUE_NAME)),
+      10  TS_QUEUE_NAME_PART1                 CHAR(4),
+      10  TS_QUEUE_NAME_PART2                 PIC'(4)9';
+
+ %INCLUDE DFHAID;
+
+ %INCLUDE DFHBMSCA;
+
+ %INCLUDE CABENDD;
+
+ DCL 1 DFHCOMMAREA BASED(COMMPTR),
+    05  LK_TS_QUEUE_NAME                      CHAR(8),
+    05  LK_CALL_TYPE                          CHAR(8),
+      /*  CALL_TYPE_CICSECI                   VALUE 'CICSECI',
+      88  CALL_TYPE_WEBSERV                   VALUE 'WEBSERV'*/
+    05  LK_PASSED_DATA                        CHAR(1024);
+
+ /****************************************************************
+ *
+ *  Copyright(C) 1998_2010 Micro Focus. All Rights Reserved.
+ *
+ ****************************************************************/
+
+ /****************************************************************
+ * Store our transaction_id                                      *
+ ****************************************************************/
+  WS_TRAN_ID = EIBTRNID;
+
+ /****************************************************************
+ * If we have a commarea then its either not the first time in   *
+ * from a terminal or we have come from other than a terminal so *
+ * display the call type so we know where we came from           *
+ * Assign the TSQ name to a work field for next IF clause test.  *
+ ****************************************************************/
+  IF EIBCALEN >= 8
+  THEN DO;
+          WS_TSQ_LK = LK_TS_QUEUE_NAME;
+          IF (LK_CALL_TYPE = 'CICSECI')
+           | (LK_CALL_TYPE = 'WEBSERV')
+          THEN DO;
+                  WS_INPUT_SOURCE_MSG_CALL_TYPE = LK_CALL_TYPE;
+     /*        EXEC CICS WRITE OPERATOR
+                         TEXT(WS_INPUT_SOURCE_MSG)
+                         TEXTLENGTH(LENGTH OF WS_INPUT_SOURCE_MSG)
+     */
+               END;
+        END;        
+  ELSE WS_TSQ_LK = '';   
+
+ /****************************************************************
+ * If this is the first time in, then we assume we are running   *
+ * from a CICS terminal so we display map BANK10M and return with*
+ * with our COMMAREA set up.                                     *
+ ****************************************************************/
+ IF (EIBCALEN = 0)
+  | ((EIBCALEN > 0) & (WS_TSQ_LK = 'INET****'))
+ THEN DO;
+         WS_BANK_DATA_AREAS_CHAR = LOW(STG(WS_BANK_DATA_AREAS_CHAR));
+         IF EIBCALEN = 0
+         THEN DO;
+                 BANK_ENV = 'CICS';
+                 EXEC CICS RETRIEVE
+                           INTO(TS_DATA)
+                           RESP(WS_RESP);
+                 IF SUBSTR(TS_QUEUE_NAME,1,7) = 'COLOUR='
+                 THEN BANK_COLOUR_SETTING = SUBSTR(TS_QUEUE_NAME,8,1);
+              END;
+         ELSE
+              BANK_ENV = 'INET';
+ 
+         BANK_CONVERSATION = '0';
+         BANK_LAST_MAPSET  = '';
+         BANK_LAST_MAP     = '';
+         BANK_LAST_PROG    = '';
+         BANK_NEXT_PROG    = '';
+         BANK_CICS_TRANCODE = WS_TRAN_ID;
+         EXEC CICS ASKTIME
+                   ABSTIME(WS_ABSTIME);
+         TS_QUEUE_NAME_PART1 = BANK_ENV;
+         TS_QUEUE_NAME_PART2 = EIBTASKN;
+         EXEC CICS DELETEQ TS
+                   QUEUE(TS_QUEUE_NAME)
+                   RESP(WS_RESP);
+         TS_QUEUE_DATA = '';
+         TS_QUEUE_LEN  = LENGTH(TS_QUEUE_DATA);
+         TS_QUEUE_ITEM = 0;
+         EXEC CICS WRITEQ TS
+                   QUEUE(TS_QUEUE_NAME)
+                   FROM(TS_QUEUE_DATA)
+                   LENGTH(TS_QUEUE_LEN)
+                   ITEM(TS_QUEUE_ITEM)
+                   RESP(WS_RESP);
+         exec cics write operator
+                         text(ts_queue_name);
+
+         IF BANK_ENV = 'INET'
+         THEN LK_TS_QUEUE_NAME = TS_QUEUE_NAME;
+      END;
+ ELSE DO;
+         WS_BANK_DATA = LOW(STG(WS_BANK_DATA));
+         TS_QUEUE_NAME = LK_TS_QUEUE_NAME;
+         TS_QUEUE_LEN  = LENGTH(TS_QUEUE_DATA);
+         TS_QUEUE_ITEM = 1;
+         EXEC CICS READQ TS
+                   QUEUE(TS_QUEUE_NAME)
+                   INTO(TS_QUEUE_DATA)
+                   ITEM(TS_QUEUE_ITEM);
+         WS_BANK_DATA = TS_QUEUE_DATA;
+         IF BANK_ENV = 'INET'
+         THEN DO;
+                 WS_BANK_EXT_DATA_CHAR
+                  = SUBSTR(LK_PASSED_DATA,1,EIBCALEN);
+                 IF LK_CALL_TYPE = 'WEBSERV'
+                 THEN WS_BANK_EXT_DATA_CHAR =
+                      TRANSLATE(WS_BANK_EXT_DATA_CHAR,'~',LOW(1));
+              END;
+      END;
+
+ /****************************************************************
+ * If we get this far then this is not the first time in as we
+ * have a COMMAREA, Check that BANK_ENV is set correctly to
+ * ensure we are running in the correct environment etc
+ ****************************************************************/
+ IF (BANK_ENV ^= 'CICS')
+  & (BANK_ENV ^= 'INET')
+ THEN DO;
+         ABEND_CULPRIT = WS_PROGRAM_ID;
+         ABEND_CODE    = 'S001';
+         ABEND_REASON  = 'Invalid environment';
+         CALL ZZ_ABEND;
+      END;
+
+ /****************************************************************
+ * This is the main process
+ ****************************************************************/
+
+ /****************************************************************
+ * Map the AID in the EIB to our common area
+ ****************************************************************/
+ IF BANK_ENV = 'INET'
+ THEN BANK_AID = EXT_IP_AID;
+ ELSE SELECT(EIBAID);
+        WHEN(DFHENTER)
+          BANK_AID = 'ENTER';
+        WHEN(DFHCLEAR)
+          BANK_AID = 'CLEAR';
+        WHEN(DFHPA1)
+          BANK_AID = 'PA1';
+        WHEN(DFHPA2)
+          BANK_AID = 'PA2';
+        WHEN(DFHPF1)
+          BANK_AID = 'PFK01';
+        WHEN(DFHPF2)
+          BANK_AID = 'PFK02';
+        WHEN(DFHPF3)
+          BANK_AID = 'PFK03';
+        WHEN(DFHPF4)
+          BANK_AID = 'PFK04';
+        WHEN(DFHPF5)
+          BANK_AID = 'PFK05';
+        WHEN(DFHPF6)
+          BANK_AID = 'PFK06';
+        WHEN(DFHPF7)
+          BANK_AID = 'PFK07';
+        WHEN(DFHPF8)
+          BANK_AID = 'PFK08';
+        WHEN(DFHPF9)
+          BANK_AID = 'PFK09';
+        WHEN(DFHPF10)
+          BANK_AID = 'PFK10';
+        WHEN(DFHPF11)
+          BANK_AID = 'PFK11';
+        WHEN(DFHPF12)
+          BANK_AID = 'PFK12';
+        WHEN(DFHPF13)
+          BANK_AID = 'PFK01';
+        WHEN(DFHPF14)
+          BANK_AID = 'PFK02';
+        WHEN(DFHPF15)
+          BANK_AID = 'PFK03';
+        WHEN(DFHPF16)
+          BANK_AID = 'PFK04';
+        WHEN(DFHPF17)
+          BANK_AID = 'PFK05';
+        WHEN(DFHPF18)
+          BANK_AID = 'PFK06';
+        WHEN(DFHPF19)
+          BANK_AID = 'PFK07';
+        WHEN(DFHPF20)
+          BANK_AID = 'PFK08';
+        WHEN(DFHPF21)
+          BANK_AID = 'PFK09';
+        WHEN(DFHPF22)
+          BANK_AID = 'PFK10';
+        WHEN(DFHPF23)
+          BANK_AID = 'PFK11';
+        WHEN(DFHPF24)
+          BANK_AID = 'PFK12';
+        OTHERWISE
+          BANK_AID = 'ENTER';
+      END;
+
+ /****************************************************************
+ * Check the AID to see if we have to toggle the colour setting
+ ****************************************************************/
+ IF BANK_AID = 'PFK02'
+ THEN DO;
+         BANK_AID = 'ENTER';
+         IF BANK_COLOUR_SETTING = '1'
+         THEN BANK_COLOUR_SETTING = '0';
+         ELSE BANK_COLOUR_SETTING = '1';
+      END;
+
+ /****************************************************************
+ * If the BANK_NEXT_PROG is not the same as BANK_LAST_PROG then
+ * we have to go to the next program
+ ****************************************************************/
+  CHECK_PROGRAM_SWITCH:
+  IF (BANK_NEXT_PROG ^= BANK_LAST_PROG)
+  THEN DO;
+         EXEC CICS LINK PROGRAM(BANK_NEXT_PROG)
+                        COMMAREA(WS_BANK_DATA_AREAS);
+         GO TO CHECK_PROGRAM_SWITCH;
+       END;
+
+ /****************************************************************
+ * We determine what the last screen displayed was and call the
+ * the appropriate routine to handle it,
+ ****************************************************************/
+  SELECT;
+    WHEN(BANK_LAST_MAPSET = '')
+      WS_SCREEN_LOGIC_PGM = 'SBANK10P';
+    OTHERWISE
+      WS_SCREEN_LOGIC_PGM =
+                 'SBANK' ||
+                 SUBSTR(BANK_LAST_MAPSET,6,2) ||
+                 'P';
+  END;
+  BANK_MAP_FUNCTION = 'GET';
+  EXEC CICS LINK PROGRAM(WS_SCREEN_LOGIC_PGM)
+                 COMMAREA(WS_BANK_DATA_AREAS);
+
+ /****************************************************************
+ * Now we have to see what is required from the business logic
+ * Essentially the choices will be switch to another program
+ * (which will be in BANK_NEXT_PROG) or display thge next screen
+ * (which will be in BANK_NEXT_MAPSET/BANK_NEXT_MAP)
+ ****************************************************************/
+ /* Check for a program switch first */
+  CHECK_FOR_PGM_SWITCH:
+  IF (BANK_NEXT_PROG ^= BANK_LAST_PROG)
+  THEN DO;
+         EXEC CICS LINK PROGRAM(BANK_NEXT_PROG)
+                        COMMAREA(WS_BANK_DATA_AREAS);
+         GO TO CHECK_FOR_PGM_SWITCH;
+      END;
+
+ /****************************************************************
+ * We determine which screen we have to display and call the
+ * appropriate routine to handle it,
+ ****************************************************************/
+  WS_SCREEN_LOGIC_PGM =
+             'SBANK' ||
+             SUBSTR(BANK_NEXT_MAPSET,6,2) ||
+             'P';
+  BANK_MAP_FUNCTION = 'PUT';
+  EXEC CICS LINK PROGRAM(WS_SCREEN_LOGIC_PGM)
+                 COMMAREA(WS_BANK_DATA_AREAS);
+
+ /****************************************************************
+ * Now we have to have finished and can return to our invoker,
+ * Before retuning, we write out any data we wish to preserve
+ * to TS, So we can retrieve this data we keep the TS queue id
+ ****************************************************************/
+ /* Now return to CICS */
+  TS_QUEUE_DATA = WS_BANK_DATA_CHAR;
+  TS_QUEUE_ITEM = 1;
+  EXEC CICS WRITEQ TS
+            QUEUE(TS_QUEUE_NAME)
+            FROM(TS_QUEUE_DATA)
+            ITEM(TS_QUEUE_ITEM)
+            REWRITE
+            RESP(WS_RESP);
+
+  IF BANK_ENV = 'INET'
+  THEN DO;
+          IF LK_CALL_TYPE = 'WEBSERV'
+          THEN WS_BANK_EXT_DATA_CHAR =
+                      TRANSLATE(WS_BANK_EXT_DATA_CHAR,'~',LOW(1));
+          LK_PASSED_DATA = WS_BANK_EXT_DATA_CHAR;
+       END;
+
+  IF BANK_CICS_TRANCODE = ''
+   | BANK_ENV = 'INET'
+  THEN EXEC CICS RETURN;
+  ELSE
+         EXEC CICS RETURN
+                   TRANSID(BANK_CICS_TRANCODE)
+                   COMMAREA(TS_QUEUE_NAME);
+
+ ZZ_ABEND:PROC;
+
+      ABEND_MSG =
+             ABEND_CULPRIT ||
+             ' Abend ' ||
+             ABEND_CODE ||
+             ' _ ' ||
+              ABEND_REASON;
+
+      EXEC CICS WRITE
+                OPERATOR
+                TEXT(ABEND_MSG);
+
+      EXEC CICS ABEND
+            ABCODE(ABEND_CODE);
+
+ END;
+
+ END SBANK00P;

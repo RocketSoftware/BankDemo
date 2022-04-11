@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Copybooks</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.microfocus.eclipse.project.copylibNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>copybook</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/sources/copybook</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<x:dirset xmlns:x="http://microfocus.com/directivesset" schemaVersion="1.1">
+    <x:directive handler="project.cobolSettings" id="max-error" name="MAX-ERROR&quot;100&quot;"/>
+    <x:directive handler="project.cobolSettings" id="charset" name="CHARSET&quot;ASCII&quot;"/>
+    <x:directive handler="project.cobolSettings" id="dialect" name="DIALECT&quot;ENTCOBOL&quot;"/>
+    <x:directive handler="project.cobolSettings" id="exitprogram" name="EXITPROGRAM&quot;ANSI&quot;"/>
+    <x:directive handler="project.cobolSettings" id="additional" name="directives-in-comments"/>
+    <x:directive handler="project.cobolSettings" id="sourceformat" name="SOURCEFORMAT&quot;fixed&quot;"/>
+    <x:directive handler="project.cobolSettings" id="warning" name="WARNING&quot;1&quot;"/>
+    <x:directive handler="project.cobolSettings" id="anim" name="anim"/>
+    <x:directive handler="project.cobolSettings" id="mainframecopyhandling" name="NOPANVALET NOLIBRARIAN"/>
+    <x:ecm enabled="false" handler="CICS" id="project.cicsSettings" postfix=")" prefix="CICSECM("/>
+    <x:ecm enabled="false" handler="OpenESQL" id="project.sqlSettings" postfix=")" prefix="SQL("/>
+</x:dirset>

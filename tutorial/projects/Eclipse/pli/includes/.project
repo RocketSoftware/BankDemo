@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>INCLUDES</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>com.microfocus.eclipse.pli.project.inclibNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>include</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-5-PROJECT_LOC%7D/sources/include</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<x:dirset xmlns:x="http://microfocus.com/directivesset" schemaVersion="1.1">
+    <x:directive handler="project.mfsSettings" id="stack" name="STACKAUTO"/>
+    <x:directive handler="project.mfsSettings" id="IMSWarningLevel" name="ECHO=ERREND,4,50"/>
+    <x:directive handler="project.mfsSettings" id="generate_list_file" name="LIST=Listing/MFS/*.lst"/>
+</x:dirset>

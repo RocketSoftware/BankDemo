@@ -1,6 +1,6 @@
 {
     "jDSN": "MFI01V.MFIDEMO.BNKATYPE",
-    "jPCN": "<CATALOGFOLDER>/data/MFI01V.MFIDEMO.BNKATYPE.DAT",
+    "jPCN": "<CATALOGFOLDER>/data/MFI01V.MFIDEMO.BNKATYPE.dat",
     "jCataloged": "checked",
     "jDSorg": "VSAM",
     "jRecfm": "KS",

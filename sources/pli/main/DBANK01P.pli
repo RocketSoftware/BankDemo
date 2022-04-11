@@ -1,0 +1,68 @@
+ /***************************************************************
+ *
+ *   Copyright (C) 1998-2010 Micro Focus. All Rights Reserved.
+ *   This demonstration program is provided for use by users
+ *   of Micro Focus products and may be used, modified and
+ *   distributed as part of your application provided that
+ *   you properly acknowledge the copyright of Micro Focus
+ *   in this material.
+ *
+ ****************************************************************/
+
+ /***************************************************************
+ * Program:     DBANK01P.PLI
+ * Function:    Obtain User details
+ *              VSAM version
+ ****************************************************************/
+ DBANK01P: PROC(COMPTR) OPTIONS(MAIN);
+ 
+ DCL COMPTR PTR;
+
+ DCL 01  WS_MISC_STORAGE,
+    05  WS_PROGRAM_ID                         CHAR(8)
+        INIT('DBANK01P'),
+    05  WS_COMMAREA_LENGTH                    PIC '(5)9',
+    05  WS_RESP                               FIXED BIN(31),
+    05  WS_BNKCUST_RID                        CHAR(5);
+
+  DCL 01 WS_BNKCUST_REC,
+  %INCLUDE CBANKVCS;
+
+  DCL 01  WS_COMMAREA BASED(COMPTR),
+  %INCLUDE CBANKD01;
+
+  %INCLUDE CABENDD;
+
+ /***************************************************************
+ * Initialize our output area
+ ****************************************************************/
+      CD01O_DATA = '';
+
+ /***************************************************************
+ * Now attempt to get the requested record
+ ****************************************************************/
+      WS_BNKCUST_RID = CD01I_PERSON_PID;
+      EXEC CICS READ FILE('BNKCUST')
+                     INTO(WS_BNKCUST_REC)
+                     RIDFLD(WS_BNKCUST_RID)
+                     RESP(WS_RESP);
+
+ /***************************************************************
+ * Did we get the record OK
+ ****************************************************************/
+      IF WS_RESP = DFHRESP(NORMAL)
+      THEN DO;
+              CD01O_PERSON_PID  = BCS_REC_PID;
+              CD01O_PERSON_NAME = BCS_REC_NAME;
+           END;
+ /***************************************************************
+ * Was the record not found?
+ ****************************************************************/
+      ELSE
+           CD01O_PERSON_NAME = 'Person not found';
+
+ /***************************************************************
+ * Return to our caller
+ ****************************************************************/
+      EXEC CICS RETURN;
+ END;

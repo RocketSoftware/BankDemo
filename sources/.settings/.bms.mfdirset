@@ -4,6 +4,6 @@
     <x:directive handler="project.bmsSettings" id="sdf" name="/IGNORE"/>
     <x:directive handler="project.bmsSettings" id="currencychar" name="/CS=$"/>
     <x:directive handler="project.bmsSettings" id="decimalchar" name="/DP=."/>
-    <x:directive handler="project.bmsSettings" id="coboldir" name="/COBOL=Sources/copybook"/>
+    <x:directive handler="project.bmsSettings" id="coboldir" name="/COBOL=sources/generated"/>
     <x:directive handler="project.bmsSettings" id="map" name="/SYSPARM=MAP"/>
 </x:dirset>

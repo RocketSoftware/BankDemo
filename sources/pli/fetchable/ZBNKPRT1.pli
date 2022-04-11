@@ -1,0 +1,738 @@
+ /****************************************************************
+ *
+ *   Copyright (C) 1998-2010 Micro Focus All Rights Reserved
+ *   This demonstration program is provided for use by users
+ *   of Micro Focus products and may be used, modified and
+ *   distributed as part of your application provided that
+ *   you properly acknowledge the copyright of Micro Focus
+ *   in this material.
+ *
+ ****************************************************************/
+
+ /****************************************************************
+ * Program:     ZBNKPRT1.PLI
+ * Function:    Print the bank statements
+ ****************************************************************/
+ ZBNKPRT1:PROC(LK_PARM) OPTIONS(MAIN);
+
+ DCL 1  (ADDR, FILEOPEN, DATETIME, HIGH,
+             HBOUND, LENGTH, LOW, LOWERCASE,
+             NULL, ONCODE, SIZE, STORAGE,
+             STRING, SUBSTR, UPPERCASE)       BUILTIN;
+
+ /*
+    Parameter declaration
+ */
+ DCL 1 LK_PARM       CHAR(12) VARYING;
+ DCL 1 LK_EXEC_PARM  BASED(ADDR(LK_PARM)),
+    05  LK_EXEC_PARM_LL                       FIXED BIN(15),
+    05  LK_EXEC_PARM_DATA                     CHAR(12);
+
+ /*
+    File declarations
+ */
+ DCL EXTRACT  RECORD INPUT;
+
+ DCL PRINTOUT RECORD OUTPUT;
+
+ /*
+    Record definitions
+ */
+ %INCLUDE CBANKXT1;
+
+ DCL EXTRACT_REC                              CHAR(100) VARYING;
+ DCL 1 EXTRACT_DATA BASED(ADDR(EXTRACT_REC)),
+       5 CBANK_LEN                            FIXED BIN(15),
+       5 CBANK_AREA                           CHAR(100);
+
+ DCL 1 PRINTOUT_REC                           CHAR(121);
+
+ %INCLUDE CTIMERD;
+
+ DCL 1 WS_DATE_WORK_AREA,
+ %INCLUDE CDATED;
+
+ DCL 1 WS_MISC_STORAGE,
+    05  WS_PROGRAM_ID                         CHAR(8)
+        INIT('ZBNKPRT1'),
+    05  WS_EXTRACT_STATUS,
+      10  WS_EXTRACT_STAT1                    CHAR(1),
+      10  WS_EXTRACT_STAT2                    CHAR(1),
+
+    05  WS_PRINTOUT_STATUS,
+      10  WS_PRINTOUT_STAT1                   CHAR(1),
+      10  WS_PRINOUTY_STAT2                   CHAR(1),
+
+    05  WS_IO_STATUS,
+      10  WS_IO_STAT1                         CHAR(1),
+      10  WS_IO_STAT2                         CHAR(1),
+
+    05  WS_TWO_BYTES,
+      10  WS_TWO_BYTES_LEFT                   CHAR(1),
+      10  WS_TWO_BYTES_RIGHT                  CHAR(1),
+
+    05  WS_SAVED_EMAIL                        CHAR(30),
+    05  WS_EMAIL_INDICATOR                    CHAR(1),
+       /* EMAIL_REQUIRED                      VALUE 'Y'*/
+       /* EMAIL_NOT_REQUIRED                  VALUE 'N'*/
+
+    05  WS_FIRST_REC                          CHAR(3)
+        INIT('YES'),
+
+    05  WS_END_OF_FILE                        CHAR(3)
+        INIT('NO '),
+
+    05  WS_RECORDS_READ                       PIC'(5)9'
+        INIT(0),
+
+    05  WS_ONCODE                             PIC'-99999',
+
+    05  WS_TXNS_FLAG                          CHAR(1),
+       /* TXNS_PRINTED                        VALUE '1'*/
+       /* NO_TXNS_PRINTED                     VALUE '0'*/
+
+    05  WS_SUB1                               PIC'(3)9',
+    05  WS_SYS_TIME                           CHAR(8),
+    05  WS_PRINTED,
+      10  WS_PRINTED_DATE,
+        15  FILL01                            CHAR(9)
+            INIT('Printed: '),
+        15  WS_PRINT_DATE                     CHAR(11)
+            INIT('dd mmm yyyy'),
+      10  WS_PRINTED_TIME,
+        15  FILL02                            CHAR(12)
+            INIT(''),
+        15  WS_PRINT_TIME,
+          20  WS_PRINT_TIME_HH                CHAR(2),
+          20  WS_PRINT_TIME_DOT1              CHAR(1),
+          20  WS_PRINT_TIME_MM                CHAR(2),
+          20  WS_PRINT_TIME_DOT2              CHAR(1),
+          20  WS_PRINT_TIME_SS                CHAR(2),
+    05  WS_TOTAL_TXNS                         FIXED DEC(9,2),
+    05  WS_TOTAL_ASSETS                       FIXED DEC(9,2),
+    05  WS_FILE_OPEN_FLAG                     BIT(1) INIT('0'B);
+
+ DCL 1  EMAIL_REQUIRED                        CHAR(1) INIT('Y');
+ DCL 1  EMAIL_NOT_REQUIRED                    CHAR(1) INIT('N');
+ DCL 1  TXNS_PRINTED                          CHAR(1) INIT('1');
+ DCL 1  NO_TXNS_PRINTED                       CHAR(1) INIT('0');
+ DCL 1  WS_TWO_BYTES_BINARY BASED(ADDR(WS_TWO_BYTES))
+                                              FIXED BIN (15,0);
+ DCL 1  WS_EXTRACT_STATUS_R DEFINED WS_EXTRACT_STATUS
+                                              CHAR(2);
+ DCL 1  WS_PRINTOUT_STATUS_R DEFINED WS_PRINTOUT_STATUS
+                                              CHAR(2);
+ DCL 1  EXTRACT_PTR                           POINTER;
+
+ DCL 1 WS_PRINT_LINES,
+    05  WS_LINE1,
+      10  WS_LINE1_CC                         CHAR(1)
+          INIT('1'),
+      10  FILL01                              CHAR(40)
+          INIT(''),
+      10  WS_LINE1_HEAD                       CHAR(21)
+          INIT('Micro Focus Demo Bank'),
+
+    05  WS_LINE2,
+      10  WS_LINE2_CC                         CHAR(1)
+          INIT(''),
+      10  FILL02                              CHAR(40)
+          INIT(''),
+      10  WS_LINE2_HEAD                       CHAR(20)
+          INIT('Statement of Account'),
+
+    05  WS_LINE3,
+      10  WS_LINE3_CC                         CHAR(1)
+          INIT('0'),
+      10  WS_LINE3_NAME_ADDR                  CHAR(23)
+          INIT(''),
+      10  FILL03                              CHAR(55)
+          INIT(''),
+      10  WS_LINE3_DATE                       CHAR(20)
+          INIT(''),
+
+    05  WS_LINE4,
+      10  WS_LINE4_CC                         CHAR(1)
+          INIT('0'),
+      10  FILL04A                             CHAR(14)
+          INIT('Account No.'),
+      10  FILL04B                             CHAR(38)
+          INIT('Description '),
+      10  FILL04C                             CHAR(15)
+          INIT('    Date  '),
+      10  FILL04D                             CHAR(18)
+          INIT('      Amount '),
+      10  FILL04E                             CHAR(18)
+          INIT('     Balance '),
+
+    05  WS_LINE5,
+      10  WS_LINE5_CC                         CHAR(1),
+      10  WS_LINE5_ACC_NO                     CHAR(9),
+      10  FILL05A                             CHAR(5),
+      10  WS_LINE5_DESC,
+        15  WS_LINE5_DESC_PT1                 CHAR(15),
+        15  WS_LINE5_DESC_PT2                 CHAR(18),
+      10  FILL05B                             CHAR(5),
+      10  WS_LINE5_DATE                       CHAR(11),
+      10  FILL05C                             CHAR(4),
+      10  WS_LINE5_AMOUNT_DASH                CHAR(13),
+      10  FILL05D                             CHAR(5),
+      10  WS_LINE5_BALANCE_DASH               CHAR(13);
+
+ DCL 1 WS_LINE5_AMOUNT BASED(ADDR(WS_LINE5_AMOUNT_DASH))
+                                              PIC'Z,ZZZ,ZZ9V.99-';
+ DCL 1 WS_LINE5_BALANCE BASED(ADDR(WS_LINE5_BALANCE_DASH))
+                                              PIC'Z,ZZZ,ZZZV.99-';
+
+ DCL 1 WS_LINE5_DESC_N BASED(ADDR(WS_LINE5_DESC))
+                                              CHAR(33);
+ DCL 1 WS_CONSOLE_MESSAGE                     CHAR(60);
+ 
+ %INCLUDE CSTATESD;
+
+ %INCLUDE CABENDD;
+
+ DCL 1  UDATECNV             EXTERNAL ENTRY OPTIONS(FETCHABLE,COBOL);
+ /*
+ DCL 1  CEE3DMP              EXTERNAL ENTRY;
+ DCL 1  CEELOCT              EXTERNAL ENTRY;
+ */
+ DCL 1 WS_LE_AREAS,
+      05 WS_CEE3DMP_AREAS,
+        10 WS_CEE3DMP_DMP_TITLE               CHAR(80)
+            INIT('CEEDUMP FROM HANDLER ROUTINE'),
+        10 WS_CEE3DMP_DMP_OPTIONS             CHAR(255)
+            INIT('TRACE FILE VAR STOR'),
+        10 WS_CEE3DMP_FEEDBACK,
+         15 WS_CEE3DMP_FB_SEV                 FIXED BIN(15,0),
+         15 WS_CEE3DMP_FB_MSGNO               FIXED BIN(15,0),
+         15 WS_CEE3DMP_FB_CASE_SEV            CHAR(1),
+         15 WS_CEE3DMP_FB_FAC_ID              CHAR(3),
+         15 WS_CEE3DMP_FB_ISINFO              FIXED BIN(31,0),
+      05 WS_CEELOCT_AREAS,
+        10 WS_CEELOCT_DATE_LILIAN             FIXED BIN(31,0),
+        10 WS_CEELOCT_SECS_LILIAN             FIXED BIN(31,0),
+        10 WS_CEELOCT_TIME_GREGORIAN          CHAR(17),
+        10 WS_CEELOCT_FEEDBACK,
+         15 WS_CEELOCT_FB_SEV                 FIXED BIN(15,0),
+         15 WS_CEELOCT_FB_MSGNO               FIXED BIN(15,0),
+         15 WS_CEELOCT_FB_CASE_SEV            CHAR(1),
+         15 WS_CEELOCT_FB_FAC_ID              CHAR(3),
+         15 WS_CEELOCTRFB_ISINFO              FIXED BIN(31,0);
+
+ /****************************************************************
+ * Set up ON conditions for various file statuses                *
+ ****************************************************************/
+      ON ERROR
+         BEGIN;
+            ON ERROR SYSTEM;
+            WS_ONCODE = ONCODE;
+            WS_CONSOLE_MESSAGE = 'Error ONCODE is ' || WS_ONCODE;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL PLIRETC(100);
+            STOP;
+         END;
+
+      ON ENDFILE(EXTRACT)
+         BEGIN;
+            WS_ONCODE = ONCODE;
+            WS_END_OF_FILE = 'YES';
+         END;
+
+      ON RECORD(EXTRACT)
+         BEGIN;
+            WS_ONCODE = ONCODE;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file RECORD error; ' ||
+                                                 WS_ONCODE;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+
+ 
+      ON UNDEFINEDFILE(EXTRACT)
+         BEGIN;
+            WS_ONCODE = ONCODE;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file UNDEFINEDFILE ' ||
+                                 'error; ONCODE is ' || WS_ONCODE;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+
+      ON RECORD(PRINTOUT)
+         BEGIN;
+            WS_ONCODE = ONCODE;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file RECORD error; ' ||
+                                 'ONCODE is ' || WS_ONCODE;
+
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+
+
+      ON UNDEFINEDFILE(PRINTOUT)
+         BEGIN;
+            WS_ONCODE = ONCODE;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file UNDEFINEDFILE ' ||
+                                 'error; ONCODE is ' || WS_ONCODE;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+
+      CALL RUN_TIME;
+
+      WS_EMAIL_INDICATOR = EMAIL_NOT_REQUIRED;
+
+      IF LK_EXEC_PARM_LL = 0 THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'No exec card parm present';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            LK_EXEC_PARM_DATA = UPPERCASE(LK_EXEC_PARM_DATA);
+            WS_CONSOLE_MESSAGE =
+                   'Exec parm is "' ||
+                   SUBSTR(LK_EXEC_PARM_DATA,1,LK_EXEC_PARM_LL) ||
+                   '"';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+
+      IF SUBSTR(LK_EXEC_PARM_DATA,1,5) = 'EMAIL' THEN
+         WS_EMAIL_INDICATOR = EMAIL_REQUIRED;
+      DD_ENV = DD_ENV_NULL;
+      DDI_TYPE = DDI_YYYYMMDD;
+      DDI_DATA = DATETIME();
+      DDO_TYPE = DDO_DD_MMM_YYYY;
+      CALL UDATECNV (WS_DATE_WORK_AREA);
+      SUBSTR(DDO_DATA_DD_MMM_YYYY_MMM,2,2) =
+              SUBSTR(LOWERCASE(DDO_DATA_DD_MMM_YYYY_MMM),2,2);
+      WS_PRINT_DATE = STRING(DDO_DATA_DD_MMM_YYYY);
+
+      CALL EXTRACT_OPEN;
+ 
+      CALL PRINTOUT_OPEN;
+
+      DO WHILE (WS_END_OF_FILE = 'NO ');
+        IF WS_END_OF_FILE = 'NO ' THEN
+         DO;
+           CALL EXTRACT_GET;
+           IF WS_END_OF_FILE = 'NO ' THEN
+              DO;
+                 WS_RECORDS_READ = WS_RECORDS_READ + 1;
+                 IF WS_RECORDS_READ < 6 THEN
+                    DISPLAY(SUBSTR(CBANK_AREA,1,30));
+                 ELSE
+                    IF WS_RECORDS_READ = 6 THEN
+                       DO;
+                          WS_CONSOLE_MESSAGE =
+                                  'Suppressing record display...';
+                          CALL DISPLAY_CONSOLE_MESSAGE;
+                       END;
+                 CALL FORMAT_AND_PRINT;
+              END;
+           ELSE
+              DO;
+                 CALL PRINT_TOTAL_TXNS;
+                 CALL PRINT_TOTAL_ASSETS;
+              END;
+         END;
+      END;
+
+      CALL EXTRACT_CLOSE;
+      CALL PRINTOUT_CLOSE;
+
+      CALL DISPLAY_CONSOLE_MESSAGE;
+      WS_CONSOLE_MESSAGE = 'End Of Job';
+      CALL DISPLAY_CONSOLE_MESSAGE;
+
+      CALL RUN_TIME;
+
+      CALL PLIRETC(0);
+
+      RETURN;
+
+ /****************************************************************
+ * Format print lines
+ ****************************************************************/
+  FORMAT_AND_PRINT: PROCEDURE;
+      SELECT(SUBSTR(CBANK_AREA,1,1));                                 
+       WHEN ('0') 
+         DO;                                                  
+            BANKREC0 =                                    
+                      SUBSTR(CBANK_AREA,1,STORAGE(BANKXT01_REC0));  
+            WS_SAVED_EMAIL = BANKXT01_0_EMAIL;
+         END;          
+       WHEN ('1')
+         DO;                                                   
+            BANKREC1 =                                    
+                      SUBSTR(CBANK_AREA,1,STORAGE(BANKXT01_REC1));
+            CALL PRINT_TOTAL_TXNS;
+            CALL PRINT_TOTAL_ASSETS;
+            IF WS_EMAIL_INDICATOR = EMAIL_REQUIRED THEN
+               DO;
+                  PRINTOUT_REC = '';
+                  PRINTOUT_REC = 'SENDTO: ' || WS_SAVED_EMAIL;
+                  CALL PRINTOUT_WRITE;
+               END;
+            PRINTOUT_REC = STRING(WS_LINE1);
+            CALL PRINTOUT_WRITE;
+            PRINTOUT_REC = STRING(WS_LINE2);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = '0';
+            WS_LINE3_NAME_ADDR =
+                SUBSTR(BANKXT01_1_NAME,1,LENGTH(WS_LINE3_NAME_ADDR));
+            WS_LINE3_DATE = STRING(WS_PRINTED_DATE);
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = ' ';
+            WS_LINE3_NAME_ADDR =
+                SUBSTR(BANKXT01_1_ADDR1,1,LENGTH(WS_LINE3_NAME_ADDR));
+            WS_SYS_TIME = TIME();
+            WS_PRINT_TIME_HH = SUBSTR(WS_SYS_TIME,1,2);
+            WS_PRINT_TIME_DOT1 = ':';
+            WS_PRINT_TIME_MM = SUBSTR(WS_SYS_TIME,3,2);
+            WS_PRINT_TIME_DOT2 = ':';
+            WS_PRINT_TIME_SS = SUBSTR(WS_SYS_TIME,5,2);
+            WS_LINE3_DATE = STRING(WS_PRINTED_TIME);
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = ' ';
+            WS_LINE3_NAME_ADDR =
+                SUBSTR(BANKXT01_1_ADDR2,1,LENGTH(WS_LINE3_NAME_ADDR));
+            WS_LINE3_DATE = ' ';
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = ' ';
+            STATE_PROV_WK_CODE = BANKXT01_1_STATE;
+            CALL EXPAND_STATE_PROV;
+            WS_LINE3_NAME_ADDR = STATE_PROV_WK_NAME;
+            WS_LINE3_DATE = '';
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = ' ';
+            WS_LINE3_NAME_ADDR = BANKXT01_1_CNTRY;
+            WS_LINE3_DATE = '';
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            WS_LINE3_CC = ' ';
+            WS_LINE3_NAME_ADDR = BANKXT01_1_PST_CDE;
+            WS_LINE3_DATE = '';
+            PRINTOUT_REC = STRING(WS_LINE3);
+            CALL PRINTOUT_WRITE;
+            PRINTOUT_REC = STRING(WS_LINE4);
+            CALL PRINTOUT_WRITE;
+            WS_TOTAL_TXNS = 0;
+            WS_TOTAL_ASSETS = 0;
+         END;  
+       WHEN ('2')
+         DO;                                                   
+            BANKREC2 =                                  
+                      SUBSTR(CBANK_AREA,1,STORAGE(BANKXT01_REC2));
+            CALL PRINT_TOTAL_TXNS;
+            WS_LINE5 = '';
+            WS_LINE5_ACC_NO = BANKXT01_2_ACC_NO;
+            WS_LINE5_DESC_PT1 = 'Last statement';
+            WS_LINE5_DESC_PT2 = BANKXT01_2_ACC_DESC;
+            DDI_DATA =
+              SUBSTR(BANKXT01_2_ACC_LAST_STMT_DTE,1,LENGTH(DDI_DATA));
+            DD_ENV = DD_ENV_NULL;
+            DDI_TYPE = DDI_ISO;
+            DDO_TYPE = DDO_DD_MMM_YYYY;
+            CALL UDATECNV (WS_DATE_WORK_AREA);
+            WS_LINE5_DATE = STRING(DDO_DATA_DD_MMM_YYYY);
+            WS_LINE5_BALANCE = BANKXT01_2_ACC_CURR_BAL;
+            WS_TOTAL_ASSETS = BANKXT01_2_ACC_CURR_BAL +
+                              WS_TOTAL_ASSETS;
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+         END;  
+  
+       WHEN ('3')
+         DO;                                                   
+            BANKREC3 =                                  
+                      SUBSTR(CBANK_AREA,1,STORAGE(BANKXT01_REC3));
+            WS_LINE5 = '';
+            SUBSTR(WS_LINE5_DESC_N,4,30) = BANKXT01_3_DESC;
+            DDI_DATA = SUBSTR(BANKXT01_3_TIMESTAMP,1,10);
+            DD_ENV = DD_ENV_NULL;
+            DDI_TYPE = DDI_ISO;
+            DDO_TYPE = DDO_DD_MMM_YYYY;
+            CALL UDATECNV (WS_DATE_WORK_AREA);
+            WS_LINE5_DATE = STRING(DDO_DATA_DD_MMM_YYYY);
+            WS_LINE5_AMOUNT = BANKXT01_3_AMOUNT;
+            WS_TOTAL_TXNS = WS_TOTAL_TXNS + BANKXT01_3_AMOUNT;
+            WS_TXNS_FLAG = TXNS_PRINTED;
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+         END;
+                        
+       OTHERWISE PUT SKIP LIST('Invalid record type found...');     
+    END;                                                            
+
+  END FORMAT_AND_PRINT;
+
+ /****************************************************************
+ * Format and print transaction totals
+ ****************************************************************/
+  PRINT_TOTAL_TXNS: PROCEDURE;
+      IF WS_TXNS_FLAG = TXNS_PRINTED THEN
+         DO;
+            WS_LINE5 = '';
+            WS_LINE5_AMOUNT_DASH = '------------';
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+            WS_LINE5_DESC = '';
+            SUBSTR(WS_LINE5_DESC_N,4,30) =
+                                     STRING('Total transactions');
+            WS_LINE5_AMOUNT = WS_TOTAL_TXNS;
+            WS_TOTAL_TXNS = 0;
+            WS_TXNS_FLAG = NO_TXNS_PRINTED;
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+         END;
+  END PRINT_TOTAL_TXNS;
+
+
+ /****************************************************************
+ * Format and print "page" totals
+ ****************************************************************/
+  PRINT_TOTAL_ASSETS: PROCEDURE;
+      IF WS_FIRST_REC = 'YES' THEN
+         DO;
+            WS_FIRST_REC = 'NO';
+            WS_TXNS_FLAG = NO_TXNS_PRINTED;
+         END;
+      ELSE
+         DO;
+            WS_LINE5 = '';
+            WS_LINE5_BALANCE_DASH = '------------';
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+            WS_LINE5 = '';
+            STRING(WS_LINE5_DESC) = 'Total Assets';
+            WS_LINE5_BALANCE = WS_TOTAL_ASSETS;
+            PRINTOUT_REC = STRING(WS_LINE5);
+            CALL PRINTOUT_WRITE;
+         END;
+  END PRINT_TOTAL_ASSETS;
+
+ /****************************************************************
+ * Open the EXTRACTed data file
+ ****************************************************************/
+  EXTRACT_OPEN: PROCEDURE;
+      OPEN FILE(EXTRACT) INPUT;
+      WS_FILE_OPEN_FLAG = FILEOPEN(EXTRACT);
+      IF WS_FILE_OPEN_FLAG = '1'B THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file opened OK';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file open failure...';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL DISPLAY_ONCODE;
+            CALL ABORT_PROGRAM;
+         END;
+  END EXTRACT_OPEN;
+
+ /****************************************************************
+ * Read a record from the EXTRACTed data file
+ ****************************************************************/
+  EXTRACT_GET: PROCEDURE;
+
+      WS_ONCODE = 0;
+      READ FILE(EXTRACT) INTO(EXTRACT_REC);
+      IF WS_ONCODE ^= 0 &
+        WS_END_OF_FILE = 'NO ' THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'EXTRACT Error reading file...';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL DISPLAY_ONCODE;
+            CALL ABORT_PROGRAM;
+         END;
+  END EXTRACT_GET;
+
+ /****************************************************************
+ * Close the EXTRACTed data file
+ ****************************************************************/
+  EXTRACT_CLOSE: PROCEDURE;
+      CLOSE FILE(EXTRACT);
+      WS_FILE_OPEN_FLAG = FILEOPEN(EXTRACT);
+      IF WS_FILE_OPEN_FLAG = '0'B THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file closed OK';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            WS_CONSOLE_MESSAGE = 'EXTRACT file close failure...';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL DISPLAY_ONCODE;
+            CALL ABORT_PROGRAM;
+         END;
+  END EXTRACT_CLOSE;
+
+ /****************************************************************
+ * Open the seqential print file
+ ****************************************************************/
+  PRINTOUT_OPEN: PROCEDURE;
+      OPEN FILE(PRINTOUT) OUTPUT;
+      WS_FILE_OPEN_FLAG = FILEOPEN(PRINTOUT);
+      IF WS_FILE_OPEN_FLAG = '1'B THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file opened OK';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file open failure...';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL DISPLAY_ONCODE;
+            CALL ABORT_PROGRAM;
+         END;
+  END PRINTOUT_OPEN;
+
+ /****************************************************************
+ * Write a record to the squential file
+ ****************************************************************/
+  PRINTOUT_WRITE: PROCEDURE;
+      IF PRINTOUT_REC ^= '' THEN
+         DO;
+            WS_ONCODE = 0;
+            WRITE FILE(PRINTOUT) FROM (PRINTOUT_REC);
+            IF WS_ONCODE ^= 0 THEN
+               DO;
+                  WS_CONSOLE_MESSAGE
+                               = 'PRINTOUT Error Writing file ...';
+                  CALL DISPLAY_CONSOLE_MESSAGE;
+                  CALL DISPLAY_ONCODE;
+                  CALL ABORT_PROGRAM;
+               END;
+         END;
+  END PRINTOUT_WRITE;
+
+ /****************************************************************
+ * Close the seqential print file
+ ****************************************************************/
+  PRINTOUT_CLOSE: PROCEDURE;
+      CLOSE FILE(PRINTOUT);
+      WS_FILE_OPEN_FLAG = FILEOPEN(PRINTOUT);
+      IF WS_FILE_OPEN_FLAG = '0'B THEN
+         DO;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file closed OK';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            WS_CONSOLE_MESSAGE = 'PRINTOUT file close failure...';
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            CALL DISPLAY_ONCODE;
+            CALL ABORT_PROGRAM;
+         END;
+  END PRINTOUT_CLOSE;
+
+ /****************************************************************
+ * Display the file status bytes. This routine will display as
+ * two digits if the full two byte file status is numeric. If
+ * second byte is non_numeric then it will be treated as a
+ * binary number.
+ ****************************************************************/
+  DISPLAY_ONCODE: PROCEDURE;
+      WS_CONSOLE_MESSAGE = '';
+      WS_CONSOLE_MESSAGE = 'File oncode -' || WS_ONCODE;
+      CALL DISPLAY_CONSOLE_MESSAGE;
+  END DISPLAY_ONCODE;
+
+ /****************************************************************
+ * Expand the 2 character state/prove code to its full text
+ ****************************************************************/
+  EXPAND_STATE_PROV: PROCEDURE;
+      DCL (END_OF_TABLE, MATCH_FOUND)     CHAR(1) INIT('N');
+      DCL (ST_PRV_TBL_LN, ST_PRV_DATA_LN) FIXED DEC (5,0) INIT(0);
+
+      STATE_PROV_SUB = 0;
+      ST_PRV_TBL_LN = SIZE(STATE_PROV_TABLE);
+      ST_PRV_DATA_LN = SIZE(STATE_PROV_TABLE.FILL01);
+
+      STATE_PROV_COUNT = HBOUND(STATE_PROV_DATA,1);
+      STATE_PROV_WK_NAME = STATE_PROV_WK_CODE;
+      DO WHILE ((END_OF_TABLE = 'N') & (MATCH_FOUND = 'N'));
+         STATE_PROV_SUB = STATE_PROV_SUB + 1;
+         IF STATE_PROV_SUB > STATE_PROV_COUNT THEN
+            END_OF_TABLE = 'Y';
+         ELSE
+            IF STATE_PROV_WK_CODE =
+                 STATE_PROV_CODE(STATE_PROV_SUB) THEN
+               DO;
+                  STATE_PROV_WK_NAME =
+                            STATE_PROV_NAME(STATE_PROV_SUB);
+                  MATCH_FOUND = 'Y';
+               END;
+      END;
+  END EXPAND_STATE_PROV;
+
+ /****************************************************************
+ * 'ABORT' the program.
+ * Post a message to the console and issue a goback
+ ****************************************************************/
+  ABORT_PROGRAM: PROCEDURE;
+      IF WS_CONSOLE_MESSAGE ^= '' THEN
+         CALL DISPLAY_CONSOLE_MESSAGE;
+      WS_CONSOLE_MESSAGE = 'Program is abending...';
+      CALL DISPLAY_CONSOLE_MESSAGE;
+   /* Add some LE routines to identify but dont execute them 
+      IF WS_CONSOLE_MESSAGE ^= WS_CONSOLE_MESSAGE THEN
+         DO;
+            CALL CEE3DMP (WS_CEE3DMP_DMP_TITLE,
+                            WS_CEE3DMP_DMP_OPTIONS,
+                            WS_CEE3DMP_FEEDBACK);
+            CALL CEELOCT (WS_CEELOCT_DATE_LILIAN,
+                            WS_CEELOCT_SECS_LILIAN,
+                            WS_CEELOCT_TIME_GREGORIAN,
+                            WS_CEELOCT_FEEDBACK);
+         END; */
+      CALL PLIRETC(16);
+      STOP;
+  END ABORT_PROGRAM;
+
+ /****************************************************************
+ * Display CONSOLE messages...
+ ****************************************************************/
+  DISPLAY_CONSOLE_MESSAGE: PROCEDURE;
+      DISPLAY('ZBNKPRT1 - ' || WS_CONSOLE_MESSAGE);
+      WS_CONSOLE_MESSAGE = '';
+  END DISPLAY_CONSOLE_MESSAGE;
+
+  RUN_TIME: PROCEDURE;
+  DCL START_SECS FIXED DEC(15);
+  DCL END_SECS FIXED DEC(15);
+  DCL TEMP_TIME CHAR(8);
+  
+      IF TIMER_START = 0 THEN
+         DO;
+            TEMP_TIME = TIME();
+            TIMER_START = TEMP_TIME;
+            WS_CONSOLE_MESSAGE = 'Timer started @ '
+                              || TIMER_START;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            TEMP_TIME = TIME();
+            TIMER_END = TEMP_TIME;
+            WS_CONSOLE_MESSAGE = 'Timer stopped @ '
+                              || TIMER_END;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            END_SECS = (TIMER_END_HH * 60 * 60 * 100) +
+                        (TIMER_END_MM * 60 * 100) +
+                        (TIMER_END_SS * 100) +
+                         TIMER_END_DD;
+            START_SECS =(TIMER_START_HH * 60 * 60 * 100) +
+                        (TIMER_START_MM * 60 * 100) +
+                        (TIMER_START_SS * 100) +
+                         TIMER_START_DD;
+            TIMER_ELAPSED = end_secs - start_secs;
+            TIMER_RUN_TIME_ELAPSED = TIMER_ELAPSED;
+            WS_CONSOLE_MESSAGE = STRING(TIMER_RUN_TIME);
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+  END RUN_TIME;
+
+ END ZBNKPRT1;

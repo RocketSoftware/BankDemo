@@ -100,7 +100,7 @@ def create_region():
     else:
         data_dir = configuration_files["data_dir"]
 
-    #read the next usable port nubers when configuring the region 
+    #read the next usable port numbers when configuring the region 
     write_log('Reading ports configuration file')
     ports_config = os.path.join(config_dir, 'ports.json')
 
@@ -116,6 +116,8 @@ def create_region():
 
     create_new_system(template_base,sys_base)
     
+	#create an empty resource definition file
+    caspcrd_process = os.system('caspcrd /c /dp=' + sys_base + '/rdef')
     
     dataset_dir = os.path.join(cwd, data_dir)
 
@@ -376,9 +378,9 @@ def create_region():
         else:
             xa_extension = ".so"
         xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
-        xa_module = '$ESP/sysloadlib/' + xarm_module_version
+        xa_module = '$ESP/loadlib/' + xarm_module_version
         xa_detail["mfXRMModule"] = xa_module
-        write_log ('XA Resource Manager being added')
+        write_log ('XA Resource Manager {} being added'.format(xa_module))
         add_xa_rm(region_name,ip_address,xa_detail)
     else:
         write_log ('VSAM version required - datasets being deployed')
