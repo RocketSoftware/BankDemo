@@ -1,4 +1,5 @@
 *.cpython*
-/Projects/Studio/.vs/BankDemo
-/Projects/Studio/Bankdemo/obj
-/System/Loadlib
+/scripts/build.txt
+/system/loadlib
+/tutorial/projects/Studio/cobol/.vs/BankDemo
+/tutorial/projects/Studio/cobol/Bankdemo/obj
