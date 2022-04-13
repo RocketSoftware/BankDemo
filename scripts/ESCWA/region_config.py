@@ -32,22 +32,22 @@ def update_region(region_name, ip_address, template_file, env_file, region_descr
     uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
+    esp_alias = '$ESP'
     if sys.platform.startswith('win32'):
         path_sep = ';'
+        log_dir = os.path.join(esp_alias, 'logs')
     else:
         path_sep = ':'
+        log_dir = '' # system dir unsupported on Unix/Linux
 
-    esp_alias = '$ESP'
-    log_dir = os.path.join(esp_alias, 'logs')
     loadlib_dir = os.path.join(esp_alias, 'loadlib')
-    sysloadlib_dir = os.path.join(esp_alias, 'sysLoadlib')
     catalog_dir = os.path.join(esp_alias, 'catalog')
     catalog_data_dir = os.path.join(catalog_dir, 'data')
     #data_dir = os.path.join(esp_alias, 'Data')
     rdef_dir = os.path.join(esp_alias, 'rdef')
 
     catalog_file = os.path.join(catalog_dir, 'CATALOG.DAT')
-    lib_path = loadlib_dir + path_sep + sysloadlib_dir
+    lib_path = loadlib_dir
 
     try:
         req_body = read_json(template_file)
