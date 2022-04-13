@@ -76,7 +76,7 @@ def add_groups(region_name, ip_address, group_details):
 
     for new_group in group_details['ResourceGroups']:
         req_body =new_group
-        write_log('Adding Resrouce Group {}'.format(req_body["resNm"]))
+        write_log('Adding Resource Group {}'.format(req_body["resNm"]))
         try:
             res = session.post(uri, headers=req_headers, json=req_body)
             check_http_error(res)
