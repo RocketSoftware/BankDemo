@@ -29,7 +29,7 @@ WITH THIS SOFTWARE.
 	<property name="cfg" value="New_Configuration"/>
 	<property name="cfgtarget" value="cfg.${cfg}"/>
 	<property name="forceCompile" value="true"/>
-	<property name="buildThreadCount" value="2"/>
+	<property name="buildThreadCount" value="4"/>
 	<property name="failOnError" value="false"/>
 	<property name="cobolFailOnError" value="true"/>
 	<property name="cobollinkFailOnError" value="${failOnError}"/>
@@ -114,13 +114,13 @@ WITH THIS SOFTWARE.
 	<target name="cobol.cfg.New_Configuration" depends="BMS.build.cfg.New_Configuration,cobol.compile.cfg.New_Configuration,cobol.link.cfg.New_Configuration"/>
 	
 	<target name="BMS.build.cfg.New_Configuration">
-		<bms destdir="${loaddir}" forceCompile="${forceCompile}" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" failonerror="${bmsFailOnError}">
+		<bms destdir="${loaddir}" forceCompile="${forceCompile}" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" failonerror="${bmsFailOnError}" threadCount="${buildThreadCount}">
 			<fileset refid="bms_file_set_1"/>
 		</bms>
 	</target>
 	
 	<target name="cobol.compile.cfg.New_Configuration">
-		<cobol verbose="true" debug="true" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" threadedRts="false" destdir="${loaddir}" is64bit="${64bitset}" failonerror="${cobolFailOnError}" forceCompile="${forceCompile}">
+		<cobol verbose="true" debug="true" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" threadedRts="false" destdir="${loaddir}" is64bit="${64bitset}" failonerror="${cobolFailOnError}" forceCompile="${forceCompile}" threadCount="${buildThreadCount}">
 			<mffilelist refid="cobol.copybook.locations"/>
 			<fileset refid="cobol_file_set_1"/>
 		</cobol>
@@ -129,7 +129,7 @@ WITH THIS SOFTWARE.
 		<path id="objects.path">
 			<fileset refid="cobol.default.object.files.New Configuration"/>
 		</path>
-		<foreach target="cobol.link.file" param="ObjName">
+		<foreach target="cobol.link.file" param="ObjName" parallel="true" maxThreads="${buildThreadCount}">
 			<path refid="objects.path"/>
 		</foreach>
 	</target>
