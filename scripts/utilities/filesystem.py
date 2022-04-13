@@ -52,4 +52,14 @@ def deploy_vsam_data (repo_dir, sys_base, os_type):
 
     copy_tree(source_load, target_load)
 
+def deploy_partitioned_data (repo_dir, sys_base):
+
+    target_load = os.path.join(sys_base, 'catalog', 'data', 'proclib')
+    source_load = os.path.join(repo_dir, 'sources', 'proclib')
+    copy_tree(source_load, target_load)
+
+    target_load = os.path.join(sys_base, 'catalog', 'data', 'ctlcards')
+    source_load = os.path.join(repo_dir, 'sources', 'ctlcards')
+    copy_tree(source_load, target_load)
+
 

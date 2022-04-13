@@ -23,10 +23,11 @@ import os
 import sys
 import glob
 
-from utilities.misc import parse_args
+from utilities.misc import parse_args, set_MF_environment
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
-from utilities.filesystem import create_new_system, deploy_application, deploy_vsam_data
+from utilities.filesystem import create_new_system, deploy_application, deploy_vsam_data, deploy_partitioned_data
+
 from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
 from ESCWA.region_config import update_region, update_alias, add_initiator, add_datasets
@@ -116,8 +117,18 @@ def create_region():
 
     create_new_system(template_base,sys_base)
     
-	#create an empty resource definition file
-    caspcrd_process = os.system('caspcrd /c /dp=' + sys_base + '/rdef')
+    #create an empty resource definition file
+    if sys.platform.startswith('win32'):
+        os_type = 'Windows'
+    else:
+        os_type = 'Linux'
+
+    #determine where the Micro Focus product has been installed
+    install_dir = set_MF_environment (os_type)
+    write_log ('Install dir {}'.format(install_dir[0]))
+    create_dfhdrdat = '\"' + install_dir[0] + 'caspcrd\" /c /dp=' + sys_base + '/rdef'
+    write_log ('Create resource defition file {}'.format(create_dfhdrdat))
+    caspcrd_process = os.system(create_dfhdrdat)
     
     dataset_dir = os.path.join(cwd, data_dir)
 
@@ -303,6 +314,7 @@ def create_region():
 
     if not confirmed:
         print('Region Failed to start. Environment being rewound')
+        sys.exit(1)
 
         del_res = del_region(region_name, ip_address)
 
@@ -385,6 +397,9 @@ def create_region():
     else:
         write_log ('VSAM version required - datasets being deployed')
         deploy_vsam_data(parentdir,sys_base,os_type)
+
+        write_log ('Partitioned datasets being deployed')
+        deploy_partitioned_data(parentdir,sys_base)
 
     if mf_product != 'EDz':
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
