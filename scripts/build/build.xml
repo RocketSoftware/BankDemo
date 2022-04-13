@@ -23,6 +23,7 @@ WITH THIS SOFTWARE.
 	<property name="pathVar.PROJECT_LOC" value="${basedir}"/>
 	<property environment="env"/>
 	<property name="DirsetBuild" value="${basedir}/copybook"/>
+	<property name="DirsetGenerated" value="${basedir}/generated"/>
 	<property name='dataversion' value="VSAM"/>
 	<property name='64bitset' value="false"/>
 	<property name="cfg" value="New_Configuration"/>
@@ -101,6 +102,7 @@ WITH THIS SOFTWARE.
 	<!-- COBOL copybook locations -->
 	<mffilelist id="cobol.copybook.locations">
 		<path type="copybook" name="${DirsetBuild}"/>
+		<path type="copybook" name="${DirsetGenerated}"/>
 	</mffilelist>
 
 	<!--  *************************  -->
@@ -112,7 +114,7 @@ WITH THIS SOFTWARE.
 	<target name="cobol.cfg.New_Configuration" depends="BMS.build.cfg.New_Configuration,cobol.compile.cfg.New_Configuration,cobol.link.cfg.New_Configuration"/>
 	
 	<target name="BMS.build.cfg.New_Configuration">
-		<bms destdir="${loaddir}" forceCompile="${forceCompile}" configuration="New Configuration" settingsDir=".settings" failonerror="${bmsFailOnError}">
+		<bms destdir="${loaddir}" forceCompile="${forceCompile}" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" failonerror="${bmsFailOnError}">
 			<fileset refid="bms_file_set_1"/>
 		</bms>
 	</target>
