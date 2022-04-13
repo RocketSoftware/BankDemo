@@ -74,7 +74,7 @@ def parse_args(arg_list, short_map, long_map):
 def set_MF_environment (os_type):
 
     if os_type == 'Windows':
-       aKey =  r"SOFTWARE\\Micro Focus\\Visual COBOL\\7.0\\COBOL"
+       aKey =  r"SOFTWARE\\Micro Focus\\Visual COBOL\\8.0\\COBOL"
        aReg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
 
        aKey = winreg.OpenKey(aReg, aKey)
