@@ -19,6 +19,7 @@ Description:  Miscelaneous utility functions.
 
 import getopt
 import winreg
+from utilities.output import write_log 
 from utilities.exceptions import HTTPException
 
 
@@ -74,16 +75,16 @@ def parse_args(arg_list, short_map, long_map):
 def set_MF_environment (os_type):
 
     if os_type == 'Windows':
-       aKey =  r"SOFTWARE\\Micro Focus\\Visual COBOL\\8.0\\COBOL"
-       aReg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-
-       aKey = winreg.OpenKey(aReg, aKey)
-       for i in range(1024):
-           try:
-            asubkey_name = winreg.EnumKey(aKey, i)
-            asubkey = winreg.OpenKey(aKey, asubkey_name)
-            install_dir = winreg.QueryValueEx(asubkey, "BIN")
-           except EnvironmentError:
-             pass
-
-    return install_dir
+       localMachineKey = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+       cobolKey = winreg.OpenKey(localMachineKey, r"SOFTWARE\\Micro Focus\\Visual COBOL")
+       defaultVersion = winreg.QueryValueEx(cobolKey, "DefaultVersion")
+       installKeyString =  r'{}\\COBOL\\Install'.format(defaultVersion[0])
+       write_log('Found COBOL version: {}'.format(defaultVersion[0]))
+       installKey = winreg.OpenKey(cobolKey, installKeyString)
+       install_dir = winreg.QueryValueEx(installKey, "BIN")
+       winreg.CloseKey(installKey)
+       winreg.CloseKey(cobolKey)
+       winreg.CloseKey(localMachineKey)
+       return install_dir[0]
+       
+    return ''
