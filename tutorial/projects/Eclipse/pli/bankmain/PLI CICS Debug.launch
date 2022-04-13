@@ -2,7 +2,7 @@
 <launchConfiguration type="com.microfocus.eclipse.ESLaunchPLI">
     <stringAttribute key="CICSPROGRAM" value=""/>
     <stringAttribute key="CICSTERMINALID" value=""/>
-    <stringAttribute key="CICSTRANSACTIONID" value=""/>
+    <stringAttribute key="CICSTRANSACTIONID" value="BANK"/>
     <stringAttribute key="CICSUSERID" value=""/>
     <stringAttribute key="CLIENTHOSTNAME" value="localhost"/>
     <stringAttribute key="DEBUGGINGTYPE" value="CICS"/>
