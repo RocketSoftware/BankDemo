@@ -19,7 +19,7 @@
 BANKROOT=__IMPORT_FILE_DIR__/..
 ESP=$BANKROOT/system
 PS=;
-OS=windows
+OS=Windows
 CHIP=x64</mfCustomConfiguration>
         <mfServerExtendedConfiguration>
           <mfServerCASConfiguration>

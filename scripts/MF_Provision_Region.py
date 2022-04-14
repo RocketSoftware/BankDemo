@@ -420,6 +420,7 @@ def create_region():
        sql_folder= os.path.join(cwd, 'config', 'database', database_type) 
 
     if  database_type == 'Postgres':
+        loadlibDir = 'SQL_Postgres'
         write_log ('Databse type {} selected - database being built'.format(database_type))
         database_connection = main_config['database_connection']
         odbc_filename = 'ODBC' + database_type + '.reg'
@@ -453,6 +454,7 @@ def create_region():
         write_log ('XA Resource Manager {} being added'.format(xa_module))
         add_xa_rm(region_name,ip_address,xa_detail)
     else:
+        loadlibDir = 'VSAM'
         write_log ('VSAM version required - datasets being deployed')
         deploy_vsam_data(parentdir,sys_base,os_type)
 
@@ -461,7 +463,7 @@ def create_region():
 
     if mf_product != 'EDz':
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
-        deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
+        deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
     else:
         ant_home = None
         if 'ant_home' in main_config:
@@ -483,7 +485,7 @@ def create_region():
 
         if ant_home is None:
             write_log('ANT_HOME not set. Precompiled executables therefore being deployed'.format(mf_product))
-            deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
+            deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
         else:
             write_log('Application being built')
 

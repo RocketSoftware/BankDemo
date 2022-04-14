@@ -32,18 +32,22 @@ def create_new_system(template_base, sys_base):
     copy_tree(template_base, sys_base)
     
 
-def deploy_application (repo_dir, sys_base, os_type, os_distribution, database_type):
+def deploy_application (repo_dir, sys_base, os_type, is64bit, database_type):
 
     target_load = os.path.join(sys_base, 'loadlib')
 
-    if  os_type == 'Windows':
-        exec_subfolder = os_type + '_' + database_type
+    if is64bit:
+        chip = 'x64'
     else:
-        exec_subfolder = os_distribution + '_' + os_type + '_' + database_type
-
-    source_load = os.path.join(repo_dir, 'executables', exec_subfolder)
-
+        chip = 'x86'
+    exec_load = os.path.join(repo_dir, 'executables', os_type, chip)
+    
+    source_load = os.path.join(exec_load, 'data', database_type)
     copy_tree(source_load, target_load)
+
+    source_load = os.path.join(exec_load, 'core')
+    copy_tree(source_load, target_load)
+
 
 def deploy_vsam_data (repo_dir, sys_base, os_type):
 
@@ -61,5 +65,4 @@ def deploy_partitioned_data (repo_dir, sys_base):
     target_load = os.path.join(sys_base, 'catalog', 'data', 'ctlcards')
     source_load = os.path.join(repo_dir, 'sources', 'ctlcards')
     copy_tree(source_load, target_load)
-
 

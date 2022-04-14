@@ -19,4 +19,4 @@ if [ "$WRITEBAK" = "y" -o "$WRITEBAK" = "Y" ]; then
 fi
 sed -i -e "s!__IMPORT_FILE_DIR__!$FILEPATH!" "$SCRIPTDIR/BANKDEMO.xml" 
 sed -i -e "s!PS=;!PS=:!" "$SCRIPTDIR/BANKDEMO.xml"
-sed -i -e "s!OS=windows!OS=amzn2_linux!" "$SCRIPTDIR/BANKDEMO.xml"
+sed -i -e "s!OS=Windows!OS=Linux!" "$SCRIPTDIR/BANKDEMO.xml"
