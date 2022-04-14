@@ -29,19 +29,27 @@ def run_ant_file(build_file, source_dir, load_dir, ant_home, full_build,datavers
     if sys.platform.startswith('win32'):
         os_type = 'Windows'
         mfant_dir = 'bin'
-        #determine where the Micro Focus product has been installed
-        install_dir = set_MF_environment (os_type)
     else:
         os_type = 'Linux'
         mfant_dir = 'lib'
 
-    #ant_home - this value should be set in demo.json
+    #determine where the Micro Focus product has been installed
+    install_dir = set_MF_environment (os_type)
+    if install_dir is None:
+        write_log("Unable to determine COBDIR")
+        sys.exit(1)
+
+    #ant_home - this value should be set in demo.json or ANT_HOME if not determined from product location
     ant_exe = os.path.join(ant_home, 'bin', 'ant')
 
-    #set the COBDIR environment variable
+    #set the COBOL environment
     cobdir = str(Path(install_dir).parents[0])
     write_log('Setting COBDIR={}'.format(cobdir))
     os.environ["COBDIR"] = cobdir
+    if os_type == 'Linux':
+        os.environ['LD_LIBRARY_PATH'] = cobdir + '/lib:' + os.environ['LD_LIBRARY_PATH']
+        os.environ['TXDIR'] = cobdir
+        os.environ['COBCPY'] = cobdir + '/cpylib:' + os.environ['COBCPY']
 
     mfant_jar = os.path.join(cobdir, mfant_dir, 'mfant.jar')
 

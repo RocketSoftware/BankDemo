@@ -23,7 +23,8 @@ import os
 import sys
 import glob
 
-from utilities.misc import parse_args, set_MF_environment
+
+from utilities.misc import parse_args, set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
 from utilities.filesystem import create_new_system, deploy_application, deploy_vsam_data, deploy_partitioned_data
@@ -50,11 +51,18 @@ def create_region():
     if sys.platform.startswith('win32'):
         os_type = 'Windows'
         install_dir = set_MF_environment (os_type)
+        if install_dir is None:
+            write_log('COBOL environment not found')
+            exit(1)
         cobdir = str(Path(install_dir).parents[0])
         pathMfAnt = Path(os.path.join(cobdir, 'bin', 'mfant.jar')) 
     else:
         os_type = 'Linux'
-        cobdir=os.environ["COBDIR"]
+        install_dir = set_MF_environment (os_type)
+        if install_dir is None:
+            write_log('COBOL environment not set - run cobsetenv')
+            exit(1)
+        cobdir = str(Path(install_dir).parents[0])
         if cobdir == '':
             write_log('COBOL environment not set - run cobsetenv')
             exit(1)
@@ -99,7 +107,13 @@ def create_region():
     cics_region = main_config["CICS"]
     jes_region = main_config["JES"]
     mq_region = main_config["MQ"]
+
     is64bit = main_config["is64bit"]
+    if os_type == 'Linux':
+        path32 = Path(os.path.join(install_dir,'casstart32'))
+        if path32.is_file() == False:
+            # No 32bit executables
+            is64bit = False;
 
     if 'database' not in main_config:
         database_type = 'none'
@@ -165,7 +179,7 @@ def create_region():
     alias_config = os.path.join(config_dir, alias_config)
     init_config = os.path.join(config_dir, init_config)
     env_config = os.path.join(config_dir, env_config)
-    resourcedef_dir = os.path.join(config_dir, 'csd')
+    resourcedef_dir = os.path.join(config_dir, 'CSD')
 
     datafile_list = [file for file in os.scandir(dataset_dir)]
 
@@ -174,6 +188,7 @@ def create_region():
         add_region(region_name, ip_address, region_port, base_config, is64bit)
     except ESCWAException as exc:
         write_log('Unable to create region.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -181,6 +196,7 @@ def create_region():
         update_region(region_name, ip_address, update_config, env_config, 'Test Region', sys_base)
     except ESCWAException as exc:
         write_log('Unable to update region.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -188,6 +204,7 @@ def create_region():
         set_jes_listener(region_name, ip_address, jes_port)
     except ESCWAException as exc:
         write_log('Unable to set JES listener.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -195,6 +212,7 @@ def create_region():
         start_region(region_name, ip_address)
     except ESCWAException as exc:
         write_log('Unable to start region.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -202,6 +220,7 @@ def create_region():
         confirmed = confirm_region_status(region_name, ip_address, 1, 'Started')
     except ESCWAException as exc:
         write_log('Unable to check region status.')
+        write_log(exc)
         sys.exit(1)
 
     if not confirmed:
@@ -222,6 +241,7 @@ def create_region():
             update_alias(region_name, ip_address, alias_config)
         except ESCWAException as exc:
             write_log('Unable to update aliases.')
+            write_log(exc)
             sys.exit(1)
 
     if  init_config != 'none':
@@ -230,6 +250,7 @@ def create_region():
             add_initiator(region_name, ip_address, init_config)
         except ESCWAException as exc:
             write_log('Unable to add initiator.')
+            write_log(exc)
             sys.exit(1)
 
     try:
@@ -265,7 +286,7 @@ def create_region():
     if database_type == 'VSAM':
 
         write_log ('VSAM version selected - FCT entries being added')
-        fct_match_pattern = resourcedef_dir + '\\rdef_fct_*.json'
+        fct_match_pattern = os.path.join(resourcedef_dir, 'rdef_fct_*.json')
         fct_filelist = glob.glob(fct_match_pattern)
 
         if fct_filelist != '':
@@ -274,8 +295,9 @@ def create_region():
                 groupx = filename.split('_')
                 group_name = groupx[2].split('.')
                 add_fct(region_name,ip_address,group_name[0], fct_details)
-
-    ppt_match_pattern = resourcedef_dir + '\\rdef_ppt_*.json'
+        else:
+            write_log('fct match pattern failed')
+    ppt_match_pattern = os.path.join(resourcedef_dir, 'rdef_ppt_*.json')
     ppt_filelist = glob.glob(ppt_match_pattern)
 
     if ppt_filelist != '':
@@ -285,8 +307,9 @@ def create_region():
            groupx = filename.split('_')
            group_name = groupx[2].split('.')
            add_ppt(region_name,ip_address,group_name[0], ppt_details)
-
-    pct_match_pattern = resourcedef_dir + '\\rdef_pct_*.json'
+    else:
+        write_log('ppt match pattern failed')
+    pct_match_pattern = os.path.join(resourcedef_dir, 'rdef_pct_*.json')
     pct_filelist = glob.glob(pct_match_pattern)
 
     if pct_filelist != '':
@@ -296,6 +319,8 @@ def create_region():
            groupx = filename.split('_')
            group_name = groupx[2].split('.')
            add_pct(region_name,ip_address,group_name[0], pct_details)
+    else:
+        write_log('pct match pattern failed')
 
     ## Update the SIT setting for this region
 
@@ -311,6 +336,7 @@ def create_region():
         stop_region(region_name, ip_address)
     except ESCWAException as exc:
         write_log('Unable to execute stop request for region.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -318,6 +344,7 @@ def create_region():
         confirmed = confirm_region_status(region_name, ip_address, 1, 'Stopped')
     except ESCWAException as exc:
         write_log('Unable to check region status.')
+        write_log(exc)
         sys.exit(1)
 
     if not confirmed:
@@ -331,6 +358,7 @@ def create_region():
         start_region(region_name, ip_address)
     except ESCWAException as exc:
         write_log('Unable to start region.')
+        write_log(exc)
         sys.exit(1)
 
     try:
@@ -338,6 +366,7 @@ def create_region():
         confirmed = confirm_region_status(region_name, ip_address, 1, 'Started')
     except ESCWAException as exc:
         write_log('Unable to check region status.')
+        write_log(exc)
         sys.exit(1)
 
     if not confirmed:
@@ -368,6 +397,7 @@ def create_region():
             add_mq_listener(region_name, ip_address, mq_details)
         except ESCWAException as exc:
             print('Unable to add MQ Listener.')
+            write_log(exc)
             sys.exit(1)
     
    ## The following code deploys the application
@@ -378,7 +408,7 @@ def create_region():
         os_distribution =''
     else:
         os_type = 'Linux'
-        os_distribution = sys.platform.linux_distribution()
+        os_distribution = '' #distro.id()
 
     if main_config['database'] == 'VSAM':
         dataversion = 'vsam'
@@ -433,33 +463,42 @@ def create_region():
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
         deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
     else:
+        ant_home = None
         if 'ant_home' in main_config:
             ant_home = main_config['ant_home']
         elif "ANT_HOME" in os.environ:
             ant_home = os.environ["ANT_HOME"]
-        elif os_type == 'Windows':
-            for file in os.listdir("C:\\Users\\Public\\Micro Focus\\Enterprise Developer\\eclipse\\plugins"):
-               if file.startswith("org.apache.ant_"):
-                    ant_home = os.path.join("C:\\Users\\Public\\Micro Focus\\Enterprise Developer\\eclipse\\plugins", file)
-
-    if ant_home is None:
-        write_log('ANT_HOME not set. Precompiled executables therefore being deployed'.format(mf_product))
-        deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
-    else:
-        write_log('Application being built')
-
-        build_file = os.path.join(cwd, 'build', 'build.xml')
-        parentdir = str(Path(cwd).parents[0])
-        source_dir = os.path.join(parentdir, 'sources')
-        load_dir = os.path.join(parentdir, region_name,'system','loadlib')
-        full_build = True
-
-        if main_config['is64bit'] == True:
-            set64bit = 'true'
         else:
-            set64bit = 'false'
+            eclipsInstallDir = get_EclipsePluginsDir(os_type)
+            if eclipsInstallDir is not None:
+                for file in os.listdir(eclipsInstallDir):
+                    if file.startswith("org.apache.ant_"):
+                        ant_home = os.path.join(eclipsInstallDir, file)
+            if ant_home is None:
+                antdir = get_CobdirAntDir(os_type)
+                if antDir is not None:
+                    for file in os.listdir(antdir):
+                        if file.startswith("apache-ant-"):
+                            ant_home = os.path.join(eclipsInstallDir, file)
 
-        run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
+        if ant_home is None:
+            write_log('ANT_HOME not set. Precompiled executables therefore being deployed'.format(mf_product))
+            deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
+        else:
+            write_log('Application being built')
+
+            build_file = os.path.join(cwd, 'build', 'build.xml')
+            parentdir = str(Path(cwd).parents[0])
+            source_dir = os.path.join(parentdir, 'sources')
+            load_dir = os.path.join(parentdir, region_name,'system','loadlib')
+            full_build = True
+
+            if is64bit == True:
+                set64bit = 'true'
+            else:
+                set64bit = 'false'
+
+            run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
 
     write_log('Micro Focus Demo environment has been provisioned')
 
