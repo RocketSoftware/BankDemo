@@ -46,7 +46,21 @@ def create_region():
     #set current working directory
     cwd = os.getcwd()
     
+    #determine where the Micro Focus product has been installed
+    if sys.platform.startswith('win32'):
+        os_type = 'Windows'
+        install_dir = set_MF_environment (os_type)
+        cobdir = str(Path(install_dir).parents[0])
+        pathMfAnt = Path(os.path.join(cobdir, 'bin', 'mfant.jar')) 
+    else:
+        os_type = 'Linux'
+        cobdir=os.environ["COBDIR"]
+        if cobdir == '':
+            write_log('COBOL environment not set - run cobsetenv')
+            exit(1)
+        pathMfAnt = Path(os.path.join(cobdir,'lib', 'mfant.jar')) 
 
+    write_log('COBDIR={}'.format(cobdir))
     write_log('Provision Process starting')
    
     config_dir = os.path.join(cwd, 'config')
@@ -59,7 +73,29 @@ def create_region():
     #retrieve the demo configuration settings
     ip_address = main_config["ip_address"]
     region_name = main_config["region_name"]
-    mf_product = main_config["product"]
+    if main_config["product"] != '':
+        mf_product = main_config["product"]
+    else:
+        mf_product = 'EDz'
+    # Override if compiler is mfant.jar is not found
+    if mf_product == 'EDz':
+        if pathMfAnt.is_file() != True:
+            mf_product = 'ES'
+        elif "JAVA_HOME" not in os.environ:
+            if os_type == 'Windows':
+                pathJDK = Path(os.path.join(cobdir,'AdoptOpenJDK'))
+                if pathJDK.is_dir():
+                    os.environ["JAVA_HOME"] = str(pathJDK)
+                    write_log('Using JAVA_HOME={}'.format(str(pathJDK)))
+                else:
+                    write_log('JAVA_HOME not set, cannot build application')
+                    mf_product = 'ES'
+            else:
+                write_log('JAVA_HOME not set, cannot build application')
+                mf_product = 'ES'
+
+    write_log('Configured for product: {}'.format(mf_product))
+
     cics_region = main_config["CICS"]
     jes_region = main_config["JES"]
     mq_region = main_config["MQ"]
@@ -118,15 +154,7 @@ def create_region():
     create_new_system(template_base,sys_base)
     
     #create an empty resource definition file
-    if sys.platform.startswith('win32'):
-        os_type = 'Windows'
-    else:
-        os_type = 'Linux'
-
-    #determine where the Micro Focus product has been installed
-    install_dir = set_MF_environment (os_type)
-    write_log ('Install dir {}'.format(install_dir[0]))
-    create_dfhdrdat = '\"' + install_dir[0] + 'caspcrd\" /c /dp=' + sys_base + '/rdef'
+    create_dfhdrdat = '\"' + install_dir + 'caspcrd\" /c /dp=' + sys_base + '/rdef'
     write_log ('Create resource defition file {}'.format(create_dfhdrdat))
     caspcrd_process = os.system(create_dfhdrdat)
     
@@ -405,8 +433,20 @@ def create_region():
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
         deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
     else:
+        if 'ant_home' in main_config:
+            ant_home = main_config['ant_home']
+        elif "ANT_HOME" in os.environ:
+            ant_home = os.environ["ANT_HOME"]
+        elif os_type == 'Windows':
+            for file in os.listdir("C:\\Users\\Public\\Micro Focus\\Enterprise Developer\\eclipse\\plugins"):
+               if file.startswith("org.apache.ant_"):
+                    ant_home = os.path.join("C:\\Users\\Public\\Micro Focus\\Enterprise Developer\\eclipse\\plugins", file)
+
+    if ant_home is None:
+        write_log('ANT_HOME not set. Precompiled executables therefore being deployed'.format(mf_product))
+        deploy_application(parentdir, sys_base, os_type, os_distribution, database_type)
+    else:
         write_log('Application being built')
-        ant_home = main_config['ant_home']
 
         build_file = os.path.join(cwd, 'build', 'build.xml')
         parentdir = str(Path(cwd).parents[0])
@@ -424,4 +464,5 @@ def create_region():
     write_log('Micro Focus Demo environment has been provisioned')
 
 if __name__ == '__main__':
+
     create_region()
