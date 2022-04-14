@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
 This software may be used, modified, and distributed 
@@ -26,7 +27,7 @@ from utilities.input import read_json
 from utilities.output import write_log 
 from utilities.misc import parse_args 
 from build.MFBuild import  run_ant_file
-from utilities.misc import get_EclipsePluginsDir, get_CobdirAntDir
+from utilities.misc import set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir
 
 def build_programs():
 
@@ -45,17 +46,17 @@ def build_programs():
             os_type = "Windows"
         else:
             os_type = "Linux"
-        eclipsInstallDir = get_EclipsePluginsDir(os_type)
-        if eclipsInstallDir is not None:
-            for file in os.listdir(eclipsInstallDir):
+        eclipseInstallDir = get_EclipsePluginsDir(os_type)
+        if eclipseInstallDir is not None:
+            for file in os.listdir(eclipseInstallDir):
                 if file.startswith("org.apache.ant_"):
-                    ant_home = os.path.join(eclipsInstallDir, file)
+                    ant_home = os.path.join(eclipseInstallDir, file)
         if ant_home is None:
-            antdir = get_CobdirAntDir(os_type)
+            antDir = get_CobdirAntDir(os_type)
             if antDir is not None:
-                for file in os.listdir(antdir):
+                for file in os.listdir(antDir):
                     if file.startswith("apache-ant-"):
-                        ant_home = os.path.join(eclipsInstallDir, file)
+                        ant_home = os.path.join(antDir, file)
     if ant_home == None:
         write_log("Ant not found, set ANT_HOME")
         sys.exit(1)
@@ -71,7 +72,7 @@ def build_programs():
     load_dir = os.path.join(parentdir, region_name,'system','loadlib')
     full_build = True
 
-    if main_config['is64bit'] == True:
+    if main_config['is64bit'] == False:
         if os_type == 'Linux':
             install_dir = set_MF_environment (os_type)
             if install_dir is None:
@@ -81,11 +82,12 @@ def build_programs():
                 path32 = Path(os.path.join(install_dir,'casstart32'))
                 if path32.is_file() == False:
                     # No 32bit executables
-                    set64bit = 'false'
-                else:
+                    write_log("Overriding bitism as platform only supports 64 bit")
                     set64bit = 'true'
+                else:
+                    set64bit = 'false'
     else:
-        set64bit = 'false'
+        set64bit = 'true'
 
     run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
 

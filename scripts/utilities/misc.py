@@ -24,7 +24,7 @@ if sys.platform.startswith('win32'):
     import winreg
 from utilities.output import write_log 
 from utilities.exceptions import HTTPException
-
+from pathlib import Path
 
 def get_elem_with_prop(arr, key, value):
     """ Gets an array object with a specific property"""
@@ -119,12 +119,14 @@ def get_EclipsePluginsDir (os_type):
        winreg.CloseKey(localMachineKey)
        return pluginsDir
     else:
-       cobdir = set_MF_environment(os_type)
-       if cobdir is not None:
-           pluginsDir = os.path.join(cobdir, "eclipse", "eclipse", "plugins")
-           pathPluginsDir = path(pluginsDir)
-           if pathPluginsDir.is_dir():
-               return pluginsDir
+       installDir = set_MF_environment(os_type)
+       if installDir is not None:
+           cobdir = Path(installDir).parents[0]
+           if cobdir is not None:
+               pluginsDir = os.path.join(cobdir, "eclipse", "eclipse", "plugins")
+               pathPluginsDir = Path(pluginsDir)
+               if pathPluginsDir.is_dir():
+                   return pluginsDir
 
     return None
 
@@ -135,7 +137,7 @@ def get_CobdirAntDir (os_type):
        cobdir = set_MF_environment(os_type)
        if cobdir is not None:
            antDir = os.path.join(cobdir, "remotedev", "ant")
-           pathAntDir = path(antDir)
+           pathAntDir = Path(antDir)
            if pathAntDir.is_dir():
                return antDir
 
