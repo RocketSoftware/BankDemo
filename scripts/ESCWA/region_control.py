@@ -23,7 +23,7 @@ from utilities.session import get_session, save_cookies
 from utilities.misc import create_headers, check_http_error
 from utilities.input import read_json
 from utilities.exceptions import ESCWAException, InputException, HTTPException
-
+from utilities.output import write_log 
 
 def add_region(region_name, ip_address, port, template_file, is64bit):
     """ Adds a region to the Micro Focus server. """
@@ -42,14 +42,13 @@ def add_region(region_name, ip_address, port, template_file, is64bit):
         req_body['mfCAS64Bit'] = 1
         
     session = get_session()
-
     try:
         res = session.post(uri, headers=req_headers, json=req_body)
         check_http_error(res)
     except requests.exceptions.RequestException as exc:
         raise ESCWAException('Unable to complete Add Region API request.') from exc
     except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add Region API request.') from exc
+        raise ESCWAException('Unable to complete Add Region API request. Region may already be defined') from exc
 
     save_cookies(session.cookies)
 
