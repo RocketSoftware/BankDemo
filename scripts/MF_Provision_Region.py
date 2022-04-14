@@ -113,7 +113,7 @@ def create_region():
         path32 = Path(os.path.join(install_dir,'casstart32'))
         if path32.is_file() == False:
             # No 32bit executables
-            is64bit = False;
+            is64bit = True;
 
     if 'database' not in main_config:
         database_type = 'none'
@@ -168,8 +168,10 @@ def create_region():
     create_new_system(template_base,sys_base)
     
     #create an empty resource definition file
-    create_dfhdrdat = '\"' + install_dir + 'caspcrd\" /c /dp=' + sys_base + '/rdef'
-    write_log ('Create resource defition file {}'.format(create_dfhdrdat))
+    caspcrd = os.path.join(install_dir, 'caspcrd')
+    rdef = os.path.join(sys_base, 'rdef')
+    create_dfhdrdat =  caspcrd + ' /c /dp=' + rdef
+    write_log ('Create resource definition file {}'.format(create_dfhdrdat))
     caspcrd_process = os.system(create_dfhdrdat)
     
     dataset_dir = os.path.join(cwd, data_dir)
