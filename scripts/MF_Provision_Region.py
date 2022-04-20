@@ -42,6 +42,13 @@ from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disco
 
 from pathlib import Path
 
+from os import stat
+from pwd import getpwuid
+import shutil
+
+def find_owner(filename):
+    return getpwuid(stat(filename).st_gid).pw_name
+
 def create_region():
 
     #set current working directory
@@ -173,6 +180,15 @@ def create_region():
     create_dfhdrdat =  caspcrd + ' /c /dp=' + rdef
     write_log ('Create resource definition file {}'.format(create_dfhdrdat))
     caspcrd_process = os.system(create_dfhdrdat)
+    #change ownership to match ES user
+    if os_type == 'Linux':
+        casstart = os.path.join(os.environ['COBDIR'], 'bin', 'casstart')
+        esuid = find_owner(casstart)
+        dfhdrdat = os.path.join(rdef, 'dfhdrdat')
+        shutil.chown(dfhdrdat, esuid, esuid)
+        write_log ('Set owner of {} to {}'.format(dfhdrdat, esuid))
+    else:
+        esuid = ''
     
     dataset_dir = os.path.join(cwd, data_dir)
 
@@ -458,10 +474,10 @@ def create_region():
     else:
         loadlibDir = 'VSAM'
         write_log ('VSAM version required - datasets being deployed')
-        deploy_vsam_data(parentdir,sys_base,os_type)
+        deploy_vsam_data(parentdir,sys_base,os_type, esuid)
 
         write_log ('Partitioned datasets being deployed')
-        deploy_partitioned_data(parentdir,sys_base)
+        deploy_partitioned_data(parentdir,sys_base, esuid)
 
     if mf_product != 'EDz':
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))

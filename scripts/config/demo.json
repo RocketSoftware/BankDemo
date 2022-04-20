@@ -1,7 +1,7 @@
 {
     "ip_address" : "127.0.0.1",
     "region_name": "BANKDEMO",
-    "product": "ES",
+    "product": "EDz",
     "configuration_files":
         {
             "base_config": "base.json",
