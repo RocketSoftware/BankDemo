@@ -45,6 +45,7 @@ from pathlib import Path
 import shutil
 if not sys.platform.startswith('win32'):
     from pwd import getpwuid
+    from os  import stat
 
 def find_owner(filename):
     return getpwuid(stat(filename).st_gid).pw_name
