@@ -42,9 +42,9 @@ from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disco
 
 from pathlib import Path
 
-from os import stat
-from pwd import getpwuid
 import shutil
+if not sys.platform.startswith('win32'):
+    from pwd import getpwuid
 
 def find_owner(filename):
     return getpwuid(stat(filename).st_gid).pw_name
@@ -177,7 +177,7 @@ def create_region():
     #create an empty resource definition file
     caspcrd = os.path.join(install_dir, 'caspcrd')
     rdef = os.path.join(sys_base, 'rdef')
-    create_dfhdrdat =  caspcrd + ' /c /dp=' + rdef
+    create_dfhdrdat =  '\"' +caspcrd + '\" /c /dp=' + rdef
     write_log ('Create resource definition file {}'.format(create_dfhdrdat))
     caspcrd_process = os.system(create_dfhdrdat)
     #change ownership to match ES user
