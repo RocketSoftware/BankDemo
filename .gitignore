@@ -5,6 +5,7 @@
 /tutorial/BANKDEMO.xml.bak
 /tutorial/projects/Studio/cobol/.vs/BankDemo
 /tutorial/projects/Studio/cobol/Bankdemo/obj
+/tutorial/projects/Studio/cobol/Bankdemo/*.dep
 /tutorial/projects/Studio/pli/.vs/BankDemo
 /tutorial/projects/Studio/cobol/Bankdemo/obj
 /tutorial/projects/Studio/pli/bankmain/bin
