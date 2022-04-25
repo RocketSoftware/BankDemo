@@ -1,0 +1,60 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{6DC9FA6F-89C3-434A-BB5A-4EB0A7B9F4BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <OutputName>fetchables</OutputName>
+    <FileName>
+    </FileName>
+    <MFProjectType>Native</MFProjectType>
+    <LinkMultiDlls>True</LinkMultiDlls>
+    <ProjectTypeGuids>{57625636-5EE3-4C1D-B9EB-FB0F8CA34489};{4B01D30A-D350-4502-90C0-55CDC54C513B}</ProjectTypeGuids>
+    <MFDependencyPaths>..\..\..\..\..\sources\include</MFDependencyPaths>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>.\bin\debug\</OutputPath>
+    <CompileAdditional>-ebcdic</CompileAdditional>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>.\bin\x64\Debug\</OutputPath>
+    <CompileAdditional>
+    </CompileAdditional>
+    <IntermediatePath>.\obj\x64\Debug\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>False</DebugSymbols>
+    <OutputPath>.\bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>False</DebugSymbols>
+    <OutputPath>.\bin\x64\Release\</OutputPath>
+    <IntermediatePath>.\obj\x64\Release\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="DLL.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\..\sources\pli\fetchable\DBANK51P.pli">
+      <EnableMacroPreprocessor>True</EnableMacroPreprocessor>
+    </Compile>
+    <Compile Include="..\..\..\..\..\sources\pli\fetchable\DBANK52P.pli">
+      <EnableMacroPreprocessor>True</EnableMacroPreprocessor>
+    </Compile>
+    <Compile Include="..\..\..\..\..\sources\pli\fetchable\ZBNKEXT1.pli">
+      <EnableMacroPreprocessor>True</EnableMacroPreprocessor>
+    </Compile>
+    <Compile Include="..\..\..\..\..\sources\pli\fetchable\ZBNKPRT1.pli">
+      <EnableMacroPreprocessor>True</EnableMacroPreprocessor>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.PLI.targets" />
+</Project>

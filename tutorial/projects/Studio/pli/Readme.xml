@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="..\..\XSLT\Overview.xslt" type="text/xsl"?>
+<sample>
+  <name>CICS-based Open PL/I Bank Application</name>
+  <contents>
+    <content linkto="overview">Overview</content>
+    <content linkto="howToRun">How to Run this Demonstration</content>
+    <content linkto="projectsDescription">Project Description</content>
+  </contents>
+  <overview>
+    <heading>Overview</heading>
+    <directory>PLI-VS\BANKDemo</directory>
+    <description>
+      This demonstration shows you how to compile, link and debug an Open PL/I BANK CICS application using the Visual Studio IDE.  The demo instructions assume you already have a basic understanding of how to use Visual Studio.
+    </description>
+  </overview>
+  <requirements>
+    <heading>Requirements</heading>
+    <paragraphs>
+      <paragraph>
+        This demonstration requires a working Microsoft Visual Studio IDE, Micro Focus Enterprise Developer, and 3270 emulator (like Micro Focus Rumba) in order to be executed successfully.
+      </paragraph>
+    </paragraphs>
+  </requirements>
+  <howToRun>
+    <heading>How to Run the Demonstration</heading>
+    <steps>
+      <step>
+        <description>Import the supplied enterprise server:</description>
+        <steps>
+          <step>In the Visual Studio IDE, in "Server Explorer" (available wth &lt;CTL&gt;+&lt;ALT&gt;+S), right-click "Micro Focus Servers", and click "Administration". This opens the Home page of "Enterprise Server Administration" in the IDE.</step>
+          <step>On the Home page of the "Enterprise Server Administration", select "NATIVE" on the top toolbar.</step>
+          <step>On the NATIVE page, expand "Directory Servers" and select "Default".</step>
+          <step>On the "REGION AND SERVER LIST" page, select "Import" from the toolbar.</step>
+          <step>On the Import wizard "CHOOSE IMPORT TYPE" page, select "XML" and click "NEXT".</step>
+          <step>On the Import wizard "UPLOAD FILE" page, drag and drop the BANKDEMO.xml and click "NEXT". By default, this file is in "C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\PLI-VS\BANKDEMO.</step>
+          <step>Click "NEXT" on the "IMPORT OPTIONS" page.</step>
+          <step>Click "IMPORT" on the "PERFORM IMPORT" page and "FINISH" to close the wizard after the import is complete.</step>
+          <step>The "BANK" server should now appear in the list of servers on the "REGION AND SERVER LIST" page.</step>
+          <step>*** IMPORTANT ***  Click "Edit" on the row for the "BANK" server to view or change any of the server settings. In the "ADDITIONAL"/"Configuration Information" section of the "GENERAL" tab, modify the value of "BANKDEMO" to set the appropriate path based on the version of ED you have installed ("PLI-VS or PLI-Eclipse") or if you've copied the Samples files to a different location.  Also, the value of BANKSHARED should be updated to the shared BANKDEMO resources in the COBOL mainframe demo (typically "C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\Mainframe\BankDemo\MFETDUSER\BankDemo\System" on Windows).</step>
+        </steps>
+      </step>
+      <step>
+        <description>Build the application:</description>
+        <steps>
+          <step>In Visual Studio, click "File"->"Open"->"Project/Solution", navigate to the location of the PL/I BANKDEMO Demo (by default, this is "C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\PLI-VS\BANKDEMO), select bankdemo.sln, and click Open.</step>
+          <step>Ensure that your active configuration is "x86" for 32-bit by right-clicking on the "bankdemo" solution in the "Solution Explorer", select "Properties", select "Configuration Properties" and "Configuration".  The default configuration and platform can then be set and click "OK" to close the dialog.  Currently, this demo is designed to run only in 32-bit mode.</step>
+          <step>Click "Build"->"Build Solution" to build the solution.</step>
+          <step>Check the "Output" window near the bottom of the IDE to verify that the solution built successfully. The last line in the log typically looks like this: "========== Build: 3 succeeded, 0 failed, 0 skipped =========="</step>
+        </steps>
+      </step>
+      <step>
+        <description>Start the enterprise server:</description>
+        <steps>
+          <step>In "Server Explorer", right-click the "BANK" server and click "Start".  If the name does not appear in the list, you may need to refresh the list by right-clicking on "Micro Focus Servers" and selecting "Refresh".</step>
+          <step>Click OK in the "Enterprise Server Sign On" dialog (you can leave the fields blank). You can check the "Output" window to see the progress of starting the server. This also starts the "Enterprise Server Console Daemon" window which also provides information about the server start-up.</step>
+        </steps>
+      </step>
+      <step>
+        <description>Execute the CICS application</description>
+        <steps>
+          <step>Before attempting to debug, the "BANK" ES region needs to be associated with the current project "bankmain".  To do this, right-click on the "BANK" region from the Server Explorer and choose "Associate With Project" and then "bankmain".</step>
+          <step>To start debugging in Visual Studio, press &lt;F5&gt; to put the IDE in wait mode for the BANK application to start.</step>
+          <step>If a 3270 window doesn't open automatically, open a 3270 emulation program like Micro Focus Rumba and connect to "localhost" or "127.0.0.1" on port "5150".</step>
+          <step>If using "Micro Focus Rumba+ Desktop" you can do this by first selecting "Mainframe Display" then selecting "Connection" > "Configure...". Select "TN3270" from "Installed Interfaces", in the "TN3270" tab insert "127.0.0.1" and set the "Telnet Port" to "User Defined" and enter 5150, finally click "Connect".</step>
+          <step>In the 3270 window, clear the screen (default "Control + Shift + Z" in Rumba+), type in transaction "BANK", and press &lt;Enter&gt;.</step>
+          <step>In Visual Studio, the source file "SBANK10P.PLI" should automatically display with the SBANK10P PROC line highlighted as the current line of execution.</step>
+          <step>At this point, feel free to step through the SBANK10P program, set breakpoints, and evaluate variables.  Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.</step>
+          <step>In the 3270 window, type a User id of "b0001" and press &lt;Enter&gt;.</step>
+          <step>Visual Studio debugging will be started again so you can debug through the SBANK10P program again.</step>          
+          <step>Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.</step>          
+          <step>As this application is psuedo-conversational, debugging will start and end with the invocation and completion of each transaction in the application.  Since this is a small demo, all of the CICS programs after the Banking main options screen are not built for debug and the sources are not provided.</step>
+          <step>Once you're ready to leave the application, press the &lt;F3&gt; key to end the application in the 3270 window.</step>          
+          <step>You can now disconnect your 3270 terminal to end the demo.</step>          
+        </steps>
+      </step>
+      <step>
+        <description>Stop the Enterprise Server</description>
+        <steps>
+          <step>Now that you have finished running the CICS demo, you can stop the associated the enterprise server. To do this, in "Server Explorer", right-click the "BANK" server, and click "Stop".</step>
+          <step>Check the "Output" window for messages that the server has been stopped. A number of messages also appear in the "Enterprise Server Console Daemon" window before it closes down.</step>
+        </steps>
+      </step>
+    </steps>
+  </howToRun>
+</sample>
