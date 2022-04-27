@@ -1,0 +1,59 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{F3B24F01-87CB-4806-9E16-6FA20169E9FF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <OutputName>includes</OutputName>
+    <FileName>includes.dll</FileName>
+    <MFProjectType>Native</MFProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>.\bin\debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>.\bin\x64\Debug\</OutputPath>
+    <IntermediatePath>.\obj\x64\Debug\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>False</DebugSymbols>
+    <OutputPath>.\bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>False</DebugSymbols>
+    <OutputPath>.\bin\x64\Release\</OutputPath>
+    <IntermediatePath>.\obj\x64\Release\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\sources\include\CABENDD.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKD01.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKD51.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKD52.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKDAT.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKDAX.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKEXT.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKTXD.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKVAC.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKVAT.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKVCS.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKVTX.inc" />
+    <None Include="..\..\..\..\..\sources\include\CBANKXT1.inc" />
+    <None Include="..\..\..\..\..\sources\include\CDATED.inc" />
+    <None Include="..\..\..\..\..\sources\include\CHELPD01.inc" />
+    <None Include="..\..\..\..\..\sources\include\CIOFUNCS.inc" />
+    <None Include="..\..\..\..\..\sources\include\CPSWDD01.inc" />
+    <None Include="..\..\..\..\..\sources\include\CSCRNHDD.inc" />
+    <None Include="..\..\..\..\..\sources\include\CSTATESD.inc" />
+    <None Include="..\..\..\..\..\sources\include\CTIMERD.inc" />
+    <None Include="..\..\..\..\..\sources\include\CVERSND.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.PLI.targets" />
+</Project>
