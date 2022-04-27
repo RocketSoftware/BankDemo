@@ -497,7 +497,7 @@ def create_region():
                         ant_home = os.path.join(eclipsInstallDir, file)
             if ant_home is None:
                 antdir = get_CobdirAntDir(os_type)
-                if antDir is not None:
+                if antdir is not None:
                     for file in os.listdir(antdir):
                         if file.startswith("apache-ant-"):
                             ant_home = os.path.join(eclipsInstallDir, file)
