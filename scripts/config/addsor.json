@@ -1,0 +1,6 @@
+{
+  "SorName": "string",
+  "SorDescription": "",
+  "SorType": "redis",
+  "SorConnectPath": ""
+}
