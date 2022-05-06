@@ -16,6 +16,12 @@
     "MQ": false,
     "is64bit": false,
     "database": "VSAM",
+    "PAC": {
+      "enabled": false,
+      "PSOR_type" : "redis",
+      "PSOR_connection": "localhost:6739",
+      "description": ""
+    },
     "database_connection": 
         {
             "server_name": "localhost",

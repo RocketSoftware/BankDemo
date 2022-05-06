@@ -33,6 +33,7 @@ from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
 from ESCWA.region_config import update_region, update_alias, add_initiator, add_datasets
 from ESCWA.comm_control import set_jes_listener
+from ESCWA.pac_config import add_sor, add_pac
 from utilities.exceptions import ESCWAException
 from ESCWA.resourcedef import  add_sit, add_Startup_list, add_groups, add_fct, add_ppt, add_pct, update_sit_in_use
 from ESCWA.xarm import add_xa_rm
@@ -49,6 +50,30 @@ if not sys.platform.startswith('win32'):
 
 def find_owner(filename):
     return getpwuid(stat(filename).st_gid).pw_name
+
+def create_pac(config_dir, main_config, pac_config):
+    psorType=pac_config["PSOR_type"] 
+    psorConnection=pac_config["PSOR_connection"]
+    ip_address = main_config["ip_address"]
+    write_log ('PAC enabled. Setting up PAC.')
+    #Add a PSOR then add the PAC
+    addsor_config = os.path.join(config_dir, 'addsor.json')
+    try:
+        write_log ('PSOR \033[1m{}\033[0m being added'.format("psor1"))
+        sor=add_sor("psor1", ip_address, "desc", psorType, psorConnection, addsor_config).json()
+    except ESCWAException as exc:
+        write_log('Unable to create PSOR.')
+        write_log(exc)
+        sys.exit(1)
+
+    addpac_config = os.path.join(config_dir, 'addpac.json')
+    try:
+        write_log ('PAC \033[1m{}\033[0m being added'.format("pac1"))
+        add_pac("pac1", ip_address, "desc", sor['Uid'], addpac_config)
+    except ESCWAException as exc:
+        write_log('Unable to create PAC.')
+        write_log(exc)
+        sys.exit(1)
 
 def create_region():
 
@@ -201,7 +226,14 @@ def create_region():
     resourcedef_dir = os.path.join(config_dir, 'CSD')
 
     datafile_list = [file for file in os.scandir(dataset_dir)]
-
+    
+    pac_config = main_config["PAC"]
+    pac_enabled=pac_config["enabled"]
+    if pac_enabled == True:
+        create_pac(config_dir, main_config, pac_config)
+    else:
+        write_log('Not using PAC.')
+        
     try:
         write_log ('Region \033[1m{}\033[0m being added'.format(region_name))
         add_region(region_name, ip_address, region_port, base_config, is64bit)
@@ -497,7 +529,7 @@ def create_region():
                         ant_home = os.path.join(eclipsInstallDir, file)
             if ant_home is None:
                 antdir = get_CobdirAntDir(os_type)
-                if antDir is not None:
+                if antdir is not None:
                     for file in os.listdir(antdir):
                         if file.startswith("apache-ant-"):
                             ant_home = os.path.join(eclipsInstallDir, file)
