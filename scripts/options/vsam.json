@@ -1,0 +1,26 @@
+{
+    "ip_address" : "127.0.0.1",
+    "region_name": "BANKDEMO",
+    "product": "EDz",
+    "configuration_files":
+        {
+            "base_config": "base.json",
+            "update_config": "update.json",
+            "env_config": "env.json",
+            "alias_config": "alias.json",
+            "init_config": "init.json",
+            "data_dir": "datasets"
+        },
+    "JES": true,
+    "CICS": true,
+    "MQ": false,
+    "is64bit": false,
+    "database": "VSAM",
+    "database_connection": 
+        {
+            "server_name": "localhost",
+            "server_port": "5432",
+            "user": "postgres",
+            "password" :"postgres"
+        }
+}
