@@ -7,7 +7,7 @@
     <x:directive handler="project.assemblerCompileSettings" id="compile_mark_reentrant" name="RENT"/>
     <x:directive handler="project.assemblerCompileSettings" id="compile_create_debug_info" name="ANIM"/>
     <x:directive handler="project.assemblerCompileSettings" id="compile_create_optimized_code" name="NOOPT"/>
-    <x:ecm enabled="false" handler="ASMCICS" id="project.assemblerCicsSettings" prefix="CICS ">
+    <x:ecm enabled="true" handler="ASMCICS" id="project.assemblerCicsSettings" prefix="CICS ">
         <x:directive handler="project.assemblerCicsSettings" id="cics_insert_prolog_macros" name="PROLOG"/>
         <x:directive handler="project.assemblerCicsSettings" id="cics_insert_epilog_macros" name="EPILOG"/>
         <x:directive handler="project.assemblerCicsSettings" id="cics_unsupported_function" name="UFUNC(E)"/>
