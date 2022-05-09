@@ -3,25 +3,12 @@
    <settings xsi:type="projectSettingsContainer">
       <copybook-paths xsi:type="copybookPathsSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
-         <path enabled="true" name="/Copybooks" type="mfpath"/>
       </copybook-paths>
       <jcl-include-paths xsi:type="jclIncludePathsSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/online" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/other" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
-         <path enabled="true" name="/Copybooks" type="mfpath"/>
       </jcl-include-paths>
       <asmmacro-paths xsi:type="assemblerMacroPathsSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/online" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/other" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
-         <path enabled="true" name="/Copybooks" type="mfpath"/>
       </asmmacro-paths>
       <build-precedence-paths xsi:type="buildPrecedenceSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
@@ -80,19 +67,12 @@
          </configuration>
       </configurations>
       <dependent-projects xsi:type="dependentProjectsSettings">
-         <dependent-project name="Copybooks"/>
       </dependent-projects>
       <ims_settings xsi:type="additionalImsSettings">
          <generatedFileDir name=""/>
          <imsDatabaseDir name=""/>
       </ims_settings>
       <imscopy-paths xsi:type="imsCopyPathsSettings">
-         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/online" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/other" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
-         <path enabled="true" name="/Copybooks" type="mfpath"/>
       </imscopy-paths>
       <asm_link_settings xsi:type="assemblerLinkSettings">
          <options>
@@ -121,13 +101,5 @@
       <filetype type="cobol.copybook" xsi:type="cobolFileContainer"/>
       <filetype type="lin" xsi:type="cobolFileContainer"/>
       <filetype type="dbd" xsi:type="cobolFileContainer"/>
-      <folders xsi:type="cobolFolderContainer">
-         <folder compile="true" path="online" xsi:type="cobolFolder"/>
-         <folder compile="true" path="loadlib" xsi:type="cobolFolder"/>
-         <folder compile="true" path="copybook" xsi:type="cobolFolder"/>
-         <folder compile="true" path="vsam" xsi:type="cobolFolder"/>
-         <folder compile="true" path="other" xsi:type="cobolFolder"/>
-         <folder compile="true" path="jcl" xsi:type="cobolFolder"/>
-      </folders>
    </files>
 </project>
