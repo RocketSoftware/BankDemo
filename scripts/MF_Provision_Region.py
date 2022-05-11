@@ -49,7 +49,7 @@ if not sys.platform.startswith('win32'):
     from os  import stat
 
 def find_owner(filename):
-    return getpwuid(stat(filename).st_gid).pw_name
+    return getpwuid(stat(filename,follow_symlinks=False).st_uid).pw_name
 
 def create_pac(config_dir, main_config, pac_config):
     psorType=pac_config["PSOR_type"] 
