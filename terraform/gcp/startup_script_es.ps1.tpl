@@ -36,12 +36,11 @@ Expand-Archive .\BankDemo.zip c:\bankdemo
 cd c:\bankdemo\BANKDEMO\scripts
 
 Write-Host "Updating demo.json settings"
-$demoConfig = Get-Content .\config\demo.json -Raw | ConvertFrom-Json
-$demoConfig.is64bit = $is64bit
-$demoConfig.database = "VSAM" #Postgres
-$demoConfig.database_connection.password = "$pgPassword"
-$demoConfig.PAC.enabled = "$usePac"
-$demoConfig | ConvertTo-Json -Depth 10 | Out-File .\config\demo.json -Encoding ASCII
+
+python MF_Configure_Json.py .\config\demo.json is64bit $is64bit
+python MF_Configure_Json.py .\config\demo.json database "VSAM"
+python MF_Configure_Json.py .\config\demo.json database_connection password $pgPassword
+python MF_Configure_Json.py .\config\demo.json PAC enabled $usePac
 
 $config = Get-Content .\config\database\Postgres\ODBCPostgres.reg -Raw
 $config = $config.replace('USRPASS=postgres.postgres','USRPASS=postgres.$pgPassword')
