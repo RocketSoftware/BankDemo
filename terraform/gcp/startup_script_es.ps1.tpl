@@ -1,7 +1,7 @@
 #Powershell script runs on ES instance on startup
 $bitism = ${BITISM}
-$pgPassword = ${PGPASSWORD}
-$usePac = ${USE_PAC}
+$pgPassword = "${PGPASSWORD}"
+$usePac = "${USE_PAC}"
 $is64bit = "False"
 if ( $bitism -eq "64" )
 {
@@ -19,6 +19,11 @@ $currentDirectory = Get-Location
 Write-Host "Installing product license"
 $licenseFile = (Get-ChildItem -Path eslicense).Name
 $licensePath = "$currentDirectory\eslicense\$licenseFile"
+if ("$licenseFile" -eq "")
+{
+  write-host "Error: license file not found in eslicense folder"
+  exit 1
+}
 cd "C:\Program Files `(x86`)\Micro Focus\Licensing"
 Invoke-Expression -Command "cmd.exe /C cesadmintool.exe -term install -f '$licensePath'"
 Write-Host "Installing required python libraries"
@@ -30,13 +35,11 @@ Start-Service -Name "escwa"
 
 Write-Host "Downloading BANKDEMO sources"
 #eventually this step can obtain bankdemo from the public github repo. 
-#For now the repo has to be zipped and put in the scripts folder 
-cd c:\temp\init\scripts
-Expand-Archive .\BankDemo.zip c:\bankdemo
-cd c:\bankdemo\BANKDEMO\scripts
+gsutil cp gs://js-bucket2/bankdemo.zip c:\temp
+Expand-Archive c:\temp\BankDemo.zip c:\bankdemo
+cd c:\bankdemo\bankdemo\scripts
 
 Write-Host "Updating demo.json settings"
-
 python MF_Configure_Json.py .\config\demo.json is64bit $is64bit
 python MF_Configure_Json.py .\config\demo.json database "VSAM"
 python MF_Configure_Json.py .\config\demo.json database_connection password $pgPassword

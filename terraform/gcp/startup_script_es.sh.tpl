@@ -41,10 +41,10 @@ chmod -R a+wrx /bankdemo
 cd /bankdemo/scripts
 . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
 
-python3 MF_Configure_Json.py .\config\demo.json is64bit $is64bit
-python3 MF_Configure_Json.py .\config\demo.json database "VSAM"
-python3 MF_Configure_Json.py .\config\demo.json database_connection password $pgPassword
-python3 MF_Configure_Json.py .\config\demo.json PAC enabled $usePac
+python3 MF_Configure_Json.py ./config/demo.json is64bit $is64bit
+python3 MF_Configure_Json.py ./config/demo.json database "VSAM"
+python3 MF_Configure_Json.py ./config/demo.json database_connection password $pgPassword
+python3 MF_Configure_Json.py ./config/demo.json PAC enabled $usePac
 python3 MF_Provision_Region.py
 
 #setup VNC tunnel using:
