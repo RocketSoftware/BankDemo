@@ -86,7 +86,7 @@ variable "availability_zones" {
 variable "vm_service_account" {
   default = {
     email  = ""
-    scopes = ["storage-ro", "compute-ro", "sql-admin"]
+    scopes = ["storage-ro", "compute-ro", "sql-admin", "cloud-platform"]
   }
   type = object({
     email  = string

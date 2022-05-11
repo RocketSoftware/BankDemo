@@ -14,10 +14,10 @@ bitism = "32"
 use_pac = false
 
 es_image_project = "amc-marketplacegcp-nonprod"
-es_image_name = "js-ed80-win2019-18042022"
+es_image_name = "js-rh-ed70pu5-20220510"
 escount = 1
 vm_machine_type = "e2-standard-4"
 
 pg_db_username = "DBadmin2"
 pg_db_password = "DBpostgres_1!"
-access_ip = "147.147.123.75"
+access_ip = "87.115.108.37"

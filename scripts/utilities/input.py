@@ -30,6 +30,12 @@ def read_json(file_path):
 
     return input_json
 
+def write_json(file_path, content):
+    try:
+        with open(file_path, 'w') as file:
+            json.dump(content, file)
+    except IOError as exc:
+        raise InputException from exc
 
 def read_txt(file_path):
     try:

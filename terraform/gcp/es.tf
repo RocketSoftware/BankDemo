@@ -14,7 +14,9 @@ module "instance_template" {
   auto_delete = true
   
   metadata = {
-    windows-startup-script-ps1 = data.template_file.es_startup_script.rendered
+    startup-script = data.template_file.es_startup_script_redhat.rendered
+    windows-startup-script-ps1 = data.template_file.es_startup_script_windows.rendered
+    
   }
   
   #Empty access_config causes an external IP to be auto-assigned
