@@ -21,7 +21,7 @@
                   <option id="applicationType" name="linkSettings" value="console"/>
                   <option id="targetName" name="linkSettings" value="Bankdemo"/>
                   <option id="rcfile" name="linkSettings" value=""/>
-                  <option id="outputDirectory" name="linkSettings" value="New_Configuration.bin"/>
+                  <option id="outputDirectory" name="linkSettings" value="loadlib"/>
                   <option id="type" name="linkSettings" value="all_dll"/>
                   <option id="bitism" name="linkSettings" value="64 bit"/>
                   <option id="platform" name="linkSettings" value="Unix/Linux"/>
@@ -61,7 +61,7 @@
                   <option id="deployFolder" name="deploySettings" value="deploy"/>
                   <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
                   <option id="deployFiles" name="deploySettings" value=""/>
-                  <option id="deployPatterns" name="deploySettings" value="loadlib.bin/*${exeext}"/>
+                  <option id="deployPatterns" name="deploySettings" value="loadlib/*${exeext}"/>
                </options>
             </deploy_settings>
          </configuration>
