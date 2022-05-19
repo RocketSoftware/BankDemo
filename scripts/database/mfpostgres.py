@@ -17,19 +17,11 @@ WITH THIS SOFTWARE.
 Description:  PostGres utility functions. 
 """
 import psycopg2
-import ctypes
-import os
 
 def Connect_to_PG_server(database_host, database_port, database_name, database_user, database_password):
 
-    connection_details = 'dbname={} user={} password={}'.format(database_name, database_user, database_password)
-    #connection_details = "dbname='postgres', user=" + database_user + " password=" + database_password
+    connection_details = 'host={} port={} dbname={} user={} password={}'.format(database_host, database_port, database_name, database_user, database_password)
     PGconn = psycopg2.connect (connection_details)
-    #PGconn = psycopg2.connect(
-    #host="localhost",
-    #database="{0}",
-    #user="postgres",
-    #password="J@sp3rTh0m@s").format(database_name)
 
     PGconn.autocommit = True
 
@@ -44,9 +36,3 @@ def Execute_PG_Command(PGconn, sql_command):
 def Disconnect_from_PG_server(PGconn):
 
     PGconn.close
-
-def Create_ODBC_Data_Source (reg_file_name):
-
-    reg_cmd = 'reg import ' + reg_file_name
-    reg_process = os.system(reg_cmd) 
-    
