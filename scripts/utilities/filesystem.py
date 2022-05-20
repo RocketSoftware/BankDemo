@@ -49,6 +49,18 @@ def deploy_application (repo_dir, sys_base, os_type, is64bit, database_type):
     source_load = os.path.join(exec_load, 'core')
     copy_tree(source_load, target_load)
 
+def deploy_system_modules (repo_dir, sys_base, os_type, is64bit, database_type):
+
+    target_load = os.path.join(sys_base, 'loadlib')
+
+    if is64bit:
+        chip = 'x64'
+    else:
+        chip = 'x86'
+    exec_load = os.path.join(repo_dir, 'executables', os_type, chip)
+    
+    source_load = os.path.join(exec_load, 'system')
+    copy_tree(source_load, target_load)
 
 def deploy_vsam_data (repo_dir, sys_base, os_type, esuid):
 

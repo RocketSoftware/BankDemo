@@ -9,7 +9,8 @@
             "env_config": "env.json",
             "alias_config": "alias.json",
             "init_config": "init.json",
-            "data_dir": "datasets"
+            "data_dir_1": "datasets_po",
+            "data_dir_2": "datasets_vsam"
         },
     "JES": true,
     "CICS": true,

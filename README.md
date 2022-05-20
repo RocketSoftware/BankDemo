@@ -18,7 +18,7 @@ will be using and follow the appropriate READMEs.
 ## <a name="intro"></a>Introduction
 
 The Micro Focus Bankdemo application is a very simplified mainframe "green screen" banking application which runs under Micro Focus 
-Enterprise Server. The materials in this project provide demostrations or tutorials of various ways of configuring or modifying the application
+Enterprise Server. The materials in this project provide demonstrations or tutorials of various ways of configuring or modifying the application
 to suit differing requirements which could then be used as a template for running and configuring your own application.
 
 The project can be used to demonstrate a selection of the capabilities of Micro Focus Enterprise Server and these options will be extended over time. 
@@ -26,7 +26,7 @@ The project can be used to demonstrate applications running both on-premise and 
 the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
 
 In the simplest configuration it demonstrates a CICS COBOL application accessing banking data held in indexed (VSAM) files on disk but it can also be configured
-to access data from SQL databases such as Postgres, Microsoft SQL Server or IBM DB2 UDB and show more complex deployments such as those involving scale-out.
+to access data from a Postgres SQL database and further planned demonstrations will show more complex deployments such as those involving scale-out and database hosted VSAM files using MFDBFH.
 
 ## <a name="license"></a>License
 
@@ -65,7 +65,6 @@ To use the project just download the source.zip or source.tar.gz from the [relea
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
         - [Deploying and running Bankdemo with Postgres SQL](demos/onprem/psql/README.md) 
-        - [Deploying and running Bankdemo with VSAM data held in a Postgres database](demos/onprem/psqlmfdbfh/README.md) 
     - Prerequisites: 
         - Micro Focus Directory Server (mfds) is running
         - Micro Focus Common Web Administration (escwa) is running and listening on the default localhost port 10086
@@ -95,8 +94,8 @@ contains suitable pre-built binaries for use with Enterprise Server, but where E
 to build the application for deployment.
 
 Except when used for the Enterprise Developer introductory tutorials, the sample also requires the installation Python 3 (to configure and
-run the demonstration), depending on the configuration being deployed there may be additional pre-requisties such as a database the README 
-for the demonstartion lists additional pre-requisties.
+run the demonstration), depending on the configuration being deployed there may be additional pre-requisites such as a database 
+(the documentation for each demonstration lists any additional pre-requisites).
 
 ## <a name="cloudrereq"></a>Prerequisites when using the project for cloud deployments
 When using the project to deploy into a cloud environment there is a prerequisite on [Hashicorp Terraform](https://www.terraform.io/) 

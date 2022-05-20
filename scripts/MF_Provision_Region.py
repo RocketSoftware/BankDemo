@@ -27,7 +27,7 @@ import glob
 from utilities.misc import parse_args, set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
-from utilities.filesystem import create_new_system, deploy_application, deploy_vsam_data, deploy_partitioned_data
+from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_vsam_data, deploy_partitioned_data
 
 from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
@@ -39,7 +39,7 @@ from ESCWA.resourcedef import  add_sit, add_Startup_list, add_groups, add_fct, a
 from ESCWA.xarm import add_xa_rm
 from ESCWA.mq_config import add_mq_listener
 from build.MFBuild import  run_ant_file
-from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disconnect_from_PG_server, Create_ODBC_Data_Source
+from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disconnect_from_PG_server
 
 from pathlib import Path
 
@@ -75,7 +75,19 @@ def create_pac(config_dir, main_config, pac_config):
         write_log(exc)
         sys.exit(1)
 
-def create_region():
+def catalog_datasets(cwd, region_name, ip_address, configuration_files, dataset_key):
+    if  dataset_key in configuration_files:
+        data_dir = configuration_files[dataset_key]
+        dataset_dir = os.path.join(cwd, data_dir)
+        datafile_list = [file for file in os.scandir(dataset_dir)]
+    
+        try:
+            add_datasets(region_name, ip_address, datafile_list)
+        except ESCWAException as exc:
+            write_log('Unable to catalog datasets in {}.'.format(dataset_dir))
+            sys.exit(1)
+
+def create_region(main_configfile):
 
     #set current working directory
     cwd = os.getcwd()
@@ -105,10 +117,10 @@ def create_region():
     write_log('Provision Process starting')
    
     config_dir = os.path.join(cwd, 'config')
+    options_dir = os.path.join(cwd, 'options')
 
     #read demo configuration file
-    write_log('Reading Demo config file')
-    main_configfile = os.path.join(config_dir, 'demo.json')
+    write_log('Reading deployment config file {}'.format(main_configfile))
     main_config = read_json(main_configfile)
 
     #retrieve the demo configuration settings
@@ -178,12 +190,6 @@ def create_region():
     else:
         init_config = configuration_files["init_config"]
 
-    #data_dir hold the directory name, under the cwd that contains definitions of any datasets to be catalogued - this setting is optional
-    if  'data_dir' not in configuration_files:
-        data_dir = 'none'
-    else:
-        data_dir = configuration_files["data_dir"]
-
     #read the next usable port numbers when configuring the region 
     write_log('Reading ports configuration file')
     ports_config = os.path.join(config_dir, 'ports.json')
@@ -216,8 +222,6 @@ def create_region():
     else:
         esuid = ''
     
-    dataset_dir = os.path.join(cwd, data_dir)
-
     base_config = os.path.join(config_dir, base_config)
     update_config = os.path.join(config_dir, update_config)
     alias_config = os.path.join(config_dir, alias_config)
@@ -225,8 +229,6 @@ def create_region():
     env_config = os.path.join(config_dir, env_config)
     resourcedef_dir = os.path.join(config_dir, 'CSD')
 
-    datafile_list = [file for file in os.scandir(dataset_dir)]
-    
     pac_config = main_config["PAC"]
     pac_enabled=pac_config["enabled"]
     if pac_enabled == True:
@@ -304,11 +306,11 @@ def create_region():
             write_log(exc)
             sys.exit(1)
 
-    try:
-        add_datasets(region_name, ip_address, datafile_list)
-    except ESCWAException as exc:
-        write_log('Unable to add datasets.')
-        sys.exit(1)
+    #data_dir_1 hold the directory name, under the cwd that contains definitions of any datasets to be catalogued - this setting is optional
+    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_1')
+
+    #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
+    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_2')
 
     ## The following code updates the CICS Resource Definitions
 
@@ -380,8 +382,142 @@ def create_region():
         update_sit_in_use(region_name, ip_address, new_sit_name)
         write_log ('Region restart now required')
 
-    ## Following the update of the SIT attribute, the region must be restarted
+   ## The following code adds MQ listeners as defined in mq.json
 
+    if  main_config['MQ'] == True:
+        write_log('Region requires MQ settings - being added')
+        mq_config = os.path.join(config_dir, 'mq.json')
+
+        mq_details = read_json(mq_config)
+
+        mq_details["mfMQTrigger"] = 'MQ_Q_' + region_name
+        mq_details["mfMQManager"] = 'MQ_QM_' + region_name
+
+        try: 
+            add_mq_listener(region_name, ip_address, mq_details)
+        except ESCWAException as exc:
+            print('Unable to add MQ Listener.')
+            write_log(exc)
+            sys.exit(1)
+    
+   ## The following code deploys the application
+
+    ## determine which OS the script is running on
+    if sys.platform.startswith('win32'):
+        os_type = 'Windows'
+        os_distribution =''
+    else:
+        os_type = 'Linux'
+        os_distribution = '' #distro.id()
+
+    if main_config['database'] == 'VSAM':
+        dataversion = 'vsam'
+    else:
+        dataversion = 'sql'
+
+    if dataversion == 'sql':
+       database_type= main_config["database"]
+
+    if  database_type == 'SQL_Postgres':
+        database_engine = 'Postgres'
+        loadlibDir = 'SQL_Postgres'
+        write_log ('Database type {} selected - database being built'.format(database_engine))
+        database_connection = main_config['database_connection']
+        if sys.platform.startswith('win32'):
+
+            # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ODBC Driver(ANSI)', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
+            if is64bit == True:
+                odbcDriver = 'PostgreSQL ODBC Driver(ANSI)'
+                odbcconf = os.path.join(os.environ['windir'], 'system32', 'odbcconf.exe')
+            else:
+                odbcDriver = 'PostgreSQL ANSI'
+                odbcconf = os.path.join(os.environ['windir'], 'syswow64', 'odbcconf.exe')
+            createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=bank|Database=bank|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
+            write_log(createDSN)
+            createDSN_process = os.system(createDSN)
+
+        conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'postgres',database_connection['user'],database_connection['password'])
+        sql_folder = os.path.join(cwd, 'config', 'database', database_engine) 
+        sql_file = os.path.join(sql_folder, 'create.sql')
+        sql_command = read_txt(sql_file)
+        execute_res = Execute_PG_Command(conn, sql_command)
+        dconn_res = Disconnect_from_PG_server(conn)
+        conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'bank',database_connection['user'],database_connection['password'])
+        sql_file = os.path.join(sql_folder, 'tables.sql')
+        sql_command = read_txt(sql_file)
+        execute_res = Execute_PG_Command(conn, sql_command)
+        dconn_res = Disconnect_from_PG_server(conn)
+        ## The following code adds XA resource managers as defined in xa.json
+
+        xa_config = os.path.join(config_dir, 'xa_Postgres.json')
+        xa_detail = read_json(xa_config)
+        if os_type == "Windows":
+            xa_extension = '.dll'
+            xa_bitism = ""
+        else:
+            xa_extension = ".so"
+            if is64bit == True:
+                xa_bitism = "64"
+            else:
+                xa_bitism = "32"
+        xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
+        xa_module = '$ESP/loadlib/' + xarm_module_version
+        xa_detail["mfXRMModule"] = xa_module
+        write_log ('XA Resource Manager {} being added'.format(xa_module))
+        add_xa_rm(region_name,ip_address,xa_detail)
+    else:
+        loadlibDir = 'VSAM'
+        write_log ('VSAM version required - datasets being deployed')
+        deploy_vsam_data(parentdir,sys_base,os_type, esuid)
+
+    write_log ('Partitioned datasets being deployed')
+    deploy_partitioned_data(parentdir,sys_base, esuid)
+
+    if mf_product != 'EDz':
+        write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
+        deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
+    else:
+        ant_home = None
+        if 'ant_home' in main_config:
+            ant_home = main_config['ant_home']
+        elif "ANT_HOME" in os.environ:
+            ant_home = os.environ["ANT_HOME"]
+        else:
+            eclipsInstallDir = get_EclipsePluginsDir(os_type)
+            if eclipsInstallDir is not None:
+                for file in os.listdir(eclipsInstallDir):
+                    if file.startswith("org.apache.ant_"):
+                        ant_home = os.path.join(eclipsInstallDir, file)
+            if ant_home is None:
+                antdir = get_CobdirAntDir(os_type)
+                if antdir is not None:
+                    for file in os.listdir(antdir):
+                        if file.startswith("apache-ant-"):
+                            ant_home = os.path.join(eclipsInstallDir, file)
+
+        if ant_home is None:
+            write_log('ANT_HOME not set. Precompiled executables therefore being deployed')
+            deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
+        else:
+            write_log('Application being built')
+
+            build_file = os.path.join(cwd, 'build', 'build.xml')
+            parentdir = str(Path(cwd).parents[0])
+            source_dir = os.path.join(parentdir, 'sources')
+            load_dir = os.path.join(parentdir, region_name,'system','loadlib')
+            full_build = True
+
+            if is64bit == True:
+                set64bit = 'true'
+            else:
+                set64bit = 'false'
+
+            run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
+
+        write_log('Precompiled system executables being deployed'.format(mf_product))
+        deploy_system_modules(parentdir, sys_base, os_type, is64bit, loadlibDir)
+
+    ## Following the update of the SIT and other attributes, the region must be restarted
     try:
         write_log('Stopping region {}'.format(region_name))
         stop_region(region_name, ip_address)
@@ -433,128 +569,24 @@ def create_region():
     else:
         write_log('Region {} restarted successfully'.format(region_name))
 
-   ## The following code adds MQ listeners as defined in mq.json
-
-    if  main_config['MQ'] == True:
-        write_log('Region requires MQ settings - being added')
-        mq_config = os.path.join(config_dir, 'mq.json')
-
-        mq_details = read_json(mq_config)
-
-        mq_details["mfMQTrigger"] = 'MQ_Q_' + region_name
-        mq_details["mfMQManager"] = 'MQ_QM_' + region_name
-
-        try: 
-            add_mq_listener(region_name, ip_address, mq_details)
-        except ESCWAException as exc:
-            print('Unable to add MQ Listener.')
-            write_log(exc)
-            sys.exit(1)
-    
-   ## The following code deploys the application
-
-    ## determine which OS the script is running on
-    if sys.platform.startswith('win32'):
-        os_type = 'Windows'
-        os_distribution =''
-    else:
-        os_type = 'Linux'
-        os_distribution = '' #distro.id()
-
-    if main_config['database'] == 'VSAM':
-        dataversion = 'vsam'
-    else:
-        dataversion = 'sql'
-
-    if dataversion == 'sql':
-       database_type= main_config["database"]
-       sql_folder= os.path.join(cwd, 'config', 'database', database_type) 
-
-    if  database_type == 'Postgres':
-        loadlibDir = 'SQL_Postgres'
-        write_log ('Databse type {} selected - database being built'.format(database_type))
-        database_connection = main_config['database_connection']
-        odbc_filename = 'ODBC' + database_type + '.reg'
-        reg_file = os.path.join(config_dir, 'database', database_type, odbc_filename)
-        odbc_out = Create_ODBC_Data_Source(reg_file)
-        conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'postgres',database_connection['user'],database_connection['password'])
-        sql_file = os.path.join(sql_folder, 'create.sql')
-        sql_command = read_txt(sql_file)
-        execute_res = Execute_PG_Command(conn, sql_command)
-        dconn_res = Disconnect_from_PG_server(conn)
-        conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'bank',database_connection['user'],database_connection['password'])
-        sql_file = os.path.join(sql_folder, 'tables.sql')
-        sql_command = read_txt(sql_file)
-        execute_res = Execute_PG_Command(conn, sql_command)
-        dconn_res = Disconnect_from_PG_server(conn)
-        ## The following code adds XA resource managers as defined in xa.json
-
-        xa_config = os.path.join(config_dir, 'xa_Postgres.json')
-        xa_detail = read_json(xa_config)
-        if is64bit == True:
-            xa_bitism = "64"
-        else:
-            xa_bitism = "32"
-        if os_type == "Windows":
-            xa_extension = '.dll'
-        else:
-            xa_extension = ".so"
-        xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
-        xa_module = '$ESP/loadlib/' + xarm_module_version
-        xa_detail["mfXRMModule"] = xa_module
-        write_log ('XA Resource Manager {} being added'.format(xa_module))
-        add_xa_rm(region_name,ip_address,xa_detail)
-    else:
-        loadlibDir = 'VSAM'
-        write_log ('VSAM version required - datasets being deployed')
-        deploy_vsam_data(parentdir,sys_base,os_type, esuid)
-
-        write_log ('Partitioned datasets being deployed')
-        deploy_partitioned_data(parentdir,sys_base, esuid)
-
-    if mf_product != 'EDz':
-        write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
-        deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
-    else:
-        ant_home = None
-        if 'ant_home' in main_config:
-            ant_home = main_config['ant_home']
-        elif "ANT_HOME" in os.environ:
-            ant_home = os.environ["ANT_HOME"]
-        else:
-            eclipsInstallDir = get_EclipsePluginsDir(os_type)
-            if eclipsInstallDir is not None:
-                for file in os.listdir(eclipsInstallDir):
-                    if file.startswith("org.apache.ant_"):
-                        ant_home = os.path.join(eclipsInstallDir, file)
-            if ant_home is None:
-                antdir = get_CobdirAntDir(os_type)
-                if antdir is not None:
-                    for file in os.listdir(antdir):
-                        if file.startswith("apache-ant-"):
-                            ant_home = os.path.join(eclipsInstallDir, file)
-
-        if ant_home is None:
-            write_log('ANT_HOME not set. Precompiled executables therefore being deployed'.format(mf_product))
-            deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
-        else:
-            write_log('Application being built')
-
-            build_file = os.path.join(cwd, 'build', 'build.xml')
-            parentdir = str(Path(cwd).parents[0])
-            source_dir = os.path.join(parentdir, 'sources')
-            load_dir = os.path.join(parentdir, region_name,'system','loadlib')
-            full_build = True
-
-            if is64bit == True:
-                set64bit = 'true'
-            else:
-                set64bit = 'false'
-
-            run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
-
     write_log('Micro Focus Demo environment has been provisioned')
 
 if __name__ == '__main__':
 
-    create_region()
+    cwd = os.getcwd()
+    if len(sys.argv) < 2:
+        config_dir = os.path.join(cwd, 'config')
+        config_fullpath = os.path.join(config_dir, "demo.json")
+    else:
+        options_dir = os.path.join(cwd, 'options')
+        config_file = sys.argv[1] + '.json'
+        config_fullpath = os.path.join(options_dir, config_file)
+        if os.path.isfile(config_fullpath) == False:
+            write_log('File {} could not be found'.format(config_fullpath))
+            write_log('Valid options are:')
+            for f in os.listdir(options_dir):
+                if os.path.isfile(os.path.join(options_dir, f)):
+                    write_log('    {}'.format(f))
+            sys.exit(1)
+
+    create_region(config_fullpath)

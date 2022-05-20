@@ -35,7 +35,7 @@ CHIP=x64</mfCustomConfiguration>
               <mfCASLocalTraceSize>341</mfCASLocalTraceSize>
               <mfCASTraceMaxSize>0</mfCASTraceMaxSize>
               <mfCASRequestedLicenses>10</mfCASRequestedLicenses>
-              <mfCASSysDir/>
+              <mfCASSysDir>$ESP/logs</mfCASSysDir>
               <mfCASHSFEnabled>0</mfCASHSFEnabled>
               <mfCASHSFWriteToDisk>0</mfCASHSFWriteToDisk>
               <mfCASHSFMaxFileSize>0</mfCASHSFMaxFileSize>
