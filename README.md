@@ -8,12 +8,9 @@ will be using and follow the appropriate READMEs.
 1. [Introduction](#intro)
 1. [License](#license)
 1. [Using The Bankdemo Application](#using)
-    1. Enterprise Developer Introductory Tutorial
-    1. On Premise Enterprise Server Capabilities
-    1. Cloud Enterprise Server Capabilities
-1. Cloud Enterprise Server Capabilities
-1. [Prerequisites when using the project on-premise](#onpremprereq)
-1. [Prerequisites when using the project for cloud deployment](#cloudrereq)
+    1. [Enterprise Developer Introductory Tutorial](#tutorial)
+    1. [On Premise Enterprise Server Capabilities](#onprem)
+    1. [Cloud Enterprise Server Capabilities](#cloud)
 
 ## <a name="intro"></a>Introduction
 
@@ -47,19 +44,21 @@ WITH THIS SOFTWARE.
 
 ## <a name="using"></a>Using The Bankdemo Application
 To use the project just download the source.zip or source.tar.gz from the [release](https://github.com/MicroFocus/BankDemo/releases) matching the Micro Focus product version you wish to use and follow the relevant instructions. The project can be used in three ways:
-1. As the basis of the introductory tutorials for the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
+1. <a name="tutorial"></a> As the basis of the introductory tutorials for the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
     - Prerequisites software: 
         - Enterprise Developer for Eclipse or Enterprise Developer for Visual Studio
     - Available tutorials:
         - [Getting Started with Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/README.md)
         - [Getting Started with Enterprise Developer for Visual Studio](tutorial/gettingstarted/visualstudio/README.md)
+        - [Open PL/I Enterprise Server Development with Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
+        - [Open PL/I Enterprise Server Development with Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
     - Prerequisites: 
         - Micro Focus Directory Server (mfds) is running
         - Micro Focus Common Web Administration (escwa) is running
 
-2. Demonstrations of Micro Focus Enterprise Server capabilities "on-premise"
+2. <a name="onprem"></a> Demonstrations of Micro Focus Enterprise Server capabilities "on-premise"
     - Prerequisite software: 
-        - Enterprise Server or Enterprise Developer
+        - Enterprise Server or Enterprise Developer on Microsoft Windows or supported Linux distribution
         - Python 3 with `requests psycopg2-binary` packages (e.g. `python -m pip install requests psycopg2-binary`)
         - See specific demonstration instructions for any additional requirements
     - Available demonstrations:
@@ -69,39 +68,11 @@ To use the project just download the source.zip or source.tar.gz from the [relea
         - Micro Focus Directory Server (mfds) is running
         - Micro Focus Common Web Administration (escwa) is running and listening on the default localhost port 10086
 
-3. Cloud deployment of Micro Focus Enterprise Server capabilities
+3. <a name="cloud"></a> Cloud deployment of Micro Focus Enterprise Server capabilities
     - Prerequisites: 
         - [Hashicorp Terraform](https://www.terraform.io/)
         - Account with a supported cloud provider, currently:
             - [Google Cloud](https://cloud.google.com)
         - Cloud provider's CLI
         - Micro Focus Enterprise Server License
-
-
-
-
-
-
-
-## <a name="onpremprereq"></a>Prerequisites when using the project on-premise
-Unless being used in cloud deployment, the application requires the installation of one of the Micro Focus Enterprise Developer or Enterprise Server 
-version 8.0 or later products. 
-Be sure to use the release of this sample application that matches the version of the product you have installed as capabilities are being 
-constantly added to the products so later releases may not work with your installed product.
-
-The sample can be used on either Microsoft Windows or one of the Linux platforms supported by Micro Focus Enterprise Server and the repository 
-contains suitable pre-built binaries for use with Enterprise Server, but where Enterprise Developer is installed that product can be used 
-to build the application for deployment.
-
-Except when used for the Enterprise Developer introductory tutorials, the sample also requires the installation Python 3 (to configure and
-run the demonstration), depending on the configuration being deployed there may be additional pre-requisites such as a database 
-(the documentation for each demonstration lists any additional pre-requisites).
-
-## <a name="cloudrereq"></a>Prerequisites when using the project for cloud deployments
-When using the project to deploy into a cloud environment there is a prerequisite on [Hashicorp Terraform](https://www.terraform.io/) 
-and you will also need an account with the cloud provider. 
-Micro Focus Enterprise Server can be used with many more cloud providers than can be demonstrated
-by this project, so far demonstrations have been created for: Google Cloud Platform, but in  
-[Amazon AWS](https://github.com/aws-quickstart/quickstart-microfocus-amc-es) and [Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/micro-focus.mfes?tab=Overview) you can find "Quick Start" demonstrations which are also based on the Bankdemo application.
-
-
+        - Please note that in [Amazon AWS](https://github.com/aws-quickstart/quickstart-microfocus-amc-es) and [Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/micro-focus.mfes?tab=Overview) you can find "Quick Start" demonstrations which are also based on the Bankdemo application that show similar capabilities
