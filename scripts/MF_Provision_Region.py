@@ -463,6 +463,8 @@ def create_region(main_configfile):
         xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
         xa_module = '$ESP/loadlib/' + xarm_module_version
         xa_detail["mfXRMModule"] = xa_module
+        xa_open_string = xa_detail["mfXRMOpenString"]
+        xa_detail["mfXRMOpenString"] = '{},USRPASS={}.{}'.format(xa_open_string,database_connection['user'],database_connection['password'])
         write_log ('XA Resource Manager {} being added'.format(xa_module))
         add_xa_rm(region_name,ip_address,xa_detail)
     else:
