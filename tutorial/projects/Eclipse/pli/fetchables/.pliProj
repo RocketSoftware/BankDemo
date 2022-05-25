@@ -112,10 +112,10 @@
       <filetype type="lin" xsi:type="cobolFileContainer"/>
       <filetype type="dbd" xsi:type="cobolFileContainer"/>
       <filetype type="pli" xsi:type="cobolFileContainer">
-         <file compile="false" path="fetchable/DBANK51P.PLI" xsi:type="cobolFile"/>
-         <file compile="false" path="fetchable/DBANK52P.PLI" xsi:type="cobolFile"/>
          <file compile="true" path="fetchable/ZBNKEXT1.pli" xsi:type="cobolFile"/>
          <file compile="true" path="fetchable/ZBNKPRT1.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="fetchable/DBANK52P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="fetchable/DBANK51P.pli" xsi:type="cobolFile"/>
       </filetype>
       <folders xsi:type="cobolFolderContainer">
          <folder compile="true" path="bin/debug" xsi:type="cobolFolder"/>
