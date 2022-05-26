@@ -10,7 +10,8 @@
             "alias_config": "alias.json",
             "init_config": "init.json",
             "data_dir_1": "datasets_po",
-            "data_dir_2": "datasets_vsam"
+            "data_dir_2": "datasets_vsam",
+            "xa_config": "xa_Postgres.json"
         },
     "JES": true,
     "CICS": true,
