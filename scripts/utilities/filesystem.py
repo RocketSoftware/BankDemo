@@ -110,8 +110,9 @@ def dbfhdeploy_vsam_data (repo_dir, os_type, is64Bit, mfdbfh_location):
     subprocess.run([dbfhdeploy, "create", db[0]])
 
     for file in os.scandir(source_load):
-        catalog_location = mfdbfh_location.format(file.name)
+        if file.name.endswith(".dat"):
+            catalog_location = mfdbfh_location.format(file.name)
 
-        dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, file.path, catalog_location)
-        write_log(dbfhdeploy_cmd)
-        subprocess.run([dbfhdeploy, "add", file.path, catalog_location])
+            dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, file.path, catalog_location)
+            write_log(dbfhdeploy_cmd)
+            subprocess.run([dbfhdeploy, "add", file.path, catalog_location])

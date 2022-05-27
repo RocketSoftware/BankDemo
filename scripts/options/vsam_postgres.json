@@ -18,6 +18,7 @@
     "MQ": false,
     "is64bit": true,
     "database": "VSAM_Postgres",
+    "mfdbfh_config": "MFDBFH_VSAM.cfg",
     "PAC": {
       "enabled": false,
       "PSOR_type" : "redis",

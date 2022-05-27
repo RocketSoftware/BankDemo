@@ -250,18 +250,19 @@ def create_region(main_configfile):
         esuid = ''
 
     # Update the mfdbfh.cfg file with the database user id
-    mfdbfh_config = os.path.join(sys_base, 'config', 'MFDBFH.cfg')
-    if 'database_connection' in main_config:
-        database_connection = main_config['database_connection']
+    if 'mfdbfh_config' in main_config:
+        mfdbfh_config = os.path.join(sys_base, 'config', main_config['mfdbfh_config'])
+        if 'database_connection' in main_config:
+            database_connection = main_config['database_connection']
 
-        # Set the user id mfdbfh.cfg
-        f_in = open(mfdbfh_config, "rt")
-        data = f_in.read()
-        f_in.close()
-        new_data = data.replace('$$user$$', database_connection['user'])
-        f_out = open(mfdbfh_config, "wt")
-        f_out.write(new_data)
-        f_out.close()
+            # Set the user id mfdbfh.cfg
+            f_in = open(mfdbfh_config, "rt")
+            data = f_in.read()
+            f_in.close()
+            new_data = data.replace('$$user$$', database_connection['user'])
+            f_out = open(mfdbfh_config, "wt")
+            f_out.write(new_data)
+            f_out.close()
 
     
     base_config = os.path.join(config_dir, base_config)
@@ -494,26 +495,16 @@ def create_region(main_configfile):
                 createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=PG.VSAM|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
                 write_log(createDSN)
                 createDSN_process = os.system(createDSN)
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=PG.REGION|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
-                write_log(createDSN)
-                createDSN_process = os.system(createDSN)
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=PG.CROSSREGION|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
-                write_log(createDSN)
-                createDSN_process = os.system(createDSN)
 
             xa_config = configuration_files["xa_config"]
             xa_config = os.path.join(config_dir, xa_config)
             add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection)
 
-            write_log("Adding database password to MFDBFH vault")
+            write_log("Adding database password to vault for MFDBFH")
             mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
             secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.master.password {}'.format(mfsecretsadmin, database_connection['password'])
             secret_process = os.system(secret)
             secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.vsam.password {}'.format(mfsecretsadmin, database_connection['password'])
-            secret_process = os.system(secret)
-            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.region.password {}'.format(mfsecretsadmin, database_connection['password'])
-            secret_process = os.system(secret)
-            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.crossregion.password {}'.format(mfsecretsadmin, database_connection['password'])
             secret_process = os.system(secret)
 
             write_log ('MFDBFH version required - datasets being migrated to database')
