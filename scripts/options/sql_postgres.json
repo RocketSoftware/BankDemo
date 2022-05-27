@@ -1,6 +1,6 @@
 {
     "ip_address" : "127.0.0.1",
-    "region_name": "BANKDEMO",
+    "region_name": "BANKSQL",
     "product": "EDz",
     "configuration_files":
         {

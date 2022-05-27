@@ -445,6 +445,7 @@ def create_region(main_configfile):
     if  database_type == 'SQL_Postgres':
         database_engine = 'Postgres'
         loadlibDir = 'SQL_Postgres'
+        database_connection = main_config['database_connection']
         write_log ('Database type {} selected - database being built'.format(database_engine))
         if os_type == 'Windows':
 
@@ -489,10 +490,10 @@ def create_region(main_configfile):
                 else:
                     odbcDriver = 'PostgreSQL ANSI'
                     odbcconf = os.path.join(os.environ['windir'], 'syswow64', 'odbcconf.exe')
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=PG.MASTER|Database=postgres|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
+                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.MASTER|Database=postgres|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
                 write_log(createDSN)
                 createDSN_process = os.system(createDSN)
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=PG.VSAM|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
+                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.VSAM|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
                 write_log(createDSN)
                 createDSN_process = os.system(createDSN)
 
@@ -502,9 +503,9 @@ def create_region(main_configfile):
 
             write_log("Adding database password to vault for MFDBFH")
             mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
-            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.master.password {}'.format(mfsecretsadmin, database_connection['password'])
+            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.master.password {}'.format(mfsecretsadmin, database_connection['password'])
             secret_process = os.system(secret)
-            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.pg.vsam.password {}'.format(mfsecretsadmin, database_connection['password'])
+            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.vsam.password {}'.format(mfsecretsadmin, database_connection['password'])
             secret_process = os.system(secret)
 
             write_log ('MFDBFH version required - datasets being migrated to database')
