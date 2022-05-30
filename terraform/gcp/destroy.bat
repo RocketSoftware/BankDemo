@@ -1,1 +1,0 @@
-terraform destroy -var-file="bankdemo.tfvars"

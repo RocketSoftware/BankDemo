@@ -1,22 +1,3 @@
-# Copyright 2019 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-locals {
-  vpc_name = "${var.name}-vpc"
-  subnet_name = "${var.name}-subnet"
-}
-
 variable "project_id" {
   description = "The project to deploy the environment into"
   type        = string
@@ -125,19 +106,19 @@ variable "access_ip" {
   default = ""
 }
 
-variable "pg_db_name" {
+variable "db_name" {
   type    = string
   description = "Name to give the postgresql database instance"
   default = "postgresql"
 }
 
-variable "pg_db_username" {
+variable "db_username" {
   description = "Name of the postgresql database user to create"
   type        = string
   default     = null
 }
 
-variable "pg_db_password" {
+variable "db_password" {
   description = "Password that will be set for the created postgresql database user"
   type        = string
   default     = null
