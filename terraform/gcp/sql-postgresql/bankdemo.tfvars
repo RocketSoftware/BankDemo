@@ -8,7 +8,7 @@ availability_zones = [
 create_network = true
 vpc_network = "js-vpc1"
 vpc_subnet = "js-subnet1"
-bucketname = "jsbucket113"
+bucketname = "jsbucket2"
 bitism = "32"
 use_pac = false
 es_image_project = "amc-marketplacegcp-nonprod"
@@ -20,4 +20,4 @@ access_ip = "0.0.0.0/0"
 #access_ip = "172.253.215.0/24" #GCP
 
 db_username = "DBadmin2"
-db_password = "DBpostgres_1!"
+db_password = "DBpostgres_1"
