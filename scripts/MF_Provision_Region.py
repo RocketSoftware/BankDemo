@@ -27,11 +27,11 @@ import glob
 from utilities.misc import parse_args, set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
-from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_vsam_data, deploy_partitioned_data
+from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_vsam_data, deploy_partitioned_data, dbfhdeploy_vsam_data
 
 from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
-from ESCWA.region_config import update_region, update_alias, add_initiator, add_datasets
+from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator, add_datasets
 from ESCWA.comm_control import set_jes_listener
 from ESCWA.pac_config import add_sor, add_pac
 from utilities.exceptions import ESCWAException
@@ -75,17 +75,36 @@ def create_pac(config_dir, main_config, pac_config):
         write_log(exc)
         sys.exit(1)
 
-def catalog_datasets(cwd, region_name, ip_address, configuration_files, dataset_key):
+def catalog_datasets(cwd, region_name, ip_address, configuration_files, dataset_key, mfdbfh_location):
     if  dataset_key in configuration_files:
         data_dir = configuration_files[dataset_key]
         dataset_dir = os.path.join(cwd, data_dir)
         datafile_list = [file for file in os.scandir(dataset_dir)]
     
         try:
-            add_datasets(region_name, ip_address, datafile_list)
+            add_datasets(region_name, ip_address, datafile_list, mfdbfh_location)
         except ESCWAException as exc:
             write_log('Unable to catalog datasets in {}.'.format(dataset_dir))
             sys.exit(1)
+
+def add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection):
+    xa_detail = read_json(xa_config)
+    if os_type == "Windows":
+        xa_extension = '.dll'
+        xa_bitism = ""
+    else:
+        xa_extension = ".so"
+        if is64bit == True:
+            xa_bitism = "64"
+        else:
+            xa_bitism = "32"
+    xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
+    xa_module = '$ESP/loadlib/' + xarm_module_version
+    xa_detail["mfXRMModule"] = xa_module
+    xa_open_string = xa_detail["mfXRMOpenString"]
+    xa_detail["mfXRMOpenString"] = '{},USRPASS={}.{}'.format(xa_open_string,database_connection['user'],database_connection['password'])
+    write_log ('XA Resource Manager {} being added'.format(xa_module))
+    add_xa_rm(region_name,ip_address,xa_detail)
 
 def create_region(main_configfile):
 
@@ -95,14 +114,17 @@ def create_region(main_configfile):
     #determine where the Micro Focus product has been installed
     if sys.platform.startswith('win32'):
         os_type = 'Windows'
+        os_distribution =''
         install_dir = set_MF_environment (os_type)
         if install_dir is None:
             write_log('COBOL environment not found')
             exit(1)
         cobdir = str(Path(install_dir).parents[0])
+        os.environ['COBDIR'] = cobdir
         pathMfAnt = Path(os.path.join(cobdir, 'bin', 'mfant.jar')) 
     else:
         os_type = 'Linux'
+        os_distribution = '' #distro.id()
         install_dir = set_MF_environment (os_type)
         if install_dir is None:
             write_log('COBOL environment not set - run cobsetenv')
@@ -162,9 +184,14 @@ def create_region(main_configfile):
 
     if 'database' not in main_config:
         database_type = 'none'
+        dataversion = 'vsam'
     else:
         database_type= main_config["database"]
         sql_folder= os.path.join(cwd, 'config', 'database', database_type)
+        if database_type.split('_')[0] == 'VSAM':
+            dataversion = 'vsam'
+        else:
+            dataversion = 'sql'
 
     #determine te individual component configuration files to be used
     configuration_files = main_config["configuration_files"]
@@ -221,6 +248,22 @@ def create_region(main_configfile):
         write_log ('Set owner of {} to {}'.format(dfhdrdat, esuid))
     else:
         esuid = ''
+
+    # Update the mfdbfh.cfg file with the database user id
+    if 'mfdbfh_config' in main_config:
+        mfdbfh_config = os.path.join(sys_base, 'config', main_config['mfdbfh_config'])
+        if 'database_connection' in main_config:
+            database_connection = main_config['database_connection']
+
+            # Set the user id mfdbfh.cfg
+            f_in = open(mfdbfh_config, "rt")
+            data = f_in.read()
+            f_in.close()
+            new_data = data.replace('$$user$$', database_connection['user'])
+            f_out = open(mfdbfh_config, "wt")
+            f_out.write(new_data)
+            f_out.close()
+
     
     base_config = os.path.join(config_dir, base_config)
     update_config = os.path.join(config_dir, update_config)
@@ -307,10 +350,7 @@ def create_region(main_configfile):
             sys.exit(1)
 
     #data_dir_1 hold the directory name, under the cwd that contains definitions of any datasets to be catalogued - this setting is optional
-    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_1')
-
-    #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
-    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_2')
+    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_1', None)
 
     ## The following code updates the CICS Resource Definitions
 
@@ -336,7 +376,7 @@ def create_region(main_configfile):
             add_groups(region_name,ip_address,group_details)  
             
     #The FCT entries are only required if the VSAM version of the application is in use
-    if database_type == 'VSAM':
+    if dataversion == 'vsam':
 
         write_log ('VSAM version selected - FCT entries being added')
         fct_match_pattern = os.path.join(resourcedef_dir, 'rdef_fct_*.json')
@@ -402,28 +442,12 @@ def create_region(main_configfile):
     
    ## The following code deploys the application
 
-    ## determine which OS the script is running on
-    if sys.platform.startswith('win32'):
-        os_type = 'Windows'
-        os_distribution =''
-    else:
-        os_type = 'Linux'
-        os_distribution = '' #distro.id()
-
-    if main_config['database'] == 'VSAM':
-        dataversion = 'vsam'
-    else:
-        dataversion = 'sql'
-
-    if dataversion == 'sql':
-       database_type= main_config["database"]
-
     if  database_type == 'SQL_Postgres':
         database_engine = 'Postgres'
         loadlibDir = 'SQL_Postgres'
-        write_log ('Database type {} selected - database being built'.format(database_engine))
         database_connection = main_config['database_connection']
-        if sys.platform.startswith('win32'):
+        write_log ('Database type {} selected - database being built'.format(database_engine))
+        if os_type == 'Windows':
 
             # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ODBC Driver(ANSI)', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
             if is64bit == True:
@@ -449,26 +473,54 @@ def create_region(main_configfile):
         dconn_res = Disconnect_from_PG_server(conn)
         ## The following code adds XA resource managers as defined in xa.json
 
-        xa_config = os.path.join(config_dir, 'xa_Postgres.json')
-        xa_detail = read_json(xa_config)
-        if os_type == "Windows":
-            xa_extension = '.dll'
-            xa_bitism = ""
-        else:
-            xa_extension = ".so"
-            if is64bit == True:
-                xa_bitism = "64"
-            else:
-                xa_bitism = "32"
-        xarm_module_version = 'ESPGSQLXA' + xa_bitism + xa_extension
-        xa_module = '$ESP/loadlib/' + xarm_module_version
-        xa_detail["mfXRMModule"] = xa_module
-        write_log ('XA Resource Manager {} being added'.format(xa_module))
-        add_xa_rm(region_name,ip_address,xa_detail)
+        xa_config = configuration_files["xa_config"]
+        xa_config = os.path.join(config_dir, xa_config)
+        add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection)
+
     else:
         loadlibDir = 'VSAM'
-        write_log ('VSAM version required - datasets being deployed')
-        deploy_vsam_data(parentdir,sys_base,os_type, esuid)
+        if database_type == 'VSAM_Postgres':
+            database_connection = main_config['database_connection']
+            if os_type == 'Windows':
+
+                # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ODBC Driver(ANSI)', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
+                if is64bit == True:
+                    odbcDriver = 'PostgreSQL ODBC Driver(ANSI)'
+                    odbcconf = os.path.join(os.environ['windir'], 'system32', 'odbcconf.exe')
+                else:
+                    odbcDriver = 'PostgreSQL ANSI'
+                    odbcconf = os.path.join(os.environ['windir'], 'syswow64', 'odbcconf.exe')
+                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.MASTER|Database=postgres|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
+                write_log(createDSN)
+                createDSN_process = os.system(createDSN)
+                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.VSAM|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
+                write_log(createDSN)
+                createDSN_process = os.system(createDSN)
+
+            xa_config = configuration_files["xa_config"]
+            xa_config = os.path.join(config_dir, xa_config)
+            add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection)
+
+            write_log("Adding database password to vault for MFDBFH")
+            mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
+            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.master.password {}'.format(mfsecretsadmin, database_connection['password'])
+            secret_process = os.system(secret)
+            secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.vsam.password {}'.format(mfsecretsadmin, database_connection['password'])
+            secret_process = os.system(secret)
+
+            write_log ('MFDBFH version required - datasets being migrated to database')
+            os.environ['MFDBFH_CONFIG'] = mfdbfh_config
+            update_region_attribute(region_name, ip_address, {"mfCASTXFILEP": "sql://ESPacDatabase/VSAM?type=folder;folder=/data"})
+            dbfhdeploy_vsam_data(parentdir, os_type, is64bit, "sql://ESPacDatabase/VSAM/{}?folder=/data")
+
+            #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
+            write_log ('MFDBFH version required - adding database locations to catalog')
+            catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://ESPacDatabase/VSAM/{}?folder=/data")
+        else:
+            write_log ('VSAM version required - datasets being deployed')
+            deploy_vsam_data(parentdir,sys_base,os_type, esuid)
+            #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
+            catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_2', None)
 
     write_log ('Partitioned datasets being deployed')
     deploy_partitioned_data(parentdir,sys_base, esuid)
@@ -476,6 +528,10 @@ def create_region(main_configfile):
     if mf_product != 'EDz':
         write_log('The Micro Focus {} product does not contain a compiler. Precompiled executables therefore being deployed'.format(mf_product))
         deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
+
+        write_log('Precompiled system executables being deployed'.format(mf_product))
+        deploy_system_modules(parentdir, sys_base, os_type, is64bit, loadlibDir)
+
     else:
         ant_home = None
         if 'ant_home' in main_config:

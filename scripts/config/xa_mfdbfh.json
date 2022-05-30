@@ -2,7 +2,7 @@
     "CN": "DBPG",
     "mfXRMName": "BANKPGSQL",
     "mfXRMModule": "",
-    "mfXRMOpenString": "DSN=bank,LOCALTX=T,ESLOGGING=0001",
+    "mfXRMOpenString": "DSN=PG.VSAM,LOCALTX=T,ESLOGGING=0001",
     "mfXRMCloseString": "",
     "mfXRMReconnect": 3,
     "mfXRMStatus": "Enabled",

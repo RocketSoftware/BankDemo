@@ -131,17 +131,17 @@
       <filetype type="psb" xsi:type="cobolFileContainer"/>
       <filetype type="pli.include" xsi:type="cobolFileContainer"/>
       <filetype type="jcl" xsi:type="cobolFileContainer">
-         <file compile="true" path="jcl/ZBNKBAT1.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKEXT1.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKINT1.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKPRT1.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKPRTZ.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKSTMT.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKUNLD.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKAIX.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKAIX2.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKDEL.JCL" xsi:type="cobolFile"/>
-         <file compile="true" path="jcl/ZBNKPATH.JCL" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKAIX2.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRTZ.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKDEL.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKEXT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKUNLD.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKINT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPATH.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKAIX.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKSTMT.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKBAT1.jcl" xsi:type="cobolFile"/>
       </filetype>
       <filetype type="rexx" xsi:type="cobolFileContainer"/>
       <filetype type="bms" xsi:type="cobolFileContainer">
@@ -153,10 +153,10 @@
       <filetype type="lin" xsi:type="cobolFileContainer"/>
       <filetype type="dbd" xsi:type="cobolFileContainer"/>
       <filetype type="pli" xsi:type="cobolFileContainer">
-         <file compile="true" path="main/BBANK10P.PLI" xsi:type="cobolFile"/>
-         <file compile="true" path="main/DBANK01P.PLI" xsi:type="cobolFile"/>
-         <file compile="true" path="main/SBANK00P.PLI" xsi:type="cobolFile"/>
-         <file compile="true" path="main/SBANK10P.PLI" xsi:type="cobolFile"/>
+         <file compile="true" path="main/SBANK00P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/BBANK10P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/DBANK01P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/SBANK10P.pli" xsi:type="cobolFile"/>
       </filetype>
       <folders xsi:type="cobolFolderContainer">
          <folder compile="true" path="bms" xsi:type="cobolFolder"/>

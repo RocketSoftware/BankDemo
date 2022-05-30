@@ -1,22 +1,24 @@
 {
     "ip_address" : "127.0.0.1",
-    "region_name": "BANKSQL",
-    "product": "EDz",
+    "region_name": "BANKMFDB",
+    "product": "ES",
     "configuration_files":
         {
             "base_config": "base.json",
             "update_config": "update.json",
-            "env_config": "env.json",
+            "env_config": "env_mfdbfh.json",
             "alias_config": "alias.json",
             "init_config": "init.json",
             "data_dir_1": "datasets_po",
-            "xa_config": "xa_Postgres.json"
+            "data_dir_2": "datasets_vsam",
+            "xa_config": "xa_mfdbfh.json"
         },
     "JES": true,
     "CICS": true,
     "MQ": false,
     "is64bit": true,
-    "database": "SQL_Postgres",
+    "database": "VSAM_Postgres",
+    "mfdbfh_config": "MFDBFH_VSAM.cfg",
     "PAC": {
       "enabled": false,
       "PSOR_type" : "redis",
