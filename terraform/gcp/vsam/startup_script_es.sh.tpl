@@ -1,14 +1,13 @@
 echo "Downloading setup scripts"
-ls
-mkdir scripts2
-gsutil cp "${BUCKET_URL}/scripts/*" ./scripts2
-chmod u+x ./scripts2/*
-./scripts2/setup.sh ${BUCKET_URL}
+mkdir setup
+gsutil cp "${BUCKET_URL}/scripts/*" ./setup
+chmod u+x ./setup/*
+./setup/setup.sh ${BUCKET_URL}
 
 . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
 cd /bankdemo/scripts
-python3 MF_Configure_Json.py ./config/demo.json database "VSAM"
-python3 MF_Provision_Region.py
+#python3 MF_Configure_Json.py ./config/demo.json database "VSAM"
+python3 MF_Provision_Region.py vsam
 
 #setup VNC tunnel using:
 #gcloud compute ssh --project amc-marketplacegcp-nonprod js1-es-2csp
