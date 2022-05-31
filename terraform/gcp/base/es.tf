@@ -14,8 +14,8 @@ module "instance_template" {
   auto_delete = true
   
   metadata = {
-    startup-script = data.template_file.es_startup_script_redhat.rendered
-    windows-startup-script-ps1 = data.template_file.es_startup_script_windows.rendered
+    startup-script = var.es_startup_script
+    windows-startup-script-ps1 = var.es_startup_script_win
     
   }
   
@@ -24,7 +24,7 @@ module "instance_template" {
     nat_ip=""
     network_tier="STANDARD"
   }]
-  depends_on = [null_resource.upload_folder_content]
+  depends_on = [null_resource.upload_license]
   tags=["es"]
 }
 

@@ -19,3 +19,5 @@
 /BANKDEMO
 /sources/Listing
 /sources/generated
+.terraform*
+terraform.tfstate*
