@@ -87,7 +87,7 @@ def catalog_datasets(cwd, region_name, ip_address, configuration_files, dataset_
             write_log('Unable to catalog datasets in {}.'.format(dataset_dir))
             sys.exit(1)
 
-def add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection):
+def add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection):
     xa_detail = read_json(xa_config)
     if os_type == "Windows":
         xa_extension = '.dll'
@@ -475,7 +475,7 @@ def create_region(main_configfile):
 
         xa_config = configuration_files["xa_config"]
         xa_config = os.path.join(config_dir, xa_config)
-        add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection)
+        add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
 
     else:
         loadlibDir = 'VSAM'
@@ -499,7 +499,7 @@ def create_region(main_configfile):
 
             xa_config = configuration_files["xa_config"]
             xa_config = os.path.join(config_dir, xa_config)
-            add_postgresxa(os_type, region_name, ip_address, xa_config, database_connection)
+            add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
 
             write_log("Adding database password to vault for MFDBFH")
             mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
