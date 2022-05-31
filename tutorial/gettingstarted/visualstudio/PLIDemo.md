@@ -1,4 +1,4 @@
-# Open PL/I Enterprise Server Development with Visual Studio
+# Open PL/I Development using Enterprise Developer for Visual Studio
 ## Contents
 - Overview
 - How to Run this Demonstration

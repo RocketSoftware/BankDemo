@@ -1,4 +1,4 @@
-# Open PL/I Enterprise Server Development with Eclipse
+# Open PL/I Development using Enterprise Developer for Eclipse
 ## Contents
 - Overview
 - How to Run this Demonstration

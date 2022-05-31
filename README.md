@@ -50,8 +50,8 @@ To use the project just download the source.zip or source.tar.gz from the [relea
     - Available tutorials:
         - [Getting Started with Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/README.md)
         - [Getting Started with Enterprise Developer for Visual Studio](tutorial/gettingstarted/visualstudio/README.md)
-        - [Open PL/I Enterprise Server Development with Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
-        - [Open PL/I Enterprise Server Development with Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
+        - [Open PL/I Development using Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
+        - [Open PL/I Development using Enterprise Developer for Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
     - Prerequisites: 
         - Micro Focus Directory Server (mfds) is running
         - Micro Focus Common Web Administration (escwa) is running
