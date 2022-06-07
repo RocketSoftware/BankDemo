@@ -9,7 +9,6 @@ module "base" {
   vpc_network = var.vpc_network
   vpc_subnet = var.vpc_subnet
   bucketname = var.bucketname
-  bitism = var.bitism
   availability_zones = var.availability_zones
   es_image_project = var.es_image_project
   es_image_name = var.es_image_name
