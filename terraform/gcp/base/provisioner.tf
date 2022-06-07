@@ -1,6 +1,6 @@
-resource "null_resource" "upload_license" {
+resource "null_resource" "upload_scripts" {
   provisioner "local-exec" {
-    command = "gsutil cp -r ../eslicense/* ${module.storage.bucket.url}/eslicense/"
+    command = "gsutil cp -r ${path.cwd}/eslicense/* ${module.storage.bucket.url}/eslicense/"
     on_failure = fail
   }
   

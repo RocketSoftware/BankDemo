@@ -14,16 +14,6 @@ variable "name" {
   default     = null
 }
 
-variable "bitism" {
-  type        = string
-  description = "Bitism of created region. Must be either 32 or 64"
-  default     = "32"
-  validation {
-    condition = contains(["32", "64"], var.bitism)
-    error_message = "Bitism must be 32 or 64."
-  }
-}
-
 variable "use_pac" {
   description = "Whether to install the region into a PAC"
   type        = bool

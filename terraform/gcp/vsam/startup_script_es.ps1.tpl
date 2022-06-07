@@ -8,7 +8,7 @@ gsutil cp "${BUCKET_URL}/eslicense/*" .\eslicense
 gsutil cp "${BUCKET_URL}/scripts/*" .\scripts
 $currentDirectory = Get-Location
 Write-Host "Installing product license"
-$licenseFile = (Get-ChildItem -Path eslicense).Name
+$licenseFile = (Get-ChildItem -Path eslicense | Where-Object {$_.Name -notlike 'place*'}).Name
 $licensePath = "$currentDirectory\eslicense\$licenseFile"
 if ("$licenseFile" -eq "")
 {

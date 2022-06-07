@@ -11,6 +11,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+jdkpath=$(ls /usr/lib/jvm/ | grep java-11-openjdk-11)
+export JAVA_HOME=/usr/lib/jvm/$jdkpath
+echo "JAVA_HOME=$JAVA_HOME"
+
 echo "Starting ESCWA"
 find /opt/microfocus/EnterpriseDeveloper/etc -type d -exec chmod 777 {} \; # So escwa can write to the logfile
 runuser -l demouser -c '. /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv; escwa &'

@@ -9,10 +9,9 @@ create_network = true
 vpc_network = "js-vpc1"
 vpc_subnet = "js-subnet1"
 bucketname = "jsbucket2"
-bitism = "32"
 use_pac = false
 es_image_project = "amc-marketplacegcp-nonprod"
-es_image_name = "js-rh-ed70pu5-20220523"
+es_image_name = "js-rh-ed80rc1-20220606" #"js-win-ed70-20220518" #"js-rh-ed70pu5-20220523"
 escount = 1
 vm_machine_type = "e2-standard-4"
 

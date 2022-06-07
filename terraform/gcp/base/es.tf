@@ -24,7 +24,7 @@ module "instance_template" {
     nat_ip=""
     network_tier="STANDARD"
   }]
-  depends_on = [null_resource.upload_license]
+  depends_on = [null_resource.upload_scripts]
   tags=["es"]
 }
 
