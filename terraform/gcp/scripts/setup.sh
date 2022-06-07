@@ -4,15 +4,12 @@ gsutil cp $bucketUrl/bankdemo.zip /tmp/bankdemo.zip
 unzip /tmp/bankdemo.zip -d /
 chmod -R a+wrx /bankdemo
 
-echo "Installing license file"
-mkdir eslicense
-gsutil cp "$bucketUrl/eslicense/*" ./eslicense
-licenseFile=$(ls eslicense)
-licensePath=$PWD/eslicense/$licenseFile
-echo "Installing license file"
-# Currently interactive, so need this workaround
-/var/microfocuslicensing/bin/cesadmintool.sh -install $licensePath << block
-block
+scriptdir=$( dirname -- "$0"; )
+$scriptdir/install-license.sh "$bucketUrl/eslicense"
+if [ $? -ne 0 ]; then
+    echo "Failed to install license"
+    exit 1
+fi
 
 echo "Starting ESCWA"
 find /opt/microfocus/EnterpriseDeveloper/etc -type d -exec chmod 777 {} \; # So escwa can write to the logfile

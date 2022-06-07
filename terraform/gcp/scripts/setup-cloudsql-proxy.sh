@@ -1,5 +1,6 @@
 dbConnectionName=$1
 dbListenPort=$2
+echo "Installing cloudsql proxy"
 yum install -y wget
 wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
 chmod +x cloud_sql_proxy
