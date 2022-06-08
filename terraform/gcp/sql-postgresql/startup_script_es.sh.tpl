@@ -25,7 +25,7 @@ echo "Setting up cloudsql proxy"
 ./setup/setup-cloudsql-proxy.sh ${SQL_CONNECTION} 5433
 
 . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
-cd /bankdemo/scripts
+cd /home/demouser/MFETDUSER/scripts
 #python3 MF_Configure_Json.py ./config/demo.json database "VSAM"
 
 python3 MF_Configure_Json.py ./options/sql_postgres.json database_connection server_port 5433

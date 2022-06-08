@@ -10,7 +10,7 @@ jdkpath=$(ls /usr/lib/jvm/ | grep java-11-openjdk-11)
 export JAVA_HOME=/usr/lib/jvm/$jdkpath
 echo "JAVA_HOME=$JAVA_HOME"
 
-cd /bankdemo/scripts
+cd /home/demouser/MFETDUSER/scripts
 #python3 MF_Configure_Json.py ./config/demo.json database "VSAM"
 python3 MF_Provision_Region.py vsam
 

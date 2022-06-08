@@ -1,8 +1,10 @@
 bucketUrl=$1
 echo "Downloading BANKDEMO sources"
 gsutil cp $bucketUrl/bankdemo.zip /tmp/bankdemo.zip
-unzip /tmp/bankdemo.zip -d /
-chmod -R a+wrx /bankdemo
+#tutorial expects bankdemo to be under /home/demouser/MFETDUSER
+unzip /tmp/bankdemo.zip -d /home/demouser
+mv /home/demouser/bankdemo /home/demouser/MFETDUSER
+chmod -R a+wrx /home/demouser/MFETDUSER
 
 scriptdir=$( dirname -- "$0"; )
 $scriptdir/install-license.sh "$bucketUrl/eslicense"
