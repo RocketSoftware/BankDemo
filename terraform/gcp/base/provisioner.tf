@@ -10,7 +10,7 @@ resource "null_resource" "upload_scripts" {
   }
   
   provisioner "local-exec" {
-    command = "powershell -file ../base/deploy.ps1 ${module.storage.bucket.url}"
+    command = "python ../base/deploy.py ${module.storage.bucket.url}"
     on_failure = fail
   }
 }
