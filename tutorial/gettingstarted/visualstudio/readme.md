@@ -1083,3 +1083,5 @@ Although the job has completed, the debugger is still waiting for the next event
 **1.** Click **Debug** \> **Stop Debugging**.
 
 This concludes this set of tutorials that introduce Micro Focus Enterprise Developer.
+
+[Back to Top](#overview)
