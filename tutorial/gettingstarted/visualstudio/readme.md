@@ -1,15 +1,16 @@
 # Getting started with Micro Focus Enterprise Developer for Visual Studio 2022
 
+## Overview
 This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates. They'll walk you through:
-- Starting the Visual Studio Integrated Development Environment
-- Adding files to your Visual Studio project
-- File, Project and IDE properties and settings
-- Editing COBOL, JCL, BMS, and Data Files
-- Compiling the source code
-- Unit Testing the Batch Application
-- Unit Testing the Online Application
-- Debugging the Batch Applicatio
-- Debugging the Online Application
+- [Starting the Visual Studio Integrated Development Environment](#starting-the-visual-studio-integrated-development-environment)
+- [Adding files to your Visual Studio project](#adding-files-to-your-visual-studio-project)
+- [File, Project and IDE properties and settings](#file-project-and-ide-properties-and-settings)
+- [Editing COBOL, JCL, BMS, and Data Files](#editing-cobol-jcl-bms-and-data-files)
+- [Compiling the source code](#compiling-the-source-code)
+- [Unit Testing the Batch Application](#unit-testing-the-batch-application)
+- [Unit Testing the Online Application](#unit-testing-the-online-application)
+- [Debugging the Batch Application](#debugging-the-batch-application)
+- [Debugging the Online Application](#debugging-the-online-application)
 
 These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Visual Studio Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Visual Studio 2022 to develop and maintain both simple COBOL and mainframe subsystem applications.
 
@@ -40,8 +41,9 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
 
     -   Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
     -   You must have Micro Focus Rumba+ Desktop or an equivalent TN3270 terminal emulator installed to run the CICS application.
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg)**Note:** A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the [*Micro Focus Web site*](https://www.microfocus.com/documentation/enterprise-developer/).
+    **Note:** A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the [*Micro Focus Web site*](https://www.microfocus.com/documentation/enterprise-developer/).
 
+[Back to Top](#overview)
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -77,8 +79,8 @@ You can see:
 
 -   Bottom right is a **Properties** window which shows the properties of the currently selected item in the Solution Explorer when you have a project loaded in it. You can open the window from **View \> Properties**.
 -   **Output** window - displays the results of tasks and from compiling your applications.
--   **Error List** Window - displays details about any errors that might be present in the code.
--   Project Details Window which gives a logical view of your COBOL application.
+-   **Error List** window - displays details about any errors that might be present in the code.
+-   Project Details window which gives a logical view of your COBOL application.
 -   The main activity window at the top the IDE, the Editor, is where you edit or debug the sources. This window is currently empty.
 -   Apart from the menus, there are a number of buttons in the toolbar, which vary depending on what you are currently doing with the IDE.
 
@@ -88,7 +90,7 @@ You can see:
 
     - Click the title bar of the window. Holding the mouse on the window title, drag the window to the left and down.
 
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg)**Note:** If you close a window, you can restore if from the **View** menu.
+      **Note:** If you close a window, you can restore if from the **View** menu.
 
     - If you wish to restore the default windows layout of the IDE, click **Window** \> **Reset Window Layout**.
 
@@ -98,6 +100,8 @@ You can see:
 2.  Navigate to the **C:\\MFETDUSER\\tutorial\\projects\\Studio\\cobol** folder, select **Bankdemo.sln**, and click **Open**.
 
     This opens the solution in the Solution Explorer window.
+
+[Back to Top](#overview)
 
 ## Adding files to your Visual Studio project
 
@@ -143,9 +147,9 @@ To add the COBOL programs to your project:
 
     Previously, you ensured the IDE is configured to scan the COBOL files you add into the project and set directives for dialect, EXEC CICS and SQL. When the files are being imported in the project, the IDE scans them for CICS and SQL settings. You can see that the **Output** window shows some messages about scanning the files. At the end of scanning, the IDE shows a **Preview Changes Directive Determination** dialog box to set any missing directives as required. Review the directives, and click **Apply**.
 
-![](images/2VSscandirs.png)
+   ![](images/2VSscandirs.png)
 
-   ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** In most cases, you add the actual COBOL programs to your Visual Studio project. Optionally, you could have left the source files in the original location and could have created links to them. This might be useful if you have large source files. In such cases, you would have used the **Add As Link** command to add the files to your project:
+   **Note:** In most cases, you add the actual COBOL programs to your Visual Studio project. Optionally, you could have left the source files in the original location and could have created links to them. This might be useful if you have large source files. In such cases, you would have used the **Add As Link** command to add the files to your project:
 
    ![](images/21a3bc2f6389c6fe4189c875358b50a9.jpg)
 
@@ -236,6 +240,8 @@ In Solution Explorer, you can view an actual representation of the files and fol
 
    Next, you are going to explore the settings available in the IDE and then you are going to edit some of the source files.
 
+[Back to Top](#overview)
+
 ## File, Project and IDE Properties and Settings
 
 There is a variety of options and settings that can be configured within Visual Studio. You are going to explore a few of them in this tutorial. Do not skip this section, as you are going to make at least one important configuration change in the project's properties.
@@ -324,11 +330,13 @@ The individual source files can have their own local properties which override t
 
 4.  Similarly, check the properties for the **.dat**, the **.jcl**, and the **.cpy** files and see that the **.dat** files and the copybooks will not be compiled.
 
+[Back to Top](#overview)
+
 ## Editing COBOL, JCL, BMS, and Data Files
 
 This topic describes the editing features for the various file types used in your project.
 
-![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** We recommend that you create backup copies of all files before you start editing them.
+**Note:** We recommend that you create backup copies of all files before you start editing them.
 
 **Editing COBOL Files**
 
@@ -347,7 +355,7 @@ You are going to explore some of the COBOL editing features using the **ZBNKPRT1
  1. Scroll down the file to line 61 and see some COPY statements. 
  2. Right-click the line for COPY CDATED, and click **Show "CDATED.CPY"**. This expands the copybook directly in the code of **ZBNKPRT1.cbl**. 
 
-![](images/96a84c25adce3137dc24e29c11862efd.png)
+    ![](images/96a84c25adce3137dc24e29c11862efd.png)
 
 3. You can edit the code of the copybook in the expanded view so introduce an error in the code now.
 
@@ -398,7 +406,7 @@ Apart from scrolling down the code in the editor, you can use the following feat
 1. Scroll down to line number 229. 
 2. Right-click WS-CONSOLE-MESSAGE and click **Peek Definition**. This opens a small window embedded in the editor with the definition of the data item.
 
-![](images/a64717adc0a2b1a0265c86c55000b776.jpg)
+   ![](images/a64717adc0a2b1a0265c86c55000b776.jpg)
 
 You can type in the window, or peek the definition of another data item in it.
 
@@ -471,12 +479,12 @@ Let's look at how Smart Editing works with background COBOL parsing:
 
 You can choose from a number of **Renumber** and **Unnumber** options available from the COBOL toolbar (use ![](images/e711062673ff7c4626a662d04d262ad7.jpg) in the toolbar and the commands available from the dropdown menu) to insert and remove line numbers from your code. 
 
-![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** If a COBOL source file includes some comments beyond column 73, you might want to change only the numbers in the COBOL sequence area as **Renumber** overwrites any text in the comments area. 
+**Note:** If a COBOL source file includes some comments beyond column 73, you might want to change only the numbers in the COBOL sequence area as **Renumber** overwrites any text in the comments area. 
 
 To insert the line numbers in your code:
 1. Click the downward arrow next to ![](images/e711062673ff7c4626a662d04d262ad7.jpg) in the COBOL toolbar, and click **Renumber Left**.
 
-![](images/f0c1ec6c4a48d259d31f7c14610b1539.png)
+   ![](images/f0c1ec6c4a48d259d31f7c14610b1539.png)
 
 To insert line numbers beyond the end of area B:
 
@@ -566,9 +574,11 @@ By default, Visual Studio is configured to use the new Data File Tools utility. 
     f.  Using the same method, restore the previous value of BAC-REC-BALANCE.
 7.  Close the Data File Tools utility.
 
+[Back to Top](#overview)
+
 ## Compiling the Source Code
 
-![](images/080f42a3aadf5eea7bced48e38d755cd.png) **Important:** You need Enterprise Developer or Enterprise Developer for IBM zEnterprise to create executables. Building projects is not supported in Enterprise Developer Connect.
+**Important:** You need Enterprise Developer or Enterprise Developer for IBM zEnterprise to create executables. Building projects is not supported in Enterprise Developer Connect.
 
 To compile the application:
 
@@ -652,6 +662,8 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
     There should be no errors in the build now.
 
+[Back to Top](#overview)
+
 ## Unit Testing the Batch Application
 
 The first thing you need to do is check that the Bankdemo application is executing correctly.
@@ -718,7 +730,7 @@ These are the steps to start the server manually, and are included for completen
 
 1. In Server Explorer, right-click **BANKDEMO** under **Micro Focus Servers**, then click **Start**.
 
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** You might receive an Enterprise Server Sign On dialog prompting you to provide connection details for the BANKDEMO server. This is a standard security dialog. Click **OK** without specifying any sign-on details. Also, you may skip enabling password recovery.
+    **Note:** You might receive an Enterprise Server Sign On dialog prompting you to provide connection details for the BANKDEMO server. This is a standard security dialog. Click **OK** without specifying any sign-on details. Also, you may skip enabling password recovery.
 
     You might receive a **Windows Security Alert** blocking the **MF Communications** process. Click **Allow access**.
 
@@ -739,7 +751,7 @@ The JCL provided in your demo causes the COBOL application to read a file, sort 
 
     Alternatively, you can right-click the file in Solution Explorer, and select **Submit JCL**
 
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** If you have not started the BANKDEMO server yet, since you configured the IDE to start the server automatically, you receive a notification that the server will be started. Click **OK** to confirm this.
+    **Note:** If you have not started the BANKDEMO server yet, since you configured the IDE to start the server automatically, you receive a notification that the server will be started. Click **OK** to confirm this.
 
 2.  Check the **Output** window to see that the job has been submitted and that the job has completed.
 
@@ -789,6 +801,8 @@ To view the spool:
 ![](images/ef9ee87126c25d0efd3a8c238ecb909c.png)
     You can now start to look at how to run the online application.
 
+[Back to Top](#overview)
+
 ## Unit Testing the Online Application
 
 In the previous step, Unit Testing the Batch Application, you used the BANKDEMO enterprise server. You are going to use it again for online testing.
@@ -835,7 +849,9 @@ A suitable **User Id** is b0001. You can type anything as a **Password** - the f
 
 You can stop the Bankdemo server from within Server Explorer. You can leave it running though, if you wish to continue this tutorial.
 
-![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg)**Note:** In production, enterprise servers are long-running processes that are usually run for many months without stopping and starting.
+**Note:** In production, enterprise servers are long-running processes that are usually run for many months without stopping and starting.
+
+[Back to Top](#overview)
 
 ## Debugging the Batch Application
 
@@ -951,7 +967,7 @@ Open the Breakpoints window - currently, there are no breakpoints set in the pro
 
 3.  Do the same for line 177.
 
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note:** You can enable and disable the breakpoints from the Breakpoints window.
+    **Note:** You can enable and disable the breakpoints from the Breakpoints window.
 
     ![](images/5234dccb8a6f6a6eee364410756c39fe.jpg)
 
@@ -976,7 +992,7 @@ COBOL watchpoints enable you to watch the memory associated with data items. You
 
     ![](images/49VSWatchpoints.png)
 
-![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg) **Note**: To view watchpoints, you need to restart debugging as previously shown. 
+**Note**: To view watchpoints, you need to restart debugging as previously shown. 
 
 **Running CSI queries**
 
@@ -1012,6 +1028,8 @@ You can use the COBOL Source Information (CSI) functionality and its **Quick Bro
  Although the job has completed, the debugger is still waiting for the next event. To stop debugging:
 
    - Click **Debug** \> **Stop Debugging**.
+
+[Back to Top](#overview)
 
 ## Debugging the Online Application
 
