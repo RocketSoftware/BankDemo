@@ -12,7 +12,7 @@ This demonstration requires a working Microsoft Visual Studio IDE, Micro Focus E
 ## >How to Run the Demonstration
 1. Import the supplied enterprise server:
     - If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
-    - Run the tutorial\creatdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
+    - Run the tutorial\createdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
     - In the "Server Explorer" tab, right-click on "Local" and select "Import...". 
     - Click the "Import server definition file" &lt;...&gt; button and select the tutorial\BANKDEMO.xml file. Then click &lt;OK&gt;
     - The BANKDEMO server should appear in Server Explorer under "Local"
@@ -24,7 +24,8 @@ This demonstration requires a working Microsoft Visual Studio IDE, Micro Focus E
     - Check the "Output" window near the bottom of the IDE to verify that the solution built successfully. The last line in the log typically looks like this: "========== Build: 3 succeeded, 0 failed, 0 skipped =========="
 
 3. Configure the enterprise server for PL/I:
-    - In the Visual Studio IDE, in "Server Explorer" (available wth <CTL>+<ALT>+S), right-click "Micro Focus Servers", and click "Administration". This opens the Home page of "Enterprise Server Administration" in the IDE.     - On the Home page of the "Enterprise Server Administration", select "NATIVE" on the top toolbar. 
+    - In the Visual Studio IDE, in "Server Explorer" (available with \<CTL\>+\<ALT\>+S), right-click "Micro Focus Servers", and click "Administration". This opens the Home page of "Enterprise Server Administration" in the IDE.     
+    - On the Home page of the "Enterprise Server Administration", select "NATIVE" on the top toolbar. 
     - On the NATIVE page, expand "Directory Servers" and expand "Default" and select "BANKDEMO"
     - On the General page, note that the "PL/I enabled" checkbox is already selected
     - Click on the "CICS" dropdown and select "Configuration".
