@@ -10,7 +10,7 @@ will be using and follow the appropriate READMEs.
 1. [Using The Bankdemo Application](#using)
     1. [Enterprise Developer Introductory Tutorial](#tutorial)
     1. [On Premise Enterprise Server Capabilities](#onprem)
-    1. [Cloud Enterprise Server Capabilities](#cloud)
+
 
 ## <a name="intro"></a>Introduction
 
@@ -23,7 +23,7 @@ The project can be used to demonstrate applications running both on-premise and 
 the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
 
 In the simplest configuration it demonstrates a CICS COBOL application accessing banking data held in indexed (VSAM) files on disk but it can also be configured
-to access data from a Postgres SQL database and further planned demonstrations will show more complex deployments such as those involving scale-out and database hosted VSAM files using MFDBFH.
+to access data using EXEC SQL from a PostgreSQL database and database hosted VSAM files using the Micro Focus Database File Handler (or MFDBFH for short) again using PostgreSQL database server. Further planned demonstrations will show more complex deployments such as those involving scale-out and cloud deployments.
 
 ## <a name="license"></a>License
 
@@ -63,17 +63,8 @@ To use the project just download the source.zip or source.tar.gz from the [relea
         - See specific demonstration instructions for any additional requirements
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
-        - [Deploying and running Bankdemo with Postgres SQL](demos/onprem/psql/README.md) 
-        - [Deploying and running Bankdemo with VSAM stored in Postgres SQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
+        - [Deploying and running Bankdemo with PostgreSQL](demos/onprem/psql/README.md) 
+        - [Deploying and running Bankdemo with VSAM stored in PostgreSQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
     - Prerequisites: 
         - Micro Focus Directory Server (mfds) is running
         - Micro Focus Common Web Administration (escwa) is running and listening on the default localhost port 10086
-
-3. <a name="cloud"></a> Cloud deployment of Micro Focus Enterprise Server capabilities
-    - Prerequisites: 
-        - [Hashicorp Terraform](https://www.terraform.io/)
-        - Account with a supported cloud provider, currently:
-            - [Google Cloud](https://cloud.google.com)
-        - Cloud provider's CLI
-        - Micro Focus Enterprise Server License
-        - Please note that in [Amazon AWS](https://github.com/aws-quickstart/quickstart-microfocus-amc-es) and [Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/micro-focus.mfes?tab=Overview) you can find "Quick Start" demonstrations which are also based on the Bankdemo application that show similar capabilities

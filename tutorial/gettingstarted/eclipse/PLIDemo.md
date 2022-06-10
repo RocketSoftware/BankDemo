@@ -17,7 +17,7 @@ Please see the Micro Focus product documentation for more information.
 ## How to Run the Demonstration
 1. Import the supplied enterprise server:
     - If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
-    - Run the tutorial\creatdefinition.ps1 Powershell script(Windows) or tutorial/createdefinition.sh shell script(Linux) to create the BANKDEMO.xml region definition file. 
+    - Run the tutorial\createdefinition.ps1 Powershell script(Windows) or tutorial/createdefinition.sh shell script(Linux) to create the BANKDEMO.xml region definition file. 
     - In the "Server Explorer" tab, right-click on "Local" and select "Import Server...". 
     - Click the &lt;Browse...&gt; button and select the tutorial/BANKDEMO.xml file. Then click &lt;Finish&gt;
     - The BANKDEMO server should appear in Server Explorer under "Local"
