@@ -43,16 +43,15 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
     -   You must have Micro Focus Rumba+ Desktop or an equivalent TN3270 terminal emulator installed to run the CICS application.
     **Note:** A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the [*Micro Focus Web site*](https://www.microfocus.com/documentation/enterprise-developer/).
 
-[Back to Top](#overview)
-
 **Using a remote enterprise server instance for the tutorials**
 
    If you have an active firewall on the machine that is running your Directory Server and enterprise server instances, and you want remote clients to be able to connect to them, you must ensure that the firewall allows access to the ports that you are using.
     
-   For example, Directory Server is configured, by default, to use port 86. Your must configure your firewall to allow TCP and UDP access to this port. Similarly, the default enterprise server instance, ESDEMO, has a **Web Services and J2EE** listener that uses port 9003. For remote clients to be able to submit requests to this listener, your firewall must permit access to this port.
+   For example, Directory Server is configured, by default, to use port 86. Your must configure your firewall to allow TCP and UDP access to this port. Similarly, the enterprise server instance you create as part of this tutorial, BANKDEMO, has listeners which use ports 9003 and 9023. For remote clients to be able to submit JCL jobs or connect a TN3270 terminal to these listeners, your firewall must permit access to these ports.
 
    We recommend that, if you want remote users to access Enterprise Server functionality through the firewall, you use fixed port values so that you can control access via these.
 
+[Back to Top](#overview)
 
 ## Starting the Visual Studio Integrated Development Environment
 
