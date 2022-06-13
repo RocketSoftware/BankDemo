@@ -22,7 +22,7 @@ The project can be used to demonstrate a selection of the capabilities of Micro 
 The project can be used to demonstrate applications running both on-premise and in cloud deployments and also includes introductory tutorials for the use of
 the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
 
-In the simplest configuration it demonstrates a CICS COBOL application accessing banking data held in indexed (VSAM) files on disk but it can also be configured
+In the simplest configuration it demonstrates a CICS/JCL COBOL application accessing banking data held in indexed (VSAM) files on disk but it can also be configured
 to access data using EXEC SQL from a PostgreSQL database and database hosted VSAM files using the Micro Focus Database File Handler (or MFDBFH for short) again using PostgreSQL database server. Further planned demonstrations will show more complex deployments such as those involving scale-out and cloud deployments.
 
 ## <a name="license"></a>License
