@@ -1,1 +1,0 @@
-Directory for CICS resource definition file

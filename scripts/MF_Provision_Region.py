@@ -102,9 +102,11 @@ def add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, databas
     xa_module = '$ESP/loadlib/' + xarm_module_version
     xa_detail["mfXRMModule"] = xa_module
     xa_open_string = xa_detail["mfXRMOpenString"]
-    xa_detail["mfXRMOpenString"] = '{},USRPASS={}.{}'.format(xa_open_string,database_connection['user'],database_connection['password'])
     write_log ('XA Resource Manager {} being added'.format(xa_module))
     add_xa_rm(region_name,ip_address,xa_detail)
+
+    secret_open_string = '{},USRPASS={}.{}'.format(xa_open_string,database_connection['user'],database_connection['password'])
+    return secret_open_string
 
 def create_region(main_configfile):
 
@@ -475,7 +477,12 @@ def create_region(main_configfile):
 
         xa_config = configuration_files["xa_config"]
         xa_config = os.path.join(config_dir, xa_config)
-        add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
+        xa_openstring = add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
+
+        write_log("Adding XA switch configuration to vault")
+        mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
+        secret = '"{}" write -overwrite Microfocus/XASW/DBPG/XAOpenString {}'.format(mfsecretsadmin, xa_openstring)
+        secret_process = os.system(secret)
 
     else:
         loadlibDir = 'VSAM'
@@ -499,13 +506,15 @@ def create_region(main_configfile):
 
             xa_config = configuration_files["xa_config"]
             xa_config = os.path.join(config_dir, xa_config)
-            add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
+            xa_openstring = add_postgresxa(os_type, is64bit, region_name, ip_address, xa_config, database_connection)
 
             write_log("Adding database password to vault for MFDBFH")
             mfsecretsadmin = os.path.join(os.environ['COBDIR'], 'bin', 'mfsecretsadmin')
             secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.master.password {}'.format(mfsecretsadmin, database_connection['password'])
             secret_process = os.system(secret)
             secret = '"{}" write -overwrite microfocus/mfdbfh/espacdatabase.bankvsam.vsam.password {}'.format(mfsecretsadmin, database_connection['password'])
+            secret_process = os.system(secret)
+            secret = '"{}" write -overwrite Microfocus/XASW/DBPG/XAOpenString {}'.format(mfsecretsadmin, xa_openstring)
             secret_process = os.system(secret)
 
             write_log ('MFDBFH version required - datasets being migrated to database')

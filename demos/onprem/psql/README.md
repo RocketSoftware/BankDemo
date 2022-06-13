@@ -1,5 +1,5 @@
 # Micro Focus Bankdemo Application with PostgreSQL
-This demonstration configures the Bankdemo deployment to store banking data in a PostgreSQL database
+This demonstration configures the Bankdemo application to store banking data in a PostgreSQL database
 accessed from COBOL programs using `EXEC SQL` statements. The COBOL modules used to access the database
 can be found in the `sources/cobol/data/sql` directory of this project.
 
@@ -24,12 +24,22 @@ Database = bank
 ## What the demonstration shows
 - This demonstration shows a simple COBOL CICS "green screen" application accessing data using EXEC SQL statements. 
 - The Enterprise Server instance is created in the `BANKSQL` sub-directory of this project
-- The server instance is created using the ESCWA Admin API, using just a single command-line utility to create the default CICS resource definition file.
-- The server is configured as 64-bit and uses pre-built executables, but can easily be reconfigured to use 32-bit and/or build the application from source
-- On Windows an ODBC system data source called `bank` is created
-- The database tables are populated with example data
-- The server instance is configured to use MFDBFH by:
-    - specifying the XA switch module espgsqlxa (source is in Enterprise Developer product `src/enterpriseserver/xa` directory)
+- The Enterprise Server instance is:
+    - created in the `BANKSQL` sub-directory of this project
+    - created (almost exclusively) using the ESCWA Admin API
+    - command-line utility `caspcrd` is used to create the default CICS resource definition file
+    - configured for use with JCL and the VSAM datasets are catalogued 
+    - configured as a 64-bit server
+    - uses pre-built application modules
+    - can be reconfigured to deploy a 32-bit server (see below)
+    - build the application from source (see below)
+    - On Windows an ODBC system data source called `bank` is created
+    - The database tables are populated with example data
+    - The server instance is configured to use PostgreSQL:
+       - the credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
+       - specifying the XA switch module espgsqlxa (source is in Enterprise Developer product `src/enterpriseserver/xa` directory)
+       - esxaextcfg is used to provide encrypted credentials to espgsqlxa
+
 
 ## Steps for running the demonstration
 1. Open a (Windows) Administrator command-prompt or (Linux) terminal

@@ -1,5 +1,5 @@
 # Micro Focus Bankdemo Application using disk files
-This demonstration configures the Bankdemo deployment to store banking data in VSAM datasets 
+This demonstration configures the Bankdemo application to store banking data in VSAM datasets 
 on disk accessed from COBOL programs using `EXEC CICS` statements such as `STARTBR FILE`, `READ FILE`, `WRITE FILE`. The COBOL modules used to access the data can be found in the `sources/cobol/data/vsam` directory of this project
 
 ## Pre-requisites
@@ -8,11 +8,16 @@ on disk accessed from COBOL programs using `EXEC CICS` statements such as `START
 - Micro Focus Enterprise Server Common Web Administration (ESCWA) server started and listening the default port (10086)
 
 ## What the demonstration shows
-- This demonstration shows a simple COBOL CICS "green screen" application access VSAM data using EXEC CICS statements where the data is as indexed sequential files on disk. 
-- The Enterprise Server instance is created in the `BANKVSAM` sub-directory of this project
-- The server instance is created using the ESCWA Admin API, using just a single command-line utility to create the default CICS resource definition file.
-- The server is configured as 64-bit and uses pre-built executables, but can easily be reconfigured to use 32-bit and/or build the application from source
-- The server instance is configured for use with JCL and the VSAM datasets are catalogued. 
+- This demonstration shows a simple COBOL CICS "green screen" application which accesses VSAM data using EXEC CICS statements where the data is held in indexed sequential files on disk. 
+- The Enterprise Server instance is:
+    - created in the `BANKVSAM` sub-directory of this project
+    - created (almost exclusively) using the ESCWA Admin API
+    - a single command-line utility `caspcrd` is used to create the default CICS resource definition file
+    - configured for use with JCL and the VSAM datasets are catalogued 
+    - configured as a 64-bit server
+    - uses pre-built application modules
+    - can be reconfigured to deploy a 32-bit server (see below)
+    - build the application from source (see below)
 
 ## Steps for running the demonstration
 1. Open a command-prompt or terminal

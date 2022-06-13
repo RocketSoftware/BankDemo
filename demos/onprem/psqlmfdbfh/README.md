@@ -1,6 +1,10 @@
 # Micro Focus Bankdemo Application using MFDBFH with PostrgreSQL
-This demonstration configures the Bankdemo deployment to store banking data in VSAM datasets 
-stored within a PostgreSQL database accessed from COBOL programs using `EXEC CICS` statements such as: `STARTBR FILE`, `READ FILE`, `WRITE FILE`. The COBOL modules used to access the data can be found in the `sources/cobol/data/vsam` directory of this project and are unchanged from when the data is stored in indexed sequential files on disk.
+This demonstration configures the Bankdemo application to store banking data in VSAM datasets 
+stored within a PostgreSQL database accessed from COBOL programs using `EXEC CICS` statements such as: `STARTBR FILE`, `READ FILE`, `WRITE FILE`. 
+
+The COBOL modules used to access the data can be found in the `sources/cobol/data/vsam` directory of this project and are unchanged from when the data is stored in indexed sequential files on disk.
+
+The Micro Focus Secrets Vault is used to store the database credentials.
 
 ## Pre-requisites
 - Micro Focus Enterprise Developer or Enterprise Server
@@ -24,17 +28,25 @@ Database = BANK_ONEDB
 ```
 
 ## What the demonstration shows
-- This demonstration shows a simple COBOL CICS "green screen" application access VSAM data using EXEC CICS statements where that data is actually stored in a PostreSQL database. 
-- The Enterprise Server instance is created in the `BANKMFDB` sub-directory of this project
-- The server instance is created using the ESCWA Admin API, using just a single command-line utility to create the default CICS resource definition file.
-- The server is configured as 64-bit and uses pre-built executables, but can easily be reconfigured to use 32-bit and/or build the application from source
-- The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
-- The server instance is configured to use MFDBFH by:
-    - installing the XA switch module espgsqlxa (source is in Enterprise Developer product `src/enterpriseserver/xa` directory)
-    - setting the environment variables MFDBFH_CONFIG and ES_DB_FH
-    - configuring the `CICS File Path` setting to point use an MFDBFH location (ie `sql://...`)
-    - cataloging the VSAM datasets with MFDBFH locations (i.e. `sql://...`)
-- The credentials vault is used to hold the database password used by MFDBFH (using the `mfsecretsadmin` command)
+- This demonstration shows a simple COBOL CICS "green screen" application accessing VSAM data using EXEC CICS statements where that data is actually stored in a PostreSQL database. 
+- The Enterprise Server instance is:
+    - created in the `BANKMFDB` sub-directory of this project
+    - created (almost exclusively) using the ESCWA Admin API
+    - command-line utility `caspcrd` is used to create the default CICS resource definition file
+    - configured for use with JCL and the VSAM datasets are catalogued 
+    - configured as a 64-bit server
+    - uses pre-built application modules
+    - can be reconfigured to deploy a 32-bit server (see below)
+    - build the application from source (see below)
+    - On Windows an ODBC system data sources called `BANKVSAM.MASTER` and `BANKVSAM.VSAM` are created
+    - The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
+    - The server instance is configured to use MFDBFH by:
+        - the credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
+        - specifying the XA switch module espgsqlxa (source is in Enterprise Developer product `src/enterpriseserver/xa` directory)
+        - esxaextcfg is used to provide encrypted credentials to espgsqlxa
+        - setting the environment variables MFDBFH_CONFIG and ES_DB_FH
+        - configuring the `CICS File Path` setting to point use an MFDBFH location (ie `sql://...`)
+        - cataloging the VSAM datasets with MFDBFH locations (i.e. `sql://...`)
 
 ## Steps for running the demonstration
 1. Open a (Windows) Administrator command-prompt or (Linux) terminal
