@@ -205,7 +205,7 @@ The demonstration application includes a number of data files used. To see how y
 1.  In the Application Explorer view, right-click the Bankdemo project, and click **New** \> **File** \> **Other File**.
 2.  Click **Advanced**, and check **Link to file in the file system**.
 3.  Browse to the **C:\\MFETDUSER\\datafiles** folder.
-4. Select **MFI01V.MFIDEMO.BNKACC.dat, and then click **Open**.
+4. Select **MFI01V.MFIDEMO.BNKACC.dat**, and then click **Open**.
 5.  Click **Finish**.
 
     This adds the file to the Bankdemo project and also automatically opens it in the Micro Focus Data Files Tools utility. You can close the utility for now.
@@ -455,7 +455,7 @@ You can also explore your BMS maps and mapsets in the BMS Preview view:
 
 Next, you can edit the data file using the Micro Focus Data Tools Editor:
 
-1.  In the Application Explorer view, right-click the **.dat** file, and click **Open With \> Data File Tools**.
+1.  In the Application Explorer view, right-click the **.dat** file, and click **Open With** \> **Data File Tools**.
 
     This starts the **Data File Editor** and loads the **.dat** file in the **Open Data File** dialog box.
 
