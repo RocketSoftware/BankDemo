@@ -43,7 +43,7 @@ WITH THIS SOFTWARE.
 ## <a name="using"></a>Using The Bankdemo Application
 To use the project, download the source.zip or source.tar.gz from the [release](https://github.com/MicroFocus/BankDemo/releases) that matches the Micro Focus product version you wish to use and follow the relevant instructions. You can use the project in one of the following ways:
 1. <a name="tutorial"></a> As the basis of the introductory tutorials for the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
-    - Prerequisites software: 
+    - Prerequisite software: 
         - Micro Focus Enterprise Developer for Eclipse or Micro Focus Enterprise Developer for Visual Studio
     - Available tutorials:
         - [Getting Started with Enterprise Developer for Eclipse (Windows)](tutorial/gettingstarted/eclipse/README.md)
@@ -51,11 +51,11 @@ To use the project, download the source.zip or source.tar.gz from the [release](
         - [Getting Started with Enterprise Developer for Visual Studio](tutorial/gettingstarted/visualstudio/README.md)
         - [Open PL/I Bankdemo Application in Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
         - [Open PL/I Bankdemo Application in Enterprise Development for Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
-    - Prerequisites: 
+    - Requirements: 
         - Micro Focus Directory Server (mfds) must be running
         - Micro Focus Common Web Administration (ESCWA) must be running
 
-2. <a name="onprem"></a> Demonstrations of Micro Focus Enterprise Server capabilities "on-premise"
+2. <a name="onprem"></a> Demonstrations of the Micro Focus Enterprise Server capabilities in "on-premise" scenarios:
     - Prerequisite software: 
         - Micro Focus Enterprise Server or Enterprise Developer on Microsoft Windows or on a supported Linux distribution
         - Python 3 with `requests psycopg2-binary` packages (e.g. `python -m pip install requests psycopg2-binary`)
@@ -64,7 +64,7 @@ To use the project, download the source.zip or source.tar.gz from the [release](
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
         - [Deploying and running Bankdemo with Postgres SQL](demos/onprem/psql/README.md) 
         - [Deploying and running Bankdemo with VSAM stored in Postgres SQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
-    - Prerequisites: 
+    - Requirements: 
         - Micro Focus Directory Server (mfds) must be running
         - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086
 
