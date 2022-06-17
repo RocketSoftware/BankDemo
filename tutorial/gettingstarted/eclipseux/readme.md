@@ -203,12 +203,11 @@ You now need to perform a scan of the COBOL programs in your project to determin
 
 To set the compiler directives on **SCASH00P.cbl** and **SBANK80P.cbl** manually:
 
-1.  Press Ctrl and click one of these two files in the Application Explorer view to select it.
-2.  Right-click the file, and click **Properties**.
-3.  Expand **COBOL**, and click **CICS Preprocessors**.
-4.  Check **Enable file specific directives**, and check **Use CICS Preprocessor**.
-5.  Click **Apply and Close**.
-6.  Repeat the above steps for the other file.
+1.  Right-click one of these two files in the Application Explorer view, and click **Properties**.
+2.  Expand **COBOL**, and click **CICS Preprocessors**.
+3.  Check **Enable file specific directives**, and check **Use CICS Preprocessor**.
+4.  Click **Apply and Close**.
+5.  Repeat the above steps for the other file.
 
     This triggers a full rebuild of the project. The project should compile cleanly now.
 
@@ -326,7 +325,7 @@ You can either use the mouse to mark a block of text or click ![](images/2a6ec09
 You can use rename refactoring to rename all occurrences of a variable:
 
 1.  Scroll down to line 228 in the file.
-2.  Right-click WS-EXEC-PARM-LL, and click **Refactor \> Rename**.
+2.  Click the WS-EXEC-PARM-LL data item, then right-click it, and click **Refactor \> Rename**.
 
     A pop-up is displayed prompting you to enter a new name for the variable.
 
@@ -546,7 +545,7 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
     * On line 237 place a period after the END-IF
 
-    * Move one of the copybooks, **CTIMERD.cpy**, from the copybook folder to the jcl folder using the **Move** command from the context menu of the copybook entry.
+    * Move one of the copybooks, **CTIMERD.cpy**, from the copybook folder to the **jcl** folder. To do this, right-click the file in Application Explorer, and click **Move**, then select the folder to move the file to, and click **OK**.
 
     This triggers a build of the project which will also update the listing file. The messages in the **Console** view indicate that there are build errors.
 
@@ -562,19 +561,18 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
 7.  Double-click an error in the list to position the cursor on the line of code that contains the error.
 8.  To fix the copybook error:
-    a.  Locate the error related to the unknown copybook in the **Problems** view and double-click that line in the list of errors.
+    
+    a.  Locate the error related to the unknown copybook in the **Problems** view.
 
-    This positions the cursor on the line that contains the COPY statement for this copybook.
-
-    b.  Right-click the COPY statement, then select **Quick Fix**.
+    b.  Right-click the line with the error message in the **Problems** view, and click **Quick Fix**.
 
        The Quick Fix window appears.
 
-    c.  Double-click **Enable copybook path**.
+    c.  Click **Enable copybook path entry for directory containing CTIMERD**, then click **Finish**.
 
     This displays a message that the directory containing the copybook is not on the copybook path for the project.
 
-    d.  Click **Yes** to add the **Bankdemo\\jcl** folder where you moved the copybook to the copybook path of the project.
+    d.  Click **Yes** to add the **Bankdemo/jcl** folder where you moved the copybook to the copybook path of the project.
 
     This triggers a rebuild of the project which now compiles cleanly as it now locates the copybook.
 
@@ -610,15 +608,15 @@ This sample provides a script that creates the region definition to use in this 
 
     This executes the script and creates the Enterprise Server region definition file, BANKDEMO.xml, in the same folder. The file is configured for the location in which you saved the sample files.
 
-Next, you need to start the following two services on your machine:
+Next, ensure that the following two services are running on your machine:
 
-   -   Enterprise Server Common Administration (ESCWA) - execute the following from a terminal that has the COBOL environment set:
+   -   Enterprise Server Common Administration (ESCWA) - execute the following from a terminal that has the COBOL environment set if you need to start this:
 
         ```
-        nohup escwa \< /dev/null \> escwa.out 2\>&1 &
+        nohup escwa < /dev/null > escwa.out 2>&1 &
         ```
 
-   -   Micro Focus Directory Server - from a terminal that has the COBOL environment set, execute the following as root:
+   -   Micro Focus Directory Server - from a terminal that has the COBOL environment set, execute the following as root if you need to start this:
 
         ```
         mfds64 &
@@ -679,7 +677,7 @@ These are the steps to start the server manually, and are included for completen
 
 1.  In Server Explorer, right-click **BANKDEMO**, then click **Start**.
 
-    ![](images/87ed9ceccb0b2296a99b18a6d37aaa3b.jpg)**Note:** You might receive an **ESMAC Sign On** dialog prompting you to provide connection details for the BANKDEMO server. This is a standard security dialog. Click **OK** without specifying any sign on details. Also, you may skip enabling password recovery.
+    **Note:** You might receive an **ESMAC Sign On** dialog prompting you to provide connection details for the BANKDEMO server. This is a standard security dialog. Click **OK** without specifying any sign on details. Also, you may skip enabling password recovery.
 
     You may receive a **Windows Security Alert** blocking the **MF Communications** process. Click **Allow access**.
 
@@ -907,7 +905,7 @@ The highlighted line of code is the one the IDE will execute next.
 
     ![](images/7351c4d4d9690e58c504d4ce5d856223.jpg)
 
-3.  To change the value of WS-RECORD-COUNTER2, right-click the data item, and click **Inspect item**.
+3.  To change the value of WS-RECORD-COUNTER2, click the data item in the editor, then right-click it, and click **Inspect item**.
 
     This opens a pop-up window showing the value of the data item.
 
