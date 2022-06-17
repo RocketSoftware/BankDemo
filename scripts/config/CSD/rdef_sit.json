@@ -3,8 +3,8 @@
     "resDesc": "SIT for the BANKDEMO application",
     "sitSul": "BANKLST",
     "sitCwa": 512,
-    "sysId": "BANK",
-    "sitTran": "CESN",
+    "sitSysID": "BANK",
+    "sitTran": "BANK",
     "sitDev": "Y",
     "sitComA": 0,
     "sitCCSID": 37,
@@ -17,5 +17,11 @@
     "sitPLTSD": "",
     "sitSDump": "Y",
     "sitDTcold": "Y",
-    "sitAIexit": "DFHZATDX"
+    "sitAIexit": "DFHZATDX",
+	"sitSkrR": "P/",
+	"sitSkrC": "C/",
+	"sitSkrP": "D/",
+	"sitSkrY": "T/",
+	"sitLaux": 341,
+	"sitLmfcs": 341
 }

@@ -20,6 +20,7 @@ Description:  Function for configuring a Micro Focus server region.
 import os
 import sys
 import requests
+from utilities.output import write_log 
 from utilities.misc import create_headers, check_http_error
 from utilities.input import read_json, read_txt
 from utilities.session import get_session, save_cookies
@@ -32,22 +33,22 @@ def update_region(region_name, ip_address, template_file, env_file, region_descr
     uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
+    esp_alias = '$ESP'
     if sys.platform.startswith('win32'):
         path_sep = ';'
+        log_dir = os.path.join(esp_alias, 'logs')
     else:
         path_sep = ':'
+        log_dir = '' # system dir unsupported on Unix/Linux
 
-    esp_alias = '$ESP'
-    log_dir = os.path.join(esp_alias, 'logs')
     loadlib_dir = os.path.join(esp_alias, 'loadlib')
-    sysloadlib_dir = os.path.join(esp_alias, 'sysLoadlib')
     catalog_dir = os.path.join(esp_alias, 'catalog')
     catalog_data_dir = os.path.join(catalog_dir, 'data')
     #data_dir = os.path.join(esp_alias, 'Data')
     rdef_dir = os.path.join(esp_alias, 'rdef')
 
     catalog_file = os.path.join(catalog_dir, 'CATALOG.DAT')
-    lib_path = loadlib_dir + path_sep + sysloadlib_dir
+    lib_path = loadlib_dir
 
     try:
         req_body = read_json(template_file)
@@ -166,7 +167,7 @@ def add_initiator(region_name, ip_address, template_file):
     return res
 
 
-def add_datasets(region_name, ip_address, datafile_list):
+def add_datasets(region_name, ip_address, datafile_list, mfdbfh_location):
     """ Adds data sets to a Micro Focus server. """
 
     req_headers = create_headers('CreateRegion', ip_address)
@@ -180,9 +181,14 @@ def add_datasets(region_name, ip_address, datafile_list):
     session = get_session()
 
     for dataset in dataset_list:
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/catalog/{}'.format(ip_address, ip_address, region_name, dataset['jDSN'])
-
+        jDSN = dataset['jDSN']
+        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/catalog/{}'.format(ip_address, ip_address, region_name, jDSN)
         try:
+            if mfdbfh_location is not None:
+                # sql://bank_mfdbfh/VSAM/{}?folder=/data
+                jPCN = os.path.basename(dataset['jPCN'])
+                jPCN = mfdbfh_location.format(jPCN)
+                dataset['jPCN'] = jPCN
             res = session.post(uri, headers=req_headers, json=dataset)
             check_http_error(res)
         except requests.exceptions.RequestException as exc:

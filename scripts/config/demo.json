@@ -1,7 +1,7 @@
 {
     "ip_address" : "127.0.0.1",
     "region_name": "BANKDEMO",
-    "product": "ES",
+    "product": "EDz",
     "configuration_files":
         {
             "base_config": "base.json",
@@ -9,20 +9,27 @@
             "env_config": "env.json",
             "alias_config": "alias.json",
             "init_config": "init.json",
-            "data_dir": "datasets"
+            "data_dir_1": "datasets_po",
+            "data_dir_2": "datasets_vsam",
+            "xa_config": "xa_Postgres.json"
         },
     "JES": true,
     "CICS": true,
     "MQ": false,
     "is64bit": false,
     "database": "VSAM",
+    "mfdbfh_config": "MFDBFH.cfg",
+    "PAC": {
+      "enabled": false,
+      "PSOR_type" : "redis",
+      "PSOR_connection": "localhost:6739",
+      "description": ""
+    },
     "database_connection": 
         {
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",
             "password" :"postgres"
-        },
-    "ant_home": "C:\\Users\\Public\\Micro Focus\\Enterprise Developer\\eclipse\\plugins\\org.apache.ant_1.10.8.v20200515-1239",
-    "java_home": "C:\\Program Files (x86)\\Java\\jre1.8.0_291"
+        }
 }

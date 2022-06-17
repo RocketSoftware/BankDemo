@@ -3,7 +3,7 @@
     "Parameters":   
     {"resDesc":"BANK Account",
     "fctFname": "MFI01V.MFIDEMO.BNKACC",
-    "fctFext": "DAT",
+    "fctFext": "dat",
     "fctFormat": "D",
     "fctRecMin": 200,
     "fctRecMax": 200,
@@ -24,7 +24,7 @@
     "Parameters":   
     {"resDesc":"BANK Account Alternate Index 1",
     "fctAbase": "BNKACC",
-    "fctFext": "DAT",
+    "fctFext": "dat",
     "fctFormat": "D",
     "resTypeN": "3",
     "fctKeyP": 1,
@@ -44,7 +44,7 @@
     "Parameters": 
      {"resDesc":"Bank account types",
      "fctFname": "MFI01V.MFIDEMO.BNKATYPE",
-     "fctFext": "DAT",
+     "fctFext": "dat",
      "fctFormat": "D",
      "fctRecMin": 100,
      "fctRecMax": 100,
@@ -65,7 +65,7 @@
   "Parameters":   
   {"resDesc":"BANK Customers",
   "fctFname": "MFI01V.MFIDEMO.BNKCUST",
-  "fctFext": "DAT",
+  "fctFext": "dat",
   "fctFormat": "D",
   "fctRecMin": 250,
   "fctRecMax": 250,
@@ -86,7 +86,7 @@
   "Parameters":   
   {"resDesc":"BANK Customers Index 1",
   "fctAbase": "BNKCUST",
-  "fctFext": "DAT",
+  "fctFext": "dat",
   "fctFormat": "D",
   "resTypeN": "3",
   "fctKeyP": 6,
@@ -106,7 +106,7 @@
   "Parameters":   
   {"resDesc":"BANK Customers Index 2",
   "fctAbase": "BNKCUST",
-  "fctFext": "DAT",
+  "fctFext": "dat",
   "fctFormat": "D",
   "resTypeN": "3",
   "fctKeyP": 31,
@@ -126,7 +126,7 @@
   "Parameters": 
    {"resDesc":"Bank help text file",
    "fctFname": "MFI01V.MFIDEMO.BNKHELP",
-   "fctFext": "DAT",
+   "fctFext": "dat",
    "fctFormat": "D",
    "fctRecMin": 83,
    "fctRecMax": 83,
@@ -147,7 +147,7 @@
   "Parameters": 
    {"resDesc":"Bank account Transactions",
    "fctFname": "MFI01V.MFIDEMO.BNKTXN",
-   "fctFext": "DAT",
+   "fctFext": "dat",
    "fctFormat": "D",
    "fctRecMin": 150,
    "fctRecMax": 150,
@@ -168,7 +168,7 @@
   "Parameters":   
   {"resDesc":"BANK Transaction Alternate Index 2",
   "fctAbase": "BNKTXN",
-  "fctFext": "DAT",
+  "fctFext": "dat",
   "fctFormat": "D",
   "resTypeN": "3",
   "fctKeyP": 8,

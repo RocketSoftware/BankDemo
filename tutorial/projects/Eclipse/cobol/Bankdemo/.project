@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Bankdemo</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.microfocus.eclipse.project.cobolBuilder</name>
+			<arguments>
+				<dictionary>
+					<key>mf.buildThreadCount</key>
+					<value>1</value>
+				</dictionary>
+				<dictionary>
+					<key>mf.settingsDir</key>
+					<value>.settings</value>
+				</dictionary>
+				<dictionary>
+					<key>mf.useDirectiveSet</key>
+					<value>true</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.microfocus.eclipse.project.cobolNature</nature>
+		<nature>com.microfocus.eclipse.edt.core.edtNature</nature>
+	</natures>
+</projectDescription>

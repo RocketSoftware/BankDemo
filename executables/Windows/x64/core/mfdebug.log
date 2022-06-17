@@ -1,0 +1,53 @@
+
+Visual COBOL Exception Handler - 23/03/2022  10:48:01
+C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin64\cassi.exe caused an exception at address : 0x00007FFFFC619534
+Exception type - EXCEPTION_ACCESS_VIOLATION on Read. Address 0x0000000000000008
+
+Registers:
+
+	RAX 0000000000000000	RBX FFFFFFFFFFFFFFFF
+	RCX 0000000000000000	RDX 00007FFFFC69FF08
+	ESI 00000010610091A8	EDI 0000000000000000
+	R8  0000001061009460	R9  0000000000144320
+	R10 0000000004222A02	R11 00000010610091A8
+	R12 0000000000143C70	R13 0000000000000000
+	R14 0000000000002020	R15 0000000000144320
+	RIP 00007FFFFC619534	RSP 0000000000143AB0
+	RBP 0000000000000000	Flags 00010213
+
+Error occurred in : C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin64\mfplimd.dll, loaded at 0x00007FFFFC3B0000
+
+	CompanyName Micro Focus
+	FileDescription Open PL/I RTS.
+	FileVersion ED80.082
+	LegalCopyright (C) Copyright 1984-2022 Micro Focus or one of its affiliates.
+	OriginalFileName Open PL/I RTS.
+	ProductName Micro Focus COBOL 2017
+	ProductVersion 8.0.00143
+
+Command Line : /rBANKDEMO -BABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+
+COBOL call stack:
+
+	mfjxe00	(obj program)
+	CASBAT	(obj program)
+	casspool	(obj program)
+	CASBAT	(obj program)
+	DFHECICS	(obj program)
+	mvsSI	(obj program)
+
+Run-time : C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin64\CBLRTSM.DLL, loaded at 0x0000000180000000
+
+	CompanyName Micro Focus
+	FileDescription Micro Focus Run Time System Core Support
+	FileVersion VisualCOBOL-R18/047
+	LegalCopyright (C) Copyright 1984-2022 Micro Focus or one of its affiliates.
+	OriginalFileName cblrtsm.dll
+	ProductName Micro Focus COBOL 2017
+	ProductVersion 8.0.00138
+
+OS Information:
+
+Windows NT 10.0 (Build 19041: )
+CPU: X64(AMD or Intel) Pentium Model 94 step 3, 8 processors
+Available memory - 33402804 KB

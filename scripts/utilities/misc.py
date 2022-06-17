@@ -17,10 +17,14 @@ WITH THIS SOFTWARE.
 Description:  Miscelaneous utility functions. 
 """
 
+import os
+import sys
 import getopt
-import winreg
+if sys.platform.startswith('win32'):
+    import winreg
+from utilities.output import write_log 
 from utilities.exceptions import HTTPException
-
+from pathlib import Path
 
 def get_elem_with_prop(arr, key, value):
     """ Gets an array object with a specific property"""
@@ -74,16 +78,67 @@ def parse_args(arg_list, short_map, long_map):
 def set_MF_environment (os_type):
 
     if os_type == 'Windows':
-       aKey =  r"SOFTWARE\\Micro Focus\\Visual COBOL\\7.0\\COBOL"
-       aReg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+        localMachineKey = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+        cobolKey = winreg.OpenKey(localMachineKey, r"SOFTWARE\\Micro Focus\\Visual COBOL")
+        defaultVersion = winreg.QueryValueEx(cobolKey, "DefaultVersion")
+        installKeyString =  r'{}\\COBOL\\Install'.format(defaultVersion[0])
+        write_log('Found COBOL version: {}'.format(defaultVersion[0]))
+        installKey = winreg.OpenKey(cobolKey, installKeyString)
+        install_dir = winreg.QueryValueEx(installKey, "BIN")
+        winreg.CloseKey(installKey)
+        winreg.CloseKey(cobolKey)
+        winreg.CloseKey(localMachineKey)
+        return install_dir[0]
+    else:
+        if "COBDIR" in os.environ:
+           return os.path.join(os.environ["COBDIR"], "bin")
 
-       aKey = winreg.OpenKey(aReg, aKey)
-       for i in range(1024):
-           try:
-            asubkey_name = winreg.EnumKey(aKey, i)
-            asubkey = winreg.OpenKey(aKey, asubkey_name)
-            install_dir = winreg.QueryValueEx(asubkey, "BIN")
-           except EnvironmentError:
-             pass
+        pathCOBDIR = Path("/opt/microfocus/EnterpriseDeveloper/bin")
+        if pathCOBDIR.is_dir():
+            return str(pathCOBDIR)
+        pathCOBDIR = Path("/opt/microfocus/EnterpriseServer/bin")
+        if pathCOBDIR.is_dir():
+            return str(pathCOBDIR)
 
-    return install_dir
+    return None
+
+def get_EclipsePluginsDir (os_type):
+    if os_type == 'Windows':
+       localMachineKey = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+       cobolKey = winreg.OpenKey(localMachineKey, r"SOFTWARE\\Micro Focus\\Visual COBOL")
+       defaultVersion = winreg.QueryValueEx(cobolKey, "DefaultVersion")
+       installKeyString =  r'{}'.format(defaultVersion[0])
+       installKey = winreg.OpenKey(cobolKey, installKeyString)
+       try:
+           install_dir = winreg.QueryValueEx(installKey, "ECLIPSEINSTALLDIR")
+           pluginsDir = os.path.join(install_dir[0], "eclipse", "plugins")   
+       except FileNotFoundError as exc:
+           pluginsDir = None
+       winreg.CloseKey(installKey)
+       winreg.CloseKey(cobolKey)
+       winreg.CloseKey(localMachineKey)
+       return pluginsDir
+    else:
+       installDir = set_MF_environment(os_type)
+       if installDir is not None:
+           cobdir = Path(installDir).parents[0]
+           if cobdir is not None:
+               pluginsDir = os.path.join(cobdir, "eclipse", "eclipse", "plugins")
+               pathPluginsDir = Path(pluginsDir)
+               if pathPluginsDir.is_dir():
+                   return pluginsDir
+
+    return None
+
+def get_CobdirAntDir (os_type):
+    if os_type == 'Windows':
+       return None
+    else:
+       cobdir = set_MF_environment(os_type)
+       if cobdir is not None:
+           antDir = os.path.join(cobdir, "remotedev", "ant")
+           pathAntDir = Path(antDir)
+           if pathAntDir.is_dir():
+               return antDir
+
+    return None

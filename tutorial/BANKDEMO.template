@@ -1,0 +1,2058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ESCombinedXML>
+  <mfDirectoryServerRepository mfDirectoryServerVersion="1.28.16" mfRepositoryLocation="d:\temp\export" mfXMLReposVersion="2.0" noNamespaceSchemaLocation="mfds1.28.16.xsd">
+    <mfServerList>
+      <mfServer>
+        <objectclass>mfServer</objectclass>
+        <mfStructVersion>26</mfStructVersion>
+        <mfInstanceVersion>0</mfInstanceVersion>
+        <mfUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfUID>
+        <mfServerStatus>Stopped</mfServerStatus>
+        <mfServerType>MFES</mfServerType>
+        <cn>BANKDEMO</cn>
+        <description>Test Region</description>
+        <mfESEnableStartScript>Disabled</mfESEnableStartScript>
+        <mfESEnableStopScript>Disabled</mfESEnableStopScript>
+        <mfESEnableNotRespondingScript>Disabled</mfESEnableNotRespondingScript>
+        <mfESRetries>1</mfESRetries>
+        <mfCustomConfiguration>[ES-Environment]
+BANKROOT=__IMPORT_FILE_DIR__/..
+ESP=$BANKROOT/system
+PS=;
+OS=Windows
+CHIP=x64</mfCustomConfiguration>
+        <mfServerExtendedConfiguration>
+          <mfServerCASConfiguration>
+            <mfCASStructVersion>33</mfCASStructVersion>
+            <mfServerCASStartupOptions>
+              <mfCASPAC/>
+              <mfCASSOR/>
+              <mfConfigManagerData/>
+              <mfCASShMemPages>512</mfCASShMemPages>
+              <mfCASSICount>2</mfCASSICount>
+              <mfCASShMemCushion>32</mfCASShMemCushion>
+              <mfCASTraceTableSize>341</mfCASTraceTableSize>
+              <mfCASLocalTraceSize>341</mfCASLocalTraceSize>
+              <mfCASTraceMaxSize>0</mfCASTraceMaxSize>
+              <mfCASRequestedLicenses>10</mfCASRequestedLicenses>
+              <mfCASSysDir>$ESP/logs</mfCASSysDir>
+              <mfCASHSFEnabled>0</mfCASHSFEnabled>
+              <mfCASHSFWriteToDisk>0</mfCASHSFWriteToDisk>
+              <mfCASHSFMaxFileSize>0</mfCASHSFMaxFileSize>
+              <mfCASHSFMaxDisplayRecords>256</mfCASHSFMaxDisplayRecords>
+              <mfCASHSFCreateJCLFileRecords>0</mfCASHSFCreateJCLFileRecords>
+              <mfCASConsoleLogSize>0</mfCASConsoleLogSize>
+              <mfCASDefaultSysDir/>
+              <mfLogPath/>
+              <mfCASDumpOnAbend>1</mfCASDumpOnAbend>
+              <mfCASColdStartTrace>1</mfCASColdStartTrace>
+              <mfCASAuxiliaryTrace>0</mfCASAuxiliaryTrace>
+              <mfCASShowConsole>0</mfCASShowConsole>
+              <mfCASRemoteDebug>1</mfCASRemoteDebug>
+              <mfCASIRDSWarmStart>1</mfCASIRDSWarmStart>
+              <mfCASIRDSFileName/>
+              <mfCASIRDSMaxSize>0</mfCASIRDSMaxSize>
+              <mfCASIRDSBufferQueueCount>0</mfCASIRDSBufferQueueCount>
+              <mfCASStartOnSystemStart>0</mfCASStartOnSystemStart>
+              <mfCASCICSEZASOKET>0</mfCASCICSEZASOKET>
+              <mfCAS64Bit>1</mfCAS64Bit>
+              <mfCASPurgeLogs>0</mfCASPurgeLogs>
+              <mfCASPerformanceMonitor>0</mfCASPerformanceMonitor>
+              <mfCASEventLogInformational>0</mfCASEventLogInformational>
+              <mfCASEventLogWarning>0</mfCASEventLogWarning>
+              <mfCASEventLogError>0</mfCASEventLogError>
+              <mfCASEventLogSevere>0</mfCASEventLogSevere>
+              <mfCASMTOEnabled>1</mfCASMTOEnabled>
+              <mfCASCICSPersonality>1</mfCASCICSPersonality>
+              <mfCASBatchEnabled>1</mfCASBatchEnabled>
+              <mfCASIMSEnabled>0</mfCASIMSEnabled>
+              <mfCASPLIEnabled>1</mfCASPLIEnabled>
+              <mfMQLEnabled>0</mfMQLEnabled>
+            </mfServerCASStartupOptions>
+            <mfServerCASTraceOptions>
+              <mfCASTraceFlagsTaskControl>1</mfCASTraceFlagsTaskControl>
+              <mfCASTraceFlagsStorageControl>0</mfCASTraceFlagsStorageControl>
+              <mfCASTraceFlagsTableManagement>0</mfCASTraceFlagsTableManagement>
+              <mfCASTraceFlagsApplicationContainer>0</mfCASTraceFlagsApplicationContainer>
+              <mfCASTraceFlagsRequestHandler>0</mfCASTraceFlagsRequestHandler>
+              <mfCASTraceFlagsRMInterface>0</mfCASTraceFlagsRMInterface>
+              <mfCASTraceFlagsCommunications>0</mfCASTraceFlagsCommunications>
+              <mfCASTraceFlagsApplication>1</mfCASTraceFlagsApplication>
+              <mfCASTraceFlagsExit>0</mfCASTraceFlagsExit>
+            </mfServerCASTraceOptions>
+            <mfServerMTOConfiguration>
+              <mfCASCICSSIT>CBLVSAM</mfCASCICSSIT>
+              <mfCASTXTRANP>$IDE_LOADLIB$PS$ESP/../executables/$OS/$CHIP/core$PS$ESP/../executables/$OS/$CHIP/data/VSAM</mfCASTXTRANP>
+              <mfCASTXFILEP>$ESP/../datafiles</mfCASTXFILEP>
+              <mfCASTXMAPP>$IDE_MODPATH$PS$ESP/../executables/$OS/$CHIP/core</mfCASTXMAPP>
+              <mfCASTXRDTP>$ESP/rdef</mfCASTXRDTP>
+            </mfServerMTOConfiguration>
+            <mfServerBatchConfiguration>
+              <mfCASJCLMainframePollInterval>0</mfCASJCLMainframePollInterval>
+              <mfCASJCLPATH>$IDE_LOADLIB$PS$ESP/../executables/$OS/$CHIP/core$PS$ESP/../executables/$OS/$CHIP/data/VSAM</mfCASJCLPATH>
+              <mfCASMFSYSCAT>$ESP/catalog/CATALOG.DAT</mfCASMFSYSCAT>
+              <mfCASJCLALLOCLOC>$ESP/catalog/data</mfCASJCLALLOCLOC>
+              <mfCASJCLSYSPROCLIB>SYS1.PROCLIB</mfCASJCLSYSPROCLIB>
+            </mfServerBatchConfiguration>
+            <mfServerIMSConfiguration>
+              <mfCASIMSCodesetBias>A</mfCASIMSCodesetBias>
+              <mfCASIMSMFSAttributeBias>B</mfCASIMSMFSAttributeBias>
+              <mfCASIMSMFSNullChar>x&apos;1A&apos;</mfCASIMSMFSNullChar>
+              <mfCASIMSKeypointFrequency>64</mfCASIMSKeypointFrequency>
+              <mfCASIMSDefaultMQName>1</mfCASIMSDefaultMQName>
+              <mfCASIMSTrailingSpace>1</mfCASIMSTrailingSpace>
+              <mfCASIMSDBLockedResourceTimeout>30</mfCASIMSDBLockedResourceTimeout>
+              <mfCASIMSDBKeyCompression>1</mfCASIMSDBKeyCompression>
+              <mfCASIMSDBIRLMLocking>0</mfCASIMSDBIRLMLocking>
+              <mfCASIMSDBDumpOnLockTimeout>0</mfCASIMSDBDumpOnLockTimeout>
+              <mfCASIMSDBDumpOnDeadlock>0</mfCASIMSDBDumpOnDeadlock>
+              <mfCASIMSDBRollforwardRecovery>0</mfCASIMSDBRollforwardRecovery>
+              <mfCASIMSDBDataCompression>1</mfCASIMSDBDataCompression>
+              <mfCASIMSTMTransThreshold>0</mfCASIMSTMTransThreshold>
+              <mfCASIMSTMMQMaxBlocks>32</mfCASIMSTMMQMaxBlocks>
+              <mfCASIMSTMMQBufferCount>2</mfCASIMSTMMQBufferCount>
+              <mfCASIMSTMMQColdStart>N</mfCASIMSTMMQColdStart>
+              <mfCASIMSTMMQPersistColdStart>0</mfCASIMSTMMQPersistColdStart>
+            </mfServerIMSConfiguration>
+            <mfServerPLIConfiguration>
+              <mfCASPLIUseJavaDebug>0</mfCASPLIUseJavaDebug>
+              <mfCASPLIPromptPLITEST>0</mfCASPLIPromptPLITEST>
+            </mfServerPLIConfiguration>
+          </mfServerCASConfiguration>
+        </mfServerExtendedConfiguration>
+        <mfCommsProcessList>
+          <mfCommsProcess>
+            <objectclass>mfCommsServer</objectclass>
+            <mfStructVersion>5</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.06.005.1647534610.9</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <mfInstance>1</mfInstance>
+            <mfServerStatus>Stopped</mfServerStatus>
+            <mfRequestedEndpoint>tcp:*:*</mfRequestedEndpoint>
+            <mfActualEndpoint>tcp:147.2.107.140:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:172.21.240.1:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:172.30.144.1:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:192.168.1.74:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:[fe80::e4ff:d5f5:66f:af81]:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:[fe80::3414:620:4498:e82f]:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:[fe80::591b:dfed:c214:cc02]:62920</mfActualEndpoint>
+            <mfActualEndpoint>tcp:[fe80::bd95:2d98:6019:37b5]:62920</mfActualEndpoint>
+            <mfSSLCertificate/>
+            <mfSSLKeyfile/>
+            <mfSSLClientOption>1</mfSSLClientOption>
+            <mfSSLMaxKeyLength>1024</mfSSLMaxKeyLength>
+            <mfSSLAllowNULLCipher>No</mfSSLAllowNULLCipher>
+            <mfSSLCARootfile/>
+            <mfSSLAllowCertCNIPMismatch>No</mfSSLAllowCertCNIPMismatch>
+            <mfSSLCheckCertRevocation>Yes</mfSSLCheckCertRevocation>
+            <mfSSLCheckCertPublishersRevocation>No</mfSSLCheckCertPublishersRevocation>
+            <mfSSLHonorServerCipherList>Yes</mfSSLHonorServerCipherList>
+            <mfTLSProtocols/>
+            <mfTLSCipherSuites/>
+            <mfTLSDHMinimumGroupSize>0</mfTLSDHMinimumGroupSize>
+            <mfTLSCipherGroups/>
+            <mfSSLServerCARootfile/>
+            <mfTLS13CipherSuites/>
+            <mfTLSMiddleBoxCompatibilityMode>No</mfTLSMiddleBoxCompatibilityMode>
+            <mfLogPath/>
+            <mfAutoStart>1</mfAutoStart>
+            <mfCustomConfiguration>[soap]
+region=BANKDEMO
+</mfCustomConfiguration>
+            <mfListenerList>
+              <mfListener>
+                <objectclass>mflistener</objectclass>
+                <mfStructVersion>18</mfStructVersion>
+                <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.25</mfUID>
+                <mfServerUID>1.3.6.1.4.1.5043.06.005.1647534610.9</mfServerUID>
+                <cn>Web Services and J2EE</cn>
+                <mfListenerStatus>Stopped</mfListenerStatus>
+                <mfRequestedEndpoint>tcp:127.0.0.1:9003</mfRequestedEndpoint>
+                <mfActualEndpoint>tcp:127.0.0.1:9003</mfActualEndpoint>
+                <mfConnector>mfcs-mp::mfcs-mp</mfConnector>
+                <mfError>OK</mfError>
+                <description>SOAP/REST Web Services and J2EE</description>
+                <mfSSLCertificate/>
+                <mfSSLKeyfile/>
+                <mfSSLClientOption>1</mfSSLClientOption>
+                <mfSSLMaxKeyLength>0</mfSSLMaxKeyLength>
+                <mfSSLAllowNULLCipher>No</mfSSLAllowNULLCipher>
+                <mfSSLCARootfile/>
+                <mfSSLAllowCertCNIPMismatch>No</mfSSLAllowCertCNIPMismatch>
+                <mfSSLCheckCertRevocation>No</mfSSLCheckCertRevocation>
+                <mfSSLCheckCertPublishersRevocation>No</mfSSLCheckCertPublishersRevocation>
+                <mfSSLHonorServerCipherList>Yes</mfSSLHonorServerCipherList>
+                <mfTLSProtocols/>
+                <mfTLSCipherSuites/>
+                <mfTLSDHMinimumGroupSize>0</mfTLSDHMinimumGroupSize>
+                <mfTLSCipherGroups/>
+                <mfSSLServerCARootfile/>
+                <mfTLS13CipherSuites/>
+                <mfTLSMiddleBoxCompatibilityMode>No</mfTLSMiddleBoxCompatibilityMode>
+                <mfCustomConfiguration/>
+              </mfListener>
+              <mfListener>
+                <objectclass>mflistener</objectclass>
+                <mfStructVersion>18</mfStructVersion>
+                <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.26</mfUID>
+                <mfServerUID>1.3.6.1.4.1.5043.06.005.1647534610.9</mfServerUID>
+                <cn>Web</cn>
+                <mfListenerStatus>Disabled</mfListenerStatus>
+                <mfRequestedEndpoint>tcp:*:*</mfRequestedEndpoint>
+                <mfActualEndpoint>tcp:0.0.0.0:0</mfActualEndpoint>
+                <mfConnector>http-switch::http-switch</mfConnector>
+                <mfError>Starting endpoint...</mfError>
+                <description>Basic HTTP web server</description>
+                <mfSSLCertificate/>
+                <mfSSLKeyfile/>
+                <mfSSLClientOption>1</mfSSLClientOption>
+                <mfSSLMaxKeyLength>0</mfSSLMaxKeyLength>
+                <mfSSLAllowNULLCipher>No</mfSSLAllowNULLCipher>
+                <mfSSLCARootfile/>
+                <mfSSLAllowCertCNIPMismatch>No</mfSSLAllowCertCNIPMismatch>
+                <mfSSLCheckCertRevocation>No</mfSSLCheckCertRevocation>
+                <mfSSLCheckCertPublishersRevocation>No</mfSSLCheckCertPublishersRevocation>
+                <mfSSLHonorServerCipherList>Yes</mfSSLHonorServerCipherList>
+                <mfTLSProtocols/>
+                <mfTLSCipherSuites/>
+                <mfTLSDHMinimumGroupSize>0</mfTLSDHMinimumGroupSize>
+                <mfTLSCipherGroups/>
+                <mfSSLServerCARootfile/>
+                <mfTLS13CipherSuites/>
+                <mfTLSMiddleBoxCompatibilityMode>No</mfTLSMiddleBoxCompatibilityMode>
+                <mfCustomConfiguration>[virtual paths]
+cgi=&lt;ES&gt;/bin
+uploads=&lt;ES&gt;/deploy
+docs=&lt;ES&gt;/help
+
+[allow]
+cgi=mfdeploy.exe
+uploads=*.txt *.car *.wsdl
+</mfCustomConfiguration>
+              </mfListener>
+              <mfListener>
+                <objectclass>mflistener</objectclass>
+                <mfStructVersion>18</mfStructVersion>
+                <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.27</mfUID>
+                <mfServerUID>1.3.6.1.4.1.5043.06.005.1647534610.9</mfServerUID>
+                <cn>TN3270</cn>
+                <mfListenerStatus>Stopped</mfListenerStatus>
+                <mfRequestedEndpoint>tcp:*:9023</mfRequestedEndpoint>
+                <mfActualEndpoint>tcp:147.2.107.140:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:172.21.240.1:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:172.30.144.1:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:192.168.1.74:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:[fe80::e4ff:d5f5:66f:af81]:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:[fe80::3414:620:4498:e82f]:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:[fe80::591b:dfed:c214:cc02]:9023</mfActualEndpoint>
+                <mfActualEndpoint>tcp:[fe80::bd95:2d98:6019:37b5]:9023</mfActualEndpoint>
+                <mfConnector>tn3270::tn3270</mfConnector>
+                <mfError>OK</mfError>
+                <description>Default TN3270 listener</description>
+                <mfSSLCertificate/>
+                <mfSSLKeyfile/>
+                <mfSSLClientOption>1</mfSSLClientOption>
+                <mfSSLMaxKeyLength>0</mfSSLMaxKeyLength>
+                <mfSSLAllowNULLCipher>No</mfSSLAllowNULLCipher>
+                <mfSSLCARootfile/>
+                <mfSSLAllowCertCNIPMismatch>No</mfSSLAllowCertCNIPMismatch>
+                <mfSSLCheckCertRevocation>No</mfSSLCheckCertRevocation>
+                <mfSSLCheckCertPublishersRevocation>No</mfSSLCheckCertPublishersRevocation>
+                <mfSSLHonorServerCipherList>Yes</mfSSLHonorServerCipherList>
+                <mfTLSProtocols/>
+                <mfTLSCipherSuites/>
+                <mfTLSDHMinimumGroupSize>0</mfTLSDHMinimumGroupSize>
+                <mfTLSCipherGroups/>
+                <mfSSLServerCARootfile/>
+                <mfTLS13CipherSuites/>
+                <mfTLSMiddleBoxCompatibilityMode>No</mfTLSMiddleBoxCompatibilityMode>
+                <mfCustomConfiguration/>
+              </mfListener>
+            </mfListenerList>
+          </mfCommsProcess>
+        </mfCommsProcessList>
+        <mfHandlerList>
+          <mfHandler>
+            <objectclass>mfHandler</objectclass>
+            <mfStructVersion>2</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.5.622b663d.7852.107</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>MFRHBINP</cn>
+            <mfHandlerStatus>Enabled</mfHandlerStatus>
+            <description>Handles J2EE requests</description>
+            <mfCustomConfiguration/>
+            <mfHandlerPath/>
+          </mfHandler>
+          <mfHandler>
+            <objectclass>mfHandler</objectclass>
+            <mfStructVersion>2</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.5.622b663e.7852.108</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>MFRHSOAP</cn>
+            <mfHandlerStatus>Enabled</mfHandlerStatus>
+            <description>Handles SOAP requests</description>
+            <mfCustomConfiguration/>
+            <mfHandlerPath/>
+          </mfHandler>
+          <mfHandler>
+            <objectclass>mfHandler</objectclass>
+            <mfStructVersion>2</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.5.622b663e.7852.109</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>MFRHJCL</cn>
+            <mfHandlerStatus>Enabled</mfHandlerStatus>
+            <description>Handles batch requests</description>
+            <mfCustomConfiguration/>
+            <mfHandlerPath/>
+          </mfHandler>
+          <mfHandler>
+            <objectclass>mfHandler</objectclass>
+            <mfStructVersion>2</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.5.622b663e.7852.110</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>MFRHJSON</cn>
+            <mfHandlerStatus>Enabled</mfHandlerStatus>
+            <description>Handles REST requests</description>
+            <mfCustomConfiguration/>
+            <mfHandlerPath/>
+          </mfHandler>
+        </mfHandlerList>
+        <mfServiceList>
+          <mfService>
+            <objectclass>mfService</objectclass>
+            <mfStructVersion>16</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.3.622b663e.7852.111</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>Deployer</cn>
+            <mfSearchOrder>1</mfSearchOrder>
+            <mfServiceStatus>Available</mfServiceStatus>
+            <mfServiceClass>MF deployment</mfServiceClass>
+            <description>Deployment file-upload service</description>
+            <mfTRMode>Unknown</mfTRMode>
+            <mfLogMode>Off</mfLogMode>
+            <mfError/>
+            <mfCustomConfiguration>[MF client]
+scheme=http
+URL=/cgi/mfdeploy.exe/uploads
+accept=application/x-zip-compressed
+
+[destination]
+listener=Web Services and J2EE
+</mfCustomConfiguration>
+            <mfListenerUID>
+              <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.26</mfUID>
+            </mfListenerUID>
+          </mfService>
+          <mfService>
+            <objectclass>mfService</objectclass>
+            <mfStructVersion>16</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.3.622b663e.7852.112</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>ES</cn>
+            <mfSearchOrder>1</mfSearchOrder>
+            <mfServiceStatus>Available</mfServiceStatus>
+            <mfServiceClass>MF ES</mfServiceClass>
+            <description>ES utility service</description>
+            <mfTRMode>Unknown</mfTRMode>
+            <mfLogMode>Off</mfLogMode>
+            <mfError/>
+            <mfCustomConfiguration/>
+            <mfListenerUID>
+              <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.25</mfUID>
+            </mfListenerUID>
+          </mfService>
+          <mfService>
+            <objectclass>mfService</objectclass>
+            <mfStructVersion>16</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.3.622b663e.7852.113</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>CICS</cn>
+            <mfSearchOrder>1</mfSearchOrder>
+            <mfServiceStatus>Available</mfServiceStatus>
+            <mfServiceClass>MF CICS</mfServiceClass>
+            <description>CICS utility service</description>
+            <mfTRMode>Unknown</mfTRMode>
+            <mfLogMode>Off</mfLogMode>
+            <mfError/>
+            <mfCustomConfiguration/>
+            <mfListenerUID>
+              <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.25</mfUID>
+            </mfListenerUID>
+          </mfService>
+          <mfService>
+            <objectclass>mfService</objectclass>
+            <mfStructVersion>16</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.3.622b663e.7852.114</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>JES</cn>
+            <mfSearchOrder>1</mfSearchOrder>
+            <mfServiceStatus>Available</mfServiceStatus>
+            <mfServiceClass>MF JES</mfServiceClass>
+            <description>Job Entry Subsystem service</description>
+            <mfTRMode>Unknown</mfTRMode>
+            <mfLogMode>Off</mfLogMode>
+            <mfError/>
+            <mfCustomConfiguration/>
+            <mfListenerUID>
+              <mfUID>1.3.6.1.4.1.5043.02.018.1647534610.25</mfUID>
+            </mfListenerUID>
+          </mfService>
+        </mfServiceList>
+        <mfPackageList/>
+        <mfXRMList/>
+        <mfJESInitiatorList>
+          <mfJESInitiator>
+            <objectclass>mfJESInitiator</objectclass>
+            <mfStructVersion>1</mfStructVersion>
+            <mfUID>1.3.6.1.4.1.5043.1.21.12.622b665d.7852.115</mfUID>
+            <mfServerUID>1.3.6.1.4.1.5043.1.21.1.622b663d.7852.102</mfServerUID>
+            <cn>BANKDEMO</cn>
+            <mfJESInitiatorClass>ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</mfJESInitiatorClass>
+            <description>All Classes</description>
+          </mfJESInitiator>
+        </mfJESInitiatorList>
+        <mfJESPrinterList/>
+        <mfIMSMPRList/>
+        <mfMQListenerList/>
+      </mfServer>
+    </mfServerList>
+  </mfDirectoryServerRepository>
+  <SITConfig version="1">
+    <sits>
+      <sit>
+        <name>PLIVSAM</name>
+        <description>SIT FOR THE BANKDEMO APPLICATION USINF PL/I VSAM</description>
+        <_cwasize>512</_cwasize>
+        <_commareaovr>0</_commareaovr>
+        <_sharedpages>256</_sharedpages>
+        <_servers>2</_servers>
+        <_trtsize>341</_trtsize>
+        <_initialtran>BANK</_initialtran>
+        <_startuplist>PLIVSAM</_startuplist>
+        <_abenddump>NO</_abenddump>
+        <_dateformat>MMDDYY</_dateformat>
+        <_datesep>/</_datesep>
+        <_timesep>:</_timesep>
+        <_autorsttime>IMMEDIATE</_autorsttime>
+        <_printsupp>YES</_printsupp>
+        <_ccigateway>NO</_ccigateway>
+        <_tscoldstart>NO</_tscoldstart>
+        <_tdcoldstart>NO</_tdcoldstart>
+        <_tsncoldstrt>NO</_tsncoldstrt>
+        <_tdncoldstrt>NO</_tdncoldstrt>
+        <_dgcoldstart>YES</_dgcoldstart>
+        <_snabracket>NO</_snabracket>
+        <_tracestore>NO</_tracestore>
+        <_tracetask>NO</_tracetask>
+        <_tracefile>NO</_tracefile>
+        <_tracedump>NO</_tracedump>
+        <_tracepcp>NO</_tracepcp>
+        <_tracesrv>NO</_tracesrv>
+        <_tracecws>NO</_tracecws>
+        <_tracetstd>NO</_tracetstd>
+        <_traceintrvl>NO</_traceintrvl>
+        <_tracejournl>NO</_tracejournl>
+        <_tracetable>NO</_tracetable>
+        <_traceuser>NO</_traceuser>
+        <_traceterm>NO</_traceterm>
+        <_tracecomms>NO</_tracecomms>
+        <_auxtrace>NO</_auxtrace>
+        <_tracemessg>NO</_tracemessg>
+        <_tracecci>NO</_tracecci>
+        <_traceapi>NO</_traceapi>
+        <_traceuexit>NO</_traceuexit>
+        <_ccidde>NO</_ccidde>
+        <_cciipx>NO</_cciipx>
+        <_ccinamep>NO</_ccinamep>
+        <_ccinetbios>NO</_ccinetbios>
+        <_ccitcpip>NO</_ccitcpip>
+        <_enabtn3270>NO</_enabtn3270>
+        <_externshut>ALLOWED</_externshut>
+        <_securitykey>1</_securitykey>
+        <_stgcushion>8</_stgcushion>
+        <_dumponsysab>YES</_dumponsysab>
+        <_waitonsend>YES</_waitonsend>
+        <_tddefreqd>NO</_tddefreqd>
+        <_development>YES</_development>
+        <_deferpct>NO</_deferpct>
+        <_maxauxdump>0</_maxauxdump>
+        <_forceprog>YES</_forceprog>
+        <_termorigsys>NO</_termorigsys>
+        <_tn3270port>23</_tn3270port>
+        <_cicsrel>33</_cicsrel>
+        <_fileshare>NO</_fileshare>
+        <_localtrtsz>341</_localtrtsz>
+        <_unicligway>NO</_unicligway>
+        <_mqenabconn>NO</_mqenabconn>
+        <_mqenabckti>NO</_mqenabckti>
+        <_tcpipgwport>0</_tcpipgwport>
+        <_transthold>0</_transthold>
+        <_enabtclass>NO</_enabtclass>
+        <_ccsid>37</_ccsid>
+        <_nqrnl>NO</_nqrnl>
+        <_gmtran>EXIT</_gmtran>
+        <_dtimeout>0</_dtimeout>
+        <_runaway>0</_runaway>
+        <_rtimeout>0</_rtimeout>
+        <_idtimeout>0</_idtimeout>
+      </sit>
+      <sit>
+        <name>CBLVSAM</name>
+        <description>SIT FOR THE BANKDEMO APPLICATION USING COBOL VSAM</description>
+        <_cwasize>512</_cwasize>
+        <_commareaovr>0</_commareaovr>
+        <_sharedpages>256</_sharedpages>
+        <_servers>2</_servers>
+        <_trtsize>341</_trtsize>
+        <_initialtran>BANK</_initialtran>
+        <_startuplist>CBLVSAM</_startuplist>
+        <_abenddump>NO</_abenddump>
+        <_dateformat>MMDDYY</_dateformat>
+        <_datesep>/</_datesep>
+        <_timesep>:</_timesep>
+        <_autorsttime>IMMEDIATE</_autorsttime>
+        <_printsupp>YES</_printsupp>
+        <_ccigateway>NO</_ccigateway>
+        <_tscoldstart>NO</_tscoldstart>
+        <_tdcoldstart>NO</_tdcoldstart>
+        <_tsncoldstrt>NO</_tsncoldstrt>
+        <_tdncoldstrt>NO</_tdncoldstrt>
+        <_dgcoldstart>YES</_dgcoldstart>
+        <_snabracket>NO</_snabracket>
+        <_tracestore>NO</_tracestore>
+        <_tracetask>NO</_tracetask>
+        <_tracefile>NO</_tracefile>
+        <_tracedump>NO</_tracedump>
+        <_tracepcp>NO</_tracepcp>
+        <_tracesrv>NO</_tracesrv>
+        <_tracecws>NO</_tracecws>
+        <_tracetstd>NO</_tracetstd>
+        <_traceintrvl>NO</_traceintrvl>
+        <_tracejournl>NO</_tracejournl>
+        <_tracetable>NO</_tracetable>
+        <_traceuser>NO</_traceuser>
+        <_traceterm>NO</_traceterm>
+        <_tracecomms>NO</_tracecomms>
+        <_auxtrace>NO</_auxtrace>
+        <_tracemessg>NO</_tracemessg>
+        <_tracecci>NO</_tracecci>
+        <_traceapi>NO</_traceapi>
+        <_traceuexit>NO</_traceuexit>
+        <_ccidde>NO</_ccidde>
+        <_cciipx>NO</_cciipx>
+        <_ccinamep>NO</_ccinamep>
+        <_ccinetbios>NO</_ccinetbios>
+        <_ccitcpip>NO</_ccitcpip>
+        <_enabtn3270>NO</_enabtn3270>
+        <_externshut>ALLOWED</_externshut>
+        <_securitykey>1</_securitykey>
+        <_stgcushion>8</_stgcushion>
+        <_dumponsysab>YES</_dumponsysab>
+        <_waitonsend>YES</_waitonsend>
+        <_tddefreqd>NO</_tddefreqd>
+        <_development>YES</_development>
+        <_deferpct>NO</_deferpct>
+        <_maxauxdump>0</_maxauxdump>
+        <_forceprog>YES</_forceprog>
+        <_termorigsys>NO</_termorigsys>
+        <_tn3270port>23</_tn3270port>
+        <_cicsrel>33</_cicsrel>
+        <_fileshare>NO</_fileshare>
+        <_localtrtsz>341</_localtrtsz>
+        <_unicligway>NO</_unicligway>
+        <_mqenabconn>NO</_mqenabconn>
+        <_mqenabckti>NO</_mqenabckti>
+        <_tcpipgwport>0</_tcpipgwport>
+        <_transthold>0</_transthold>
+        <_enabtclass>NO</_enabtclass>
+        <_ccsid>37</_ccsid>
+        <_nqrnl>NO</_nqrnl>
+        <_gmtran>EXIT</_gmtran>
+        <_dtimeout>0</_dtimeout>
+        <_runaway>0</_runaway>
+        <_rtimeout>0</_rtimeout>
+        <_idtimeout>0</_idtimeout>
+      </sit>
+    </sits>
+  </SITConfig>
+  <StartupListConfig version="1">
+    <startuplists>
+      <startuplist>
+        <name>CBLVSAM</name>
+        <description>STARTUP LIST FOR BANKDEMO DEMO APPLICATION USING COBOL VSAM</description>
+        <group>
+          <name>DFHBMS</name>
+        </group>
+        <group>
+          <name>DFHCONS</name>
+        </group>
+        <group>
+          <name>DFHEDF</name>
+        </group>
+        <group>
+          <name>DFHHARDC</name>
+        </group>
+        <group>
+          <name>DFHISC</name>
+        </group>
+        <group>
+          <name>DFHOPER</name>
+        </group>
+        <group>
+          <name>DFHTYPE</name>
+        </group>
+        <group>
+          <name>DFHVTAM</name>
+        </group>
+        <group>
+          <name>DFH$ACCT</name>
+        </group>
+        <group>
+          <name>DFH$IVP</name>
+        </group>
+        <group>
+          <name>DFHTERM</name>
+        </group>
+        <group>
+          <name>DFHSIGN</name>
+        </group>
+        <group>
+          <name>BANKGRP</name>
+        </group>
+        <group>
+          <name>BANKGRP2</name>
+        </group>
+      </startuplist>
+      <startuplist>
+        <name>PLIVSAM</name>
+        <description>STARTUP LIST FOR BANKDEMO DEMO APPLICATION USING PL/I VSAM</description>
+        <group>
+          <name>DFHBMS</name>
+        </group>
+        <group>
+          <name>DFHCONS</name>
+        </group>
+        <group>
+          <name>DFHEDF</name>
+        </group>
+        <group>
+          <name>DFHHARDC</name>
+        </group>
+        <group>
+          <name>DFHISC</name>
+        </group>
+        <group>
+          <name>DFHOPER</name>
+        </group>
+        <group>
+          <name>DFHTYPE</name>
+        </group>
+        <group>
+          <name>DFHVTAM</name>
+        </group>
+        <group>
+          <name>DFH$ACCT</name>
+        </group>
+        <group>
+          <name>DFH$IVP</name>
+        </group>
+        <group>
+          <name>DFHTERM</name>
+        </group>
+        <group>
+          <name>DFHSIGN</name>
+        </group>
+        <group>
+          <name>BANKGRP</name>
+        </group>
+        <group>
+          <name>BANKGRP2</name>
+        </group>
+        <group>
+          <name>BANKGRP3</name>
+        </group>
+      </startuplist>
+    </startuplists>
+  </StartupListConfig>
+  <GroupsConfig version="1">
+    <resources>
+      <file>
+        <name>BNKACC</name>
+        <group>BANKGRP</group>
+        <description>BANK Account</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>KSDS</_filetype>
+        <_maxreclen>200</_maxreclen>
+        <_minreclen>200</_minreclen>
+        <_keyposition>6</_keyposition>
+        <_keylength>9</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_filename>MFI01V.MFIDEMO.BNKACC</_filename>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKACC1</name>
+        <group>BANKGRP</group>
+        <description>BANK Account Alternate Index 1</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>ALTINDEX</_filetype>
+        <_basefile>BNKACC</_basefile>
+        <_keyposition>1</_keyposition>
+        <_keylength>5</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKATYPE</name>
+        <group>BANKGRP</group>
+        <description>Bank account types</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>KSDS</_filetype>
+        <_maxreclen>100</_maxreclen>
+        <_minreclen>100</_minreclen>
+        <_keyposition>1</_keyposition>
+        <_keylength>1</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_filename>MFI01V.MFIDEMO.BNKATYPE</_filename>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKCUST</name>
+        <group>BANKGRP</group>
+        <description>BANK Customers</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>KSDS</_filetype>
+        <_maxreclen>250</_maxreclen>
+        <_minreclen>250</_minreclen>
+        <_keyposition>1</_keyposition>
+        <_keylength>5</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_filename>MFI01V.MFIDEMO.BNKCUST</_filename>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKCUST1</name>
+        <group>BANKGRP</group>
+        <description>BANK Customers Index 1</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>ALTINDEX</_filetype>
+        <_basefile>BNKCUST</_basefile>
+        <_keyposition>6</_keyposition>
+        <_keylength>25</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKCUST2</name>
+        <group>BANKGRP</group>
+        <description>BANK Customers Index 2</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>ALTINDEX</_filetype>
+        <_basefile>BNKCUST</_basefile>
+        <_keyposition>31</_keyposition>
+        <_keylength>25</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKHELP</name>
+        <group>BANKGRP</group>
+        <description>Bank help text file</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>KSDS</_filetype>
+        <_maxreclen>83</_maxreclen>
+        <_minreclen>83</_minreclen>
+        <_keyposition>1</_keyposition>
+        <_keylength>8</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_filename>MFI01V.MFIDEMO.BNKHELP</_filename>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKTXN</name>
+        <group>BANKGRP</group>
+        <description>Bank account Transactions</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>KSDS</_filetype>
+        <_maxreclen>150</_maxreclen>
+        <_minreclen>150</_minreclen>
+        <_keyposition>15</_keyposition>
+        <_keylength>26</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_filename>MFI01V.MFIDEMO.BNKTXN</_filename>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <file>
+        <name>BNKTXN1</name>
+        <group>BANKGRP</group>
+        <description>BANK Transaction Alternate Index 2</description>
+        <status>ENABLED</status>
+        <opentime>FIRSTREF</opentime>
+        <recordformat>F</recordformat>
+        <add>YES</add>
+        <browse>YES</browse>
+        <_exclusive>YES</_exclusive>
+        <delete>YES</delete>
+        <read>YES</read>
+        <update>YES</update>
+        <recovery>NONE</recovery>
+        <_filetype>ALTINDEX</_filetype>
+        <_basefile>BNKTXN</_basefile>
+        <_keyposition>8</_keyposition>
+        <_keylength>35</_keylength>
+        <_startempty>NO</_startempty>
+        <_dupkey>NO</_dupkey>
+        <_fileext>dat</_fileext>
+        <_usecatalog>NO</_usecatalog>
+        <_collseq>ASCII</_collseq>
+      </file>
+      <transaction>
+        <name>BANK</name>
+        <group>BANKGRP2</group>
+        <description>Demo system - BANK txn</description>
+        <program>SBANK00P</program>
+        <twasize>0</twasize>
+        <status>ENABLED</status>
+        <dynamic>NO</dynamic>
+        <priority>0</priority>
+        <spurge>NO</spurge>
+        <tranclass>DFHTCL00</tranclass>
+        <dtimout>NO</dtimout>
+        <indoubt>BACKOUT</indoubt>
+        <dump>NO</dump>
+        <trace>YES</trace>
+        <ressec>NO</ressec>
+        <cmdsec>NO</cmdsec>
+        <runaway>0</runaway>
+        <_screen>DEFAULT</_screen>
+        <_uctran>NO</_uctran>
+        <_inboundtp>YES</_inboundtp>
+        <_rtimeout>0</_rtimeout>
+        <_timethold>0</_timethold>
+      </transaction>
+      <program>
+        <name>BBANK10P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK20P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK30P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK40P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK50P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK60P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK70P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK80P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK99P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK01P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK02P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK03P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK04P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK05P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK06P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK07P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK08P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK51P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK52P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DHELP01P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK00P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK10P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK20P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK30P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK40P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK50P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK60P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK70P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK80P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK99P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SCUSTOMP</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>STRAC00P</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>UDATECNV</name>
+        <group>BANKGRP2</group>
+        <language>COBOL</language>
+        <resident>NO</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>BBANK10P</name>
+        <group>BANKGRP3</group>
+        <language>PLI</language>
+        <resident>YES</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>DBANK01P</name>
+        <group>BANKGRP3</group>
+        <language>PLI</language>
+        <resident>YES</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK00P</name>
+        <group>BANKGRP3</group>
+        <language>PLI</language>
+        <resident>YES</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+      <program>
+        <name>SBANK10P</name>
+        <group>BANKGRP3</group>
+        <language>PLI</language>
+        <resident>YES</resident>
+        <status>ENABLED</status>
+        <_moduletype>PROGRAM</_moduletype>
+        <_wssavestate>NO</_wssavestate>
+        <_maxcommarea>0</_maxcommarea>
+      </program>
+    </resources>
+  </GroupsConfig>
+  <r-CAT-DB noNamespaceSchemaLocation="xcatdb.xsd">
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.CTLCARDS</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../sources/ctlcards/</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>LSEQ</R-RECFM>
+        <R-DSORG>PO</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301676</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102236</R-TIME-CREATED>
+        <R-GDG-MAX>0</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>10</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>10</R-SCCS-TYPE>
+        <R-LRECL>80</R-LRECL>
+        <R-LRECL-MAX>80</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>11</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>1</R-PDS-EXT-CNT>
+        <R-DYN-PDS-EXT>ctl</R-DYN-PDS-EXT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01V.MFIDEMO.BNKACC</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKACC.dat</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>KS</R-RECFM>
+        <R-DSORG>VSAM</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301677</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102200</R-TIME-CREATED>
+        <R-GDG-MAX>1</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>12336</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>6</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>9</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>99</R-SCCS-TYPE>
+        <R-LRECL>200</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01V.MFIDEMO.BNKATYPE</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKATYPE.dat</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>KS</R-RECFM>
+        <R-DSORG>VSAM</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301677</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102206</R-TIME-CREATED>
+        <R-GDG-MAX>1</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>12336</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>1</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>1</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>99</R-SCCS-TYPE>
+        <R-LRECL>100</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01V.MFIDEMO.BNKCUST</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKCUST.dat</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>KS</R-RECFM>
+        <R-DSORG>VSAM</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301677</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102211</R-TIME-CREATED>
+        <R-GDG-MAX>1</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>12336</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>1</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>5</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>99</R-SCCS-TYPE>
+        <R-LRECL>250</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01V.MFIDEMO.BNKHELP</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKHELP.dat</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>KS</R-RECFM>
+        <R-DSORG>VSAM</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301677</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102217</R-TIME-CREATED>
+        <R-GDG-MAX>1</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>12336</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>1</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>8</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>99</R-SCCS-TYPE>
+        <R-LRECL>83</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01V.MFIDEMO.BNKTXN</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKTXN.dat</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>KS</R-RECFM>
+        <R-DSORG>VSAM</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301677</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102230</R-TIME-CREATED>
+        <R-GDG-MAX>1</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>12336</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>17</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>26</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>3</R-VERSION>
+        <R-SCCS-TYPE>99</R-SCCS-TYPE>
+        <R-LRECL>400</R-LRECL>
+        <R-LRECL-MAX>400</R-LRECL-MAX>
+        <R-LRECL-MIN>400</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+	<r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKACC.AIX1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKACC.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>20050110</R-CHG-DATE><R-CHG-TIME>10565432</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED>MFIDEMO</R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>A</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>5</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>2</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>200</R-LRECL><R-LRECL-MAX>200</R-LRECL-MAX><R-LRECL-MIN>200</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKACC.PATH1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKACC.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>0</R-CHG-DATE><R-CHG-TIME>00000000</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED> </R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>P</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>5</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>1</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>200</R-LRECL><R-LRECL-MAX>200</R-LRECL-MAX><R-LRECL-MIN>200</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKCUST.AIX1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKCUST.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>20050110</R-CHG-DATE><R-CHG-TIME>10565432</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED>MFIDEMO</R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>A</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>5</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>25</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>2</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>250</R-LRECL><R-LRECL-MAX>250</R-LRECL-MAX><R-LRECL-MIN>250</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKCUST.AIX2</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKCUST.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>20050110</R-CHG-DATE><R-CHG-TIME>10565432</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED>MFIDEMO</R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>A</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>30</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>25</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>2</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>250</R-LRECL><R-LRECL-MAX>250</R-LRECL-MAX><R-LRECL-MIN>250</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKCUST.PATH1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKCUST.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>0</R-CHG-DATE><R-CHG-TIME>00000000</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED> </R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>P</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>5</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>25</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>1</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>250</R-LRECL><R-LRECL-MAX>250</R-LRECL-MAX><R-LRECL-MIN>250</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKCUST.PATH2</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKCUST.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>0</R-CHG-DATE><R-CHG-TIME>00000000</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED> </R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>P</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>30</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>25</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>1</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>250</R-LRECL><R-LRECL-MAX>250</R-LRECL-MAX><R-LRECL-MIN>250</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKTXN.AIX1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKTXN.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>20050110</R-CHG-DATE><R-CHG-TIME>10565432</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED>MFIDEMO</R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>A</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>7</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>35</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>2</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>400</R-LRECL><R-LRECL-MAX>400</R-LRECL-MAX><R-LRECL-MIN>400</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC><R-CAT-REC><R-DSN><R-DSNAME>MFI01V.MFIDEMO.BNKTXN.PATH1</R-DSNAME><R-MEMBER> </R-MEMBER></R-DSN><R-PC-DSN>&lt;CatalogFolder&gt;/../../datafiles/MFI01V.MFIDEMO.BNKTXN.dat</R-PC-DSN><R-CATALOGED>1</R-CATALOGED><R-VOLUME> </R-VOLUME><R-RECFM>KS</R-RECFM><R-DSORG>VSAM</R-DSORG><R-CHARSET>A</R-CHARSET><R-EXPDT>99991231</R-EXPDT><R-SPACE-UNIT>TRK</R-SPACE-UNIT><R-CREATE-DATE>20050110</R-CREATE-DATE><R-CHG-DATE>0</R-CHG-DATE><R-CHG-TIME>00000000</R-CHG-TIME><R-COMPILE-DATE>0</R-COMPILE-DATE><R-COMPILE-TIME>00000000</R-COMPILE-TIME><R-DEFAULT-EXT> </R-DEFAULT-EXT><R-JOB-CREATED>MFIDEMO</R-JOB-CREATED><R-JOB-USED> </R-JOB-USED><R-TIME-CREATED>10565400</R-TIME-CREATED><R-GDG-MAX>1</R-GDG-MAX><R-EXTENDED-TYPE>P</R-EXTENDED-TYPE><R-LOCK-USERID>USERID</R-LOCK-USERID><R-VSAM-REU>0</R-VSAM-REU><R-VSAM-AIX-UNQK>0</R-VSAM-AIX-UNQK><R-FILE-FORMAT>0</R-FILE-FORMAT><R-RETURN-REL-PATH>R</R-RETURN-REL-PATH><hex.R-XRBA>00</hex.R-XRBA><R-DSNTYPE>0</R-DSNTYPE><R-PCFILE-STATE>0</R-PCFILE-STATE><R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT><R-VSAM-KEY-OFFSET>7</R-VSAM-KEY-OFFSET><R-VSAM-KEY-LENGTH>35</R-VSAM-KEY-LENGTH><R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP><R-STRUCT-OFFSET>0</R-STRUCT-OFFSET><R-STRUCT-LEN>0</R-STRUCT-LEN><R-DATACLAS> </R-DATACLAS><R-BLKSIZE>0</R-BLKSIZE><R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS><R-SPACE-INIT-UNITS>5</R-SPACE-INIT-UNITS><R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS><R-VERSION>1</R-VERSION><R-SCCS-TYPE>9</R-SCCS-TYPE><R-LRECL>400</R-LRECL><R-LRECL-MAX>400</R-LRECL-MAX><R-LRECL-MIN>400</R-LRECL-MIN><R-VAR-LEN>0</R-VAR-LEN></R-CAT-REC><R-SUB-RECORDS><R-PDS-EXT-CNT>0</R-PDS-EXT-CNT><R-STR-filename> </R-STR-filename><R-ASSOCIATIONS><R-ASSOC-ALIAS-EXTRA><R-ASSOC-CATALOG> </R-ASSOC-CATALOG></R-ASSOC-ALIAS-EXTRA><R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE></R-ASSOCIATIONS></R-SUB-RECORDS></r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>SYS1.PROCLIB</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/../../sources/proclib/</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>LSEQ</R-RECFM>
+        <R-DSORG>PO</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220317</R-CHG-DATE>
+        <R-CHG-TIME>16301678</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED> </R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>15102246</R-TIME-CREATED>
+        <R-GDG-MAX>0</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>10</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>2</R-VERSION>
+        <R-SCCS-TYPE>10</R-SCCS-TYPE>
+        <R-LRECL>80</R-LRECL>
+        <R-LRECL-MAX>80</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>11</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>1</R-PDS-EXT-CNT>
+        <R-DYN-PDS-EXT>prc</R-DYN-PDS-EXT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.LOADLIB</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN>&lt;CatalogFolder&gt;/data/extlib/</R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>LSEQ</R-RECFM>
+        <R-DSORG>PO</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220311</R-CREATE-DATE>
+        <R-CHG-DATE>20220311</R-CHG-DATE>
+        <R-CHG-TIME>15102242</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <hex.R-DEFAULT-EXT>000000</hex.R-DEFAULT-EXT>
+        <hex.R-JOB-CREATED>0000000000000000</hex.R-JOB-CREATED>
+        <hex.R-JOB-USED>0000000000000000</hex.R-JOB-USED>
+        <R-TIME-CREATED>15102242</R-TIME-CREATED>
+        <R-GDG-MAX>0</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH>R</R-RETURN-REL-PATH>
+        <hex.R-XRBA>00</hex.R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>64</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>0</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <hex.R-DATACLAS>0000000000000000</hex.R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>10</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>1</R-VERSION>
+        <R-SCCS-TYPE>10</R-SCCS-TYPE>
+        <R-LRECL>80</R-LRECL>
+        <R-LRECL-MAX>80</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>194</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>1</R-PDS-EXT-CNT>
+        <R-DYN-PDS-EXT>DLL</R-DYN-PDS-EXT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.BANKEXT1</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN> </R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>?</R-RECFM>
+        <R-DSORG>GDG</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220318</R-CREATE-DATE>
+        <R-CHG-DATE>20220318</R-CHG-DATE>
+        <R-CHG-TIME>14231020</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED>MFIDEMO</R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>14231020</R-TIME-CREATED>
+        <R-GDG-MAX>3</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH> </R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>0</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>1</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>1</R-VERSION>
+        <R-SCCS-TYPE>9</R-SCCS-TYPE>
+        <R-LRECL>0</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.BANKEXT2</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN> </R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>?</R-RECFM>
+        <R-DSORG>GDG</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220318</R-CREATE-DATE>
+        <R-CHG-DATE>20220318</R-CHG-DATE>
+        <R-CHG-TIME>14231020</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED>MFIDEMO</R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>14231020</R-TIME-CREATED>
+        <R-GDG-MAX>3</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH> </R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>0</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>1</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>1</R-VERSION>
+        <R-SCCS-TYPE>9</R-SCCS-TYPE>
+        <R-LRECL>0</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.BANKSRT1</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN> </R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>?</R-RECFM>
+        <R-DSORG>GDG</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220318</R-CREATE-DATE>
+        <R-CHG-DATE>20220318</R-CHG-DATE>
+        <R-CHG-TIME>14231018</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED>MFIDEMO</R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>14231018</R-TIME-CREATED>
+        <R-GDG-MAX>3</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH> </R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>0</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>1</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>1</R-VERSION>
+        <R-SCCS-TYPE>9</R-SCCS-TYPE>
+        <R-LRECL>0</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+    <r-CAT-COMPOSITE-REC>
+      <R-CAT-REC>
+        <R-DSN>
+          <R-DSNAME>MFI01.MFIDEMO.BANKSRT2</R-DSNAME>
+          <R-MEMBER> </R-MEMBER>
+        </R-DSN>
+        <R-PC-DSN> </R-PC-DSN>
+        <R-CATALOGED>1</R-CATALOGED>
+        <R-VOLUME> </R-VOLUME>
+        <R-RECFM>?</R-RECFM>
+        <R-DSORG>GDG</R-DSORG>
+        <R-CHARSET>A</R-CHARSET>
+        <R-EXPDT>0</R-EXPDT>
+        <R-SPACE-UNIT>BLK</R-SPACE-UNIT>
+        <R-CREATE-DATE>20220318</R-CREATE-DATE>
+        <R-CHG-DATE>20220318</R-CHG-DATE>
+        <R-CHG-TIME>14231019</R-CHG-TIME>
+        <R-COMPILE-DATE>0</R-COMPILE-DATE>
+        <R-COMPILE-TIME>00000000</R-COMPILE-TIME>
+        <R-DEFAULT-EXT> </R-DEFAULT-EXT>
+        <R-JOB-CREATED>MFIDEMO</R-JOB-CREATED>
+        <R-JOB-USED> </R-JOB-USED>
+        <R-TIME-CREATED>14231019</R-TIME-CREATED>
+        <R-GDG-MAX>3</R-GDG-MAX>
+        <R-EXTENDED-TYPE> </R-EXTENDED-TYPE>
+        <R-LOCK-USERID> </R-LOCK-USERID>
+        <R-VSAM-REU> </R-VSAM-REU>
+        <R-VSAM-AIX-UNQK> </R-VSAM-AIX-UNQK>
+        <R-FILE-FORMAT>0</R-FILE-FORMAT>
+        <R-RETURN-REL-PATH> </R-RETURN-REL-PATH>
+        <R-XRBA> </R-XRBA>
+        <R-DSNTYPE>0</R-DSNTYPE>
+        <R-PCFILE-STATE>0</R-PCFILE-STATE>
+        <R-GDG-EMPTY-COUNT>0</R-GDG-EMPTY-COUNT>
+        <R-VSAM-KEY-OFFSET>0</R-VSAM-KEY-OFFSET>
+        <R-VSAM-KEY-LENGTH>0</R-VSAM-KEY-LENGTH>
+        <R-GDG-ROLL-DISP>1</R-GDG-ROLL-DISP>
+        <R-STRUCT-OFFSET>0</R-STRUCT-OFFSET>
+        <R-STRUCT-LEN>0</R-STRUCT-LEN>
+        <R-DATACLAS> </R-DATACLAS>
+        <R-BLKSIZE>0</R-BLKSIZE>
+        <R-SPACE-DIR-BLKS>0</R-SPACE-DIR-BLKS>
+        <R-SPACE-INIT-UNITS>1</R-SPACE-INIT-UNITS>
+        <R-SPACE-EXTENT-UNITS>1</R-SPACE-EXTENT-UNITS>
+        <R-VERSION>1</R-VERSION>
+        <R-SCCS-TYPE>9</R-SCCS-TYPE>
+        <R-LRECL>0</R-LRECL>
+        <R-LRECL-MAX>0</R-LRECL-MAX>
+        <R-LRECL-MIN>0</R-LRECL-MIN>
+        <R-VAR-LEN>0</R-VAR-LEN>
+      </R-CAT-REC>
+      <R-SUB-RECORDS>
+        <R-PDS-EXT-CNT>0</R-PDS-EXT-CNT>
+        <R-STR-filename> </R-STR-filename>
+        <R-ASSOCIATIONS>
+          <R-ASSOC-ALIAS-EXTRA>
+            <R-ASSOC-CATALOG> </R-ASSOC-CATALOG>
+          </R-ASSOC-ALIAS-EXTRA>
+          <R-ASSOC-LIST-SIZE>0</R-ASSOC-LIST-SIZE>
+        </R-ASSOCIATIONS>
+      </R-SUB-RECORDS>
+    </r-CAT-COMPOSITE-REC>
+  </r-CAT-DB>
+</ESCombinedXML>
