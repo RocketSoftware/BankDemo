@@ -315,7 +315,7 @@ This turns the data items and the paragraph names you hover over into hyperlinks
 You can use rename refactoring to rename all occurrences of a variable:
 
 1.  Scroll down to line 228 in the file.
-2.  Double-click WS-EXEC-PARM-LL to select it, and click **Refactor \> Rename**.
+2.  Cclick WS-EXEC-PARM-LL in the editor, right-click it, and click **Refactor \> Rename**.
 
     A pop-up is displayed prompting you to enter a new name for the variable.
     ![](images/2e15eb9d708cff50ce53b2564221fcf8.jpg)
@@ -555,13 +555,13 @@ You can introduce some Compiler errors into one of the programs to see how the C
 2.  Page down the program a few pages to the start of the Procedure Division around line 224.
 3.  Introduce a few syntax errors as follows:
 
-    On line 226 change RUN-TIME to RUN-TME
+    - On line 226 change RUN-TIME to RUN-TME
 
-    On line 229 change SPACES to SPOCES
+    - On line 229 change SPACES to SPOCES
 
-    On line 237 place a period after the END-IF
+    - On line 237 place a period after the END-IF
 
-    Move one of the copybooks, **CTIMERD.cpy**, from the copybook folder to the **jcl** folder using the **Move** command from the context menu of the copybook entry.
+    - Move one of the copybooks, **CTIMERD.cpy**, from the copybook folder to the **jcl** folder - right-click the file in Application Exlorer, click **Move**, select the folder to move this to, and click **OK**.
 
     This triggers a build of the project which will also update the listing file. The messages in the **Console** view indicate that there are build errors.
 
@@ -578,19 +578,17 @@ You can introduce some Compiler errors into one of the programs to see how the C
 7.  Double-click an error in the list to position the cursor on the line of code that contains the error.
 8.  To fix the copybook error:
     
-    a.  Locate the error related to the unknown copybook in the **Problems** view and double-click that line in the list of errors.
+    a.  Locate the error related to the unknown copybook in the **Problems** view.
 
-    This positions the cursor on the line that contains the COPY statement for this copybook.
-
-    b.  Right-click the COPY statement, then select **Quick Fix**.
+    b.  Right-click the line for the error, then select **Quick Fix**.
 
      The Quick Fix window appears.
 
-    c.  Double-click **Enable copybook path**.
+    c.  Select **Enable copybook path...**, then click **OK**.
 
        This displays a message that the directory containing the copybook is not on the copybook path for the project.
 
-    d.  Click **Yes** to add the **Bankdemo\\jcl** folder where you moved the copybook to the copybook path of the project.
+    d.  Click **Yes** to add the **Bankdemo/jcl** folder where you moved the copybook to the copybook path of the project.
 
     This triggers a rebuild of the project which now compiles cleanly as it now locates the copybook.
 
@@ -891,7 +889,7 @@ The highlighted line of code is the one the IDE will execute next.
 
     ![](images/7351c4d4d9690e58c504d4ce5d856223.jpg)
 
-3.  To change the value of WS-RECORD-COUNTER2, right-click the data item, and click **Inspect item**.
+3.  To change the value of WS-RECORD-COUNTER2, click the data item in the editor, right-click it, and click **Inspect item**.
 
     This opens a pop-up window showing the value of the data item.
 
