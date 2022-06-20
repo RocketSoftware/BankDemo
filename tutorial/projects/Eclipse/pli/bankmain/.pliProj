@@ -45,7 +45,7 @@
       </asmmacro-paths>
       <configurations default="x64" linkedWith="2017" xsi:type="buildConfigurationsContainer">
          <pli_configuration description="x86" type="all_dll" is64bit="false" xsi:type="pliBuildConfiguration">
-            <targetdir name="bin\debug"/>
+            <targetdir name="bin/debug"/>
             <pli_link_settings xsi:type="pliLinkSettings">
                <options>
                   <option id="link_targetName" name="link_targetName" value="BANKDEMO"/>
@@ -65,7 +65,7 @@
             </deploy_settings>
          </pli_configuration>
          <pli_configuration description="x64" type="all_dll" is64bit="true" xsi:type="pliBuildConfiguration">
-            <targetdir name="bin\x64\debug"/>
+            <targetdir name="bin/x64/debug"/>
             <pli_link_settings xsi:type="pliLinkSettings">
                <options>
                   <option id="link_targetName" name="link_targetName" value="BANKDEMO"/>
