@@ -73,7 +73,7 @@ The demonstration also includes some instructions to build the application from 
 7. Execute the following python script from the `scripts` directory with the specified option to create the Enterprise Server instance, and to deploy the application:
 
    ```
-   MF_Provision_Region.py sql_postgres
+   python MF_Provision_Region.py sql_postgres
    ``` 
 8. Start a TN3270 terminal emulator and connect it to port 9023.
 
