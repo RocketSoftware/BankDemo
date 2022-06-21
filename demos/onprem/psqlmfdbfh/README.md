@@ -47,7 +47,7 @@ The demonstration includes a Python script that helps create the Enterprise Serv
    - On Windows, two ODBC system data sources called `BANKVSAM.MASTER` and `BANKVSAM.VSAM` are created
    - The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
    - The server instance is configured to use the Micro Focus Database File Handler (MFDBFH) by:
-       - the credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
+       - The credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
         - Specifying the XA switch module espgsqlxa (its source is in the `src/enterpriseserver/xa` directory of the Enterprise Developer installation location)
        - The esxaextcfg module provides encrypted credentials to espgsqlxa        
         - Setting the environment variables MFDBFH_CONFIG and ES_DB_FH
