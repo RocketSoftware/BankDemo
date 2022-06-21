@@ -24,7 +24,7 @@ Please see the Micro Focus product documentation for more information.
 
 2. Import the INCLUDES, FETCHABLES, and BANKMAIN projects into an Eclipse workspace:
     - After opening Enterprise Developer for Eclipse, either create a new workspace or open an existing one.
-    - If it's not already open, open the PL/I perspective in the Eclipse IDE ("Window"->"Open Perspective"->"Other..."->"PL/I").
+    - If it's not already open, open the PL/I perspective in the Eclipse IDE ("Window"->"Perspective"->"Open Perspective"->"Other..."->"PL/I").
     - Start the project import process by selecting "Import..." from the "File" menu or right clicking in the "PL/I Explorer" tab and selecting "Import->Import..."
     - On the import pop-up window, expand "General", select "Existing Projects into Workspace", and click &lt;Next&gt;.
     - In "Select root directory:", click &lt;Browse...&gt; to navigate to the location of the "tutorial\projects\Eclipse\pli" directory, select it and click &lt;Select Folder&gt;.
@@ -49,8 +49,8 @@ Please see the Micro Focus product documentation for more information.
 
 6. Execute the BANKDEMO application
     - To prepare for debugging in Eclipse, create a debug configuration by selecting "Debug Configurations..." from the "Run" menu.
-    - On the Debug Configurations dialog, right-click on "PL/I Enterprise Server" and select "New".
-    - Change the "Name:" from "New_configuration" to something meaningful like "BANK", enter "Local" for "Connection", enter "BANKDEMO" for "Server", click the "Apply" button, and click the "Debug" button.
+    - On the Debug Configurations dialog, right-click on "PL/I Enterprise Server" and select "New Configuration".
+    - Change the "Name:" from "New_configuration" to something meaningful like "BANK",enter "BANKMAIN" in PL/I project ,enter "Local" for "Connection", enter "BANKDEMO" for "Server", click the "Apply" button, and click the "Debug" button.
     - Open a 3270 emulation program like Micro Focus Rumba and connect to "localhost" or "127.0.0.1" on port "9023".
     - If using "Micro Focus Rumba+ Desktop" you can do this by first selecting "Mainframe Display" then selecting "Connection" > "Configure...". Select "TN3270" from "Installed Interfaces", in the "TN3270" tab insert "127.0.0.1" and set the "Telnet Port" to "User Defined" and enter 9023, finally click "Connect".
     - If a dialog asking whether to automatically switch to the debug perspective is displayed, select "Remember my decision" and click &lt;Yes&gt;.
