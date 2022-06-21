@@ -8,7 +8,7 @@ This demonstration shows how to configure the Bankdemo application to store bank
    - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
 - The Micro Focus Directory Server (mfds) service must be started and listening on the default port (86).
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be started and listening on the default port (10086).
-- Python 3.*n* and the `requests psycopg2-binary` packages. You can install the packages after installing Python with the following command: 
+- Python 3.*n* and the `requests psycopg2-binary` packages from Python.org. You can install the packages after installing Python with the following command: 
   ```
   python -m pip install requests psycopg2-binary
   ```
@@ -38,10 +38,10 @@ The demonstration also includes some instructions to build the application from 
    b. Ensure there is no region called **BANKVSAM** already defined. If there is one, delete it.
 3. Ensure that there are no other demonstration servers running. This is to ensure no other servers use the same ports. The server for this demonstration uses a common server definition with many of the same listener ports as the ones other servers in this repository might use.
 4. Open a command prompt (Windows) or a terminal (UNIX), and navigate to the `scripts` directory in the demonstration files.
-5. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` Python script which creates a BANKVSAM server, and deploys the desired application configuration.
+5. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` script which creates a BANKVSAM server, and deploys the desired application configuration.
 
     ```
-    MF_Provision_Region.py vsam
+    python MF_Provision_Region.py vsam
     ```
 
    **Note:** If you want to deploy a 32-bit enterprise server instance, or build the application from source, you need to change the configuration first as follows:
