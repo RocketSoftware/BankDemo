@@ -1,33 +1,59 @@
-# Micro Focus Bankdemo Application using disk files
-This demonstration configures the Bankdemo application to store banking data in VSAM datasets 
-on disk accessed from COBOL programs using `EXEC CICS` statements such as `STARTBR FILE`, `READ FILE`, `WRITE FILE`. The COBOL modules used to access the data can be found in the `sources/cobol/data/vsam` directory of this project
+# Micro Focus Bankdemo Application Using Disk Files
+This demonstration shows how to configure the Bankdemo application to store banking data in VSAM datasets on disk. You access them from COBOL programs using `EXEC CICS` statements such as `STARTBR FILE`, `READ FILE`, `WRITE FILE`. The COBOL modules used to access the data are in the `sources/cobol/data/vsam` directory of this project.
 
-## Pre-requisites
+## Prerequisites
 - Micro Focus Enterprise Developer or Enterprise Server
-- Micro Focus Directory Server started and listening on the default port (86)
-- Micro Focus Enterprise Server Common Web Administration (ESCWA) server started and listening the default port (10086)
+- A TN3270 terminal emulator. 
+   - Micro Focus Rumba is included with Enterprise Developer. 
+   - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
+- The Micro Focus Directory Server (mfds) service must be started and listening on the default port (86).
+- The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be started and listening on the default port (10086).
+- Python 3.*n* and the `requests psycopg2-binary` packages from Python.org. You can install the packages after installing Python with the following command: 
+  ```
+  python -m pip install requests psycopg2-binary
+  ```
 
-## What the demonstration shows
-- This demonstration shows a simple COBOL CICS "green screen" application which accesses VSAM data using EXEC CICS statements where the data is held in indexed sequential files on disk. 
-- The Enterprise Server instance is:
-    - created in the `BANKVSAM` sub-directory of this project
-    - created (almost exclusively) using the ESCWA Admin API
-    - a single command-line utility `caspcrd` is used to create the default CICS resource definition file
-    - configured for use with JCL and the VSAM datasets are catalogued 
-    - configured as a 64-bit server
-    - uses pre-built application modules
-    - can be reconfigured to deploy a 32-bit server (see below)
-    - build the application from source (see below)
+## Demonstration overview
+This demonstration shows a simple COBOL CICS "green screen" application which accesses VSAM data using EXEC CICS statements where the data is held in indexed sequential files on disk. 
 
-## Steps for running the demonstration
-1. Open a command-prompt or terminal
-2. Ensure there is no `BANKVSAM` sub-directory in the location in which you expanded the archive (if there is delete it)
-3. In [ESCWA](http://localhost:10086/#/native/ds/127.0.0.1/86/regions) ensure there is no region called `BANKVSAM` already defined - if there is delete it.
-4. As this demonstration uses a common server definition (i.e. many of the same listener ports) as the others in this repository, ensure you do not have any of the other demonstration servers running
-5. Change to the `scripts` directory
-6. Run the `python` script `MF_Provision_Region.py vsam` to deploy the desired application configuration
-    - If you wish to deploy a 32-bit server, or build the application from source open the `scripts/options/vsam.json` file in a text editor and change the `is64bit` and/or `product` options appropriately (specify `"EDz"` to build from source, `"ES"` to use pre-built programs).
-7. Start a 3270 terminal emulator 
-    - connect the emulator to port 9023 and the login screen should become visible
-    - enter an valid user-id (e.g. B0001 with any character for the password as it isn't validated)
-    - use [ESCWA](http://localhost:10086/#/native/ds/127.0.0.1/86/region/BANKVSAM/generalproperties) to view the server configuration
+The demonstration includes a Python script that helps create the Enterprise Server instance which is:
+
+   - Created in the `BANKVSAM` sub-directory of this project
+   - Created (almost exclusively) using the ESCWA Admin API
+   - A single command-line utility, `caspcrd`, is used to create the default CICS resource definition file
+   - Configured for use with JCL and the VSAM datasets are catalogued 
+   - Configured as a 64-bit server and can be reconfigured to deploy a 32-bit server (see below)
+   - Uses pre-built application modules
+
+The demonstration also includes some instructions to build the application from the sources (see the next section).
+
+## Running the demonstration
+1. Expand the demonstration archive on your machine.
+ 
+   Ensure that there is no `BANKVSAM` sub-directory in the location in which you expanded the archive. If there is one, you must delete it.
+2. Load the ESCWA UI by entering http://localhost:10086 in a browser. 
+
+   a. In the ESCWA UI, click **Native**, expand **Directory Servers** and click **Default** in the left pane.
+
+   b. Ensure there is no region called **BANKVSAM** already defined. If there is one, delete it.
+3. Ensure that there are no other demonstration servers running. This is to ensure no other servers use the same ports. The server for this demonstration uses a common server definition with many of the same listener ports as the ones other servers in this repository might use.
+4. Open a command prompt (Windows) or a terminal (UNIX), and navigate to the `scripts` directory in the demonstration files.
+5. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` Python script which creates a BANKVSAM server, and deploys the desired application configuration.
+
+    ```
+    MF_Provision_Region.py vsam
+    ```
+
+   **Note:** If you want to deploy a 32-bit enterprise server instance, or build the application from source, you need to change the configuration first as follows:
+    
+    a. Open the `scripts/options/vsam.json` file in a text editor.
+    
+    b. Change the `is64bit` and/or the `product` options as required. For example, `"product"="EDz"` indicates you are going to build the application from the sources, `"product"="ES"` indicates that the pre-built programs will be used.
+
+6. Start a TN3270 terminal emulator, and connect to port 9023. 
+
+   The Bankdemo application login screen should load.
+
+7. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
+
+8. In ESCWA, select the BANKVSAM server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
