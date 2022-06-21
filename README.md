@@ -1,6 +1,6 @@
 # Micro Focus Bankdemo Application
 This project provides tutorials and demonstrations of features in the Micro Focus Enterprise Server and Enterprise Developer products.
-To use these materials, download the assets of the project [release](https://github.com/MicroFocus/BankDemo/releases) that matches the version of the Micro Focus product you will be using and follow the appropriate READMEs.
+To use these materials, download the assets of the project [release](https://github.com/MicroFocus/BankDemo/releases) that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
 
 ## Contents
 
@@ -41,10 +41,10 @@ MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
 ## <a name="using"></a>Using The Bankdemo Application
-To use the project, download the source.zip or source.tar.gz from the [release](https://github.com/MicroFocus/BankDemo/releases) that matches the Micro Focus product version you wish to use and follow the relevant instructions. You can use the project in one of the following ways:
+To use the project, download the **source.zip** or **source.tar.gz** from the [release](https://github.com/MicroFocus/BankDemo/releases) that matches the Micro Focus product version you want to use, then follow the relevant readme instructions. You can use the project in one of the following ways:
 1. <a name="tutorial"></a> As the basis of the introductory tutorials for the Micro Focus Enterprise Developer for Eclipse and Visual Studio integrated development environments.
     - Prerequisite software: 
-        - Micro Focus Enterprise Developer for Eclipse or Micro Focus Enterprise Developer for Visual Studio
+        - Micro Focus Enterprise Developer for Eclipse or Micro Focus Enterprise Developer for Visual Studio 2022
     - Available tutorials:
         - [Getting Started with Enterprise Developer for Eclipse (Windows)](tutorial/gettingstarted/eclipse/README.md)
         - [Getting Started with Enterprise Developer for Eclipse (UNIX)](tutorial/gettingstarted/eclipseux/readme.md)
