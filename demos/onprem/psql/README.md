@@ -12,9 +12,8 @@ The SQL database is populated with bank account data.
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver 
-- On Linux, the ODBC `bank` data source must be configured - for example:
+- On Linux, the ODBC `bank` data source must be configured. For example, you need to specify the database details in the `odbc.ini` file:
     ```
-    odbc.ini:
     [bank] 
     Driver = PostgreSQL
     Servername = localhost
