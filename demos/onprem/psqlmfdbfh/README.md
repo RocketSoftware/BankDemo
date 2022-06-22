@@ -14,9 +14,8 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver
-- On Linux, the ODBC data sources must be confgured. For example:
+- On Linux, the ODBC data sources must be confgured. Specify the details in the `odbc.ini` file:
     ```
-    odbc.ini:
     [BANKVSAM.MASTER] 
     Driver = PostgreSQL
     Servername = localhost
