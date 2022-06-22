@@ -58,7 +58,7 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
 2. <a name="onprem"></a> Demonstrations of the Micro Focus Enterprise Server capabilities in "on-premise" scenarios:
     - Prerequisite software: 
         - Micro Focus Enterprise Server or Enterprise Developer on Microsoft Windows or on a supported Linux distribution
-        - Python 3 with `requests psycopg2-binary` packages (e.g. `python -m pip install requests psycopg2-binary`)
+        - Python 3 with the `requests psycopg2-binary` packages (use the following command to install the packages: `python -m pip install requests psycopg2-binary`)
         - See the specific tutorials and demonstration instructions for any additional requirements
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
@@ -68,3 +68,4 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
         - Micro Focus Directory Server (mfds) must be running
         - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086
 
+Use the **Issues** tab to report issues, or to raise questions.
