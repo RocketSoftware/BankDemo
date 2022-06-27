@@ -1,21 +1,26 @@
 # Open PL/I Development using Enterprise Developer for Visual Studio
 ## Contents
 - Overview
+- Prerequisites
 - How to Run this Demonstration
 - Project Description
 ## Overview
 This demonstration shows you how to compile, link and debug an Open PL/I BANK CICS application using the Visual Studio IDE.  
 The demo instructions assume you already have a basic understanding of how to use Visual Studio.
 
-This demonstration requires a working Microsoft Visual Studio IDE, Micro Focus Enterprise Developer, and 3270 emulator (like Micro Focus Rumba) in order to be executed successfully.
+## Prerequisites
 
-## >How to Run the Demonstration
+This demonstration requires:
+- Micro Focus Enterprise Developer for Visual Studio 2022
+- A TN3270 terminal emulator to run the CICS application. Note: A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+
+## How to Run the Demonstration
 1. Import the supplied enterprise server:
-    - If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
-    - Run the tutorial\createdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
-    - In the "Server Explorer" tab, right-click on "Local" and select "Import...". 
-    - Click the "Import server definition file" &lt;...&gt; button and select the tutorial\BANKDEMO.xml file. Then click &lt;OK&gt;
-    - The BANKDEMO server should appear in Server Explorer under "Local"
+    a. If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
+    b. Run the tutorial\createdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
+    c. In the "Server Explorer" tab, right-click on "Local" and select "Import...". 
+    d. Click the "Import server definition file" &lt;...&gt; button and select the tutorial\BANKDEMO.xml file. Then click &lt;OK&gt;
+    e. The BANKDEMO server should appear in Server Explorer under "Local"
 
 2. Build the application:</description>
     - In Visual Studio, click "File"->"Open"->"Project/Solution", navigate to "tutorial\projects\Studio\pli", select bankdemo.sln, and click Open.
