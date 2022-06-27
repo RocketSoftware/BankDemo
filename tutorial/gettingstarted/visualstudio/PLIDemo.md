@@ -1,28 +1,35 @@
+
 # Open PL/I Development using Enterprise Developer for Visual Studio
 ## Contents
-- Overview
-- Prerequisites
-- How to Run this Demonstration
-- Project Description
+- Overview[](#overview)
+- Prerequisites[](#prerequisites)
+- How to Run this Demonstration[](#how-to-run-the-demonstration)
+- Project Description[]()
 ## Overview
-This demonstration shows you how to compile, link and debug an Open PL/I BANK CICS application using the Visual Studio IDE.  
-The demo instructions assume you already have a basic understanding of how to use Visual Studio.
+This demonstration shows how you can compile, link, and debug an Open PL/I BANK CICS application using the Visual Studio IDE. The instructions assume you already have a basic understanding of how to use Visual Studio.
 
 ## Prerequisites
 
 This demonstration requires:
 - Micro Focus Enterprise Developer for Visual Studio 2022
-- A TN3270 terminal emulator to run the CICS application. Note: A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+- A TN3270 terminal emulator to run the CICS application. 
+
+  **Note**: A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
 
 ## How to Run the Demonstration
-1. Import the supplied enterprise server:
-    a. If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
-    b. Run the tutorial\createdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
-    c. In the "Server Explorer" tab, right-click on "Local" and select "Import...". 
-    d. Click the "Import server definition file" &lt;...&gt; button and select the tutorial\BANKDEMO.xml file. Then click &lt;OK&gt;
-    e. The BANKDEMO server should appear in Server Explorer under "Local"
+### 1. Import the supplied enterprise server:
+  
+1. If you have already imported the enterprise server for the IDE Getting Started tutorial you scan skip these steps
+    
+2. Run the tutorial\createdefinition.ps1 Powershell script to create the BANKDEMO.xml region definition file. 
+    
+3. In the "Server Explorer" tab, right-click on "Local" and select "Import...". 
+    
+4. Click the "Import server definition file" &lt;...&gt; button and select the tutorial\BANKDEMO.xml file. Then click &lt;OK&gt;
+    
+5. The BANKDEMO server should appear in Server Explorer under "Local"
 
-2. Build the application:</description>
+### 2. Build the application:</description>
     - In Visual Studio, click "File"->"Open"->"Project/Solution", navigate to "tutorial\projects\Studio\pli", select bankdemo.sln, and click Open.
     - Ensure that your active configuration is "x64" for 64-bit by right-clicking on the "bankdemo" solution in the "Solution Explorer", select "Properties", select "Configuration Properties" and "Configuration".  The default configuration and platform can then be set and click "OK" to close the dialog.  Currently, this demo is designed to run only in 64-bit mode.
     - Click "Build"->"Build Solution" to build the solution.
@@ -60,3 +67,4 @@ This demonstration requires:
 7. Stop the Enterprise Server</description>
     - Now that you have finished running the CICS demo, you can stop the associated the enterprise server. To do this, in "Server Explorer", right-click the "BANKDEMO" server, and click "Stop".
     - Check the "Output" window for messages that the server has been stopped. A number of messages also appear in the "Enterprise Server Console Daemon" window before it closes down.
+
