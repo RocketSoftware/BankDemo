@@ -1,10 +1,10 @@
-
 # Open PL/I Development using Enterprise Developer for Visual Studio
 ## Contents
-- Overview[](#overview)
-- Prerequisites[](#prerequisites)
-- How to Run this Demonstration[](#how-to-run-the-demonstration)
-- Project Description[]()
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [How to Run this Demonstration](#how-to-run-the-demonstration)
+
+
 ## Overview
 This demonstration shows how you can compile, link, and debug an Open PL/I BANK CICS application using the Visual Studio IDE. The instructions assume you already have a basic understanding of how to use Visual Studio.
 
@@ -30,41 +30,48 @@ This demonstration requires:
 5. The BANKDEMO server should appear in Server Explorer under "Local"
 
 ### 2. Build the application:</description>
-    - In Visual Studio, click "File"->"Open"->"Project/Solution", navigate to "tutorial\projects\Studio\pli", select bankdemo.sln, and click Open.
-    - Ensure that your active configuration is "x64" for 64-bit by right-clicking on the "bankdemo" solution in the "Solution Explorer", select "Properties", select "Configuration Properties" and "Configuration".  The default configuration and platform can then be set and click "OK" to close the dialog.  Currently, this demo is designed to run only in 64-bit mode.
-    - Click "Build"->"Build Solution" to build the solution.
-    - Check the "Output" window near the bottom of the IDE to verify that the solution built successfully. The last line in the log typically looks like this: "========== Build: 3 succeeded, 0 failed, 0 skipped =========="
+    
+1. In Visual Studio, click "File"->"Open"->"Project/Solution", navigate to "tutorial\projects\Studio\pli", select bankdemo.sln, and click Open.
+2. Ensure that your active configuration is "x64" for 64-bit by right-clicking on the "bankdemo" solution in the "Solution Explorer", select "Properties", select "Configuration Properties" and "Configuration".  The default configuration and platform can then be set and click "OK" to close the dialog.  Currently, this demo is designed to run only in 64-bit mode.
+3. Click "Build"->"Build Solution" to build the solution.
+4. Check the "Output" window near the bottom of the IDE to verify that the solution built successfully. The last line in the log typically looks like this: 
 
-3. Configure the enterprise server for PL/I:
-    - In the Visual Studio IDE, in "Server Explorer" (available with \<CTL\>+\<ALT\>+S), right-click "Micro Focus Servers", and click "Administration". This opens the Home page of "Enterprise Server Administration" in the IDE.     
-    - On the Home page of the "Enterprise Server Administration", select "NATIVE" on the top toolbar. 
-    - On the NATIVE page, expand "Directory Servers" and expand "Default" and select "BANKDEMO"
+   "========== Build: 3 succeeded, 0 failed, 0 skipped =========="
+
+### 3. Configure the enterprise server for PL/I:
+    
+1. In the Visual Studio IDE, in "Server Explorer" (available with \<CTL\>+\<ALT\>+S), right-click "Micro Focus Servers", and click "Administration". This opens the Home page of "Enterprise Server Administration" in the IDE.     
+2. On the Home page of the "Enterprise Server Administration", select "NATIVE" on the top toolbar. 
+3. On the NATIVE page, expand "Directory Servers" and expand "Default" and select "BANKDEMO"
     - On the General page, note that the "PL/I enabled" checkbox is already selected
     - Click on the "CICS" dropdown and select "Configuration".
-    - Change the "System Initialization Table" from "CBLVSAM" to "PLIVSAM" and click &lt;Apply&gt;. This configures the server to use some PL/I CICS resources (BMS maps and programs)
+    - Change the "System Initialization Table" from "CBLVSAM" to "PLIVSAM", and click **Apply**. This configures the server to use some PL/I CICS resources (BMS maps and programs)
       
-4. Associate the projects with enterprise server:
-    - Visual Studio IDE, in "Server Explorer", right-click the "BANKDEMO" server and select "Associate with Project" and select "bankmain", then repeat the process and select "fetchables". Making these associations
+### 4. Associate the projects with enterprise server:
+1. Visual Studio IDE, in "Server Explorer", right-click the "BANKDEMO" server and select "Associate with Project" and select "bankmain", then repeat the process and select "fetchables". Making these associations
       before starting the server enables the executables built by the projects are used.
 
-5. Start the enterprise server:</description>
-    - In "Server Explorer", right-click the "BANKDEMO" server and click "Start".  If the name does not appear in the list, you may need to refresh the list by right-clicking on "Micro Focus Servers" and selecting "Refresh".
-    - Click OK in the "Enterprise Server Sign On" dialog (you can leave the fields blank). You can check the "Output" window to see the progress of starting the server. This also starts the "Enterprise Server Console Daemon" window which also provides information about the server start-up.
+### 5. Start the enterprise server:</description>
+1. In "Server Explorer", right-click the "BANKDEMO" server and click "Start".  If the name does not appear in the list, you may need to refresh the list by right-clicking on "Micro Focus Servers" and selecting "Refresh".
+2.  Click OK in the "Enterprise Server Sign On" dialog (you can leave the fields blank). You can check the "Output" window to see the progress of starting the server. This also starts the "Enterprise Server Console Daemon" window which also provides information about the server start-up.
 
-6. Execute the CICS application</description>
-    - To start debugging in Visual Studio, press &lt;F5&gt; to put the IDE in wait mode for the BANK application to start.
-    - If a 3270 window doesn't open automatically, open a 3270 emulation program like Micro Focus Rumba and connect to "localhost" or "127.0.0.1" on port "9023".
-    - If using "Micro Focus Rumba+ Desktop" you can do this by first selecting "Mainframe Display" then selecting "Connection" > "Configure...". Select "TN3270" from "Installed Interfaces", in the "TN3270" tab insert "127.0.0.1" and set the "Telnet Port" to "User Defined" and enter 9023, finally click "Connect".
-    - In Visual Studio, the source file "SBANK00P.PLI" should automatically display with the SBANK00P PROC line highlighted as the current line of execution.
-    - At this point, feel free to step through the SBANK00P program, set breakpoints, and evaluate variables.  Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.
-    - In the 3270 window, type a User id of "b0001", anything for the password and press &lt;Enter&gt;.
-    - Visual Studio debugging will be started again so you can debug through the SBANK10P program.          
-    - Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.          
-    - As this application is psuedo-conversational, debugging will start and end with the invocation and completion of each transaction in the application.  Since this is a small demo, all of the CICS programs after the Banking main options screen are not built for debug and the sources are not provided.
-    - Once you're ready to leave the application, press the &lt;F3&gt; key to end the application in the 3270 window.          
-    - You can now disconnect your 3270 terminal to end the demo.          
+### 6. Execute the CICS application</description>
 
-7. Stop the Enterprise Server</description>
-    - Now that you have finished running the CICS demo, you can stop the associated the enterprise server. To do this, in "Server Explorer", right-click the "BANKDEMO" server, and click "Stop".
-    - Check the "Output" window for messages that the server has been stopped. A number of messages also appear in the "Enterprise Server Console Daemon" window before it closes down.
+1. To start debugging in Visual Studio, press &lt;F5&gt; to put the IDE in wait mode for the BANK application to start.
+2. If a 3270 window doesn't open automatically, open a 3270 emulation program like Micro Focus Rumba and connect to "localhost" or "127.0.0.1" on port "9023".
+3. If using "Micro Focus Rumba+ Desktop" you can do this by first selecting "Mainframe Display" then selecting "Connection" > "Configure...". Select "TN3270" from "Installed Interfaces", in the "TN3270" tab insert "127.0.0.1" and set the "Telnet Port" to "User Defined" and enter 9023, finally click "Connect".
+4. In Visual Studio, the source file "SBANK00P.PLI" should automatically display with the SBANK00P PROC line highlighted as the current line of execution.
+5. At this point, feel free to step through the SBANK00P program, set breakpoints, and evaluate variables.  Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.
+6. In the 3270 window, type a User id of "b0001", anything for the password and press &lt;Enter&gt;.
+7. Visual Studio debugging will be started again so you can debug through the SBANK10P program.          
+8. Once you're ready to run the program to completion, select "Resume"/&lt;F5&gt; as many times as necessary to run the program to completion.          
+9. As this application is psuedo-conversational, debugging will start and end with the invocation and completion of each transaction in the application.  Since this is a small demo, all of the CICS programs after the Banking main options screen are not built for debug and the sources are not provided.
+10. Once you're ready to leave the application, press the &lt;F3&gt; key to end the application in the 3270 window.          
+11. You can now disconnect your 3270 terminal to end the demo.          
 
+### 7. Stop the Enterprise Server
+
+Now that you have finished running the CICS demo, you can stop the associated the enterprise server. To do this:
+ 
+1. In Server Explorer, right-click the "BANKDEMO" server, and click "Stop".
+2. Check the "Output" window for messages that the server has been stopped. A number of messages also appear in the "Enterprise Server Console Daemon" window before it closes down.
