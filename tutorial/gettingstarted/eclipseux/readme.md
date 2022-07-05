@@ -1,4 +1,4 @@
-# Getting started with Micro Focus Enterprise Developer for Eclipse (UNIX)
+# Getting started with Micro Focus Enterprise Developer for Eclipse (Linux)
 
 ## Overview
 
@@ -43,7 +43,7 @@ As part of this tutorial, you use the supplied standard Eclipse COBOL project in
 
 You must have the following software installed:
 
--   Micro Focus Enterprise Developer for Eclipse (UNIX). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) <https://www.microfocus.com/documentation/enterprise-developer/> to access the product Help and the release notes of Enterprise Developer.
+-   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) <https://www.microfocus.com/documentation/enterprise-developer/> to access the product Help and the release notes of Enterprise Developer.
 -   A TN3270 terminal emulator to run the CICS application. Micro Focus Rumba+ Desktop is supplied with the Enterprise Developer installer.
 
 **Using a remote enterprise server instance for the tutorials**
