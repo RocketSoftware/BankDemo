@@ -37,7 +37,7 @@ The demonstration also includes some instructions to build the application from 
 
    b. Ensure there is no region called **BANKVSAM** already defined. If there is one, delete it.
 3. Ensure that there are no other demonstration servers running. This is to ensure no other servers use the same ports. The server for this demonstration uses a common server definition with many of the same listener ports as the ones other servers in this repository might use.
-4. Open a command prompt (Windows) or a terminal (UNIX), and navigate to the `scripts` directory in the demonstration files.
+4. Open a command prompt (Windows) or a terminal (Linux), and navigate to the `scripts` directory in the demonstration files.
 5. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` script which creates a BANKVSAM server, and deploys the desired application configuration.
 
     ```

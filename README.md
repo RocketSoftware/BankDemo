@@ -47,7 +47,7 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
         - Micro Focus Enterprise Developer for Eclipse or Micro Focus Enterprise Developer for Visual Studio 2022
     - Available tutorials:
         - [Getting Started with Enterprise Developer for Eclipse (Windows)](tutorial/gettingstarted/eclipse/README.md)
-        - [Getting Started with Enterprise Developer for Eclipse (UNIX)](tutorial/gettingstarted/eclipseux/readme.md)
+        - [Getting Started with Enterprise Developer for Eclipse (Linux)](tutorial/gettingstarted/eclipseux/readme.md)
         - [Getting Started with Enterprise Developer for Visual Studio](tutorial/gettingstarted/visualstudio/readme.md)
         - [Open PL/I Bankdemo Application in Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
         - [Open PL/I Bankdemo Application in Enterprise Development for Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
