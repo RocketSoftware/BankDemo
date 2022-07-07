@@ -12,8 +12,8 @@ You must have the following software installed:
 
 -   Micro Focus Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application.
-**Note:**
-Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+
+**Note:** Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
 
 Before running this demo remotely, be sure you have a Micro Focus RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
 Please see the Micro Focus product documentation for more information.
@@ -26,19 +26,19 @@ Please see the Micro Focus product documentation for more information.
 
 1. Run the `tutorial\createdefinition.ps1` Powershell script (Windows) or `tutorial/createdefinition.sh` shell script (Linux) to create the `BANKDEMO.xml` region definition file. 
 2. On the **Server Explorer** tab, right-click **Local** and select **Import Server**.
-4. Click **Browse**, select the tutorial/BANKDEMO.xml file, and then click **Finish**.
+4. Click **Browse**, select the `tutorial/BANKDEMO.xml` file, and then click **Finish**.
     The BANKDEMO server should appear in Server Explorer under **Local**.
 
 ### Import the INCLUDES, FETCHABLES, and BANKMAIN projects into an Eclipse workspace:
 
 1. After opening Enterprise Developer for Eclipse, either create a new workspace or open an existing one.
-2. If it's not already open, open the PL/I perspective in the Eclipse IDE by clicking **Window > Perspective > Open Perspective > Other. > PL/I**.
-3. Start the project import process by selecting **Import** from the **File** menu or right clicking in the **PL/I Explorer** tab and selecting **Import > Import**
+2. If it's not already open, open the PL/I perspective in the Eclipse IDE by clicking **Window > Perspective > Open Perspective > Other > PL/I**.
+3. Start the project import process by selecting **Import** from the **File** menu or right clicking in the **PL/I Explorer** tab, and selecting **Import > Import**
 4. On the import pop-up window, expand **General**, select **Existing Projects into Workspace**, and click **Next**.
-5. In **Select root directory:**, click **Browse** to navigate to the location of the `tutorial\projects\Eclipse\pli` directory, select it, and click **Select Folder**.
-6. The **BANKMAIN**, **FETCHABLES** and **INCLUDES** projects should now be visible on the **Projects:** list.
-7. Ensure **Copy projects into workspace** is not checked and click **Finish**
-8. Once the import is complete, the **BANKMAIN**, **FETCHABLES** and **INCLUDES** projects should display in the **PL/I Explorer** tab.
+5. In **Select root directory**, click **Browse** to navigate to the location of the `tutorial\projects\Eclipse\pli` directory, select it, and click **Select Folder**.
+6. The **BANKMAIN**, **FETCHABLES** and **INCLUDES** projects should now be visible on the **Projects** list.
+7. Ensure **Copy projects into workspace** is not checked, and click **Finish**
+8. Once the import is complete, the **BANKMAIN**, **FETCHABLES**, and **INCLUDES** projects should display in the **PL/I Explorer** tab.
 9. Be sure to check the active build configuration is 'x64' in the project properties before continuing as this demo is designed to run only in 64-bit mode.
 10.  Ensure the project has been built (either because Auto-build is enabled) or by clicking **Build** on the **Project** menu.
 
@@ -46,19 +46,19 @@ Please see the Micro Focus product documentation for more information.
 
 1. In the **Server Explorer** tab, right-click on **BANKDEMO** under **Local**, and click **Open Administration Page**. This opens the **Enterprise Server Common Web Administration** (ESCWA for short)  page outside of Eclipse.
 2. Click the **CICS** drop-down list, and select **Configuration**.
-3. Change the **System Initialization Table** from **CBLVSAM** to **PLIVSAM** and click **Apply**. This configures the server to use some PL/I CICS resources.
+3. Change the **System Initialization Table** from **CBLVSAM** to **PLIVSAM**, and click **Apply**. This configures the server to use some PL/I CICS resources.
 
 ### Associate the projects with the BANKDEMO enterprise server:
 
-1. In the **Server Explorer** tab, right-click the **BANKDEMO** server and select **Associate with Project**, and click **BANKMAIN**.
+1. In the **Server Explorer** tab, right-click the **BANKDEMO** server, and select **Associate with Project**, and click **BANKMAIN**.
 2. Repeat the process for the **FETCHABLES** project. 
 
-Making these associations before starting the server enables the executables built by the projects are used.
+Making these associations before you start the server enables the executables built by the projects to be used.
 
 ### Start the BANKDEMO enterprise server:
 
 1. On the **Server Explorer** tab, right-click the **BANKDEMO** server, and click **Start**.
-2. Click **OK** in the **Enterprise Server Sign On** dialog (you can leave the fields blank). You can check the Output window to see the progress of starting the server. This also starts the **Enterprise Server Console Daemon** window which also provides information about the server start-up.
+2. Click **OK** in the **Enterprise Server Sign On** dialog (you can leave the fields blank). You can check the **Output** view to see the progress of starting the server. This also starts the **Enterprise Server Console Daemon** window which also provides information about the server start-up.
 
 ### Execute the BANKDEMO application:
 
@@ -77,7 +77,8 @@ Making these associations before starting the server enables the executables bui
 8. If line numbers are not turned on in the source window, right-click in the left-hand column of the source pane, and click **Show Line Numbers**.
 9. You can step through the SBANK00P program, set breakpoints, and evaluate variables.  Once you're ready to run the program to completion, select **Resume/&lt;F8&gt;** as many times as necessary to run the program to completion.
 10. In the TN3270 emulator window, type a User id of **b0001**, and anything for the password, and press **Enter**.
-11. Eclipse restarts debugging so you can debug through the SBANK10P program.          
+    
+    Eclipse restarts debugging so you can debug through the SBANK10P program.          
 12. Once you are ready to run the program to completion, select **Resume/&lt;F8&gt;** as many times as necessary to run the program to completion.      
 
     As this application is psuedo-conversational, debugging will start and end with the invocation and completion of each transaction in the application.  Since this is a small demo, all of the CICS programs after the Banking main options screen are not built for debug and the sources are not provided.
@@ -85,7 +86,7 @@ Making these associations before starting the server enables the executables bui
 14. You can now disconnect your TN3270 terminal to end the demo.
 
 ### Stop the enterprise server:
-Now that you have finished running the CICS demo, you can stop the associated the enterprise server. To do this:
+When you have finished running the CICS demo, you can stop the associated the enterprise server as follows:
 
 1. In Eclipse, right-click the **BANKDEMO** server in **Server Explorer**, and click **Stop**.
 2. Check the **Output** view for messages that the server has been stopped. A number of messages also appear in the **Enterprise Server Console Daemon** window before it closes down.
