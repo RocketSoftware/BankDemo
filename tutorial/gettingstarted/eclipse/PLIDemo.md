@@ -11,7 +11,9 @@ If you decide to use the remote debug instructions, please check with your syste
 You must have the following software installed:
 
 -   Micro Focus Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
--   You must have Micro Focus Rumba+ Desktop or an equivalent TN3270 terminal emulator installed to run the CICS application. **Note:** A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.  
+- A TN3270 terminal emulator to run the CICS application.
+**Note:**
+Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
 
 Before running this demo remotely, be sure you have a Micro Focus RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
 Please see the Micro Focus product documentation for more information.
