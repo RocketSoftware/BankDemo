@@ -21,7 +21,7 @@ Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 em
 ### Import the supplied Bankdemo enterprise server:
   
 **Note:**
-If you have already imported the BANKDEMO enterprise server as part of the "[Getting started with Micro Focus Enterprise Developer for Visual Studio 2022](..\cobol\README.md)" tutorial, you can skip these steps.
+If you have already imported the BANKDEMO enterprise server as part of the "[Getting started with Micro Focus Enterprise Developer for Visual Studio 2022](..\README.md)" tutorial, you can skip these steps.
     
 1. Execute the `tutorial\createdefinition.ps1` PowerShell script to create the **BANKDEMO.xml** region definition file. 
     
