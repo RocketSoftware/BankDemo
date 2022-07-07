@@ -1,5 +1,5 @@
 # Micro Focus Bankdemo Application
-This project provides tutorials and demonstrations of features in the Micro Focus Enterprise Server and Enterprise Developer products.
+This project provides tutorials and demonstrations of features in the Micro Focus Enterprise Developer and Enterprise Server products.
 To use these materials, download the assets of the project [release](https://github.com/MicroFocus/BankDemo/releases) that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
 
 ## Contents
@@ -25,7 +25,7 @@ In the simplest configuration, it demonstrates a CICS/JCL COBOL application that
 
 ## <a name="license"></a>License
 
-Copyright (C) 2010-2022 Micro Focus.  All Rights Reserved.
+Copyright &copy; 2010-2022 Micro Focus.  All Rights Reserved.
 This software may be used, modified, and distributed 
 (provided this notice is included without modification)
 solely for internal demonstration purposes with other 
@@ -52,20 +52,20 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
         - [Open PL/I Bankdemo Application in Enterprise Developer for Eclipse](tutorial/gettingstarted/eclipse/PLIDemo.md)
         - [Open PL/I Bankdemo Application in Enterprise Development for Visual Studio](tutorial/gettingstarted/visualstudio/PLIDemo.md)
     - Requirements: 
-        - Micro Focus Directory Server (mfds) must be running
-        - Micro Focus Common Web Administration (ESCWA) must be running
+        - The Micro Focus Directory Server (mfds) service must be running
+        - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086.
 
 2. <a name="onprem"></a> Demonstrations of the Micro Focus Enterprise Server capabilities in "on-premise" scenarios:
     - Prerequisite software: 
-        - Micro Focus Enterprise Server or Enterprise Developer on Microsoft Windows or on a supported Linux distribution
+        - Micro Focus Enterprise Server or Enterprise Developer on Windows or on a supported Linux distribution.
         - Python 3 with the `requests psycopg2-binary` packages (use the following command to install the packages: `python -m pip install requests psycopg2-binary`)
-        - See the specific tutorials and demonstration instructions for any additional requirements
+        - Check the tutorial or demonstration instruction for any additional requirements
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
         - [Deploying and running Bankdemo with Postgres SQL](demos/onprem/psql/README.md) 
         - [Deploying and running Bankdemo with VSAM stored in Postgres SQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
     - Requirements: 
-        - Micro Focus Directory Server (mfds) must be running
-        - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086
+        - The Micro Focus Directory Server (mfds) service must be running
+        - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086.
 
 Use the **Issues** tab to report issues, or to raise questions.
