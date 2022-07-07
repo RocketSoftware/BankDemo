@@ -11,11 +11,11 @@ This demonstration shows how you can compile, link, and debug an Open PL/I BANK 
 ## Prerequisites
 
 This demonstration requires:
-- Micro Focus Enterprise Developer for Visual Studio 2022
+- Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application. 
 
 **Note:**
-Licenses for Micro Focus Rumba+ Desktop and the  HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
 
 ## How to Run the Demonstration
 ### Import the supplied Bankdemo enterprise server:
