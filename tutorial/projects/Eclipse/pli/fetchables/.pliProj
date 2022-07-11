@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="pliProject" name="FETCHABLES" uuid="2e0b1857-f1f9-4ce7-98da-9e684ad0da9b" version="5.0">
+   <settings xsi:type="projectSettingsContainer">
+      <imscopy-paths xsi:type="imsCopyPathsSettings">
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/fetchables/bin" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/fetchable" type="mfpath"/>
+      </imscopy-paths>
+      <jcl-include-paths xsi:type="jclIncludePathsSettings">
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/fetchables/bin" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/fetchable" type="mfpath"/>
+      </jcl-include-paths>
+      <asmmacro-paths xsi:type="assemblerMacroPathsSettings">
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/fetchables/bin" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/fetchable" type="mfpath"/>
+      </asmmacro-paths>
+      <configurations default="x64" linkedWith="2017" xsi:type="buildConfigurationsContainer">
+         <pli_configuration description="x86" type="all_dll" is64bit="false" xsi:type="pliBuildConfiguration">
+            <targetdir name="bin/debug"/>
+            <pli_link_settings xsi:type="pliLinkSettings">
+               <options>
+                  <option id="link_targetName" name="link_targetName" value="FETCHABLES"/>
+                  <option id="link_output" name="link_output" value="alldll"/>
+                  <option id="platform_target" name="ldpli" value="32 bit"/>
+               </options>
+               <additional_files/>
+            </pli_link_settings>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="New_Configuration.bin/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </pli_configuration>
+         <pli_configuration description="x64" type="all_dll" is64bit="true" xsi:type="pliBuildConfiguration">
+            <targetdir name="bin/x64/debug"/>
+            <pli_link_settings xsi:type="pliLinkSettings">
+               <options>
+                  <option id="link_targetName" name="link_targetName" value="FETCHABLES"/>
+                  <option id="link_output" name="link_output" value="alldll"/>
+                  <option id="platform_target" name="ldpli" value="64 bit"/>
+               </options>
+               <additional_files/>
+            </pli_link_settings>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="New_Configuration.bin/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </pli_configuration>
+      </configurations>
+      <build-precedence-paths xsi:type="buildPrecedenceSettings">
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES/fetchable" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES/bin" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES/bin/x64" type="mfpath"/>
+      </build-precedence-paths>
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/fetchable" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin" type="mfpath"/>
+         <path enabled="false" name="/FETCHABLES/bin/x64" type="mfpath"/>
+      </copybook-paths>
+      <dependent-projects xsi:type="dependentProjectsSettings">
+         <dependent-project name="INCLUDES"/>
+      </dependent-projects>
+      <ims_settings xsi:type="additionalImsSettings">
+         <generatedFileDir name=""/>
+         <imsDatabaseDir name=""/>
+      </ims_settings>
+      <asm_link_settings xsi:type="assemblerLinkSettings">
+         <options>
+            <option id="link_create_debug_info" name="mf370lnk" value="ANIM"/>
+            <option id="link_mark_reentrant" name="mf370lnk" value="RENT"/>
+            <option id="link_addressing_mode" name="mf370lnk" value="AMODE(31)"/>
+            <option id="link_residency_mode" name="mf370lnk" value="RMODE(31)"/>
+            <option id="link_generate_listing" name="mf370lnk" value="NOLIST"/>
+            <option id="link_mark_reusable" name="mf370lnk" value="REUS"/>
+            <option id="link_linker_output" name="mf370lnk" value="OMF(390)"/>
+            <option id="link_resolve_external" name="mf370lnk" value="CALL"/>
+         </options>
+      </asm_link_settings>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="macro" xsi:type="cobolFileContainer"/>
+      <filetype type="asm" xsi:type="cobolFileContainer"/>
+      <filetype type="psb" xsi:type="cobolFileContainer"/>
+      <filetype type="pli.include" xsi:type="cobolFileContainer"/>
+      <filetype type="jcl" xsi:type="cobolFileContainer"/>
+      <filetype type="rexx" xsi:type="cobolFileContainer"/>
+      <filetype type="bms" xsi:type="cobolFileContainer"/>
+      <filetype type="mfs" xsi:type="cobolFileContainer"/>
+      <filetype type="clist" xsi:type="cobolFileContainer"/>
+      <filetype type="easytrieve" xsi:type="cobolFileContainer"/>
+      <filetype type="lin" xsi:type="cobolFileContainer"/>
+      <filetype type="dbd" xsi:type="cobolFileContainer"/>
+      <filetype type="pli" xsi:type="cobolFileContainer">
+         <file compile="true" path="fetchable/ZBNKEXT1.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="fetchable/ZBNKPRT1.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="fetchable/DBANK52P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="fetchable/DBANK51P.pli" xsi:type="cobolFile"/>
+      </filetype>
+      <folders xsi:type="cobolFolderContainer">
+         <folder compile="true" path="bin/debug" xsi:type="cobolFolder"/>
+         <folder compile="true" path="bin" xsi:type="cobolFolder"/>
+         <folder compile="true" path="New_Configuration.bin" xsi:type="cobolFolder"/>
+         <folder compile="true" path="bin/x64/debug" xsi:type="cobolFolder"/>
+         <folder compile="true" path="New_Configuration_01.bin" xsi:type="cobolFolder"/>
+         <folder compile="true" path="fetchable" xsi:type="cobolFolder"/>
+      </folders>
+   </files>
+</project>

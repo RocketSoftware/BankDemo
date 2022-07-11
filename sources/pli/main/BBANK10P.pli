@@ -1,0 +1,257 @@
+ /****************************************************************
+ *
+ *   Copyright (C) 1998-2010 Micro Focus. All Rights Reserved.
+ *   This demonstration program is provided for use by users
+ *   of Micro Focus products and may be used, modified and
+ *   distributed as part of your application provided that
+ *   you properly acknowledge the copyright of Micro Focus
+ *   in this material.
+ *
+ ****************************************************************/
+
+ /****************************************************************
+ * Program:     BBANK10P.PLI
+ * Layer:       Business logic
+ * Function:    Signon to system to identify user
+ ****************************************************************/
+
+ BBANK10P:PROC(COMMPTR) OPTIONS(MAIN);
+
+ DCL COMMPTR                                  POINTER;
+ DCL 1 DFHCOMMAREA BASED(COMMPTR),
+    05  LK_COMMAREA                           CHAR(6144);
+
+ DCL (ADDR,
+      CSTG,
+      LOW,
+      SUBSTR)                                 BUILTIN;
+
+ DCL 1 WS_MISC_STORAGE,
+    05  TRUE                                  BIT(1) INIT('1'B),
+    05  FALSE                                 BIT(1) INIT('0'B),
+    05  WS_PROGRAM_ID                         CHAR(8)
+        INIT('BBANK10P'),
+    05  WS_INPUT_FLAG,
+      10  INPUT_OK                            BIT(1) INIT('0'B),
+      10  INPUT_ERROR                         BIT(1) INIT('0'B),
+    05  WS_RETURN_FLAG,
+      10  WS_RETURN_FLAG_OFF                  BIT(1) INIT('0'B),
+      10  WS_RETURN_FLAG_ON                   BIT(1) INIT('0'B),
+    05  WS_RETURN_MSG                         CHAR(75),
+    05  WS_PFK_FLAG,
+      10  PFK_VALID                           BIT(1) INIT('0'B),
+      10  PFK_INVALID                         BIT(1) INIT('0'B),
+    05  WS_ERROR_MSG                          CHAR(75) INIT('');
+
+ DCL 1 WS_BANK_DATA,
+  %INCLUDE CBANKDAT;
+  10 FILL CHAR(0);
+  %INCLUDE CBANKDAX;
+  
+ DCL WS_BANK_DATA_CHAR CHAR(STG(WS_BANK_DATA))
+      BASED(ADDR(WS_BANK_DATA));
+      
+ DCL 1 WS_HELP_DATA,
+  %INCLUDE CHELPD01;
+
+ DCL 1 WS_PERSON,
+  %INCLUDE CBANKD01;
+
+ DCL 1 WS_SECURITY,
+  %INCLUDE CPSWDD01;
+
+  %INCLUDE CABENDD;
+ /****************************************************************
+ * Move the passed area to our area
+ ****************************************************************/
+  WS_BANK_DATA_CHAR = SUBSTR(LK_COMMAREA,1,STG(WS_BANK_DATA));
+ /****************************************************************
+ * Ensure error message is cleared
+ ****************************************************************/
+  BANK_ERROR_MSG = '';
+
+ /****************************************************************
+ * If this is the first time in, then we have to do set up the
+ * COMMAREA and ask for the first map to be displayed.
+ ****************************************************************/
+  IF BANK_CONVERSATION    = '0'
+  THEN DO;
+         BANK_CONVERSATION    = '1';     
+         BANK_LAST_PROG = 'BBANK10P';
+         BANK_NEXT_PROG = 'BBANK10P';
+         BANK_SIGNON_ID = '';
+         BANK_USERID    = '';
+         BANK_PSWD      = '';
+         BANK_LAST_MAPSET = '';
+         BANK_LAST_MAP    = '';
+         BANK_NEXT_MAPSET ='MBANK10';
+         BANK_NEXT_MAP = 'BANK10A';
+         BANK_ERROR_MSG = 'PL/1 version';
+         GO TO COMMON_RETURN;
+      END;
+
+ /****************************************************************
+ * This is the main process
+ ****************************************************************/
+ /****************************************************************
+ * Move the passed area to our area
+ ****************************************************************/
+  WS_BANK_DATA = LK_COMMAREA;
+
+ /****************************************************************
+ * Save the passed return message and then turn it off
+ ****************************************************************/
+  WS_RETURN_MSG = BANK_RETURN_MSG;
+  BANK_RETURN_MSG = LOW(75);
+
+ /****************************************************************
+ * Check the AID to see if its valid at this point
+ ****************************************************************/
+  WS_PFK_FLAG = '';
+  PFK_INVALID = TRUE;
+  IF BANK_AID = 'ENTER'
+   | BANK_AID = 'PFK03'
+  THEN PFK_VALID = TRUE;
+  IF BANK_AID = 'PFK01'
+   & BANK_HELP_FLAG <= ''
+  THEN DO;
+         BANK_HELP_FLAG = 'HELP';
+         PFK_VALID = TRUE;
+       END;
+  IF BANK_AID = 'PFK04'
+   & BANK_HELP_FLAG = 'HELP'
+  THEN PFK_VALID = TRUE;
+  IF PFK_INVALID
+  THEN BANK_AID  = 'ENTER';
+   
+ /****************************************************************
+ * Check the AID to see if we have to quit
+ ****************************************************************/
+  IF BANK_AID = 'PFK03'
+  THEN DO;
+          BANK_LAST_PROG     = 'BBANK10P';
+          BANK_NEXT_PROG     = 'BBANK99P';
+          BANK_LAST_MAPSET   = 'MBANK10' ;
+          BANK_LAST_MAP      = 'BANK10A' ;
+          BANK_NEXT_MAPSET   = 'MBANK99' ;
+          BANK_NEXT_MAP      = 'BANK99A' ;
+          GO TO COMMON_RETURN;
+        END;
+
+ /****************************************************************
+ * Check the to see if user needs or has been using help
+ ****************************************************************/
+  IF BANK_HELP_FLAG = 'HELP'
+  THEN IF BANK_AID = 'PFK04'
+       THEN DO;
+            BANK_HELP_FLAG = LOW(4);     /* Cobol compatibility */
+            BANK_HELP_SCREEN = 0;
+            BANK_LAST_PROG   = 'BBANK10P';
+            BANK_NEXT_PROG   = 'BBANK10P';
+            BANK_LAST_MAPSET = 'MBANK10' ;
+            BANK_LAST_MAP    = 'HELP10A' ;
+            BANK_NEXT_MAPSET = 'MBANK10' ;
+            BANK_NEXT_MAP    = 'BANK10A' ;
+            GO TO COMMON_RETURN;
+            END;
+         ELSE DO;
+                BANK_HELP_SCREEN = 1;
+                BANK_LAST_PROG   = 'BBANK10P';
+                BANK_NEXT_PROG   = 'BBANK10P';
+                BANK_LAST_MAPSET = 'MBANK10' ;
+                BANK_LAST_MAP    = 'BANK10A' ;
+                BANK_NEXT_MAPSET = 'MBANK10' ;
+                BANK_NEXT_MAP    = 'HELP10A' ;
+                HELP01I_SCRN     = 'BANK10'  ;
+                EXEC CICS LINK PROGRAM('DHELP01P')
+                         COMMAREA(WS_HELP_DATA);
+                BANK_HELP_DATA = HELP01O_DATA;
+                GO TO COMMON_RETURN;
+              END;
+
+      CALL VALIDATE_USER;
+
+ /* If we had an error display error and return */
+  IF INPUT_ERROR
+  THEN DO;
+         BANK_ERROR_MSG = WS_ERROR_MSG;
+         BANK_LAST_PROG  = 'SBANK10P';
+         BANK_NEXT_PROG  = 'SBANK10P';
+         BANK_LAST_MAPSET= 'MBANK10' ;
+         BANK_LAST_MAP   = 'BANK10A' ;
+         BANK_NEXT_MAPSET= 'MBANK10' ;
+         BANK_NEXT_MAP   = 'BANK10A' ;
+         GO TO COMMON_RETURN;
+       END;
+
+  BANK_NEXT_PROG = 'BBANK20P';
+  GO TO COMMON_RETURN;
+
+  COMMON_RETURN:
+   DFHCOMMAREA = WS_BANK_DATA_CHAR;
+   EXEC CICS RETURN;
+
+  VALIDATE_USER:PROC;
+      WS_INPUT_FLAG = '';
+      INPUT_OK = TRUE;
+      BANK_SIGNON_ID = UPPERCASE(BANK_SIGNON_ID);
+      IF BANK_SIGNON_ID = 'GUEST'
+      THEN DO;
+              BANK_USERID = 'GUEST';
+              BANK_USERID_NAME = 'Guest';
+              GO TO VALIDATE_USER_EXIT;
+           END;
+      IF BANK_SIGNON_ID < ''
+      THEN DO;
+              WS_ERROR_MSG = 'Please input user id';
+              GO TO VALIDATE_USER_ERROR;
+           END;
+      IF BANK_PSWD < ''
+      THEN DO;
+              WS_ERROR_MSG = 'Please input password';
+              GO TO VALIDATE_USER_ERROR;
+           END;
+ /* We now make sure the user is valid....... */
+      CPSWDD01_DATA = '';
+      CPSWDD01I_USERID = BANK_SIGNON_ID;
+      CPSWDD01I_PASSWORD = BANK_PSWD;
+ /* If user starts with "Z" then treat as "B" */
+      IF SUBSTR(CPSWDD01I_USERID,1,1) = 'Z'
+      THEN SUBSTR(CPSWDD01I_USERID,1,1) = 'B';
+
+      PSWD_SIGNON = TRUE;
+
+      EXEC CICS LINK PROGRAM('SPSWD01P')
+                     COMMAREA(CPSWDD01_DATA);
+
+      IF CPSWDD01O_MESSAGE > ''
+      THEN DO;
+              WS_ERROR_MSG = CPSWDD01O_MESSAGE;
+              GO TO VALIDATE_USER_ERROR;
+           END;
+ /* We now make sure the user is actually a customer......*/
+      CD01_DATA = '';
+      CD01I_PERSON_PID = BANK_SIGNON_ID;
+ /* If user starts with "Z" then treat as "B" */
+      IF SUBSTR(CD01I_PERSON_PID,1,1) = 'Z'
+      THEN SUBSTR(CD01I_PERSON_PID,1,1) = 'B';
+      EXEC CICS LINK PROGRAM('DBANK01P')
+                     COMMAREA(CD01_DATA);
+
+      IF CD01O_PERSON_PID = ''
+      THEN DO;
+              WS_ERROR_MSG = CD01O_PERSON_NAME;
+              GO TO VALIDATE_USER_ERROR;
+           END;
+      ELSE DO;
+              BANK_USERID_NAME = CD01O_PERSON_NAME;
+              BANK_USERID = BANK_SIGNON_ID;
+              IF SUBSTR(BANK_USERID,1,1) = 'Z'
+              THEN SUBSTR(BANK_USERID,1,1) = 'B';
+              GO TO VALIDATE_USER_EXIT;
+           END;
+  VALIDATE_USER_ERROR:
+      INPUT_ERROR = TRUE;
+  VALIDATE_USER_EXIT:
+ END;
+ END BBANK10P;

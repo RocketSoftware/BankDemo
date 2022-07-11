@@ -1,0 +1,19 @@
+# Demonstrations of Micro Focus Enterprise Server capabilities "on-premise"
+- Prerequisite software: 
+    - Enterprise Server or Enterprise Developer
+    - Python 3 with `requests psycopg2-binary` packages (e.g. `python3 -m pip install requests psycopg2-binary`)
+    - See specific demonstration instructions for any additional requirements
+- Prerequisites: 
+    - Micro Focus Directory Server (mfds) is running
+    - Micro Focus Common Web Administration (escwa) is running and listening on the default localhost port 10086
+- Available demonstrations:
+    - [Deploying and running Bankdemo with VSAM data](vsam/README.md)
+        - Data stored in indexed sequential disk files accessed using COBOL verbs (READ/WRITE etc)
+       - Application built if Enterprise Developer is installed
+     - [Deploying and running Bankdemo with Postgres SQL](psql/README.md) 
+        - Data stored in a SQL database accessed using EXEC SQL statements
+        - Application built if Enterprise Developer is installed
+    - [Deploying and running Bankdemo with Postgres VSAM](psqlmfdbfh/README.md) 
+        - Data stored in a SQL database but accessed using COBOL verbs (READ/WRITE etc)
+        - Application built if Enterprise Developer is installed
+    

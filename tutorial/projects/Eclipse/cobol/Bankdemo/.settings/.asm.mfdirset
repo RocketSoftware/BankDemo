@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<x:dirset xmlns:x="http://microfocus.com/directivesset" schemaVersion="1.1">
+    <x:directive handler="project.assemblerCompileSettings" id="compile_cross_ref_listing" name="NOXREF"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_aat_info" name="NOAAT"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_generate_listing" name="NOLIST"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_pre_assm_macros" name="NOMPC"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_mark_reentrant" name="RENT"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_create_debug_info" name="ANIM"/>
+    <x:directive handler="project.assemblerCompileSettings" id="compile_create_optimized_code" name="NOOPT"/>
+    <x:ecm enabled="true" handler="ASMCICS" id="project.assemblerCicsSettings" prefix="CICS ">
+        <x:directive handler="project.assemblerCicsSettings" id="cics_insert_prolog_macros" name="PROLOG"/>
+        <x:directive handler="project.assemblerCicsSettings" id="cics_insert_epilog_macros" name="EPILOG"/>
+        <x:directive handler="project.assemblerCicsSettings" id="cics_unsupported_function" name="UFUNC(E)"/>
+        <x:directive handler="project.assemblerCicsSettings" id="cics_unsupported_option" name="UOPT(E)"/>
+    </x:ecm>
+    <x:ecm enabled="true" handler="mf370chkAutoLink" id="project.assemblerAutoLinkSettings" prefix="AUTOLINK ">
+        <x:directive handler="project.assemblerAutoLinkSettings" id="autolink_resolve_external" name="CALL"/>
+        <x:directive handler="project.assemblerAutoLinkSettings" id="autolink_residency_mode" name="RMODE(31)"/>
+        <x:directive handler="project.assemblerAutoLinkSettings" id="autolink_linker_output" name="OMF(390)"/>
+        <x:directive handler="project.assemblerAutoLinkSettings" id="autolink_addressing_mode" name="AMODE(31)"/>
+        <x:directive handler="project.assemblerAutoLinkSettings" id="autolink_mark_reusable" name="REUS"/>
+    </x:ecm>
+</x:dirset>

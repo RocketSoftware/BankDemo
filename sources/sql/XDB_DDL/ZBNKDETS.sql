@@ -1,0 +1,37 @@
+DROP VIEW VBNKDETS;
+COMMIT;
+
+CREATE VIEW VBNKDETS
+   (VPID, 
+    VNAME,
+    VADDR1,
+    VADDR2, 
+    VSTATE,
+    VCNTRY,
+    VPSTCDE, 
+    VEMAIL,
+    VACCNO, 
+    VDESC, 
+    VCURRBAL,
+    VLASTSTMTDTE,
+    VLASTSTMTBAL) AS 
+  SELECT A.BCS_PID, 
+         A.BCS_NAME, 
+         A.BCS_ADDR1,
+         A.BCS_ADDR2, 
+         A.BCS_STATE,
+         A.BCS_COUNTRY,
+         A.BCS_POST_CODE, 
+         A.BCS_EMAIL,
+         B.BAC_ACCNO,
+         C.BAT_DESC, 
+         B.BAC_BALANCE,
+         B.BAC_LAST_STMT_DTE,
+         B.BAC_LAST_STMT_BAL
+  FROM BNKCUST A, 
+       BNKACC B, 
+       BNKATYPE C
+  WHERE (A.BCS_PID = B.BAC_PID) AND  
+        (B.BAC_ACCTYPE = C.BAT_TYPE); 
+COMMIT;
+

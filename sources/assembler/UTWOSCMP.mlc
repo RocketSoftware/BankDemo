@@ -1,0 +1,83 @@
+***********************************************************************
+*                                                                     *
+* Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved           *
+* This software may be used, modified, and distributed                *
+* (provided this notice is included without modification)             *
+* solely for internal demonstration purposes with other               *
+* Micro Focus software, and is otherwise subject to the EULA at       *
+* https://www.microfocus.com/en-us/legal/software-licensing.          *
+*                                                                     *
+* THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED                   *
+* WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF                     *
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,               *
+* SHALL NOT APPLY.                                                    *
+* TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL                    *
+* MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION             *
+* WITH THIS SOFTWARE.                                                 *
+*                                                                     *
+***********************************************************************
+         TITLE 'Two" complement routine'
+***********************************************************************
+* This routine will be used to obtaim the "two's complement" of a     *
+* string. This is particularly useful in files/databases that cannot  *
+* sort, as in SQL with the ORDER BY option. Most methods give a read  *
+* forward by key, but not backwards. By using the 2's compliment, we  *
+* are effectively reading backwards.                                  *
+*---------------------------------------------------------------------*
+* This routine will be passed 3 parameters:                           *
+* - a two byte binary field containing the length of the field to     *
+*   be processed (min of 1, max of 256)                               *
+* - the input string area                                             *
+* - the output string area                                            *
+***********************************************************************
+UTWOSCMP CSECT
+         SAVE  (14,12),,*
+         EQUREGS
+         BALR  R12,R0                  ESTABLISH
+         USING *,R12                    ADDRESSABILITY
+         LA    R11,SAVEAREA            DO
+         ST    R11,8(R0,R13)            NORMAL
+         ST    R13,4(R0,R11)            SAVEAREA
+         LR    R13,R11                  CHAINING
+*
+         LM    R2,R4,0(R1)             LOAD PASSED PARM
+*
+         XR    R5,R5                   CLEAR A REGISTER
+         IC    R5,1(R2)                PUT LENGTH IN REGISTER
+CHKLO    EQU   *
+         CH    R5,H1                   CHECK FOR MIN LENGTH
+         BNL   CHKHI                   GO TO CHKHI
+         WTO   'UTWOSCMP - Passed length is less than the min of 1',   X
+               ROUTCDE=(2,11)
+         WTO   'UTWOSCMP - Aborting'                                   X
+               ROUTCDE=(2,11)
+         ABEND 1,DUMP
+*
+CHKHI    EQU   *
+         CH    R5,H256                 CHECK FOR MAX LENGTH
+         BNH   PROCESS                 GO TO PROCESS
+         WTO   'UTWOSCMP - Passed length is greater than max of 256',  X
+               ROUTCDE=(2,11)
+         WTO   'UTWOSCMP - Aborting'                                   X
+               ROUTCDE=(2,11)
+*
+PROCESS  EQU   *
+         BCTR  R5,R0                   REDUCE LENGTH FOR MACHINE CODE
+         STC   R5,MVC+1                STORE LENGTH IN MVC INSTRUCTION
+         STC   R5,XC+1                 STORE LENGTH IN XC INSTRUCTION
+MVC      MVC   0(1,R4),HIVALUES        MOVE X'FF' TO OUTPUT STRING
+XC       XC    0(1,R4),0(R3)           XC THE FIELD TO FLIP THE ITS
+*                                       (GET THE 2'S COMPLEMENT!)
+*
+RETURN   EQU   *
+         L     R13,SAVEAREA+4          RESTORE SA POINTER
+         RETURN (14,12),RC=0
+*
+SAVEAREA DS    18F
+H1       DC    H'1'
+H256     DC    H'256'
+HIVALUES DC    256XL1'FF'
+*
+* $ Version 7.00a sequenced on Thursday 20 Sep 2012 at 3:30pm
+*
+         END

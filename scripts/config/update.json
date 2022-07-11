@@ -1,0 +1,20 @@
+{
+    "CN": "",
+    "description": "",
+    "mfConfig": "",
+    "mfCASRemoteDebug": 1,
+    "mfCASMTOEnabled": 1,
+    "mfCASBatchEnabled": 1,
+    "mfMQLEnabled": 0,
+    "mfCASSysDir": "",
+    "mfCASCICSSIT": "DEMOSIT",
+    "mfCASTXTRANP": "",
+    "mfCASTXFILEP": "",
+    "mfCASTXMAPP": "",
+    "mfCASTXRDTP": "",
+    "mfCASCICSEZASOKET": 0,
+    "mfCASJCLPATH": "",
+    "mfCASMFSYSCAT": "",
+    "mfCASJCLALLOCLOC": "",
+    "mfCASJCLSYSPROCLIB": "SYS1.PROCLIB"
+}

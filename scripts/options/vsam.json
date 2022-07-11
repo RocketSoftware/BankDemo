@@ -1,0 +1,33 @@
+{
+    "ip_address" : "127.0.0.1",
+    "region_name": "BANKVSAM",
+    "product": "EDz",
+    "configuration_files":
+        {
+            "base_config": "base.json",
+            "update_config": "update.json",
+            "env_config": "env.json",
+            "alias_config": "alias.json",
+            "init_config": "init.json",
+            "data_dir_1": "datasets_po",
+            "data_dir_2": "datasets_vsam"
+        },
+    "JES": true,
+    "CICS": true,
+    "MQ": false,
+    "is64bit": false,
+    "database": "VSAM",
+    "PAC": {
+      "enabled": false,
+      "PSOR_type" : "redis",
+      "PSOR_connection": "localhost:6739",
+      "description": ""
+    },
+    "database_connection": 
+        {
+            "server_name": "localhost",
+            "server_port": "5432",
+            "user": "postgres",
+            "password" :"postgres"
+        }
+}

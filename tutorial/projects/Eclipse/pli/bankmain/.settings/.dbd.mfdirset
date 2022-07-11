@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<x:dirset xmlns:x="http://microfocus.com/directivesset" schemaVersion="1.1">
+    <x:directive handler="project.dbdSettings" id="IMSWarningLevel" name="ECHO=ERREND,4,50"/>
+    <x:directive handler="project.dbdSettings" id="generate_list_file" name="LIST=Listing/DBD/*.lst"/>
+</x:dirset>

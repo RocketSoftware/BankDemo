@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Bankdemo", "Bankdemo\Bankdemo.cblproj", "{E8190365-7277-4F72-8E77-1EF8581954F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Debug|x64.ActiveCfg = Debug|x64
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Debug|x64.Build.0 = Debug|x64
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Debug|x86.ActiveCfg = Debug|x86
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Debug|x86.Build.0 = Debug|x86
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Release|x64.ActiveCfg = Release|x64
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Release|x64.Build.0 = Release|x64
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Release|x86.ActiveCfg = Release|x86
+		{E8190365-7277-4F72-8E77-1EF8581954F2}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9965D86D-5757-4D61-BFDC-694ED99B7B16}
+	EndGlobalSection
+EndGlobal

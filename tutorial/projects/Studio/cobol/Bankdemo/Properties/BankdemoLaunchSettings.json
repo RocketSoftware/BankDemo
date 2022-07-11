@@ -1,0 +1,8 @@
+{
+  "Profiles": {
+    "Bankdemo": {
+      "commandName": "CICS",
+      "otherSettings": {}
+    }
+  }
+}

@@ -1,0 +1,446 @@
+UDATECNV AMODE 31
+         TITLE 'Assembler version of UDATECNV'
+***********************************************************************
+*                                                                     *
+* Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved           *
+* This software may be used, modified, and distributed                *
+* (provided this notice is included without modification)             *
+* solely for internal demonstration purposes with other               *
+* Micro Focus software, and is otherwise subject to the EULA at       *
+* https://www.microfocus.com/en-us/legal/software-licensing.          *
+*                                                                     *
+* THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED                   *
+* WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF                     *
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,               *
+* SHALL NOT APPLY.                                                    *
+* TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL                    *
+* MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION             *
+* WITH THIS SOFTWARE.                                                 *
+*                                                                     *
+***********************************************************************
+UDATECNV CSECT
+         SAVE  (14,12),,*
+         EQUREGS
+         BALR  R12,R0                  ESTABLISH
+         USING *,R12                    ADDRESSABILITY
+         LA    R11,SAVEAREA            DO
+         ST    R11,8(R0,R13)            NORMAL
+         ST    R13,4(R0,R11)            SAVEAREA
+         LR    R13,R11                  CHAINING
+*
+         L     R2,0(R0,R1)             LOAD PASSED PARM
+         USING CDATED,R2               ADDRESS PASSD PARMS
+*
+         TIME  DEC                     GET SYSTEM DATE & TIME
+         ST    R0,SYSTIME              STORE SYSTEM TIME (HHMMSSDD)
+         OI    SYSTIME+3,X'0F'         SET ZONE SIGN ON TIME
+         UNPK  DBLEWORD(7),SYSTIME     UNPACK TIME
+         MVC   LOCALTIM,DBLEWORD       STOTE MACHINE TIME
+*
+         ST    R1,SYSDATE              STORE SYSTEM DATE (00YYDDDS)
+         OI    SYSDATE+3,X'0F'         SET SIGN BITS ON DATE
+         UNPK  DBLEWORD(7),SYSDATE     UNPACK DATE
+         MVC   LOCALDAT,DBLEWORD + 2
+*
+         BAL   R10,CONVTIM             LINK TO TIME RTN
+         BAL   R10,CONVDAT             LINK TO DATE RTN
+*
+GOBACK   EQU   *                       COMMOM EXIT POINT
+         L    R13,SAVEAREA+4           RESTORE R13
+         RETURN (14,12),RC=0           RETURN TO CALLER
+*
+**********************************************************************
+* Convert any supplied time to hh:mm:dd format.                      *
+* If ENV is CICS then we have the time as 0HHMMSS.                   *
+* If ENV is IMS then we have date as HHMSSD                          *
+* If ENV is nulls or INET we will use system time                    *
+* Any other value of ENV is invalid so return 'hh:mm:ss' rather than *
+*  a real time                                                       *
+**********************************************************************
+CONVTIM  EQU   *
+         MVC   DDTIMEO,=CL7'hh:mm:ss'  SET DEFAULT RESPONES
+         MVC   NUMAREA,ZEROS           CLEAR NUMERIC WORK AREA
+         CLC   DDENV,ENVCICS           IS ENV = CICS
+         BNE   CONVTIMA                NO - SKIP TO CONVTIMA
+         MVC   NUMAREA+9(6),DDTIMEI+1  MOVE IN CICS TIME
+         B     CONVTIMX                SKIP TO FORMAT PART
+CONVTIMA EQU   *
+         CLC   DDENV,ENVIMS            IS ENV = IMS
+         BNE   CONVTIMB                NO - SKIP TO CONVTIMB
+         MVC   NUMAREA+9(6),DDTIMEI    MOVE IN IMS TIME
+         B     CONVTIMX                SKIP TO FORMAT PART
+CONVTIMB EQU   *
+         CLC   DDENV,ENVINET           IS ENV = INET
+         BNE   CONVTIMC                NO - SKIP TO CONVTIMC
+         MVC   NUMAREA+9(6),LOCALTIM   MOVE IN SYSTEM TIME
+         B     CONVTIMX                SKIP TO FORMAT PART
+CONVTIMC EQU   *
+         CLC   DDENV,ENVNULL           IS ENV = NULL
+         BNE   CONVTIMD                NO - SKIP TO CONVTIMD
+         MVC   NUMAREA+9(6),LOCALTIM   MOVE IN SYSTEM TIME
+         B     CONVTIMX                SKIP TO FORMAT PART
+CONVTIMD EQU   *
+         B     CONVTIMZ                SKIP TO EXIT
+CONVTIMX EQU   *
+         BAL   R14,NUMCHECK            CHECK TIME FOR NUMERIC
+         LTR   R15,R15                 WAS IT NUMERIC?
+         BNZ   CONVTIMZ                NO - SKIP TO EXIT
+         CLC   NUMAREA+9(2),=CL2'23'   IS HH GREATER THAN 23?
+         BH    CONVTIMZ                YES - SKIP TO EXIT
+         CLC   NUMAREA+11(2),=CL2'59'  IS MM GREATER THAN 59
+         BH    CONVTIMZ                YES - SKIP TO EXIT
+         CLC   NUMAREA+13(2),=CL2'59'  IS SS GREATER THAN 59?
+         BH    CONVTIMZ                YES - SKIP O EXIT
+CONVTIMY EQU   *                       REFORMAT THE TIME
+         MVC   DDTIMEO(2),NUMAREA+9    MOVE IN THE HH
+         MVI   DDTIMEO+2,C':'          MOVE IN A SEPERATOR
+         MVC   DDTIMEO+3(2),NUMAREA+11 MOVE IN THE MM
+         MVI   DDTIMEO+5,C':'          MOVE IN A SEPERATOR
+         MVC   DDTIMEO+6(2),NUMAREA+13 MOVE IN THE SS
+         B     CONVTIMZ
+CONVTIMZ EQU   *
+         BR    R10
+*
+**********************************************************************
+* Convert date from supplied format to requested format.             *
+**********************************************************************
+CONVDAT  EQU   *
+         MVC   DDODATA,=CL20' '        CLEAR THE OUTPUT DATA AREA
+*                                      CHECK OUTPUT TYPE
+         CLI   DDITYPE,C'0'            IS INPUT TYPE 0 (YYYY-MM-DD)
+         BE    CONVDAT0                YES - SKIP TO CONVDAT0
+         CLI   DDITYPE,C'1'            IS INPUT TYPE 1 (YYYYMMDD)
+         BE    CONVDAT1                YES - SKIP TO CONVDAT1
+         CLI   DDITYPE,C'2'            IS INPUT TYPE 2 (YYMMDD)?
+         BE    CONVDAT2                YES - SKIP TO CONVDAT2
+         CLI   DDITYPE,C'3'            IS INPUT TYPE 3 (YYDDD)?
+         BE    CONVDAT3                YES - SKIP TO CONVDAT3
+*
+         MVC   DDODATA(6),=CL6'ERROR1' NOT VALID SO MARK AS ERROR
+         BR    R10                     RETURN
+*
+** Convert date from YYYY-MM-DD
+*
+CONVDAT0 EQU   *
+         CLI   DDOTYPE,C'1'            IS OUTPUT TYPE 1 (DD-MMM-YY)?
+         BE    CONVDT01                YES - SKIP TO CONVDT01
+         CLI   DDOTYPE,C'2'            IS OUTPUT TYPE 2 (DD-MMM-YYYY)?
+         BE    CONVDT02                YES - SKIP TO CONVDT02
+*
+         MVC   DDODATA(6),=CL6'ERROR2' NOT VALID SO MARK AS ERROR
+         BR    R10                     RETURN
+*
+CONVDT01 EQU   *                       TYPE 1 (YYYY-MM-DD=>DD-MMM-YY)
+         MVC   DDO1Y,DDI0Y             MOVE YY TO OUTPUT
+         MVC   WRKMM,DDI0M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO1M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO1D,DDI0D             MOVE DD TO OUTPUT
+         MVI   DDO1S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO1S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+CONVDT02 EQU   *                       TYPE 2 (YYYY-MM-DD=>DD-MMM-YYYY)
+         MVC   DDO2C,DDI0C             MOVE CC TO OUTPUT
+         MVC   DDO2Y,DDI0Y             MOVE YY TO OUTPUT
+         MVC   WRKMM,DDI0M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO2M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO2D,DDI0D             MOVE DD TO OUTPUT
+         MVI   DDO2S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO2S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+** Convert date from YYYYMMDD
+*
+CONVDAT1 EQU   *
+         CLI   DDOTYPE,C'1'            IS OUTPUT TYPE 1 (DD-MMM-YY)?
+         BE    CONVDT11                YES - SKIP TO CONVDT11
+         CLI   DDOTYPE,C'2'            IS OUTPUT TYPE 2 (DD-MMM-YYYY)?
+         BE    CONVDT12                YES - SKIP TO CONVDT12
+*
+         MVC   DDODATA(6),=CL6'ERROR2' NOT VALID SO MARK AS ERROR
+         BR    R10                     RETURN
+*
+CONVDT11 EQU   *                       TYPE 1 (YYYYMMDD=>DD-MMM-YY)
+         MVC   DDO1Y,DDI1Y             MOVE YY TO OUTPUT
+         MVC   WRKMM,DDI1M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO1M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO1D,DDI1D             MOVE DD TO OUTPUT
+         MVI   DDO1S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO1S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+CONVDT12 EQU   *                       TYPE 2 (YYYYMMDD=>DD-MMM-YYYY)
+         MVC   DDO2C,DDI1C             MOVE CC TO OUTPUT
+         MVC   DDO2Y,DDI1Y             MOVE YY TO OUTPUT
+         MVC   WRKMM,DDI1M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO2M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO2D,DDI1D             MOVE DD TO OUTPUT
+         MVI   DDO2S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO2S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+** Convert date from YYMMDD
+*
+CONVDAT2 EQU   *
+         CLI   DDOTYPE,C'1'            IS OUTPUT TYPE 1 (DD-MMM-YY)?
+         BE    CONVDT21                YES - SKIP TO CONVDT21
+         CLI   DDOTYPE,C'2'            IS OUTPUT TYPE 2 (DD-MMM-YYYY)?
+         BE    CONVDT22                YES - SKIP TO CONVDT22
+*
+         MVC   DDODATA(6),=CL6'ERROR2' NOT VALID SO MARK AS ERROR
+         BR    R10                     RETURN
+*
+CONVDT21 EQU   *                       TYPE 1 (YYMMDD=>DD-MMM-YY)
+         MVC   DDO1Y,DDI2Y             MOVE YY TO OUTPUT
+         MVC   WRKMM,DDI2M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO1M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO1D,DDI2D             MOVE DD TO OUTPUT
+         MVI   DDO1S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO1S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+CONVDT22 EQU   *                       TYPE 2 (YYMMDD=>DD-MMM-YYYY)
+         MVC   DDO2Y,DDI2Y             MOVE YY TO OUTPUT
+         CLC   DDO2Y,=CL2'50'          IS YY GREATER THAN 50?
+         BH    CENT192
+         MVC   DDO2C,=CL2'20'          20th century
+         B     CONVNX2
+CENT192  DS    0H
+         MVC   DDO2C,=CL2'19'          19th century
+CONVNX2  DS    0H
+         MVC   WRKMM,DDI2M             MOVE MM TO WORKAREA
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO2M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO2D,DDI2D             MOVE DD TO OUTPUT
+         MVI   DDO2S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO2S2,C'-'             MOVE IN SEPERATOR
+         BR    R10                     RETURN
+*
+** Convert date from YYDDD
+*
+CONVDAT3 EQU   *
+         CLI   DDOTYPE,C'1'            IS OUTPUT TYPE 1 (DD-MMM-YY)?
+         BE    CONVDT31                YES - SKIP TO CONVDT31
+         CLI   DDOTYPE,C'2'            IS OUTPUT TYPE 2 (DD-MMM-YYYY)?
+         BE    CONVDT32                YES - SKIP TO CONVDT32
+*
+         MVC   DDODATA(6),=CL6'ERROR2' NOT VALID SO MARK AS ERROR
+         BR    R10                     RETURN
+*
+CONVDT31 EQU   *
+         BAL   R14,CONVDDD             CONVERT DDD TO MMDD
+         MVC   DDO1Y,DDI3YY            MOVE YY TO OUTPUT
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO1M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO1D,WRKDD             MOVE DD TO OUTPUT
+         MVI   DDO1S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO1S2,C'-'             MOVE IN SEPERATOR
+         BR    R10
+CONVDT32 EQU   *
+         BAL   R14,CONVDDD             CONVERT DDD TO MMDD
+         MVC   DDO2Y,DDI3YY            MOVE YY TO OUTPUT
+         CLC   DDO2Y,=CL2'50'          IS YY GREATER THAN 50?
+         BH    CENT193
+         MVC   DDO2C,=CL2'20'          20th century
+         B     CONVNX3
+CENT193  DS    0H
+         MVC   DDO2C,=CL2'19'          19th century
+CONVNX3  DS    0H
+         BAL   R14,MM2MTH              LINK TO CONVERSION RTN
+         MVC   DDO2M,WRKMTH            MOVE MMM TO OUTPUT
+         MVC   DDO2D,WRKDD             MOVE DD TO OUTPUT
+         MVI   DDO2S1,C'-'             MOVE IN SEPERATOR
+         MVI   DDO2S2,C'-'             MOVE IN SEPERATOR
+         BR    R10
+*
+CONVDDD  EQU   *
+         ZAP   MTHDAY02,=PL2'+028'     SET FEB TO 28 DAYS
+         PACK  WRKYY,DDI3YY            PACK YEAR
+         DP    WRKYY,=PL1'+4'          DIVIDE BY 4 FOR LEAP YEAR
+         CP    WRKYY+2(1),=PL1'+0'     IS REMAINDER 0? (A LEPA YEAR)
+         BNE   *+10                    NO - SKIP NEXT INSTRUCTION
+         ZAP   MTHDAY02,=PL2'+029'     SET FEB TO 29 DAYS
+*
+         PACK  WRKDAYS,DDI3DDD         CONVERT DAYS TO USEABLE FORMAT
+         ZAP   WRKMTH,=PL1'+1'         INITIALISE MONTH COUNT
+         LA    R15,MTHDAYS             POINTS TO TABLE OF DAYS/MTH
+CONVDD1  EQU   *
+         CP    WRKDAYS,0(2,R15)        DAYS LEFT GREATER THAN TABLE
+         BNH   CONVDD2                 NO - MUST BE THIS MONTH
+         AP    WRKMTH,=PL1'+1'         INCREMENT MONTH
+         SP    WRKDAYS,0(2,R15)        REDUCE DAYS LEFT
+         LA    R15,2(R0,R15)           INCREMENT TABLE POINTER
+         B     CONVDD1                 LOOP BACK
+CONVDD2  EQU   *
+         OI    WRKMTH+2,X'0F'          FLIP SIGN BITS ON MONTH
+         UNPK  WRKMM,WRKMTH+1(2)       CONVERT MTH TO DISPLAY FORMAT
+         OI    WRKDAYS+2,X'0F'         FLIP SIGN BITS ON DAYS
+         UNPK  WRKDD,WRKDAYS           CONVETS DAYS TO DISPLAY FORMAT
+
+*
+MM2MTH   EQU   *                       CONVERT MM TO MMM (ALPHA)
+         CLI   WRKMM,C'0'              CHECK MM IS VALID NUMERIC AND
+         BL    MM2MTHE                  IN RANGE 01 TO 12
+         CLI   WRKMM,C'1'
+         BH    MM2MTHE
+         CLI   WRKMM+1,C'0'
+         BL    MM2MTHE
+         CLI   WRKMM+1,C'9'
+         BH    MM2MTHE
+         CLC   WRKMM,=CL2'01'
+         BL    MM2MTHE
+         CLC   WRKMM,=CL2'12'
+         BH    MM2MTHE
+         PACK  DBLEWORD,WRKMM          CONVERT MM TO BINARY
+         CVB   R1,DBLEWORD
+         BCTR  R1,R0                   NOW REDUCE IT BY 1 AND
+         MH    R1,=H'3'                MULT BY TABLE ENTRY
+         LA    R15,MONTHS(R1)          TO GET ADDRESS IN TABLE
+         MVC   WRKMTH,0(R15)           MOVE TABLE ENTRY TO WORK AREA
+         B     MM2MTHX                 SKIP TO EXIT POINT
+MM2MTHE EQU   *
+         MVC   WRKMTH,=CL3'***'        FLAG MM AS INVALID
+         B     MM2MTHX
+MM2MTHX  EQU   *
+         BR    R14                     RETURN FROM SUB ROUTINE
+*
+**********************************************************************
+* Check the characters in NUMAREA for being numeric                  *
+**********************************************************************
+NUMCHECK EQU   *                       CHECK NUMAREA FOR NUMERICS
+         LA    R1,15(R0,R0)            LENGTH OF NUMAREA
+         LA    R15,NUMAREA             POINT TO NUMAREA
+NUMCHCKA EQU   *
+         CLI   0(R15),C'0'             IS CHAR LESS THAN 0?
+         BL    NUMCHCKY                YES - SKIP TO ERROR
+         CLI   0(R15),C'9'             IS CHAR GREATER THAN 9?
+         BH    NUMCHCKY                YES - SKIP TO ERROR
+         LA    R15,1(R0,R15)           INCREMENT POINTER
+         BCT   R1,NUMCHCKA             LOOP BACK
+NUMCHCKX EQU   *
+         LA    R15,0(R0,R0)            CLEAR RETURN CODE
+         B     NUMCHCKZ                SKIP TO EXIT
+NUMCHCKY EQU   *
+         LA    R15,4(R0,R0)            SET ERROR CONDITION
+         B     NUMCHCKZ                SKIP TO EXIT
+NUMCHCKZ EQU   *
+         BR    R14
+*
+DBLEWORD DS    D
+SAVEAREA DS    18F
+R14STORE DS    F
+NUMAREA  DS    CL15
+ZEROS    DC    CL15'000000000000000'
+SYSDATE  DC    F'0'
+LOCALDAT DC    CL5'YYDDD'
+SYSTIME  DC    F'0'
+LOCALTIM DC    CL6'HHMMSS'
+ENVCICS  DC    CL4'CICS'
+ENVIMS   DC    CL4'IMS '
+ENVINET  DC    CL4'INET'
+ENVNULL  DC    XL4'00000000'
+WRKMM    DS    CL2
+WRKMTH   DS    CL3
+WRKDD    DS    CL2
+WRKDAYS  DS    CL3
+WRKYY    DS    CL3
+MONTHS   DS    0CL36
+         DC    CL3'JAN'
+         DC    CL3'FEB'
+         DC    CL3'MAR'
+         DC    CL3'APR'
+         DC    CL3'MAY'
+         DC    CL3'JUN'
+         DC    CL3'JUL'
+         DC    CL3'AUG'
+         DC    CL3'SEP'
+         DC    CL3'OCT'
+         DC    CL3'NOV'
+         DC    CL3'DEC'
+MTHDAYS  DS    0CL24
+MTHDAY01 DC    PL2'+31'
+MTHDAY02 DC    PL2'+28'
+MTHDAY03 DC    PL2'+31'
+MTHDAY04 DC    PL2'+30'
+MTHDAY05 DC    PL2'+31'
+MTHDAY06 DC    PL2'+30'
+MTHDAY07 DC    PL2'+31'
+MTHDAY08 DC    PL2'+31'
+MTHDAY09 DC    PL2'+30'
+MTHDAY00 DC    PL2'+31'
+MTHDAY11 DC    PL2'+30'
+MTHDAY12 DC    PL2'+31'
+DAYS     DC    PL3'+0'
+*
+CDATED   DSECT
+DDENV    DS    CL4                     ENV VALUES
+*                                      - XL4'00000000'
+*                                      - CL4'CICS'
+*                                      - CL4'IMS '
+*                                      - CL4'INET'
+DDTIME   EQU   *                       TIME AREAS
+DDTIMEI  DS    CL7                     - TIME IN
+*                                        - IF CICS 0HHMMSS
+*                                        - IF IMS  HHMMSSD
+*                                        - ESLE ASSUME NO VALUE
+DDTIMEO  DS    CL8                     - TIME OUT
+*                                        HH:MM:SS
+*
+DDI      EQU   *                       DATE INPUT FORMAT & AREA
+DDITYPE  DS    CL1                     INPUT FORMAT
+*                                      - 1 = YYMDD
+*                                      - 2 = YYDDD
+*
+DDIDATA  DS    CL20                    DATE INPUT AREA
+         ORG   DDIDATA                 REDEFINE INPUT AREA
+DDI0     EQU   *                       DATE INPUT TYPE 0
+DDI0C    DS    CL2                     - CC
+DDI0Y    DS    CL2                     - YY
+DDI0F1   DS    CL1                     - -
+DDI0M    DS    CL2                     - MM
+DDI0F2   DS    CL1                     - -
+DDI0D    DS    CL2                     - DD
+         ORG   DDIDATA                 REDEFINE INPUT AREA
+DDI1     EQU   *                       DATE INPUT TYPE 1
+DDI1C    DS    CL2                     - CC
+DDI1Y    DS    CL2                     - YY
+DDI1M    DS    CL2                     - MM
+DDI1D    DS    CL2                     - DD
+         ORG   DDIDATA                 REDEFINE INPUT AREA
+DDI2     EQU   *                       DATE INPUT TYPE 1
+DDI2Y    DS    CL2                     - YY
+DDI2M    DS    CL2                     - MM
+DDI2D    DS    CL2                     - DD
+         ORG   DDIDATA                 REDEFINE INPUT AREA
+DDI3     EQU   *                       DATE INPUT TYPE 2
+DDI3YY   DS    CL2                     - YY
+DDI3DDD  DS    CL3                     - DDD
+         ORG   DDIDATA+20              CHECK WE'RE AT END OF INPUT AREA
+DDO      EQU   *                       DATE OUTPUT FORMAT & AREA
+DDOTYPE  DS    CL1                     OUTPUT FORMAT
+*                                      - 1 = DD.MMM.YY
+*                                      - 2 = DD.MMM.YYYY
+*
+DDODATA  DS    CL20                    DATE OUTPUT AREA
+         ORG   DDODATA                 REDEFINE OUTPUT AREA
+DDO1     EQU   *                       DATE OUTPUT TYPE 1
+DDO1D    DS    CL2                     - DD
+DDO1S1   DS    CL1                     - SEP
+DDO1M    DS    CL3                     - MMM
+DDO1S2   DS    CL1                     - SEP
+DDO1Y    DS    CL2                     - YY
+         ORG   DDODATA                 REDEFINE OUTPUT AREA
+DDO2     EQU   *                       DATE OUTPUT TYPE 2
+DDO2D    DS    CL2                     - DD
+DDO2S1   DS    CL1                     - SEP
+DDO2M    DS    CL3                     - MMM
+DDO2S2   DS    CL1                     - SEP
+DDO2C    DS    CL2                     - CC
+DDO2Y    DS    CL2                     - YY
+         END
+* $ Version 7.00a sequenced on Thursday 20 Sep 2012 at 3:30pm

@@ -1,0 +1,498 @@
+{"PPT_Entries": [
+  {"Resource":"BBANK10P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"BBANK20P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"BBANK30P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },  
+  {"Resource":"BBANK40P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"BBANK50P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"BBANK60P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"BBANK70P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"BBANK80P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"BBANK99P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK01P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK02P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK03P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK04P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK05P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK06P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK07P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK08P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK51P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DBANK52P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"DHELP01P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"SBANK00P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"SBANK10P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"SBANK20P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"SBANK30P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },  
+  {"Resource":"SBANK40P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"SBANK50P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }
+  },
+  {"Resource":"SBANK60P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"SBANK70P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"SBANK80P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"SBANK99P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  }, 
+  {"Resource":"SCUSTOMP",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"STRAC00P",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  },
+  {"Resource":"UDATECNV",
+    "Parameters":   
+        {
+            "resDesc": "",
+            "pptEnable": "Y",
+            "pptType": "P",
+            "pptRes": "N",
+            "pptComMax": "0",
+            "pptLang": "C",
+            "pptSave": "N",
+            "pptSys": "",
+            "pptRtrn": "",
+            "pptRprog": ""
+        }     
+  }    
+]
+}
