@@ -451,9 +451,9 @@ def create_region(main_configfile):
         write_log ('Database type {} selected - database being built'.format(database_engine))
         if os_type == 'Windows':
 
-            # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ODBC Driver(ANSI)', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
+            # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ANSI', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
             if is64bit == True:
-                odbcDriver = 'PostgreSQL ODBC Driver(ANSI)'
+                odbcDriver = 'PostgreSQL ANSI(x64)'
                 odbcconf = os.path.join(os.environ['windir'], 'system32', 'odbcconf.exe')
             else:
                 odbcDriver = 'PostgreSQL ANSI'
