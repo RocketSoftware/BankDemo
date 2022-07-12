@@ -1,0 +1,8 @@
+{
+    "CN": "string",
+    "description": "string",
+    "mfCASMTOEnabled": 1,
+    "mfCAS64Bit": 0,
+    "mfCreateTN3270Listener": true,
+    "mfTN3270ListenerPort": 0
+}

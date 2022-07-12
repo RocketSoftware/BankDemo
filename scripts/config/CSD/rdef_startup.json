@@ -1,0 +1,17 @@
+{"resNm": "BANKLST",
+ "resDesc": "Startup List for BANKDEMO demo application",
+ "lstItem01": "DFHBMS",
+ "lstItem02": "DFHCONS",
+ "lstItem03": "DFHEDF",
+ "lstItem04": "DFHHARDC",
+ "lstItem05": "DFHISC",
+ "lstItem06": "DFHOPER",
+ "lstItem07": "DFHTYPE",
+ "lstItem08": "DFHVTAM",
+ "lstItem09": "DFH$ACCT",
+ "lstItem10": "DFH$IVP",
+ "lstItem11": "DFHTERM",
+ "lstItem12": "DFHSIGN",
+ "lstItem13": "BANKGRP",
+ "lstItem14": "BANKGRP2"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<x:dirset xmlns:x="http://microfocus.com/directivesset" schemaVersion="1.1">
+    <x:directive handler="project.bmsSettings" id="dsect" name="/SYSPARM=DSECT"/>
+    <x:directive handler="project.bmsSettings" id="sdf" name="/IGNORE"/>
+    <x:directive handler="project.bmsSettings" id="currencychar" name="/CS=$"/>
+    <x:directive handler="project.bmsSettings" id="decimalchar" name="/DP=."/>
+    <x:directive handler="project.bmsSettings" id="coboldir" name="/COBOL=generated"/>
+    <x:directive handler="project.bmsSettings" id="map" name="/SYSPARM=MAP"/>
+    <x:directive handler="project.bmsSettings" id="targetdir" name="/BINARY=New_Configuration.bin"/>
+</x:dirset>

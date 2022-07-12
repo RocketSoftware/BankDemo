@@ -1,0 +1,107 @@
+***********************************************************************
+*                                                                     *
+* Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved           *
+* This software may be used, modified, and distributed                *
+* (provided this notice is included without modification)             *
+* solely for internal demonstration purposes with other               *
+* Micro Focus software, and is otherwise subject to the EULA at       *
+* https://www.microfocus.com/en-us/legal/software-licensing.          *
+*                                                                     *
+* THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED                   *
+* WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF                     *
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,               *
+* SHALL NOT APPLY.                                                    *
+* TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL                    *
+* MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION             *
+* WITH THIS SOFTWARE.                                                 *
+*                                                                     *
+***********************************************************************
+DFHZSGM DFHMSD BASE=MAPAREA,                                           -
+               LANG=COBOL,                                             -
+               MODE=INOUT,                                             -
+               TIOAPFX=YES,                                            -
+               TYPE=&&SYSPARM
+CSGM    DFHMDI DSATTS=(COLOR,HILIGHT,PS,VALIDN),                       -
+               MAPATTS=(COLOR,HILIGHT,PS,VALIDN),                      -
+               SIZE=(24,80)
+TXT00   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=39,                                              -
+               POS=(1,1),                                              -
+               INITIAL='This is the Micro Focus MFE CICS region'
+VAR01   DFHMDF ATTRB=(ASKIP,FSET,NORM),                                -
+               COLOR=GREEN,                                            -
+               LENGTH=20,                                              -
+               POS=(1,41),                                             -
+               INITIAL='SYSID HH:MM:SS'
+TXT01   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(7,1),                                              -
+               INITIAL='   **\      **\  *******\  *******\     ******\-
+                  **\   ******\    ******\   '
+TXT02   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=79,                                              -
+               POS=(8,1),                                              -
+               INITIAL='   ***\    ***\  *******\  *******\    ********-
+               \  **\  ********\  ********\    '
+TXT03   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(9,1),                                              -
+               INITIAL='   ****\  ****\  ***\\\\\  **\\\\\\    **\\\\\\-
+               \  **\  **\\\\\\\  **\\\\**\  '
+TXT04   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(10,1),                                             -
+               INITIAL='   **\**\**\**\  ***\      **\         **\     -
+                  **\  **\        **\    \\  '
+TXT05   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=78,                                              -
+               POS=(11,1),                                             -
+               INITIAL='   **\ ***\ **\  *****\    *****\      **\     -
+                  **\  **\         *******\   '
+TXT06   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(12,1),                                             -
+               INITIAL='   **\  *\  **\  *****\    *****\      **\     -
+                  **\  **\         *******\  '
+TXT07   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=76,                                              -
+               POS=(13,1),                                             -
+               INITIAL='   **\      **\  ***\      **\         **\     -
+                  **\  **\          \\\\**\ '
+TXT08   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(14,1),                                             -
+               INITIAL='   **\      **\  ***\      **\         **\     -
+                  **\  **\        **\   **\  '
+TXT09   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=77,                                              -
+               POS=(15,1),                                             -
+               INITIAL='   **\      **\  ***\      *******\    ********-
+               \  **\  ********\  ********\  '
+TXT10   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=76,                                              -
+               POS=(16,1),                                             -
+               INITIAL='   **\      **\  ***\      *******\     ******\-
+                  **\   ******\   ******\\  '
+TXT11   DFHMDF ATTRB=(ASKIP,NORM),                                     -
+               COLOR=GREEN,                                            -
+               LENGTH=75,                                              -
+               POS=(17,1),                                             -
+               INITIAL='    \\       \\   \\\        \\\\\      \\\\\\ -
+                 \\     \\\\\\    \\\\\\   '
+        DFHMSD TYPE=FINAL
+*
+* $ Version 7.00a sequenced on Thursday 20 Sep 2012 at 3:30pm
+*
+        END

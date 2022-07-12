@@ -1,0 +1,127 @@
+  /****************************************************************
+  *
+  *   Copyright (C) 1998-2010 Micro Focus. All Rights Reserved.
+  *   This demonstration program is provided for use by users
+  *   of Micro Focus products and may be used, modified and
+  *   distributed as part of your application provided that
+  *   you properly acknowledge the copyright of Micro Focus
+  *   in this material.
+  *
+  ****************************************************************/
+
+  /****************************************************************
+  * Program:     DBANK52P.PLI
+  * Function:    Sequential read of bank data for batch job
+  *              VSAM version
+  ****************************************************************/
+
+  DBANK52P:PROC(WS_COMMAREA) OPTIONS(FETCHABLE);
+
+   DCL BNKTXN FILE RECORD INPUT ENV(VSAM);
+   /*         ASSIGN       TO BNKTXN
+              ORGANIZATION IS INDEXED
+              ACCESS MODE  IS SEQUENTIAL
+              RECORD KEY   IS BTX_REC_TIMESTAMP
+              ALTERNATE KEY IS BTX_REC_ALTKEY1 WITH DUPLICATES
+              FILE STATUS  IS WS_BNKTXN_STATUS*/
+
+   DCL 01 BNKTXN_REC,
+   %INCLUDE CBANKVTX;
+
+  DCL 01  WS_MISC_STORAGE,
+     05  WS_PROGRAM_ID                         CHAR(8)
+         INIT('DBANK52P'),
+
+     05  WS_BNKTXN_STATUS                      CHAR(2) INIT('00');
+
+  DCL 01  WS_COMMAREA,
+   %INCLUDE CIOFUNCS;
+   %INCLUDE CBANKD51;
+   %INCLUDE CBANKD52;
+
+   %INCLUDE CBANKTXD;
+
+  /****************************************************************
+  * Set up ENDFILE and ERROR conditions
+  ****************************************************************/
+  ON ENDFILE(BNKTXN) WS_BNKTXN_STATUS = '10';
+  ON ERROR           WS_BNKTXN_STATUS = '99';
+
+  /****************************************************************
+  * Initialize our output area                                    *
+  ****************************************************************/
+    CD52O_DATA = '';
+
+  /****************************************************************
+  * Check what is required                                        *
+  ****************************************************************/
+    SELECT;
+      WHEN (IO_REQUEST_FUNCTION = 'OPEN')
+        CALL OPEN_FILE;
+      WHEN (IO_REQUEST_FUNCTION = 'READ')
+        CALL READ_FILE;
+      WHEN (IO_REQUEST_FUNCTION = 'CLOSE')
+        CALL CLOSE_FILE;
+      OTHERWISE
+        IO_REQUEST_STATUS = 'ERROR';
+      END;
+
+  /****************************************************************
+  * Return to our caller                                          *
+  ****************************************************************/
+      RETURN;
+
+  /****************************************************************
+  * Open the file so we can read TXN sequentially                 *
+  ****************************************************************/
+   OPEN_FILE:PROC;
+       OPEN FILE(BNKTXN) SEQUENTIAL;
+       IO_REQUEST_STATUS = 'OK';
+   END OPEN_FILE;
+
+  /****************************************************************
+  * Read sequentially through the transaction file                *
+  ****************************************************************/
+   READ_FILE:PROC;
+
+     NEXT:
+       READ FILE(BNKTXN) INTO(BNKTXN_REC);
+       SELECT;
+       /* Was read ok? */
+       WHEN (WS_BNKTXN_STATUS = '00')
+         IO_REQUEST_STATUS = 'OK';
+       /* Was read at end_of_file? */
+       WHEN (WS_BNKTXN_STATUS = '10')
+         IO_REQUEST_STATUS = 'EOF';
+       OTHERWISE
+         IO_REQUEST_STATUS = 'ERROR';
+       END;
+
+       IF IO_REQUEST_STATUS ^= 'OK'
+       THEN RETURN;
+
+       IF BTX_REC_TYPE = '1'
+        & (BTX_REC_PID = CD52I_PID
+           | CD52I_PID = 'ALL')
+       THEN DO;
+               CD52O_PID = BTX_REC_PID  ;
+               CD52O_ACC_NO = BTX_REC_ACCNO;
+               CD52O_TIMESTAMP = BTX_REC_TIMESTAMP;
+               CD52O_AMOUNT = BTX_REC_AMOUNT ;
+               TXN_DATA_OLD = BTX_REC_DATA_OLD;
+               CD52O_DESC = TXN_T1_OLD_DESC ;
+            END;
+       ELSE
+            GOTO NEXT;
+
+   END READ_FILE;
+
+  /****************************************************************
+  * Close the file                                                *
+  ****************************************************************/
+   CLOSE_FILE:PROC;
+       CLOSE FILE(BNKTXN);
+       IO_REQUEST_STATUS = 'OK';
+   END CLOSE_FILE;
+
+  END DBANK52P;

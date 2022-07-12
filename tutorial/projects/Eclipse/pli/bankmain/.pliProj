@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="pliProject" name="BANKMAIN" uuid="2574c16b-a6ab-4f7e-819b-a82c82974c62" version="5.0">
+   <settings xsi:type="projectSettingsContainer">
+      <imscopy-paths xsi:type="imsCopyPathsSettings">
+         <path enabled="true" name="/BANKDEMO" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/bankmain/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bms" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/main" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/jcl" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/generated" type="mfpath"/>
+      </imscopy-paths>
+      <jcl-include-paths xsi:type="jclIncludePathsSettings">
+         <path enabled="true" name="/BANKDEMO" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/bankmain/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bms" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/main" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/jcl" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/generated" type="mfpath"/>
+      </jcl-include-paths>
+      <asmmacro-paths xsi:type="assemblerMacroPathsSettings">
+         <path enabled="true" name="/BANKDEMO" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKDEMO/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/bankmain/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bms" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/main" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/jcl" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/generated" type="mfpath"/>
+      </asmmacro-paths>
+      <configurations default="x64" linkedWith="2017" xsi:type="buildConfigurationsContainer">
+         <pli_configuration description="x86" type="all_dll" is64bit="false" xsi:type="pliBuildConfiguration">
+            <targetdir name="bin/debug"/>
+            <pli_link_settings xsi:type="pliLinkSettings">
+               <options>
+                  <option id="link_targetName" name="link_targetName" value="BANKDEMO"/>
+                  <option id="link_output" name="link_output" value="alldll"/>
+                  <option id="link_system" name="ldpli" value="-systemcics"/>
+                  <option id="platform_target" name="ldpli" value="32 bit"/>
+               </options>
+               <additional_files/>
+            </pli_link_settings>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="New_Configuration.bin/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </pli_configuration>
+         <pli_configuration description="x64" type="all_dll" is64bit="true" xsi:type="pliBuildConfiguration">
+            <targetdir name="bin/x64/debug"/>
+            <pli_link_settings xsi:type="pliLinkSettings">
+               <options>
+                  <option id="link_targetName" name="link_targetName" value="BANKDEMO"/>
+                  <option id="link_output" name="link_output" value="alldll"/>
+                  <option id="platform_target" name="ldpli" value="64 bit"/>
+               </options>
+               <additional_files/>
+            </pli_link_settings>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="New_Configuration.bin/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </pli_configuration>
+      </configurations>
+      <build-precedence-paths xsi:type="buildPrecedenceSettings">
+         <path enabled="true" name="/BANKMAIN/bms" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN/main" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN/jcl" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN/bin" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN/bin/x64" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN/generated" type="mfpath"/>
+      </build-precedence-paths>
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="false" name="/BANKMAIN/bms" type="mfpath"/>
+         <path enabled="true" name="/BANKMAIN" type="mfpath"/>
+         <path enabled="true" name="/FETCHABLES" type="mfpath"/>
+         <path enabled="true" name="/INCLUDES" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/main" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/jcl" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/bin/x64" type="mfpath"/>
+         <path enabled="false" name="/BANKMAIN/generated" type="mfpath"/>
+      </copybook-paths>
+      <dependent-projects xsi:type="dependentProjectsSettings">
+         <dependent-project name="FETCHABLES"/>
+         <dependent-project name="INCLUDES"/>
+      </dependent-projects>
+      <ims_settings xsi:type="additionalImsSettings">
+         <generatedFileDir name=""/>
+         <imsDatabaseDir name=""/>
+      </ims_settings>
+      <asm_link_settings xsi:type="assemblerLinkSettings">
+         <options>
+            <option id="link_create_debug_info" name="mf370lnk" value="ANIM"/>
+            <option id="link_mark_reentrant" name="mf370lnk" value="RENT"/>
+            <option id="link_addressing_mode" name="mf370lnk" value="AMODE(31)"/>
+            <option id="link_residency_mode" name="mf370lnk" value="RMODE(31)"/>
+            <option id="link_generate_listing" name="mf370lnk" value="NOLIST"/>
+            <option id="link_mark_reusable" name="mf370lnk" value="REUS"/>
+            <option id="link_linker_output" name="mf370lnk" value="OMF(390)"/>
+            <option id="link_resolve_external" name="mf370lnk" value="CALL"/>
+         </options>
+      </asm_link_settings>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="macro" xsi:type="cobolFileContainer"/>
+      <filetype type="asm" xsi:type="cobolFileContainer"/>
+      <filetype type="psb" xsi:type="cobolFileContainer"/>
+      <filetype type="pli.include" xsi:type="cobolFileContainer"/>
+      <filetype type="jcl" xsi:type="cobolFileContainer">
+         <file compile="true" path="jcl/ZBNKAIX2.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRTZ.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKDEL.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKEXT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKUNLD.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKINT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPATH.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKAIX.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKSTMT.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKBAT1.jcl" xsi:type="cobolFile"/>
+      </filetype>
+      <filetype type="rexx" xsi:type="cobolFileContainer"/>
+      <filetype type="bms" xsi:type="cobolFileContainer">
+         <file compile="true" path="bms/MBANK10.bms" xsi:type="cobolFile"/>
+      </filetype>
+      <filetype type="mfs" xsi:type="cobolFileContainer"/>
+      <filetype type="clist" xsi:type="cobolFileContainer"/>
+      <filetype type="easytrieve" xsi:type="cobolFileContainer"/>
+      <filetype type="lin" xsi:type="cobolFileContainer"/>
+      <filetype type="dbd" xsi:type="cobolFileContainer"/>
+      <filetype type="pli" xsi:type="cobolFileContainer">
+         <file compile="true" path="main/SBANK00P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/BBANK10P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/DBANK01P.pli" xsi:type="cobolFile"/>
+         <file compile="true" path="main/SBANK10P.pli" xsi:type="cobolFile"/>
+      </filetype>
+      <folders xsi:type="cobolFolderContainer">
+         <folder compile="true" path="bms" xsi:type="cobolFolder"/>
+         <folder compile="true" path="jcl" xsi:type="cobolFolder"/>
+         <folder compile="true" path="main" xsi:type="cobolFolder"/>
+         <folder compile="true" path="New_Configuration.bin" xsi:type="cobolFolder"/>
+      </folders>
+   </files>
+</project>

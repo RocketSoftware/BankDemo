@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="inclibProject" name="INCLUDES" uuid="9e959299-acb4-462e-b963-68b656a9dea0" version="5.0">
+   <settings xsi:type="projectSettingsContainer">
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="true" name="/INCLUDES/include" type="mfpath"/>
+         <path enabled="false" name="/INCLUDES" type="mfpath"/>
+      </copybook-paths>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="pli.include" xsi:type="cobolFileContainer"/>
+      <folders xsi:type="cobolFolderContainer"/>
+   </files>
+</project>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
+This software may be used, modified, and distributed 
+(provided this notice is included without modification)
+solely for internal demonstration purposes with other 
+Micro Focus software, and is otherwise subject to the EULA at
+https://www.microfocus.com/en-us/legal/software-licensing.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED 
+WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
+SHALL NOT APPLY.
+TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL 
+MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+WITH THIS SOFTWARE. 
+-->
+<project name="DirsetBuild" default="cobolbuild" basedir="." xmlns:ac="antlib:net.sf.antcontrib">
+	<taskdef resource="com/microfocus/ant/antlib.xml"/>
+	<!--  ***********************************  -->
+	<!--  * General property initialisation *  -->
+	<!--  ***********************************  -->
+	<property name="pathVar.PROJECT_LOC" value="${basedir}"/>
+	<property environment="env"/>
+	<property name="DirsetBuild" value="${basedir}/copybook"/>
+	<property name="DirsetGenerated" value="${basedir}/generated"/>
+	<property name='dataversion' value="VSAM"/>
+	<property name='64bitset' value="false"/>
+	<property name="cfg" value="New_Configuration"/>
+	<property name="cfgtarget" value="cfg.${cfg}"/>
+	<property name="forceCompile" value="true"/>
+	<property name="buildThreadCount" value="4"/>
+	<property name="failOnError" value="false"/>
+	<property name="cobolFailOnError" value="true"/>
+	<property name="cobollinkFailOnError" value="${failOnError}"/>
+	<property name="bmsFailOnError" value="${failOnError}"/>
+
+	<!--  ******************************  -->
+	<!--  * OS-specific initialisation *  -->
+	<!--  ******************************  -->
+	<condition property="windows">
+		<os family="windows"/>
+	</condition>
+	<condition property="unix">
+		<os family="unix"/>
+	</condition>
+	<ac:if>
+		<isset property="windows"/>
+		<then>
+			<property name="dllext" value="dll"/>
+			<property name="exeext" value="exe"/>
+			<property name="objext" value="obj"/>
+			<property name="equalsInDir" value="="/>
+			<property name="pathVar.pS" value=";"/>
+			<property name="shell" value="cmd"/>
+			<property name="shell.ext" value=".bat"/>
+			<property name="shell.arg" value="/c"/>
+			<property name="script.header" value="@rem MS-DOS Batch File"/>
+		</then>
+	</ac:if>
+	<ac:if>
+		<isset property="unix"/>
+		<then>
+			<property name="dllext" value="so"/>
+			<property name="exeext" value=""/>
+			<property name="objext" value="o"/>
+			<property name="equalsInDir" value="="/>
+			<property name="pathVar.pS" value=":"/>
+			<property name="shell" value="sh"/>
+			<property name="shell.ext" value=".sh"/>
+			<property name="shell.arg" value="-c"/>
+			<property name="script.header" value="#!/bin/sh"/>
+		</then>
+	</ac:if>
+
+	<!--  **********************  -->
+	<!--  * COBOL source files *  -->
+	<!--  **********************  -->
+	<!-- cobol_file_set_1 -->
+	<fileset dir="${basedir}" id="cobol_file_set_1">
+		<include name="cobol/core/*.cbl"/>
+		<include name="cobol/data/${dataversion}/*.cbl"/>
+	</fileset>
+	
+	<!--  **********************  -->
+	<!--  * BMS source files *  -->
+	<!--  **********************  -->
+	<!-- bms_file_set_1 -->
+	<fileset dir="${basedir}" id="bms_file_set_1">
+		<include name="bms/cobol/*.bms"/>
+	</fileset>
+
+	<!-- **************** -->
+	<!-- * Object files * -->
+	<!-- **************** -->
+	<!-- Default -->
+	<fileset dir="${loaddir}" id="cobol.default.object.files.New Configuration">
+		<include name="*${objext}"/>
+	</fileset>
+	
+	<!-- COBOL copybook locations -->
+	<mffilelist id="cobol.copybook.locations">
+		<path type="copybook" name="${DirsetBuild}"/>
+		<path type="copybook" name="${DirsetGenerated}"/>
+	</mffilelist>
+
+	<!--  *************************  -->
+	<!--  * Configuration targets *  -->
+	<!--  *************************  -->
+	<!-- cfg.New_Configuration -->
+	<target name="cobolbuild.cfg.New_Configuration" depends="nature.specific.build.cfg.New_Configuration"/>
+	<target name="nature.specific.build.cfg.New_Configuration" depends="cobol.cfg.New_Configuration"/>
+	<target name="cobol.cfg.New_Configuration" depends="BMS.build.cfg.New_Configuration,cobol.compile.cfg.New_Configuration,cobol.link.cfg.New_Configuration"/>
+	
+	<target name="BMS.build.cfg.New_Configuration">
+		<bms destdir="${loaddir}" forceCompile="${forceCompile}" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" failonerror="${bmsFailOnError}" threadCount="${buildThreadCount}">
+			<fileset refid="bms_file_set_1"/>
+		</bms>
+	</target>
+	
+	<target name="cobol.compile.cfg.New_Configuration">
+		<cobol verbose="true" debug="true" configuration="New Configuration" settingsDir=".settings" useDirectiveSet="true" threadedRts="false" destdir="${loaddir}" is64bit="${64bitset}" failonerror="${cobolFailOnError}" forceCompile="${forceCompile}" threadCount="${buildThreadCount}">
+			<mffilelist refid="cobol.copybook.locations"/>
+			<fileset refid="cobol_file_set_1"/>
+		</cobol>
+	</target>
+	<target name="cobol.link.cfg.New_Configuration">
+		<path id="objects.path">
+			<fileset refid="cobol.default.object.files.New Configuration"/>
+		</path>
+		<foreach target="cobol.link.file" param="ObjName" parallel="true" maxThreads="${buildThreadCount}">
+			<path refid="objects.path"/>
+		</foreach>
+	</target>
+	
+	<target name="cobol.link.file">                 
+        <propertyregex input="${ObjName}" regexp="((.*[\\/])*)([^\.]*)\..*" select="\3" property="basename" casesensitive="false" override="true"/>
+		<ac:if>
+		<isset property="windows"/>
+		<then>
+			<cobollink objectfile="${ObjName}" entrypoint="" sharedRts="true" destfile="${basename}" destdir="${loaddir}" is64bit="${64bitset}" failonerror="${cobollinkFailOnError}" desttype="${dllext}" threadedRts="false">
+        	</cobollink>
+		</then>
+	</ac:if>
+	<ac:if>
+		<isset property="unix"/>
+		<then>
+			<cobollink objectfile="${ObjName}" entrypoint="" sharedRts="true" destfile="${basename}" destdir="${loaddir}" is64bit="${64bitset}" failonerror="${cobollinkFailOnError}" desttype="so" threadedRts="false">
+        	</cobollink>
+		</then>
+	</ac:if>        
+    </target>
+
+
+	<target name="clean.cfg.New_Configuration">
+		<delete file="${loaddir}/DirsetBuild.lbr"/>
+		<cobolclean debug="true" destdir="${loaddir}" desttype="${dllext}">
+			<mffilelist refid="cobol_file_set_1"/>
+		</cobolclean>
+		<cobolclean destdir="${loaddir}" desttype="${dllext}">
+			<mffilelist>
+				<file name="DirsetBuild"/>
+			</mffilelist>
+		</cobolclean>
+	</target>
+	<!--  *******************  -->
+	<!--  * General targets *  -->
+	<!--  *******************  -->
+	<target name="clean">
+		<antcall target="clean.${cfgtarget}" inheritAll="true"/>
+	</target>
+	<target name="BMSbuild">
+		<antcall target="BMS.build.${cfgtarget}" inheritAll="true"/>
+	</target>
+	<target name="cobolbuild">
+		<antcall target="cobolbuild.${cfgtarget}" inheritAll="true"/>
+	</target>
+	<target name="cobollink">
+		<antcall target="cobol.link.${cfgtarget}" inheritAll="true"/>
+	</target>
+</project>

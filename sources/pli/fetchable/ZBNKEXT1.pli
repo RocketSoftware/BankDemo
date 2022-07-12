@@ -1,0 +1,613 @@
+ /***************************************************************
+
+          Copyright (C) 1998-2010 Micro Focus All Rights Reserved
+          This demonstration program is provided for use by users
+          of Micro Focus products and may be used, modified and
+          distributed as part of your application provided that
+          you properly acknowledge the copyright of Micro Focus
+          in this material.
+
+ ****************************************************************/
+
+ /***************************************************************
+ Program:            ZBNKEXT1.pli
+ Function:           Extract data to print bank statements
+ ****************************************************************/
+ ZBNKEXT1:PROC(LK_PARM)    OPTIONS(MAIN);
+
+ DCL 1  (ADDR, FILEOPEN, HIGH, LENGTH, LOW,
+               NULL, ONCODE, STORAGE, STRING,
+               SUBSTR, TIME, UPPERCASE)            BUILTIN;
+
+ /*
+ Parameter declaration
+ */
+ DCL 1 LK_PARM       CHAR(14) VARYING;
+ DCL 1 LK_EXEC_PARM  BASED(ADDR(LK_PARM)),
+       05 LK_EXEC_PARM_LL                          FIXED BIN(15),
+       05 LK_EXEC_PARM_DATA                        CHAR(12);
+
+ /*
+ File declarations
+ */
+ DCL EXTRACT FILE RECORD OUTPUT;
+
+ %include CBANKXT1;
+
+ %include CTIMERD;
+
+ DCL 1     WS_MISC_STORAGE,
+         05  WS_PROGRAM_ID                         char(8)
+             init('ZBNKEXT1'),
+         05  WS_EXTRACT_STATUS,
+           10  WS_EXTRACT_STAT1                    char(1),
+           10  WS_EXTRACT_STAT2                    char(1),
+
+         05  WS_RECORD_COUNTER1                    PIC'(5)9' init(0),
+         05  WS_RECORD_COUNTER2                    PIC'(5)9' init(0),
+
+         05  WS_LAST_PID                           char(5) init(''),
+
+         05  WS_FILE_OPEN_FLAG                     bit(1) init('0'b),
+
+         05  WS_ONCODE                             fixed bin(15,0)
+                                                       init(0),
+
+         05  WS_BNK_REC_TYPE                       char(1) init(' ');
+
+ DCL 1     WS_EXTRACT_STATUS_R DEFINED WS_EXTRACT_STATUS
+                                                   char(2);
+ 
+ DCL 1     DBANK51P   EXTERNAL ENTRY OPTIONS(FETCHABLE);
+ DCL 1     DBANK52P   EXTERNAL ENTRY OPTIONS(FETCHABLE);
+ DCL 1     ZBNKRPC1   EXTERNAL ENTRY OPTIONS(FETCHABLE, COBOL);
+ DCL 1     WS_ZBNKRPC1_FIELDS,
+         05  WS_ZBNKRPC1_REQUESTED                 char(1)
+             init(''),
+        /* 88  RPC_REQUESTED                       VALUE 'Y'. */
+         05  WS_ZBNKRPC1_PGM                       char(8)
+             init(''),
+         05  WS_ZBNKRPC1_IND                       char(1)
+             init(''),
+          /* VALUE LOW-VALUES. */
+         05  WS_ZBNKRPC1_DATA,
+           10  WS_ZBNKRPC1_DATA_PT1                char(80),
+           10  WS_ZBNKRPC1_DATA_PT2                char(80);
+
+ DCL 1     WS_DATA_REPOSITORY,
+         05  WS_DATA_ACCESS                        char(3),
+        /* 88  DATA-ACCESS-DLI                     VALUE 'DLI'.
+           88  DATA-ACCESS-SQL                     VALUE 'SQL'.
+           88  DATA-ACCESS-VSM                     VALUE 'VSM'. */
+         05  WS_DATA_ACCESS_SQL_TYPE               char(3);
+        /* 88  SQL-ACCESS-DB2                      VALUE 'DB2'.
+           88  SQL-ACCESS-XDB                      VALUE 'XDB'. */
+
+ DCL 01    WS_CONSOLE_MESSAGE                      char(60);
+
+ DCL 01    WS_COMMAREA,
+ %include CIOFUNCS;
+ %include CBANKD51;
+ %include CBANKD52;;
+ DCL 01    WS_COMMAREA_R BASED(ADDR(WS_COMMAREA))
+                                             char(60);
+
+ DCL 01  IO_REQUEST_FUNCTION_OPEN            char(8) init('OPEN    ');
+ DCL 01  IO_REQUEST_FUNCTION_READ            char(8) init('READ    ');
+ DCL 01  IO_REQUEST_FUNCTION_CLOSE           char(8) init('CLOSE   ');
+ DCL 01  IO_REQUEST_STATUS_OK                char(8) init('OK      ');
+ DCL 01  IO_REQUEST_STATUS_EOF               char(8) init('EOF     ');
+ DCL 01  IO_REQUEST_STATUS_ERROR             char(8) init('ERROR   ');
+
+ %include CABENDD;
+
+ /*
+ DCL 01    WS_ENV_AREA                             char(200);
+ DCL 01    WS_ENV_AREA_R BASED(ADDR(WS_ENV_AREA)),
+         05  WS_ENVIRON_DATA                       char(100),
+         05  WS_ENV_DATA BASED(ADDR(WS_ENVIRON_DATA)),
+           10  WS_ENV_ID                           char(8),
+           10  WS_ENV_REL                          char(4),
+           10  WS_ENV_CTLTYPE                      char(8),
+           10  WS_ENV_APPTYPE                      char(8),
+           10  WS_ENV_RGNID                        char(4),
+           10  WS_ENV_APPNAME                      char(8),
+           10  WS_ENV_PSBNAME                      char(8),
+           10  WS_ENV_TRNNAME                      char(8),
+           10  WS_ENV_UID                          char(8),
+           10  WS_ENV_GRPNAME                      char(8),
+           10  WS_ENV_STATUS                       char(4),
+           10  WS_ENV_RECTOK                       POINTER,
+           10  WS_ENV_ADDRPRM                      POINTER,
+           10  WS_ENV_SHRQ                         char(4),
+           10  WS_ENV_UADS                         char(8),
+           10  WS_ENV_UIND                         char(4),
+         05  WS_RECOVER_TOKEN                      char(18); */
+         
+ /****************************************************************
+ * Set up ON conditions for various file statuses                *
+ ****************************************************************/
+           ON ERROR
+              BEGIN;
+                 ON ERROR SYSTEM;
+                 WS_ONCODE = ONCODE();
+                 WS_CONSOLE_MESSAGE = 'Error ONCODE is ' ||
+                                              WS_ONCODE;
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL PLIRETC(100);
+                 STOP;
+              END;
+
+           ON RECORD(EXTRACT)
+              WS_ONCODE = ONCODE();
+
+           ON UNDEFINEDFILE(EXTRACT)
+              WS_ONCODE = ONCODE();
+
+ /***************************************************************
+ Perform RUN_TIME to initialize time and display start time
+ ***************************************************************/
+           CALL RUN_TIME;
+
+
+ /***************************************************************
+ Check whether any parameter has been passed.
+ ***************************************************************/
+           IF LK_EXEC_PARM_LL = 0 THEN
+              DO;
+                 WS_CONSOLE_MESSAGE = 'No exec card parm present';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 WS_CONSOLE_MESSAGE = '  Selecting all records';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE = 'Exec parm is "' ||
+                    SUBSTR(LK_EXEC_PARM_DATA,1,LK_EXEC_PARM_LL) ||
+                    '"';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 WS_CONSOLE_MESSAGE = '';
+                 WS_CONSOLE_MESSAGE = '  Selecting records for ' ||
+                    SUBSTR(LK_EXEC_PARM_DATA,1,LK_EXEC_PARM_LL) ||
+                    ' only';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+
+ /***************************************************************
+ Check to see if we want to demonstrate MFE calling a module
+ that resides on the mainframe.
+ ***************************************************************/
+           IF WS_ZBNKRPC1_REQUESTED = 'Y' THEN
+              CALL RPC_PROCESS;
+
+ /***************************************************************
+ Open our output file
+ ***************************************************************/
+           CALL EXTRACT_OPEN;
+
+ /***************************************************************
+ Open the customer details input then read the data and create  *
+ output records as appropriate.                                 *
+ ***************************************************************/
+           CALL SOURCE1_OPEN;
+           DO WHILE (IO_REQUEST_STATUS ^= IO_REQUEST_STATUS_EOF);
+             IF IO_REQUEST_STATUS ^= IO_REQUEST_STATUS_EOF THEN
+                DO;
+                   CALL SOURCE1_READ;
+                   IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_OK THEN
+                      DO;
+                         WS_RECORD_COUNTER1 = WS_RECORD_COUNTER1 + 1;
+                         IF WS_RECORD_COUNTER1 < 6 THEN
+                            DO;
+                               WS_CONSOLE_MESSAGE = WS_COMMAREA_R;
+                               CALL DISPLAY_CONSOLE_MESSAGE;
+                            END;
+                         ELSE
+                            IF WS_RECORD_COUNTER2 = 6 THEN
+                               DO;
+                                  WS_CONSOLE_MESSAGE =
+                                     'Suppressing record display...';
+                                  CALL DISPLAY_CONSOLE_MESSAGE;
+                               END;
+
+                         IF CD51O_PID ^= WS_LAST_PID THEN
+                            DO;
+                               BANKXT01_REC0 = '';
+                               BANKXT01_0_TYPE, WS_BNK_REC_TYPE = '0';
+                               BANKXT01_0_PID = CD51O_PID;
+                               BANKXT01_0_NAME = CD51O_NAME;
+                               BANKXT01_0_EMAIL = CD51O_EMAIL;
+                               CALL EXTRACT_WRITE;
+                               BANKXT01_REC1 = '';
+                               BANKXT01_1_TYPE,
+                                       WS_BNK_REC_TYPE = '1';
+                               BANKXT01_1_PID = CD51O_PID;
+                               BANKXT01_1_NAME = CD51O_NAME;
+                               BANKXT01_1_ADDR1 = CD51O_ADDR1;
+                               BANKXT01_1_ADDR2 = CD51O_ADDR2;
+                               BANKXT01_1_STATE = CD51O_STATE;
+                               BANKXT01_1_CNTRY = CD51O_CNTRY;
+                               BANKXT01_1_PST_CDE = CD51O_POST_CODE;
+                               CALL EXTRACT_WRITE;
+                               WS_LAST_PID = CD51O_PID;
+                            END;
+                         BANKXT01_REC2 = '';
+                         BANKXT01_2_TYPE, WS_BNK_REC_TYPE = '2';
+                         BANKXT01_2_PID = CD51O_PID;
+                         BANKXT01_2_ACC_NO = CD51O_ACC_NO;
+                         BANKXT01_2_ACC_DESC = CD51O_ACC_DESC;
+                         BANKXT01_2_ACC_CURR_BAL = CD51O_ACC_CURR_BAL;
+                         BANKXT01_2_ACC_LAST_STMT_DTE =
+                              CD51O_ACC_LAST_STMT_DTE;
+                         BANKXT01_2_ACC_LAST_STMT_BAL =
+                              CD51O_ACC_LAST_STMT_BAL;
+                         CALL EXTRACT_WRITE;
+                      END;
+                END;
+           END;
+           CALL SOURCE1_CLOSE;
+
+ /***************************************************************
+ Open the transactions details file then read the data and
+ create output records as appropriate.
+ ***************************************************************/
+           CALL SOURCE2_OPEN;
+           DO WHILE (IO_REQUEST_STATUS ^= IO_REQUEST_STATUS_EOF);
+             IF IO_REQUEST_STATUS ^= IO_REQUEST_STATUS_EOF THEN
+                DO;
+                   CALL SOURCE2_READ;
+                   IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_OK THEN
+                      DO;
+                         WS_RECORD_COUNTER2 = WS_RECORD_COUNTER2 + 1;
+                         IF WS_RECORD_COUNTER2 < 6 THEN
+                            DO;
+                               WS_CONSOLE_MESSAGE = WS_COMMAREA_R;
+                               CALL DISPLAY_CONSOLE_MESSAGE;
+                            END;
+                         ELSE
+                            IF WS_RECORD_COUNTER2 = 6 THEN
+                               DO;
+                                  WS_CONSOLE_MESSAGE =
+                                     'Suppressing record display...';
+                                  CALL DISPLAY_CONSOLE_MESSAGE;
+                               END;
+
+                         BANKXT01_REC3 = '';
+                         BANKXT01_3_TYPE, WS_BNK_REC_TYPE = '3';
+                         BANKXT01_3_PID = CD52O_PID;
+                         BANKXT01_3_ACC_NO = CD52O_ACC_NO;
+                         BANKXT01_3_AMOUNT = CD52O_AMOUNT;
+                         BANKXT01_3_TIMESTAMP = CD52O_TIMESTAMP;
+                         BANKXT01_3_DESC = CD52O_DESC;
+                         CALL EXTRACT_WRITE;
+                      END;
+                END;
+           END;
+           CALL SOURCE2_CLOSE;
+
+ /***************************************************************
+ Close our output file
+ ***************************************************************/
+           CALL EXTRACT_CLOSE;
+
+ /***************************************************************
+ Display messages to show what we created
+ ***************************************************************/
+           WS_CONSOLE_MESSAGE = 'SOURCE data has been extracted';
+           CALL DISPLAY_CONSOLE_MESSAGE;
+           WS_CONSOLE_MESSAGE = '';
+           WS_CONSOLE_MESSAGE = WS_RECORD_COUNTER1 ||
+                                ' from SOURCE1 (Customer details)';
+           CALL DISPLAY_CONSOLE_MESSAGE;
+           WS_CONSOLE_MESSAGE = '';
+           WS_CONSOLE_MESSAGE = WS_RECORD_COUNTER2 ||
+                                   ' from SOURCE2 (Transactions)';
+           CALL DISPLAY_CONSOLE_MESSAGE;
+           WS_CONSOLE_MESSAGE = 'End Of Job';
+           CALL DISPLAY_CONSOLE_MESSAGE;
+
+ /***************************************************************
+ Perform RUN_TIME to calculate run time and display end time
+ ***************************************************************/
+           CALL RUN_TIME;
+
+ /***************************************************************
+ Step return code and return
+ ***************************************************************/
+           CALL PLIRETC(0);
+           RETURN;
+
+ /***************************************************************
+ Open the source file
+ ***************************************************************/
+ SOURCE1_OPEN: PROCEDURE;
+           WS_COMMAREA = '';
+           CD51I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD51I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_OPEN;
+           CALL DBANK51P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_OK THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                        'SOURCE1 (Customer details) file opened OK';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                   'SOURCE1 (Customer details) file open failure...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE1_OPEN;
+ 
+ SOURCE2_OPEN: PROCEDURE;
+           WS_COMMAREA = '';
+           CD52I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD52I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_OPEN;
+           CALL DBANK52P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_OK THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                         'SOURCE2 (Transactions) file opened OK';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                    'SOURCE2 (Transactions) file open failure...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE2_OPEN;
+
+ /***************************************************************
+ Read a record from the source file
+ ***************************************************************/
+ SOURCE1_READ: PROCEDURE;
+           WS_COMMAREA = '';
+           CD51I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD51I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_READ;
+           CALL DBANK51P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_ERROR THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                  'SOURCE1 (Customer details) Error reading file ...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE1_READ;
+ 
+ SOURCE2_READ: PROCEDURE;
+           WS_COMMAREA = '';
+           CD52I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD52I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_READ;
+           CALL DBANK52P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_ERROR THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                     'SOURCE2 (Transactions) Error reading file ...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE2_READ;
+
+ /***************************************************************
+ Close the source file.
+ ***************************************************************/
+ SOURCE1_CLOSE: PROCEDURE;
+           WS_COMMAREA = '';
+           CD51I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD51I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_CLOSE;
+           CALL DBANK51P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_ERROR THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                 'SOURCE1 (Customer details) Error closing file...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE1_CLOSE;
+ 
+ SOURCE2_CLOSE: PROCEDURE;
+           WS_COMMAREA = '';
+           CD51I_PID = SUBSTR(LK_EXEC_PARM_DATA,1,LENGTH(CD51I_PID));
+           IO_REQUEST_FUNCTION = IO_REQUEST_FUNCTION_CLOSE;
+           CALL DBANK52P (WS_COMMAREA);
+           IF IO_REQUEST_STATUS = IO_REQUEST_STATUS_ERROR THEN
+              DO;
+                 WS_CONSOLE_MESSAGE =
+                   'SOURCE2 (Transactions) Error closing file ...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END SOURCE2_CLOSE;
+
+ /***************************************************************
+ Open the seqential extract file as output
+ ***************************************************************/
+ EXTRACT_OPEN: PROCEDURE;
+           OPEN FILE(EXTRACT) OUTPUT;
+           WS_FILE_OPEN_FLAG = FILEOPEN(EXTRACT);
+           IF WS_FILE_OPEN_FLAG = '1'B THEN
+              DO;
+                 WS_CONSOLE_MESSAGE = 'EXTRACT file opened OK';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE = 'EXTRACT file open failure...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL DISPLAY_COND_CODE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END EXTRACT_OPEN;
+
+ /***************************************************************
+ Write a record to the squential file
+ ***************************************************************/
+ EXTRACT_WRITE: PROCEDURE;
+    
+           SELECT(WS_BNK_REC_TYPE);
+              WHEN ('0') WRITE FILE(EXTRACT) FROM(BANKXT01_REC0);
+              WHEN ('1') WRITE FILE(EXTRACT) FROM(BANKXT01_REC1);
+              WHEN ('2') WRITE FILE(EXTRACT) FROM(BANKXT01_REC2);
+              WHEN ('3') WRITE FILE(EXTRACT) FROM(BANKXT01_REC3);
+              OTHERWISE;
+           END;
+
+           IF WS_ONCODE ^= 0 THEN
+              DO;
+                 WS_CONSOLE_MESSAGE = 'EXTRACT Error Writing file...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL DISPLAY_COND_CODE;
+                 CALL ABORT_PROGRAM;
+              END;
+
+           WS_BNK_REC_TYPE = ' ';
+ END EXTRACT_WRITE;
+
+ /***************************************************************
+ Close the seqential extract file
+ ***************************************************************/
+ EXTRACT_CLOSE: PROCEDURE;
+           CLOSE FILE(EXTRACT);
+           WS_FILE_OPEN_FLAG = FILEOPEN(EXTRACT);
+           IF WS_FILE_OPEN_FLAG = '0'B THEN
+              DO;
+                 WS_CONSOLE_MESSAGE = 'EXTRACT file closed OK';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE = 'EXTRACT file close failure...';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+                 CALL DISPLAY_COND_CODE;
+                 CALL ABORT_PROGRAM;
+              END;
+ END EXTRACT_CLOSE;
+
+ /***************************************************************
+ Display the file status ONCODE value. 
+ ***************************************************************/
+ DISPLAY_COND_CODE: PROCEDURE;
+
+           IF WS_ONCODE = 0 THEN
+              DO;
+                 WS_CONSOLE_MESSAGE = '';
+                 WS_CONSOLE_MESSAGE = 'File oncode -' ||
+                                      WS_ONCODE;
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE
+              DO;
+                 WS_CONSOLE_MESSAGE = '';
+                 WS_CONSOLE_MESSAGE = 'File oncode -' ||
+                                      WS_ONCODE;
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+ END DISPLAY_COND_CODE;
+
+ /***************************************************************
+ 'ABORT' the program.
+ Post a message to the console and issue a STOP RUN
+ ***************************************************************/
+ ABORT_PROGRAM: PROCEDURE;
+           IF WS_CONSOLE_MESSAGE ^= '' THEN
+              CALL DISPLAY_CONSOLE_MESSAGE;
+           WS_CONSOLE_MESSAGE = 'Program is abending...';
+           CALL DISPLAY_CONSOLE_MESSAGE;
+           CALL PLIRETC(16);
+           STOP;
+ END ABORT_PROGRAM;
+
+ /***************************************************************
+ This process will attempt to call a small module which is
+ meant to reside on the mainframe
+ ***************************************************************/
+ RPC_PROCESS: PROCEDURE;
+      /*   WS_ZBNKRPC1_IND = '0';   */
+           WS_ZBNKRPC1_DATA_PT1 = LOW(STG(WS_ZBNKRPC1_DATA_PT1));
+           WS_ZBNKRPC1_DATA_PT2 = HIGH(STG(WS_ZBNKRPC1_DATA_PT2));
+           WS_ZBNKRPC1_PGM = 'ZBNKRPC1';
+           CALL ZBNKRPC1 (WS_ZBNKRPC1_DATA);
+ /*            ON EXCEPTION
+               MOVE '1' TO WS_ZBNKRPC1_IND
+           IF WS_ZBNKRPC1_IND = '1' THEN
+              DO;
+                 WS_CONSOLE_MESSAGE
+                    = 'Call to ZBNKRPC1 failed. Program not found.';
+                 CALL DISPLAY_CONSOLE_MESSAGE;
+              END;
+           ELSE */
+              IF ((WS_ZBNKRPC1_DATA_PT1 =
+                             LOW(STG(WS_ZBNKRPC1_DATA_PT1))) &
+                 (WS_ZBNKRPC1_DATA_PT2 =
+                             HIGH(STG(WS_ZBNKRPC1_DATA_PT2)))) THEN
+                 DO;
+                    WS_CONSOLE_MESSAGE
+                        = 'Call to ZBNKRPC1 was to a stub program.';
+                    CALL DISPLAY_CONSOLE_MESSAGE;
+                    WS_CONSOLE_MESSAGE
+                        = 'Passed data area was unchanged.';
+                    CALL DISPLAY_CONSOLE_MESSAGE;
+                 END;
+              ELSE
+                 DO;
+                    WS_CONSOLE_MESSAGE =
+                                SUBSTR(WS_ZBNKRPC1_DATA_PT1,1,
+                                      LENGTH(WS_CONSOLE_MESSAGE));
+                    CALL DISPLAY_CONSOLE_MESSAGE;
+                    WS_CONSOLE_MESSAGE =
+                                SUBSTR(WS_ZBNKRPC1_DATA_PT2,1,
+                                      LENGTH(WS_CONSOLE_MESSAGE));
+                    CALL DISPLAY_CONSOLE_MESSAGE;
+                 END;
+ END RPC_PROCESS;
+
+ /***************************************************************
+ Display CONSOLE messages...
+ ***************************************************************/
+ DISPLAY_CONSOLE_MESSAGE: PROCEDURE;
+           PUT SKIP LIST (WS_PROGRAM_ID || ' - ' ||
+                          WS_CONSOLE_MESSAGE);
+           DISPLAY (WS_PROGRAM_ID || ' - ' || WS_CONSOLE_MESSAGE);
+           WS_CONSOLE_MESSAGE = '';
+ END DISPLAY_CONSOLE_MESSAGE;
+
+ RUN_TIME: PROCEDURE;
+  DCL START_SECS FIXED DEC(15);
+  DCL END_SECS FIXED DEC(15);
+  DCL TEMP_TIME CHAR(8);
+  
+      IF TIMER_START = 0 THEN
+         DO;
+            TEMP_TIME = TIME();
+            TIMER_START = TEMP_TIME;
+            WS_CONSOLE_MESSAGE = 'Timer started @ '
+                              || TIMER_START;                                   
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+      ELSE
+         DO;
+            TEMP_TIME = TIME();
+            TIMER_END = TEMP_TIME;
+            WS_CONSOLE_MESSAGE = 'Timer stopped @ '
+                              || TIMER_END;
+            CALL DISPLAY_CONSOLE_MESSAGE;
+            END_SECS = (TIMER_END_HH * 60 * 60 * 100) +
+                        (TIMER_END_MM * 60 * 100) +
+                        (TIMER_END_SS * 100) +
+                         TIMER_END_DD;
+            START_SECS =(TIMER_START_HH * 60 * 60 * 100) +
+                        (TIMER_START_MM * 60 * 100) +
+                        (TIMER_START_SS * 100) +
+                         TIMER_START_DD;
+            TIMER_ELAPSED = end_secs - start_secs;
+            TIMER_RUN_TIME_ELAPSED = TIMER_ELAPSED;
+            WS_CONSOLE_MESSAGE = STRING(TIMER_RUN_TIME);
+            CALL DISPLAY_CONSOLE_MESSAGE;
+         END;
+ END RUN_TIME;
+
+ END ZBNKEXT1;
+ 

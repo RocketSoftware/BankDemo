@@ -1,0 +1,189 @@
+  /****************************************************************
+  *
+  *   Copyright (C) 1998_2010 Micro Focus. All Rights Reserved.
+  *   This demonstration program is provided for use by users
+  *   of Micro Focus products and may be used, modified and
+  *   distributed as part of your application provided that
+  *   you properly acknowledge the copyright of Micro Focus
+  *   in this material.
+  *
+  ****************************************************************/
+
+  /****************************************************************
+  * Program:     DBANK51P.PLI
+  * Function:    Sequential read of bank data for batch job
+  *              VSAM version
+  ****************************************************************/
+
+ DBANK51P:PROC(WS_COMMAREA) OPTIONS(FETCHABLE);
+
+  /* Declare the Account file using the alternate key (PID) */
+  DCL BNKACCP FILE RECORD INPUT KEYED
+             ENV(VSAM recsize(200) keyloc(1) keylength(5));
+  /*          ASSIGN       TO BNKACCP
+              ORGANIZATION IS INDEXED
+              ACCESS MODE  IS SEQUENTIAL
+              RECORD KEY   IS BAC_REC_ACCNO
+              ALTERNATE KEY IS BAC_REC_PID WITH DUPLICATES
+              FILE STATUS  IS WS_BNKACCP_STATUS*/
+
+  DCL BNKCUST FILE RECORD INPUT KEYED
+             ENV(VSAM recsize(250) keyloc(1) keylength(5));
+  /*          ASSIGN       TO BNKCUST
+              ORGANIZATION IS INDEXED
+              ACCESS MODE  IS RANDOM
+              RECORD KEY   IS BCS_REC_PID
+              ALTERNATE KEY IS BCS_REC_NAME
+                WITH DUPLICATES
+              ALTERNATE KEY IS BCS_REC_NAME_FF
+                WITH DUPLICATES
+              FILE STATUS  IS WS_BNKCUST_STATUS*/
+
+  DCL BNKATYP FILE RECORD INPUT KEYED
+             ENV(VSAM recsize(100) keyloc(1) keylength(1));
+  /*          ASSIGN       TO BNKATYP
+              ORGANIZATION IS INDEXED
+              ACCESS MODE  IS RANDOM
+              RECORD KEY   IS BAT_REC_TYPE
+              FILE STATUS  IS WS_BNKATYP_STATUS*/
+
+  DCL 01  BNKACC_REC,
+   %INCLUDE CBANKVAC;
+
+  DCL 01  BNKCUST_REC,
+   %INCLUDE CBANKVCS;
+
+  DCL 01  BNKATYP_REC,
+   %INCLUDE CBANKVAT;
+
+  DCL 01  WS_MISC_STORAGE,
+     05  WS_PROGRAM_ID                         CHAR(8)
+         INIT('DBANK51P'),
+     05  WS_BNKACCP_STATUS                     CHAR(2) INIT('00'),
+     05  WS_BNKCUST_STATUS                     CHAR(2) INIT('00'),
+     05  WS_BNKATYP_STATUS                     CHAR(2) INIT('00');
+
+  DCL 01  WS_COMMAREA,
+   %INCLUDE CIOFUNCS;
+   %INCLUDE CBANKD51;
+   05 FILL CHAR(0);
+
+  DCL WS_FIRST_READ  STATIC BIT(1) INIT('1'B);
+
+  /****************************************************************
+  * Set up ON conditions for various file statuses                *
+  ****************************************************************/
+  ON ENDFILE(BNKACCP) WS_BNKACCP_STATUS = '10';
+  ON KEY(BNKCUST)    WS_BNKCUST_STATUS = '10';
+  ON KEY(BNKATYP)    WS_BNKATYP_STATUS = '10';
+
+  /****************************************************************
+  * Initialize our output area                                    *
+  ****************************************************************/
+   CD51O_DATA = '';
+
+  /****************************************************************
+  * Check what is required                                        *
+  ****************************************************************/
+   SELECT(IO_REQUEST_FUNCTION);
+     WHEN('OPEN')
+       CALL OPEN_FILE;
+     WHEN('READ')
+       CALL READ_FILE;
+     WHEN('CLOSE')
+       CALL CLOSE_FILE;
+     OTHERWISE
+       IO_REQUEST_STATUS = 'ERROR';
+   END;
+
+  /****************************************************************
+  * Return to our caller                                          *
+  ****************************************************************/
+   RETURN;
+
+  /****************************************************************
+  * Open the file so we can read ACC sequentially, others randomly*
+  ****************************************************************/
+   OPEN_FILE:PROC;
+       OPEN FILE(BNKACCP) SEQUENTIAL;
+       OPEN FILE(BNKCUST);
+       OPEN FILE(BNKATYP);
+       IF CD51I_PID = 'ALL'
+       THEN BAC_REC_PID = LOW(5);
+       ELSE BAC_REC_PID = CD51I_PID;
+       IO_REQUEST_STATUS = 'OK';
+   END;
+
+  /****************************************************************
+  * Read sequentially through the customer account file
+  * If a PID has been passed, establish a position in the file by
+  *  issuing a keyed read first, before continuing with read next.
+  ****************************************************************/
+   READ_FILE:PROC;
+   IF WS_FIRST_READ & (CD51I_PID ^= 'ALL')
+   THEN DO;
+        READ FILE(BNKACCP) INTO(BNKACC_REC) KEY(CD51I_PID);
+        WS_FIRST_READ = '';
+        END;
+   ELSE READ FILE(BNKACCP) INTO(BNKACC_REC);
+       SELECT;
+       /* If key is greater than the one we want, fake end_of_file */
+       WHEN ((CD51I_PID ^= 'ALL')
+             & (BAC_REC_PID > CD51I_PID))
+         IO_REQUEST_STATUS = 'EOF';
+       /* Was read ok? */
+       WHEN (WS_BNKACCP_STATUS = '00')
+         IO_REQUEST_STATUS = 'OK';
+       /* Was read at end_of_file? */
+       WHEN (WS_BNKACCP_STATUS = '10')
+         IO_REQUEST_STATUS = 'EOF';
+       OTHERWISE
+         IO_REQUEST_STATUS = 'ERROR';
+       END;
+
+       IF IO_REQUEST_STATUS ^= 'OK'
+       THEN RETURN;
+
+       CD51O_PID = BAC_REC_PID ;
+       CD51O_ACC_NO = BAC_REC_ACCNO ;
+       CD51O_ACC_CURR_BAL = BAC_REC_BALANCE ;
+       CD51O_ACC_LAST_STMT_DTE = BAC_REC_LAST_STMT_DTE ;
+       CD51O_ACC_LAST_STMT_BAL = BAC_REC_LAST_STMT_BAL ;
+       IF BAC_REC_PID ^= BCS_REC_PID
+       THEN DO;
+               WS_BNKCUST_STATUS = '00';
+               BCS_REC_PID = BAC_REC_PID;
+               READ FILE(BNKCUST) INTO(BNKCUST_REC) KEY(BCS_REC_PID);
+               IF WS_BNKCUST_STATUS ^= '00'
+               THEN DO;
+                       BCS_RECORD = '';
+                       BCS_REC_NAME = 'Customer name unavailable';
+                    END;
+               CD51O_NAME  = BCS_REC_NAME  ;
+               CD51O_ADDR1 = BCS_REC_ADDR1 ;
+               CD51O_ADDR2 = BCS_REC_ADDR2 ;
+               CD51O_STATE = BCS_REC_STATE ;
+               CD51O_CNTRY = BCS_REC_CNTRY ;
+               CD51O_POST_CODE = BCS_REC_POST_CODE ;
+               CD51O_EMAIL = BCS_REC_EMAIL ;
+               BAT_REC_TYPE = BAC_REC_TYPE;
+               WS_BNKATYP_STATUS = '00';
+               READ FILE(BNKATYP) INTO(BNKATYP_REC) KEY(BAT_REC_TYPE);
+               IF WS_BNKATYP_STATUS = '00'
+               THEN CD51O_ACC_DESC = BAT_REC_DESC;
+               ELSE CD51O_ACC_DESC = 'Type not found';
+            END;
+
+   END READ_FILE;
+
+  /****************************************************************
+  * Close the file                                                *
+  ****************************************************************/
+   CLOSE_FILE:PROC;
+       CLOSE FILE(BNKCUST);
+       CLOSE FILE(BNKACCP);
+       CLOSE FILE(BNKATYP);
+       IO_REQUEST_STATUS = 'OK';
+   END CLOSE_FILE;
+
+ END DBANK51P;

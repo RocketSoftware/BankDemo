@@ -1,0 +1,14 @@
+{"PCT_Entries": [
+    {"Resource":"BANK",
+      "Parameters":   
+          {
+            "resDesc": "Demo system - BANK txn",
+            "pctPgm": "SBANK00P",
+            "pctTwa": "0",
+            "pctEnable": "Y",
+            "pctIbound": "Y",
+            "pctTclass": "DFHTCL00"         
+          }
+    }
+]   
+}

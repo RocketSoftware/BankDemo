@@ -1,0 +1,1 @@
+Directory for ES logs on Windows (not used on Linux)
