@@ -78,7 +78,7 @@
       *****************************************************************
            MOVE SPACES TO CD04O-DATA.
            SET CD04O-UPDATE-FAIL TO TRUE.
-           MOVE '0001-01-01-00.00.00.000000' TO CD04O-TIMESTAMP.
+           MOVE '0001-01-01 00:00:00.000000' TO CD04O-TIMESTAMP.
 
       *****************************************************************
       * Try to update the 'from' balance                              *

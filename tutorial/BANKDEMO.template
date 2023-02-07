@@ -867,9 +867,9 @@ listener=Web Services and J2EE
         <update>YES</update>
         <recovery>NONE</recovery>
         <_filetype>KSDS</_filetype>
-        <_maxreclen>150</_maxreclen>
-        <_minreclen>150</_minreclen>
-        <_keyposition>15</_keyposition>
+        <_maxreclen>400</_maxreclen>
+        <_minreclen>400</_minreclen>
+        <_keyposition>17</_keyposition>
         <_keylength>26</_keylength>
         <_startempty>NO</_startempty>
         <_dupkey>NO</_dupkey>

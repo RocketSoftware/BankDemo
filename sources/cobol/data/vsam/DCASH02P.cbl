@@ -131,7 +131,7 @@
            IF WS-RESP IS EQUAL TO DFHRESP(NORMAL)
               MOVE BAT-REC-DESC TO CD02O-ACC-DESC (WS-SUB1)
            ELSE
-              MOVE 'Unkown' TO CD02O-ACC-DESC (WS-SUB1)
+              MOVE 'Unknown' TO CD02O-ACC-DESC (WS-SUB1)
            END-IF.
            MOVE BAC-REC-BALANCE TO WS-ACC-BALANCE.
            MOVE WS-ACC-BALANCE-X TO CD02O-ACC-BAL (WS-SUB1).
