@@ -129,10 +129,12 @@
     <Compile Include="..\..\..\..\sources\cobol\core\DFHUAINS.cbl">
       <Link>DFHUAINS.cbl</Link>
       <CICSECM>CICSECM()</CICSECM>
+      <Dialect>MF</Dialect>
     </Compile>
     <Compile Include="..\..\..\..\sources\cobol\core\DFHZCSGM.cbl">
       <Link>DFHZCSGM.cbl</Link>
       <CICSECM>CICSECM()</CICSECM>
+      <Dialect>MF</Dialect>
     </Compile>
     <Compile Include="..\..\..\..\sources\cobol\core\OPENFIL.cbl">
       <Link>OPENFIL.cbl</Link>
