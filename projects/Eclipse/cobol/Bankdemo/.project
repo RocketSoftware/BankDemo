@@ -29,6 +29,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>MFI01V.MFIDEMO.BNKACC.dat</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKACC.dat</locationURI>
+		</link>
+		<link>
 			<name>bms</name>
 			<type>2</type>
 			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/sources/bms/cobol</locationURI>
