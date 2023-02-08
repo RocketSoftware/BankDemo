@@ -1,0 +1,420 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{E8190365-7277-4F72-8E77-1EF8581954F2}</ProjectGuid>
+    <ProjectTypeGuids>{6710734B-1D50-4f99-AF91-F73BB8168F21};{535C04D7-A2A5-47c7-83E0-B340A995CD1F}</ProjectTypeGuids>
+    <OutputName>Bankdemo</OutputName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bankdemo</RootNamespace>
+    <LinkMultiDlls>true</LinkMultiDlls>
+    <MFProjectType>Native</MFProjectType>
+    <COBOLDir>False</COBOLDir>
+    <MFDependencyPaths>.\generated;..\..\..\..\sources\copybook</MFDependencyPaths>
+    <BmsCopybookOutputLocation>.\generated</BmsCopybookOutputLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.\bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>100</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>ASCII</Charset>
+    <AdditionalDirectives>directives-in-comments</AdditionalDirectives>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.\bin\x64\Debug\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>100</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>ASCII</Charset>
+    <IntermediatePath>.\obj\x64\Debug\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+    <AdditionalDirectives>directives-in-comments</AdditionalDirectives>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>.\bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>100</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>ASCII</Charset>
+    <AdditionalDirectives>directives-in-comments</AdditionalDirectives>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>.\bin\x64\Release\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <ManagedCode>False</ManagedCode>
+    <MaxError>100</MaxError>
+    <Dialect>ENTCOBOL</Dialect>
+    <Charset>ASCII</Charset>
+    <IntermediatePath>.\obj\x64\Release\</IntermediatePath>
+    <Pointer64>True</Pointer64>
+    <AdditionalDirectives>directives-in-comments</AdditionalDirectives>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK10P.cbl">
+      <Link>BBANK10P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK20P.cbl">
+      <Link>BBANK20P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK30P.cbl">
+      <Link>BBANK30P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK35P.cbl">
+      <Link>BBANK35P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK40P.cbl">
+      <Link>BBANK40P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK50P.cbl">
+      <Link>BBANK50P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK60P.cbl">
+      <Link>BBANK60P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK70P.cbl">
+      <Link>BBANK70P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK80P.cbl">
+      <Link>BBANK80P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK90P.cbl">
+      <Link>BBANK90P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANK99P.cbl">
+      <Link>BBANK99P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BBANKZZP.cbl">
+      <Link>BBANKZZP.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BCASH00P.cbl">
+      <Link>BCASH00P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BCASH01P.cbl">
+      <Link>BCASH01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BCASH02P.cbl">
+      <Link>BCASH02P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\BCASH03P.cbl">
+      <Link>BCASH03P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\CLOSEFIL.cbl">
+      <Link>CLOSEFIL.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\DFHUAINS.cbl">
+      <Link>DFHUAINS.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+      <Dialect>MF</Dialect>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\DFHZCSGM.cbl">
+      <Link>DFHZCSGM.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+      <Dialect>MF</Dialect>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\OPENFIL.cbl">
+      <Link>OPENFIL.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK00P.cbl">
+      <Link>SBANK00P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK10P.cbl">
+      <Link>SBANK10P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK20P.cbl">
+      <Link>SBANK20P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK30P.cbl">
+      <Link>SBANK30P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK35P.cbl">
+      <Link>SBANK35P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK40P.cbl">
+      <Link>SBANK40P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK50P.cbl">
+      <Link>SBANK50P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK60P.cbl">
+      <Link>SBANK60P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK70P.cbl">
+      <Link>SBANK70P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK80P.cbl">
+      <Link>SBANK80P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK90P.cbl">
+      <Link>SBANK90P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANK99P.cbl">
+      <Link>SBANK99P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SBANKZZP.cbl">
+      <Link>SBANKZZP.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SCASH00P.cbl">
+      <Link>SCASH00P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SCASHDRV.cbl">
+      <Link>SCASHDRV.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SCHAR00P.cbl">
+      <Link>SCHAR00P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SCUSTOMP.cbl">
+      <Link>SCUSTOMP.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SPSWD01P.cbl">
+      <Link>SPSWD01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SSECUREP.cbl">
+      <Link>SSECUREP.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SSTMT01P.cbl">
+      <Link>SSTMT01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\STRAC00P.cbl">
+      <Link>STRAC00P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\SVERSONP.cbl">
+      <Link>SVERSONP.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\UBNKPLT1.cbl">
+      <Link>UBNKPLT1.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\UBNKPLT2.cbl">
+      <Link>UBNKPLT2.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\UDATECNV.cbl">
+      <Link>UDATECNV.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\UTWOSCMP.cbl">
+      <Link>UTWOSCMP.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\ZBNKE15.cbl">
+      <Link>ZBNKE15.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\ZBNKE35.cbl">
+      <Link>ZBNKE35.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\ZBNKEXT1.cbl">
+      <Link>ZBNKEXT1.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\ZBNKLOAD.cbl">
+      <Link>ZBNKLOAD.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\core\ZBNKPRT1.cbl">
+      <Link>ZBNKPRT1.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK01P.cbl">
+      <Link>DBANK01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK02P.cbl">
+      <Link>DBANK02P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK03P.cbl">
+      <Link>DBANK03P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK04P.cbl">
+      <Link>DBANK04P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK05P.cbl">
+      <Link>DBANK05P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK06P.cbl">
+      <Link>DBANK06P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK07P.cbl">
+      <Link>DBANK07P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK08P.cbl">
+      <Link>DBANK08P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK09P.cbl">
+      <Link>DBANK09P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK11P.cbl">
+      <Link>DBANK11P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK51P.cbl">
+      <Link>DBANK51P.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANK52P.cbl">
+      <Link>DBANK52P.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DBANKIOP.cbl">
+      <Link>DBANKIOP.cbl</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DCASH01P.cbl">
+      <Link>DCASH01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DCASH02P.cbl">
+      <Link>DCASH02P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+    <Compile Include="..\..\..\..\sources\cobol\data\vsam\DHELP01P.cbl">
+      <Link>DHELP01P.cbl</Link>
+      <CICSECM>CICSECM()</CICSECM>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKACC.dat">
+      <Link>MFI01V.MFIDEMO.BNKACC.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKATYPE.dat">
+      <Link>MFI01V.MFIDEMO.BNKATYPE.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKCUST.dat">
+      <Link>MFI01V.MFIDEMO.BNKCUST.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKHELP.dat">
+      <Link>MFI01V.MFIDEMO.BNKHELP.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKTXN.dat">
+      <Link>MFI01V.MFIDEMO.BNKTXN.dat</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\DFHZCSGM.bms">
+      <Link>DFHZCSGM.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK10.bms">
+      <Link>MBANK10.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK20.bms">
+      <Link>MBANK20.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK30.bms">
+      <Link>MBANK30.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK35.bms">
+      <Link>MBANK35.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK40.bms">
+      <Link>MBANK40.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK50.bms">
+      <Link>MBANK50.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK60.bms">
+      <Link>MBANK60.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK70.bms">
+      <Link>MBANK70.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK80.bms">
+      <Link>MBANK80.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK90.bms">
+      <Link>MBANK90.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK99.bms">
+      <Link>MBANK99.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANKZZ.bms">
+      <Link>MBANKZZ.bms</Link>
+    </BmsFile>
+  </ItemGroup>
+  <ItemGroup>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKAIX.jcl">
+      <Link>ZBNKAIX.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKAIX2.jcl">
+      <Link>ZBNKAIX2.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKBAT1.jcl">
+      <Link>ZBNKBAT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKDEL.jcl">
+      <Link>ZBNKDEL.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKEXT1.jcl">
+      <Link>ZBNKEXT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKINT1.jcl">
+      <Link>ZBNKINT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPATH.jcl">
+      <Link>ZBNKPATH.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPRT1.jcl">
+      <Link>ZBNKPRT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPRTZ.jcl">
+      <Link>ZBNKPRTZ.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKSTMT.jcl">
+      <Link>ZBNKSTMT.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKUNLD.jcl">
+      <Link>ZBNKUNLD.jcl</Link>
+    </JCLFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.COBOL.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

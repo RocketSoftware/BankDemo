@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.microfocus.eclipse.ESLaunchCBL">
+    <stringAttribute key="CICSPROGRAM" value=""/>
+    <stringAttribute key="CICSTERMINALID" value=""/>
+    <stringAttribute key="CICSTRANSACTIONID" value=""/>
+    <stringAttribute key="CICSUSERID" value=""/>
+    <stringAttribute key="CLIENTHOSTNAME" value="localhost"/>
+    <stringAttribute key="DEBUGGINGTYPE" value="JCL"/>
+    <stringAttribute key="IMSPROGRAM" value=""/>
+    <stringAttribute key="IMSTERMINAL" value=""/>
+    <stringAttribute key="IMSTRANSACTION" value=""/>
+    <stringAttribute key="IMSUSERID" value=""/>
+    <stringAttribute key="IP2" value="0.0.0.0"/>
+    <stringAttribute key="JAVASERVICENAME" value=""/>
+    <stringAttribute key="JCLJOBID" value=""/>
+    <stringAttribute key="JCLJOBNUMBER" value=""/>
+    <stringAttribute key="JCLJOBSTEP" value=""/>
+    <stringAttribute key="JCLPROGRAM" value=""/>
+    <stringAttribute key="REGION_NAME" value="BANKDEMO"/>
+    <intAttribute key="RESOLVECLIENTNAME" value="0"/>
+    <stringAttribute key="SERVER_NAME" value="Default"/>
+    <stringAttribute key="SERVICENAME" value=""/>
+    <booleanAttribute key="USE_KUBERNETES_NAME_AND_PORT" value="false"/>
+    <booleanAttribute key="USE_LOCALHOST_PORT" value="false"/>
+    <stringAttribute key="editorDebugger" value="com.microfocus.eclipse.editor.cobol.CobolEditor"/>
+    <booleanAttribute key="isAllowReverseDebug" value="false"/>
+    <booleanAttribute key="isESDebugging" value="true"/>
+    <booleanAttribute key="isProgramExternalFile" value="false"/>
+    <stringAttribute key="launch_container_type" value="traditional"/>
+    <booleanAttribute key="mainOnlyProgBreakpoint" value="false"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+    </listAttribute>
+    <stringAttribute key="projectName" value="Bankdemo"/>
+    <stringAttribute key="remote_host" value=""/>
+    <booleanAttribute key="stopOnBreakpointsOnly" value="false"/>
+    <booleanAttribute key="useMatchIncludePath" value="false"/>
+</launchConfiguration>

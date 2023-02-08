@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="cobolProject" name="Bankdemo" uuid="57e56d7c-4084-49ef-95d3-f68d3a40bdde" version="5.0">
+   <settings xsi:type="projectSettingsContainer">
+      <copybook-paths xsi:type="copybookPathsSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/copybook" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/bms" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/core" type="mfpath"/>
+      </copybook-paths>
+      <jcl-include-paths xsi:type="jclIncludePathsSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/bms" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos/LoanCalculator.deploy" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/core" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
+      </jcl-include-paths>
+      <asmmacro-paths xsi:type="assemblerMacroPathsSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/bms" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos/LoanCalculator.deploy" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/core" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
+      </asmmacro-paths>
+      <build-precedence-paths xsi:type="buildPrecedenceSettings">
+         <path enabled="true" name="/Bankdemo" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/copybook" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/vsam" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/bms" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/jcl" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/core" type="mfpath"/>
+         <path enabled="true" name="/Bankdemo/generated" type="mfpath"/>
+      </build-precedence-paths>
+      <configurations default="loadlib" linkedWith="2017" xsi:type="buildConfigurationsContainer">
+         <configuration description="loadlib" type="all_dll" xsi:type="cobolBuildConfiguration">
+            <targetdir name="Bankdemo"/>
+            <link_settings xsi:type="linkSettings">
+               <options>
+                  <option id="applicationType" name="linkSettings" value="console"/>
+                  <option id="targetName" name="linkSettings" value="Bankdemo"/>
+                  <option id="rcfile" name="linkSettings" value=""/>
+                  <option id="outputDirectory" name="linkSettings" value="loadlib"/>
+                  <option id="type" name="linkSettings" value="all_dll"/>
+                  <option id="bitism" name="linkSettings" value="64 bit"/>
+                  <option id="platform" name="linkSettings" value="Unix/Linux"/>
+                  <option id="runtimeModel" name="linkSettings" value="shared"/>
+               </options>
+               <additional_files/>
+            </link_settings>
+            <application_configuration xsi:type="runtimeConfigurationSettings">
+               <cobol_switches xsi:type="projectCobolSwitches"/>
+               <rts_switches xsi:type="projectRtsSwitches">
+                  <rts_switch name="A" value="on" index="1"/>
+                  <rts_switch name="D" value="off" index="0"/>
+                  <rts_switch name="F" value="on" index="0"/>
+                  <rts_switch name="I" value="off" index="2"/>
+                  <rts_switch name="O" value="on" index="0"/>
+                  <rts_switch name="S" value="off" index="5"/>
+               </rts_switches>
+               <envScriptParameters></envScriptParameters>
+               <envScriptPath></envScriptPath>
+               <inheritBuildEnv>false</inheritBuildEnv>
+               <tunables>
+                  <tunable name="default_cancel_mode" value="1" index="0"/>
+                  <tunable name="arguments_are_initial" value="false" index="0"/>
+                  <tunable name="command_line_accept" value="false" index="0"/>
+                  <tunable name="dynamic_memory_limit" value="2147483647" index="0"/>
+                  <tunable name="memory_free_check_size" value="100" index="0"/>
+                  <tunable name="memory_strategy" value="1" index="0"/>
+                  <tunable name="ansi_input_mode" value="false" index="0"/>
+                  <tunable name="screen_lines" value="25" index="0"/>
+                  <tunable name="screen_cols" value="80" index="0"/>
+                  <tunable name="datewarp_dynamic" value="false" index="0"/>
+                  <tunable name="timewarp_dynamic" value="false" index="0"/>
+               </tunables>
+            </application_configuration>
+            <deploy_settings xsi:type="deploySettings">
+               <options>
+                  <option id="deployFolder" name="deploySettings" value="deploy"/>
+                  <option id="cleanAllowed" name="deploySettings" value="cleanAllowed"/>
+                  <option id="deployFiles" name="deploySettings" value=""/>
+                  <option id="deployPatterns" name="deploySettings" value="loadlib/*${exeext}"/>
+               </options>
+            </deploy_settings>
+         </configuration>
+      </configurations>
+      <dependent-projects xsi:type="dependentProjectsSettings"/>
+      <ims_settings xsi:type="additionalImsSettings">
+         <generatedFileDir name=""/>
+         <imsDatabaseDir name=""/>
+      </ims_settings>
+      <imscopy-paths xsi:type="imsCopyPathsSettings">
+         <path enabled="false" name="/Bankdemo/copybook" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/bms" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/repos/LoanCalculator.deploy" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/core" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
+      </imscopy-paths>
+      <asm_link_settings xsi:type="assemblerLinkSettings">
+         <options>
+            <option id="link_create_debug_info" name="mf370lnk" value="ANIM"/>
+            <option id="link_mark_reentrant" name="mf370lnk" value="RENT"/>
+            <option id="link_addressing_mode" name="mf370lnk" value="AMODE(31)"/>
+            <option id="link_residency_mode" name="mf370lnk" value="RMODE(31)"/>
+            <option id="link_generate_listing" name="mf370lnk" value="NOLIST"/>
+            <option id="link_mark_reusable" name="mf370lnk" value="REUS"/>
+            <option id="link_linker_output" name="mf370lnk" value="OMF(390)"/>
+            <option id="link_resolve_external" name="mf370lnk" value="CALL"/>
+         </options>
+      </asm_link_settings>
+   </settings>
+   <files xsi:type="projectFileStore">
+      <filetype type="macro" xsi:type="cobolFileContainer"/>
+      <filetype type="cobol" xsi:type="cobolFileContainer">
+         <file compile="true" path="vsam/DBANK01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK02P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK03P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK04P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK05P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK06P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK07P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK08P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK09P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK11P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK51P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANK52P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DBANKIOP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DCASH01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DCASH02P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="vsam/DHELP01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK10P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK20P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK30P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK35P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK40P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK50P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK60P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK70P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK80P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK90P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANK99P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BBANKZZP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BCASH00P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BCASH01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BCASH02P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/BCASH03P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/CLOSEFIL.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/DFHUAINS.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/DFHZCSGM.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/OPENFIL.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK00P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK10P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK20P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK30P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK35P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK40P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK50P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK60P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK70P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK80P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK90P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANK99P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SBANKZZP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SCASH00P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SCASHDRV.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SCHAR00P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SCUSTOMP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SPSWD01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SSECUREP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SSTMT01P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/STRAC00P.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/SVERSONP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/UBNKPLT1.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/UBNKPLT2.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/UDATECNV.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/UTWOSCMP.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/ZBNKE15.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/ZBNKE35.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/ZBNKEXT1.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/ZBNKLOAD.cbl" xsi:type="cobolFile"/>
+         <file compile="true" path="core/ZBNKPRT1.cbl" xsi:type="cobolFile"/>
+      </filetype>
+      <filetype type="asm" xsi:type="cobolFileContainer"/>
+      <filetype type="psb" xsi:type="cobolFileContainer"/>
+      <filetype type="jcl" xsi:type="cobolFileContainer">
+         <file compile="true" path="jcl/ZBNKAIX.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKAIX2.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKBAT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKDEL.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKEXT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKINT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPATH.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRT1.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKPRTZ.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKSTMT.jcl" xsi:type="cobolFile"/>
+         <file compile="true" path="jcl/ZBNKUNLD.jcl" xsi:type="cobolFile"/>
+      </filetype>
+      <filetype type="rexx" xsi:type="cobolFileContainer"/>
+      <filetype type="bms" xsi:type="cobolFileContainer">
+         <file compile="true" path="bms/DFHZCSGM.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK10.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK20.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK30.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK35.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK40.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK50.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK60.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK70.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK80.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK90.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANK99.bms" xsi:type="cobolFile"/>
+         <file compile="true" path="bms/MBANKZZ.bms" xsi:type="cobolFile"/>
+      </filetype>
+      <filetype type="mfs" xsi:type="cobolFileContainer"/>
+      <filetype type="clist" xsi:type="cobolFileContainer"/>
+      <filetype type="easytrieve" xsi:type="cobolFileContainer"/>
+      <filetype type="cobol.copybook" xsi:type="cobolFileContainer"/>
+      <filetype type="lin" xsi:type="cobolFileContainer"/>
+      <filetype type="dbd" xsi:type="cobolFileContainer"/>
+      <folders xsi:type="cobolFolderContainer">
+         <folder compile="true" path="repos" xsi:type="cobolFolder"/>
+         <folder compile="true" path="vsam" xsi:type="cobolFolder"/>
+         <folder compile="true" path="bms" xsi:type="cobolFolder"/>
+         <folder compile="true" path="jcl" xsi:type="cobolFolder"/>
+         <folder compile="true" path="repos/CALC.deploy" xsi:type="cobolFolder"/>
+         <folder compile="true" path="core" xsi:type="cobolFolder"/>
+      </folders>
+   </files>
+</project>

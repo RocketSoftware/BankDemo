@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.microfocus.eclipse.ESLaunchCBL">
+    <stringAttribute key="CICSPROGRAM" value=""/>
+    <stringAttribute key="CICSTERMINALID" value=""/>
+    <stringAttribute key="CICSTRANSACTIONID" value=""/>
+    <stringAttribute key="CICSUSERID" value=""/>
+    <stringAttribute key="CLIENTHOSTNAME" value="localhost"/>
+    <stringAttribute key="DEBUGGINGTYPE" value="CICS"/>
+    <stringAttribute key="IMSPROGRAM" value=""/>
+    <stringAttribute key="IMSTERMINAL" value=""/>
+    <stringAttribute key="IMSTRANSACTION" value=""/>
+    <stringAttribute key="IMSUSERID" value=""/>
+    <stringAttribute key="IP2" value="0.0.0.0"/>
+    <stringAttribute key="JAVASERVICENAME" value=""/>
+    <stringAttribute key="JCLJOBID" value=""/>
+    <stringAttribute key="JCLJOBNUMBER" value=""/>
+    <stringAttribute key="JCLJOBSTEP" value=""/>
+    <stringAttribute key="JCLPROGRAM" value=""/>
+    <stringAttribute key="REGION_NAME" value="BANKDEMO"/>
+    <intAttribute key="RESOLVECLIENTNAME" value="0"/>
+    <stringAttribute key="SERVER_NAME" value="Default"/>
+    <stringAttribute key="SERVICENAME" value=""/>
+    <stringAttribute key="editorDebugger" value="com.microfocus.eclipse.editor.cobol.CobolEditor"/>
+    <booleanAttribute key="isESDebugging" value="true"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+    </listAttribute>
+    <stringAttribute key="projectName" value="Bankdemo"/>
+    <booleanAttribute key="useMatchIncludePath" value="false"/>
+</launchConfiguration>
