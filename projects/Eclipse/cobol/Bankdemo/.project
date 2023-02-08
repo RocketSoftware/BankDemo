@@ -34,6 +34,26 @@
 			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKACC.dat</locationURI>
 		</link>
 		<link>
+			<name>MFI01V.MFIDEMO.BNKATYPE.dat</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKATYPE.dat</locationURI>
+		</link>
+		<link>
+			<name>MFI01V.MFIDEMO.BNKCUST.dat</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKCUST.dat</locationURI>
+		</link>
+		<link>
+			<name>MFI01V.MFIDEMO.BNKHELP.dat</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKHELP.dat</locationURI>
+		</link>
+		<link>
+			<name>MFI01V.MFIDEMO.BNKTXN.dat</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/datafiles/MFI01V.MFIDEMO.BNKTXN.dat</locationURI>
+		</link>
+		<link>
 			<name>bms</name>
 			<type>2</type>
 			<locationURI>$%7BPARENT-4-PROJECT_LOC%7D/sources/bms/cobol</locationURI>

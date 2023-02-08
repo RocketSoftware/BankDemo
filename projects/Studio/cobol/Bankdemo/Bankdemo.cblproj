@@ -10,7 +10,7 @@
     <LinkMultiDlls>true</LinkMultiDlls>
     <MFProjectType>Native</MFProjectType>
     <COBOLDir>False</COBOLDir>
-    <MFDependencyPaths>..\..\..\..\sources\copybook</MFDependencyPaths>
+    <MFDependencyPaths>.\generated;..\..\..\..\sources\copybook</MFDependencyPaths>
     <BmsCopybookOutputLocation>.\generated</BmsCopybookOutputLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -320,6 +320,94 @@
     <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKACC.dat">
       <Link>MFI01V.MFIDEMO.BNKACC.dat</Link>
     </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKATYPE.dat">
+      <Link>MFI01V.MFIDEMO.BNKATYPE.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKCUST.dat">
+      <Link>MFI01V.MFIDEMO.BNKCUST.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKHELP.dat">
+      <Link>MFI01V.MFIDEMO.BNKHELP.dat</Link>
+    </None>
+    <None Include="..\..\..\..\datafiles\MFI01V.MFIDEMO.BNKTXN.dat">
+      <Link>MFI01V.MFIDEMO.BNKTXN.dat</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\DFHZCSGM.bms">
+      <Link>DFHZCSGM.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK10.bms">
+      <Link>MBANK10.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK20.bms">
+      <Link>MBANK20.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK30.bms">
+      <Link>MBANK30.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK35.bms">
+      <Link>MBANK35.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK40.bms">
+      <Link>MBANK40.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK50.bms">
+      <Link>MBANK50.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK60.bms">
+      <Link>MBANK60.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK70.bms">
+      <Link>MBANK70.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK80.bms">
+      <Link>MBANK80.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK90.bms">
+      <Link>MBANK90.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANK99.bms">
+      <Link>MBANK99.bms</Link>
+    </BmsFile>
+    <BmsFile Include="..\..\..\..\sources\bms\cobol\MBANKZZ.bms">
+      <Link>MBANKZZ.bms</Link>
+    </BmsFile>
+  </ItemGroup>
+  <ItemGroup>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKAIX.jcl">
+      <Link>ZBNKAIX.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKAIX2.jcl">
+      <Link>ZBNKAIX2.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKBAT1.jcl">
+      <Link>ZBNKBAT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKDEL.jcl">
+      <Link>ZBNKDEL.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKEXT1.jcl">
+      <Link>ZBNKEXT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKINT1.jcl">
+      <Link>ZBNKINT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPATH.jcl">
+      <Link>ZBNKPATH.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPRT1.jcl">
+      <Link>ZBNKPRT1.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKPRTZ.jcl">
+      <Link>ZBNKPRTZ.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKSTMT.jcl">
+      <Link>ZBNKSTMT.jcl</Link>
+    </JCLFile>
+    <JCLFile Include="..\..\..\..\sources\jcl\ZBNKUNLD.jcl">
+      <Link>ZBNKUNLD.jcl</Link>
+    </JCLFile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.COBOL.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

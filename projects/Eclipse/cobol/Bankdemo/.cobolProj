@@ -3,12 +3,12 @@
    <settings xsi:type="projectSettingsContainer">
       <copybook-paths xsi:type="copybookPathsSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
+         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
          <path enabled="true" name="/Bankdemo/copybook" type="mfpath"/>
          <path enabled="false" name="/Bankdemo/vsam" type="mfpath"/>
          <path enabled="false" name="/Bankdemo/bms" type="mfpath"/>
          <path enabled="false" name="/Bankdemo/jcl" type="mfpath"/>
          <path enabled="false" name="/Bankdemo/core" type="mfpath"/>
-         <path enabled="false" name="/Bankdemo/generated" type="mfpath"/>
       </copybook-paths>
       <jcl-include-paths xsi:type="jclIncludePathsSettings">
          <path enabled="true" name="/Bankdemo" type="mfpath"/>
