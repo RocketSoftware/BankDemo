@@ -258,7 +258,7 @@
       * Set criteria for search to populate screen
            IF BANK-PAGING-OFF
               MOVE LOW-VALUES TO CD05I-START-ID
-              MOVE '0001-01-01-00.00.00.000000' TO CD05I-START-ID
+              MOVE '0001-01-01 00:00:00.000000' TO CD05I-START-ID       
               SET CD05-START-EQUAL TO TRUE
            ELSE
               IF WS-RETURN-FLAG-ON

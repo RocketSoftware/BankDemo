@@ -145,7 +145,7 @@
            IF WS-RESP IS EQUAL TO DFHRESP(NORMAL)
               MOVE BAT-REC-DESC TO CD03O-ACC-DESC (WS-SUB2)
            ELSE
-              MOVE 'Unkown' TO CD03O-ACC-DESC (WS-SUB2)
+              MOVE 'Unknown' TO CD03O-ACC-DESC (WS-SUB2)
            END-IF.
 
       *****************************************************************

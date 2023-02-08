@@ -95,7 +95,7 @@
            EXEC CICS LINK PROGRAM('STRAC00P')
                           COMMAREA(WS-PROGRAM-ID)
                           LENGTH(LENGTH OF WS-PROGRAM-ID)
-          END-EXEC.
+           END-EXEC.
 
       * $ Version 5.99c sequenced on Wednesday 3 Mar 2011 at 1:00pm
 

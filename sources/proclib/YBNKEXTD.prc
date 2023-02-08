@@ -16,8 +16,7 @@
 //            SSM=,PREINIT=,RGN=2048K,                                  00001600
 //            ALTID=,REQUEST=,LOCKMAX=,IMSPLEX=,                        00001700
 //            SOUT='*'                                                  00001800
-//*  alan was here                                                              
-//* this is a new line
+//*                                                                     00001900
 //EXTRACT  EXEC PGM=DFSRRC00,REGION=&RGN,                               00002000
 //         PARM=(BMP,&MBR,&PSB,&IN,&OUT,                                00002100
 //             &OPT&SPIE&TEST&DIRCA,&PRLD,                              00002200

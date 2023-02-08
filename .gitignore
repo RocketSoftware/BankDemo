@@ -17,6 +17,9 @@
 /tutorial/projects/Studio/pli/fetchables/*.def
 /tutorial/projects/Studio/pli/fetchables/*.del
 /BANKDEMO
+/BANKVSAM
+/BANKSQL
+/BANKMFDB
 /sources/Listing
 /sources/generated
 .terraform*

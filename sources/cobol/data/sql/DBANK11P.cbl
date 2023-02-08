@@ -40,6 +40,11 @@
          05  WS-PROGRAM-ID                         PIC X(8)
              VALUE 'DBANK11P'.
          05  WS-COMMAREA-LENGTH                    PIC 9(5).
+         05  WS-TRANS-COUNT                        PIC S9(10) COMP-3.
+         05  WS-TRANS-EDIT                                            
+                                                   PIC Z(6)9.       
+         05  WS-TRANS-EDIT-X REDEFINES WS-TRANS-EDIT
+                                                   PIC X(7).
 
        01  WS-COMMAREA.
            EXEC SQL
@@ -144,6 +149,7 @@
               MOVE DCL-BAT-DESC TO CD11O-DESC
               MOVE DCL-BAC-BALANCE TO CD11O-BAL-N
               MOVE DCL-BAC-LAST-STMT-DTE TO CD11O-DTE
+              MOVE 'No' TO CD11O-TRANS
               MOVE DCL-BAC-ATM-ENABLED TO CD11O-ATM-ENABLED
               MOVE DCL-BAC-ATM-DAY-LIMIT TO CD11O-ATM-LIM-N
               MOVE DCL-BAC-ATM-DAY-DTE TO CD11O-ATM-LDTE
@@ -163,8 +169,24 @@
               MOVE DCL-BAC-RP3-PID TO CD11O-RP3PID
               MOVE DCL-BAC-RP3-ACCNO TO CD11O-RP3ACC
               MOVE DCL-BAC-RP3-LAST-PAY TO CD11O-RP3DTE
+              EXEC SQL                                          
+                   SELECT COUNT(*)                                      
+                   INTO :WS-TRANS-COUNT                              
+                   FROM BNKTXN                                           
+                   WHERE (BTX_ACCNO = :DCL-BAC-ACCNO)                    
+              END-EXEC
+
+              IF SQLSTATE IS EQUAL TO '00000'
+                  IF WS-TRANS-COUNT IS EQUAL TO 0
+                      MOVE 'No' TO CD11O-TRANS
+                  ELSE
+                      MOVE WS-TRANS-COUNT TO WS-TRANS-EDIT
+                      PERFORM TRANS-LEFT-JUST
+                      MOVE WS-TRANS-EDIT-X TO CD11O-TRANS
+                  END-IF
+              END-IF
            ELSE
-              MOVE SPACES TO CD11O-ACCNO
+               MOVE SPACES TO CD11O-ACCNO
            END-IF.
 
       *****************************************************************
@@ -176,5 +198,13 @@
       * Return to our caller                                          *
       *****************************************************************
        COPY CRETURN.
+
+       TRANS-LEFT-JUST.
+           IF WS-TRANS-EDIT-X(1:1) IS EQUAL TO SPACE
+               MOVE WS-TRANS-EDIT-X(2:LENGTH OF WS-TRANS-EDIT-X - 1)
+                 TO WS-TRANS-EDIT-X(1:LENGTH OF WS-TRANS-EDIT-X - 1)
+               MOVE SPACE
+                 TO WS-TRANS-EDIT-X(LENGTH OF WS-TRANS-EDIT-X:1)
+               GO TO TRANS-LEFT-JUST.
 
       * $ Version 5.90a sequenced on Friday 1 Dec 2006 at 6:00pm
