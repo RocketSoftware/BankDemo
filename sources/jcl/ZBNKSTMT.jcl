@@ -19,9 +19,9 @@
 //* ******************************************************************
 //  NOTIFY=MFIDEMO
 //EXTRACT  EXEC YBNKEXTV,REQUEST=B0004
-//*XTRACT.SYSOUT DD DUMMY
+//*
 //SORT     EXEC YBNKSRT1,GEN='+1'
-//*ORT.SYSOUT DD DUMMY
+//*
 //PRINT    EXEC YBNKPRT1,GEN='+1',SOUT=A
 //*
 //* *** $ Version 5.99c sequenced on Wednesday 3 Mar 2011 at 1:00pm

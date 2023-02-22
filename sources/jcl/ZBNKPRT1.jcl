@@ -20,11 +20,9 @@
 //* ******************************************************************
 //* ZBNKPRT1.JCL
 //* ******************************************************************
-//PRINT    EXEC PGM=ZBNKPRT1,PARM='HELLO'
-//*TEPLIB  DD DSN=MFI01.MFIDEMO.LOADLIB,DISP=SHR
+//PRINT    EXEC PGM=ZBNKPRT1,PARM=''
+//*STEPLIB  DD DSN=MFI01.MFIDEMO.LOADLIB,DISP=SHR
 //EXTRACT  DD DSN=MFI01.MFIDEMO.BANKSRT1(0),DISP=SHR
 //PRINTOUT DD SYSOUT=*
-//*RINTOUT DD DSN=ZBNKRT1.PRINTOUT,DISP=(NEW,CATLG),DCB=RECFM=FBA,
-//* UNIT=SYSDA,SPACE=(TRK,(1,1))
 //*
 //* *** $ Version 7.00a sequenced on Thursday 20 Sep 2012 at 3:30pm
