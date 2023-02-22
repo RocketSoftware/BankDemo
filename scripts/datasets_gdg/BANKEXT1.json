@@ -1,0 +1,9 @@
+{
+  "name": "MFI01.MFIDEMO.BANKEXT1",
+  "cataloged": true,
+  "dataSetOrganization": "GDG",
+  "recordFormat": "F",
+  "codeset": "ASCII",
+  "maxGenerations": 3,
+  "rollInDisposition": "SCRATCH_AND_NO_EMPTY"
+}
