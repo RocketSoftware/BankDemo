@@ -13,7 +13,7 @@ You must have the following software installed:
 -   Micro Focus Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application.
 
-**Note:** Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+**Note:** This release includes a license for the Micro Focus Host Access for the Cloud TN3270 emulator (HACloud). A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
 
 Before running this demo remotely, be sure you have a Micro Focus RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
 Please see the Micro Focus product documentation for more information.
@@ -62,16 +62,11 @@ Making these associations before you start the server enables the executables bu
 
 ### Execute the BANKDEMO application:
 
-1.  To prepare for debugging in Eclipse, create a debug configuration by selecting **Debug Configurations** from the **Run** menu.
+1. To prepare for debugging in Eclipse, create a debug configuration by selecting **Debug Configurations** from the **Run** menu.
 2. On the Debug Configurations dialog, right-click **PL/I Enterprise Server**, and click **New Configuration**.
 3. Change the **Name** from **New_configuration** to something meaningful like **BANK**.
 4. Type **BANKMAIN** in PL/I project, enter **Local** for **Connection**, enter **BANKDEMO** for **Server**, then click **Apply**, and then click **Debug**.
-5. Open a TN3270 emulation program like Micro Focus Rumba Desktop, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
-   - If using **Micro Focus Rumba+ Desktop**:
-     1. Click **Mainframe Display > Connection > Configure**.
-     2. Click **TN3270** in **Installed Interfaces**.
-     3. On the **TN3270** tab insert **127.0.0.1** and set the **Telnet Port** to **User Defined**, then type **9023**.
-     4. Click **Connect**.
+5. If a 3270 window does not open automatically, open your preferred TN3270 emulation program, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 6. If you receive a dialog asking whether to automatically switch to the debug perspective, select **Remember my decision**, and click **Yes**.
 7. Eclipse should automatically open the `SBANK00P.PLI` source file with the SBANK00P PROC line highlighted as the current line of execution.
 8. If line numbers are not turned on in the source window, right-click in the left-hand column of the source pane, and click **Show Line Numbers**.

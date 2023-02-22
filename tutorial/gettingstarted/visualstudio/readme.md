@@ -1,7 +1,12 @@
 # Getting started with Micro Focus Enterprise Developer for Visual Studio 2022
 
 ## Overview
-This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates. They'll walk you through:
+This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates.
+
+These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Visual Studio Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Visual Studio 2022 to develop and maintain both simple COBOL and mainframe subsystem applications.
+
+Other tutorials, which are designed for Administrators, are available.
+
 - [Starting the Visual Studio Integrated Development Environment](#starting-the-visual-studio-integrated-development-environment)
 - [Adding files to your Visual Studio project](#adding-files-to-your-visual-studio-project)
 - [File, Project and IDE properties and settings](#file-project-and-ide-properties-and-settings)
@@ -11,11 +16,6 @@ This set of tutorials guides you through the use of Micro Focus Enterprise Devel
 - [Unit Testing the Online Application](#unit-testing-the-online-application)
 - [Debugging the Batch Application](#debugging-the-batch-application)
 - [Debugging the Online Application](#debugging-the-online-application)
-
-These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Visual Studio Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Visual Studio 2022 to develop and maintain both simple COBOL and mainframe subsystem applications.
-
-Other tutorials, which are designed for Administrators, are available.
-
 
 **Download the demonstration application**
 
@@ -40,8 +40,7 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
     You must have the following software installed:
 
     -   Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
-    -   You must have Micro Focus Rumba+ Desktop or an equivalent TN3270 terminal emulator installed to run the CICS application.
-    **Note:** A license for Micro Focus Rumba+ Desktop is included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the [*Micro Focus Web site*](https://www.microfocus.com/documentation/enterprise-developer/).
+    -   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator. **Note:** A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -51,9 +50,9 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
 
    We recommend that, if you want remote users to access Enterprise Server functionality through the firewall, you use fixed port values so that you can control access via these.
 
-[Back to Top](#overview)
-
 ## Starting the Visual Studio Integrated Development Environment
+
+[Back to Top](#overview)
 
 1. To start the Visual Studio IDE:
 
@@ -100,9 +99,9 @@ You can see:
 
     This opens the solution in the Solution Explorer window.
 
-[Back to Top](#overview)
-
 ## Adding files to your Visual Studio project
+
+[Back to Top](#overview)
 
 The source files of the demonstration application are stored in subfolders named after the file type (for example, **bms**, **cobol**, **copybook**, **jcl**) in the **C:\\MFETDUSER\\sources** directory. The Visual Studio project is in the **C:\\MFETDUSER\\tutorial\\projects\\Studio\\cobol** folder. You will be adding the source files to the Visual Studio project. The other folders that are not so obvious are:
 
@@ -239,9 +238,9 @@ In Solution Explorer, you can view an actual representation of the files and fol
 
    Next, you are going to explore the settings available in the IDE and then you are going to edit some of the source files.
 
-[Back to Top](#overview)
-
 ## File, Project and IDE Properties and Settings
+
+[Back to Top](#overview)
 
 There is a variety of options and settings that can be configured within Visual Studio. You are going to explore a few of them in this tutorial. Do not skip this section, as you are going to make at least one important configuration change in the project's properties.
 
@@ -329,9 +328,9 @@ The individual source files can have their own local properties which override t
 
 4.  Similarly, check the properties for the **.dat**, the **.jcl**, and the **.cpy** files and see that the **.dat** files and the copybooks will not be compiled.
 
-[Back to Top](#overview)
-
 ## Editing COBOL, JCL, BMS, and Data Files
+
+[Back to Top](#overview)
 
 This topic describes the editing features for the various file types used in your project.
 
@@ -573,9 +572,9 @@ By default, Visual Studio is configured to use the new Data File Tools utility. 
     f.  Using the same method, restore the previous value of BAC-REC-BALANCE.
 7.  Close the Data File Tools utility.
 
-[Back to Top](#overview)
-
 ## Compiling the Source Code
+
+[Back to Top](#overview)
 
 **Important:** You need Enterprise Developer or Enterprise Developer for IBM zEnterprise to create executables. Building projects is not supported in Enterprise Developer Connect.
 
@@ -661,9 +660,9 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
     There should be no errors in the build now.
 
-[Back to Top](#overview)
-
 ## Unit Testing the Batch Application
+
+[Back to Top](#overview)
 
 The first thing you need to do is check that the Bankdemo application is executing correctly.
 
@@ -800,9 +799,9 @@ To view the spool:
 ![](images/ef9ee87126c25d0efd3a8c238ecb909c.png)
     You can now start to look at how to run the online application.
 
-[Back to Top](#overview)
-
 ## Unit Testing the Online Application
+
+[Back to Top](#overview)
 
 In the previous step, Unit Testing the Batch Application, you used the BANKDEMO enterprise server. You are going to use it again for online testing.
 
@@ -810,7 +809,7 @@ As with JCL, execution of the jobs requires a previously configured Micro Focus 
 
 **Executing the CICS application**
 
-The CICS application requires that you use a 3270 terminal emulator. The installation of Enterprise Developer includes the Micro Focus Rumba+ Desktop emulator. Rumba+ Desktop is available as a standalone application, Rumba+ Desktop, and is also available as a TN3270 Mainframe Display embedded within the IDE.
+The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
 
 **Configuring the TN3270 settings in the IDE** 
 
@@ -818,31 +817,29 @@ To check the IDE preferences for a TN3270 display:
 
 1.  In the IDE, click **Tools \> Options**.
 2.  Expand **Micro Focus Tools**, and click **TN3270 Display**.
-3.  Note that **Rumba (Desktop)** is selected. The IDE uses the standalone Rumba+ Desktop to run applications.
-
-    The **Rumba (Embedded)** option is disabled as the embedded view is not available in Visual Studio 2022. It is available in Enterprise Developer for Visual Studio 2017 and 2019.
-
+3.  Ensure that **Host Access for the Cloud** is selected.
 4.  Click **OK**.
 
-**Starting Rumba+ Desktop**
+**Starting the terminal emulator**
 
 1. Right-click the BANKDEMO server in Server Explorer, and click **Mainframe TN3270 Display**.
 
-This opens the Rumba+ Desktop application outside of Visual Studio and automatically establishes a 3270 terminal connection to the BANKDEMO server. You can see the starting page of the ES/MTO region BANKDEMO.
+This opens the **Host Access for the Cloud** in your default browser and automatically establishes a 3270 terminal connection to the BANKDEMO server. You can see the starting page of the ES/MTO region BANKDEMO.
 
 **Executing the Enterprise Server Demonstration**
 
 1.  Type your logon details, and press **Enter**.
 A suitable **User Id** is b0001. You can type anything as a **Password** - the field must not be empty though.
 
-    ![](images/d2b7febf01d5b5e7a7bc26cd9a30da56.png)
+    ![](images/Bankdemo_001.png)
 
 2.  Type **/** against **Display your account balances**, and press **Enter** to see the details for this customer.
 
-    ![](images/9eb193b9df2826d4183dae260799d5fa.jpg)
+    ![](images/Bankdemo_002.jpg)
 
-3.  You can explore this application further if you wish or press **F3** to terminate it.
-4.  You can close Rumba+ Desktop.
+    ![](images/Bankdemo_003.png)
+
+3.  You can explore this application further if you wish or press **Ctrl + F2** to clear the screen and conclude the session.
 
 **Stopping the enterprise server**
 
@@ -850,9 +847,9 @@ You can stop the Bankdemo server from within Server Explorer. You can leave it r
 
 **Note:** In production, enterprise servers are long-running processes that are usually run for many months without stopping and starting.
 
-[Back to Top](#overview)
-
 ## Debugging the Batch Application
+
+[Back to Top](#overview)
 
 You are going to debug the batch Bankdemo application using the JCL debugger.
 
@@ -1028,9 +1025,9 @@ You can use the COBOL Source Information (CSI) functionality and its **Quick Bro
 
    - Click **Debug** \> **Stop Debugging**.
 
-[Back to Top](#overview)
-
 ## Debugging the Online Application
+
+[Back to Top](#overview)
 
 **Starting the BANKDEMO enterprise server**
 
@@ -1060,7 +1057,7 @@ To start the debugger:
 
 1.  Click **Debug** \> **Step Into**.
 
-    Visual Studio enters debug mode and a few new windows open in the IDE. The Rumba+ Desktop application starts outside of Visual Studio but does not show the sign-on application screen yet.
+    Visual Studio enters debug mode and a few new windows open in the IDE. HACloud starts outside of Visual Studio but does not show the sign-on application screen yet.
 
     The program SBANK00P starts to execute and execution stops on the first EXEC CICS statement in the code.
 
