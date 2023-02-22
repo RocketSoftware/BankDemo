@@ -11,11 +11,12 @@
             "init_config": "init.json",
             "data_dir_1": "datasets_po",
             "data_dir_2": "datasets_vsam"
+            "data_dir_3": "datasets_gdg",
         },
     "JES": true,
     "CICS": true,
     "MQ": false,
-    "is64bit": false,
+    "is64bit": true,
     "database": "VSAM",
     "PAC": {
       "enabled": false,
