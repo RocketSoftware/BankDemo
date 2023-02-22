@@ -44,9 +44,34 @@ from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disco
 from pathlib import Path
 
 import shutil
+import subprocess
 if not sys.platform.startswith('win32'):
     from pwd import getpwuid
     from os  import stat
+
+def powershell(cmd):
+    completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+    return completed
+
+def checkElevation():
+    # Check if the current process is running as administator role
+    isAdmin = '$user = [Security.Principal.WindowsIdentity]::GetCurrent();if ((New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {exit 1} else {exit 0}'
+    completed = powershell(isAdmin)
+    return completed.returncode == 1
+
+def createWindowsDSN(database_connection, is_64bit, dsn_name, database_name):
+    driverBitism="32-bit"
+    if is_64bit == True:
+        driverBitism="64-bit"
+
+    findDriver='$Drivers = Get-OdbcDriver -Name "PostgreSQL*ANSI*" -Platform {};\n '.format(driverBitism)
+    ##findDSN='$DSN = Get-OdbcDsn -Name "{}" -Platform {} -DsnType System;\n'.format(dsn_name, driverBitism)
+    deleteDSN ='Remove-OdbcDSN -Name "{}" -Platform {} -DsnType System;\n '.format(dsn_name, driverBitism)
+    addDSN ='Add-OdbcDSN -Name "{}" -Platform {} -DsnType System -DriverName $Drivers.Name[0]'.format(dsn_name, driverBitism) 
+    addDSNProperties = ' -SetPropertyValue "Database={}","ServerName={}","Port={}","Username={}","Password={}"\n'.format(database_name, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password'])
+    fullCommand=findDriver + deleteDSN + addDSN + addDSNProperties
+    write_log(fullCommand)
+    powershell(fullCommand)
 
 def find_owner(filename):
     return getpwuid(stat(filename,follow_symlinks=False).st_uid).pw_name
@@ -195,6 +220,12 @@ def create_region(main_configfile):
         else:
             dataversion = 'sql'
 
+    if sys.platform.startswith('win32'):
+        if  database_type == 'SQL_Postgres':
+            if checkElevation() != True:
+                write_log('ERROR: Script must be Run As Administrator to create ODBC connections')
+                return 1
+
     #determine te individual component configuration files to be used
     configuration_files = main_config["configuration_files"]
 
@@ -314,7 +345,7 @@ def create_region(main_configfile):
         sys.exit(1)
 
     try:
-        write_log('Checking region {} start succesfully'.format(region_name))
+        write_log('Checking region {} started successfully'.format(region_name))
         confirmed = confirm_region_status(region_name, ip_address, 1, 'Started')
     except ESCWAException as exc:
         write_log('Unable to check region status.')
@@ -331,7 +362,7 @@ def create_region(main_configfile):
         
         sys.exit(1)
     else:
-        write_log('Region {} started succedsfully'.format(region_name))
+        write_log('Region {} started successfully'.format(region_name))
     
     if  alias_config != 'none':
         write_log ('JES Alias configuration found. Aliases being added')
@@ -353,6 +384,9 @@ def create_region(main_configfile):
 
     #data_dir_1 hold the directory name, under the cwd that contains definitions of any datasets to be catalogued - this setting is optional
     catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_1', None)
+
+    #data_dir_3 hold the directory name, under the cwd that contains definitions of extra datasets to be catalogued - this setting is optional
+    catalog_datasets(cwd, region_name, ip_address, configuration_files, 'data_dir_3', None)
 
     ## The following code updates the CICS Resource Definitions
 
@@ -450,17 +484,7 @@ def create_region(main_configfile):
         database_connection = main_config['database_connection']
         write_log ('Database type {} selected - database being built'.format(database_engine))
         if os_type == 'Windows':
-
-            # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ANSI', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
-            if is64bit == True:
-                odbcDriver = 'PostgreSQL ANSI(x64)'
-                odbcconf = os.path.join(os.environ['windir'], 'system32', 'odbcconf.exe')
-            else:
-                odbcDriver = 'PostgreSQL ANSI'
-                odbcconf = os.path.join(os.environ['windir'], 'syswow64', 'odbcconf.exe')
-            createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=bank|Database=bank|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
-            write_log(createDSN)
-            createDSN_process = os.system(createDSN)
+            createWindowsDSN(database_connection, is64bit, "bank", "bank")
 
         conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'postgres',database_connection['user'],database_connection['password'])
         sql_folder = os.path.join(cwd, 'config', 'database', database_engine) 
@@ -489,20 +513,8 @@ def create_region(main_configfile):
         if database_type == 'VSAM_Postgres':
             database_connection = main_config['database_connection']
             if os_type == 'Windows':
-
-                # windll.ODBCCP32.SQLConfigDataSource(0, 4, bytes('PostgreSQL ODBC Driver(ANSI)', 'iso-8859-1'), bytes('DSN=bank\x00Database=bank\x00Servername={}\x00Port={}\x00Username={}\x00Password={}\x00\x00'.format(database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']), 'iso-8859-1'))
-                if is64bit == True:
-                    odbcDriver = 'PostgreSQL ODBC Driver(ANSI)'
-                    odbcconf = os.path.join(os.environ['windir'], 'system32', 'odbcconf.exe')
-                else:
-                    odbcDriver = 'PostgreSQL ANSI'
-                    odbcconf = os.path.join(os.environ['windir'], 'syswow64', 'odbcconf.exe')
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.MASTER|Database=postgres|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
-                write_log(createDSN)
-                createDSN_process = os.system(createDSN)
-                createDSN = odbcconf + ' /a {CONFIGSYSDSN "' + '{}" "DSN=BANKVSAM.VSAM|Database=BANK_ONEDB|Servername={}|Port={}|Username={}|Password={}'.format(odbcDriver, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password']) + '"}'
-                write_log(createDSN)
-                createDSN_process = os.system(createDSN)
+                createWindowsDSN(database_connection, is64bit, "BANKVSAM.MASTER", "postgres")
+                createWindowsDSN(database_connection, is64bit, "BANKVSAM.VSAM", "BANK_ONEDB")
 
             xa_config = configuration_files["xa_config"]
             xa_config = os.path.join(config_dir, xa_config)
