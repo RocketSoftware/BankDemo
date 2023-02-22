@@ -13,14 +13,22 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
-- PostgreSQL ODBC driver
-- On Linux, the ODBC data sources must be confgured. Specify the details in the `odbc.ini` file:
+- PostgreSQL ODBC driver: 
+   - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
+   - RedHat: sudo yum install unixODBC postgres-odbc
+   - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
+   - SuSE: sudo zypper install unixODBC psqlODBC
+- On Linux, the ODBC data sources must be pre-configured. Check the configuration file locations with `odbcinst -j`. 
+  Specify the following details in the `odbc.ini` file ensuring the `Driver` name is adjusted to match the name of 
+  the PostgreSQL ANSI driver (enclosed by `[]`) in output of `odbcinst -q -d` and the `Servername` and `Port` match 
+  your installed database server:
     ```
     [BANKVSAM.MASTER] 
     Driver = PostgreSQL
     Servername = localhost
     Port = 5432
     Database = postgres
+    
     [BANKVSAM.VSAM] 
     Driver = PostgreSQL
     Servername = localhost
@@ -87,5 +95,5 @@ The demonstration also includes some instructions to build the application from 
 
 7. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
 
-8. In ESCWA, select the BANKVSAM server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
+8. In ESCWA, select the BANKMFDB server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
     
