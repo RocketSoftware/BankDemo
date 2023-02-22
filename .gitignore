@@ -16,6 +16,12 @@
 /tutorial/projects/Studio/pli/fetchables/obj
 /tutorial/projects/Studio/pli/fetchables/*.def
 /tutorial/projects/Studio/pli/fetchables/*.del
+/projects/**/generated
+/projects/**/loadlib
+/projects/**/obj
+/projects/**/bin
+/projects/**/.cobolBuild
+/projects/**/*.dep
 /BANKDEMO
 /BANKVSAM
 /BANKSQL
