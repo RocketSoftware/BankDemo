@@ -181,14 +181,14 @@ def add_datasets(region_name, ip_address, datafile_list, mfdbfh_location):
     session = get_session()
 
     for dataset in dataset_list:
-        jDSN = dataset['jDSN']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/catalog/{}'.format(ip_address, ip_address, region_name, jDSN)
+        uri = 'http://{}:10086/v2/native/regions/{}/86/{}/catalog'.format(ip_address, ip_address, region_name)
         try:
             if mfdbfh_location is not None:
                 # sql://bank_mfdbfh/VSAM/{}?folder=/data
-                jPCN = os.path.basename(dataset['jPCN'])
-                jPCN = mfdbfh_location.format(jPCN)
-                dataset['jPCN'] = jPCN
+                physicalFile = os.path.basename(dataset['physicalFile'])
+                physicalFile = mfdbfh_location.format(physicalFile)
+                dataset['physicalFile'] = physicalFile
+                
             res = session.post(uri, headers=req_headers, json=dataset)
             check_http_error(res)
         except requests.exceptions.RequestException as exc:
