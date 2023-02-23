@@ -67,7 +67,7 @@ def createWindowsDSN(database_connection, is_64bit, dsn_name, database_name):
     findDriver='$Drivers = Get-OdbcDriver -Name "PostgreSQL*ANSI*" -Platform {};\n '.format(driverBitism)
     ##findDSN='$DSN = Get-OdbcDsn -Name "{}" -Platform {} -DsnType System;\n'.format(dsn_name, driverBitism)
     deleteDSN ='Remove-OdbcDSN -Name "{}" -Platform {} -DsnType System;\n '.format(dsn_name, driverBitism)
-    addDSN ='Add-OdbcDSN -Name "{}" -Platform {} -DsnType System -DriverName $Drivers.Name[0]'.format(dsn_name, driverBitism) 
+    addDSN ='Add-OdbcDSN -Name "{}" -Platform {} -DsnType System -DriverName $Drivers[0].Name'.format(dsn_name, driverBitism) 
     addDSNProperties = ' -SetPropertyValue "Database={}","ServerName={}","Port={}","Username={}","Password={}"\n'.format(database_name, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password'])
     fullCommand=findDriver + deleteDSN + addDSN + addDSNProperties
     write_log(fullCommand)
