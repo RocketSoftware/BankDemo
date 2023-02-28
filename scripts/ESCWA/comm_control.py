@@ -63,3 +63,33 @@ def set_jes_listener(region_name, ip_address, port):
     save_cookies(session.cookies)
     
     return res
+	
+def set_commsserver_local(region_name, ip_address):
+    """ Sets a Communications Server to localhost. """
+
+    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/commsserver'.format(ip_address, ip_address, region_name)
+    req_headers = create_headers('CreateRegion', ip_address)
+    session = get_session()
+
+    try:
+        res = session.get(uri, headers=req_headers)
+        check_http_error(res)
+    except requests.exceptions.RequestException as exc:
+        raise ESCWAException('Unable to get Comm Server information.') from exc
+    except HTTPException as exc:
+        raise ESCWAException('Unable to get Comm Server information.') from exc
+
+    comm_server = res.json()
+    uri += '/{}'.format(comm_server[0]['mfUID'])
+    req_body = {'mfRequestedEndpoint': 'tcp:127.0.0.1:*'}
+    
+    try:
+        res = session.put(uri, headers=req_headers, json=req_body)
+    except requests.exceptions.RequestException as exc:
+        raise ESCWAException('Unable to update Comm Server.') from exc
+    except HTTPException as exc:
+        raise ESCWAException('Unable to update Comm Server.') from exc
+
+    save_cookies(session.cookies)
+    
+    return res	

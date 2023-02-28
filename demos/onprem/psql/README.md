@@ -13,7 +13,7 @@ The SQL database is populated with bank account data.
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver: 
    - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
-   - RedHat: sudo yum install unixODBC postgres-odbc
+   - RedHat: sudo yum install unixODBC postgresql-odbc
    - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
    - SuSE: sudo zypper install unixODBC psqlODBC
 - On Linux, the ODBC `bank` source must be pre-configured. Check the file locations with `odbcinst -j`. 

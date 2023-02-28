@@ -32,14 +32,13 @@ from utilities.filesystem import create_new_system, deploy_application, deploy_s
 from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
 from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator, add_datasets
-from ESCWA.comm_control import set_jes_listener
+from ESCWA.comm_control import set_jes_listener, set_commsserver_local
 from ESCWA.pac_config import add_sor, add_pac
 from utilities.exceptions import ESCWAException
 from ESCWA.resourcedef import  add_sit, add_Startup_list, add_groups, add_fct, add_ppt, add_pct, update_sit_in_use
 from ESCWA.xarm import add_xa_rm
 from ESCWA.mq_config import add_mq_listener
 from build.MFBuild import  run_ant_file
-from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disconnect_from_PG_server
 
 from pathlib import Path
 
@@ -329,6 +328,14 @@ def create_region(main_configfile):
         sys.exit(1)
 
     try:
+        write_log ('Communications Server set to localhost')
+        set_commsserver_local(region_name, ip_address)
+    except ESCWAException as exc:
+        write_log('Unable to set update Comms Server.')
+        write_log(exc)
+        sys.exit(1)
+
+    try:
         write_log ('Web Services and J2EE listener port set to {}'.format(jes_port))
         set_jes_listener(region_name, ip_address, jes_port)
     except ESCWAException as exc:
@@ -479,6 +486,8 @@ def create_region(main_configfile):
    ## The following code deploys the application
 
     if  database_type == 'SQL_Postgres':
+        from database.mfpostgres import  Connect_to_PG_server, Execute_PG_Command, Disconnect_from_PG_server
+
         database_engine = 'Postgres'
         loadlibDir = 'SQL_Postgres'
         database_connection = main_config['database_connection']

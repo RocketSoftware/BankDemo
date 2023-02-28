@@ -15,7 +15,7 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver: 
    - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
-   - RedHat: sudo yum install unixODBC postgres-odbc
+   - RedHat: sudo yum install unixODBC postgresql-odbc
    - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
    - SuSE: sudo zypper install unixODBC psqlODBC
 - On Linux, the ODBC data sources must be pre-configured. Check the configuration file locations with `odbcinst -j`. 
@@ -35,9 +35,9 @@ The Micro Focus Secrets Vault is used to store the database credentials.
     Port = 5432
     Database = BANK_ONEDB
     ```
-- Python 3.*n* and the `requests psycopg2-binary` packages. You can install the packages after installing Python with the following command: 
+- Python 3.*n* and the `requests` package. You can install the package after installing Python with the following command: 
   ```
-  python -m pip install requests psycopg2-binary
+  python -m pip install requests
   ```
 
 ## Demonstration overview
