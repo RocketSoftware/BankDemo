@@ -12,6 +12,7 @@ The SQL database is populated with bank account data.
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver: 
+   - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
    - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
    - RedHat: sudo yum install unixODBC postgresql-odbc
    - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
