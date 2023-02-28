@@ -58,7 +58,7 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
 2. <a name="onprem"></a> Demonstrations of the Micro Focus Enterprise Server capabilities in "on-premise" scenarios:
     - Prerequisite software: 
         - Micro Focus Enterprise Server or Enterprise Developer on Windows or on a supported Linux distribution.
-        - Python 3 with the `requests psycopg2-binary` packages (use the following command to install the packages: `python -m pip install requests psycopg2-binary`)
+        - Python 3 with the `requests` and for the PostgreSQL demo `psycopg2-binary` packages (use the following command to install the packages: `python -m pip install requests psycopg2-binary`)
         - Check the tutorial or demonstration instruction for any additional requirements
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
