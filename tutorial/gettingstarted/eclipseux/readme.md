@@ -43,8 +43,8 @@ As part of this tutorial, you use the supplied standard Eclipse COBOL project in
 
 You must have the following software installed:
 
--   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) <https://www.microfocus.com/documentation/enterprise-developer/> to access the product Help and the release notes of Enterprise Developer.
--   A TN3270 terminal emulator to run the CICS application. Micro Focus Rumba+ Desktop is supplied with the Enterprise Developer installer.
+-   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
+-   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator. **Note:** A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -753,29 +753,22 @@ As with JCL, execution of the jobs requires a previously configured Micro Focus 
 
 **Executing the CICS application**
 
-The CICS application requires that you use a 3270 terminal emulator. The installation of Enterprise Developer includes the Micro Focus Rumba+ Desktop emulator. This provides a TN3270 Mainframe Display embedded within the IDE that you are going to use to run the application.
+The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
 
 **Configuring the TN3270 settings in the IDE**
 
-To check the IDE preferences for the embedded Rumba display:
+To check the IDE preferences for the TN3270 emulator:
 
 1.  In the IDE, click **Window \> Preferences**.
 2.  Expand **Micro Focus \> Enterprise Server**, and click **TN3270**.
-3.  Ensure that **Enable display**, **Rumba (Embedded version)** and **Connect automatically** are all selected.
+3.  Ensure that **Enable display**, **Host Access for the Cloud** and **Connect automatically** are all selected.
 4.  Click **Apply and Close**.
 
-**Starting the Rumba Mainframe Display view**
+**Starting the terminal emulator**
 
 1.  Right-click the BANKDEMO server in Server Explorer, and click **Show TN3270 Display**.
-2.  Click **Connect** in the **TN3270 Connection Properties** dialog box. Note the Telnet port number at which the TN3270 emulator will connect.
 
-    ![](images/a7eadbf593513f2ef01075cd8d00c970.jpg)
-
-    This opens the **Rumba Mainframe Display** view and automatically establishes a 3270 terminal connection to the BANKDEMO server. You can see the starting page of the ES/MTO region
-
-    BANKDEMO.
-
-3.  You can drag the **Rumba Mainframe Display** view to reposition it. Alternatively, right-click on the taskbar of the view, and click **Detach** before you move or resize the view.
+    This opens **Host Access for the Cloud** in your default browser and automatically establishes a 3270 terminal connection to the BANKDEMO server. You can see the starting page of the ES/MTO region BANKDEMO.
 
 **Executing the Enterprise Server Demonstration**
 
@@ -783,28 +776,24 @@ To check the IDE preferences for the embedded Rumba display:
 
     A suitable **User Id** is b0001. You can type anything as a **Password** - the field must not be empty though.
 
-    ![](images/26724a06801757df6a49140a72d5e70c.jpg)
+    ![](images/Bankdemo_001.png)
 
 2.  Type / against **Display your account balances** and press **Enter** to see the details for this customer.
 
-![](images/7f373449fc38c86f16c8c1182a1b36a7.jpg)
+    ![](images/Bankdemo_002.png)
 
-![](images/3c00c6639419e71ed0c01c3dfda0b724.jpg)
+    ![](images/Bankdemo_003.png)
 
-3.  You can explore this application further if you wish or press **F3** to terminate it.
+3.  You can explore this application further if you wish or press **Ctrl + F2** to clear the screen and conclude the session.
 
-If the Rumba+ Desktop Mainframe Display view disconnects from the server, you can connect again manually as follows:
+If HACloud disconnects from the server, you can connect again manually as follows:
 
-1.  Click the **New Rumba Mainframe Display** button, ![](images/2d916a11d5d3fbc6ec88213c4bd263e3.jpg), in the toolbar of the Rumba Mainframe Display view.
-2.  Specify the host name and the TN3270 port number for the Bankdemo server as follows:
+1.  Click **Open Session**, ![](images/HAC_OpenSessionbutton.png), in the toolbar of the HACloud window.
+2.  In the **Available cs aplps** dialog box, click on the BANKDEMO server.    
 
-    ![](images/a7eadbf593513f2ef01075cd8d00c970.jpg)
+    This connects the display to the BANKDEMO server and loads the start screen of the application.
 
-3.  Click **Connect**.
-
-    This connects the display to the Bankdemo server and loads the start screen of the application.
-
-5.  Follow the steps described earlier in this topic to execute the application in the Rumba Mainframe Display view.
+3.  Follow the steps described earlier in this topic to execute the application in the HACloud view.
 
 **Stopping the enterprise server**
 
@@ -995,19 +984,19 @@ You can now start the debugger. It starts in the background until a program whic
 3.  Click **CICS Debug**, and then click **Debug**.
 4.  You might receive a message about opening the Debug perspective. Click **Yes**.
 
-    This opens a new **Debug** pane, showing the debugger that is waiting for an attachment:
+    This opens a new **Debug** pane, showing that the debugger is waiting for an attachment:
 
     ![](images/d3bd4d7209beaf4b43d3b47efb3b9421.jpg)
 
-    In addition, in the top right corner of the main screen, the perspective has changed from **Team**
-
-    **Developer** to **Debug**:![](images/88f58bfeb3fd128cb2fe55172b59806e.jpg).
+    In addition, in the top right corner of the main screen, the perspective has changed from **Team Developer** to **Debug**: 
+    
+    ![](images/88f58bfeb3fd128cb2fe55172b59806e.jpg).
 
     The TN3270 Connection Properties dialog box opens up.
 
 5.  Click **Connect** to accept the connection details.
 
-    This opens the **Rumba Mainframe Display** view, connects the display to the BANKDEMO enterprise server, and loads the start screen of the application.
+    This opens the **Host Access for the Cloud** view, connects the display to the BANKDEMO enterprise server, and loads the start screen of the application.
 
     Your Eclipse application is now waiting for an event to happen that will trigger the debugging.
 
@@ -1015,8 +1004,7 @@ You can now start the debugger. It starts in the background until a program whic
 
     You can see that the pre-configured CICS and JCL debug configurations have now appeared in the menu.
 
-7.  If the **Rumba Mainframe Display** view is not visible, open it from **Window \> Show View \> Other \> Micro Focus \> Rumba Mainframe Display**.
-10. Click in the **Rumba Mainframe Display** view, and press **CTRL+SHIFT+Z** to clear the screen of the emulator.
+10. In the HACloud view, press **Ctrl + F2** to clear the screen of the emulator.
 11. Enter transaction id BANK, and press **Enter**.
 
     The program SBANK00P starts to execute on line 105.
