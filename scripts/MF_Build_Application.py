@@ -77,17 +77,17 @@ def build_programs():
             install_dir = set_MF_environment (os_type)
             if install_dir is None:
                 write_log("Unable to determine COBDIR")
-                set64bit = 'true'
+                set64bit = True
             else:
                 path32 = Path(os.path.join(install_dir,'casstart32'))
                 if path32.is_file() == False:
                     # No 32bit executables
                     write_log("Overriding bitism as platform only supports 64 bit")
-                    set64bit = 'true'
+                    set64bit = True
                 else:
-                    set64bit = 'false'
+                    set64bit = False
     else:
-        set64bit = 'true'
+        set64bit = True
 
     run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
 
