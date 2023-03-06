@@ -62,8 +62,9 @@ To use the project, download the **source.zip** or **source.tar.gz** from the [r
         - Check the tutorial or demonstration instruction for any additional requirements
     - Available demonstrations:
         - [Deploying and running Bankdemo with VSAM data](demos/onprem/vsam/README.md) 
-        - [Deploying and running Bankdemo with Postgres SQL](demos/onprem/psql/README.md) 
-        - [Deploying and running Bankdemo with VSAM stored in Postgres SQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
+        - [Deploying and running Bankdemo with PostgreSQL](demos/onprem/psql/README.md) 
+        - [Deploying and running Bankdemo with VSAM stored in PostgreSQL using MFDBFH](demos/onprem/psqlmfdbfh/README.md) 
+        - [Deploying and running Bankdemo in a Performance and Availability Cluster with PostgreSQL](demos/onprem/psqlpac/README.md) 
     - Requirements: 
         - The Micro Focus Directory Server (mfds) service must be running
         - Micro Focus Common Web Administration (ESCWA) must be running and listening on the default localhost port - 10086.

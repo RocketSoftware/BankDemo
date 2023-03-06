@@ -26,13 +26,9 @@ from utilities.input import read_json, read_txt
 from utilities.session import get_session, save_cookies
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 
-
-def update_region(region_name, ip_address, template_file, env_file, region_description, region_base):
+def update_region(session, region_name, template_file, env_file, region_description, region_base, catalog_file):
     """ Updates the settings of a previously created region on the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
+    uri = 'native/v1/regions/{}/86/{}'.format('127.0.0.1', region_name)
     esp_alias = '$ESP'
     if sys.platform.startswith('win32'):
         path_sep = ';'
@@ -47,7 +43,9 @@ def update_region(region_name, ip_address, template_file, env_file, region_descr
     #data_dir = os.path.join(esp_alias, 'Data')
     rdef_dir = os.path.join(esp_alias, 'rdef')
 
-    catalog_file = os.path.join(catalog_dir, 'CATALOG.DAT')
+    if catalog_file == None:
+        catalog_file = os.path.join(catalog_dir, 'CATALOG.DAT')
+    
     lib_path = loadlib_dir
 
     try:
@@ -76,128 +74,52 @@ def update_region(region_name, ip_address, template_file, env_file, region_descr
     req_body['mfCASJCLPATH'] = lib_path
     req_body['mfCASMFSYSCAT'] = catalog_file
     req_body['mfCASJCLALLOCLOC'] = catalog_data_dir
-
-    #print(req_body)
-
-    session = get_session()
-
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Region API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.put(uri, req_body, 'Unable to complete Update Region API request.')
     return res
 
-def update_region_attribute(region_name, ip_address, attribute_details):
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
+def update_region_attribute(session, region_name, attribute_details):
+    uri = 'native/v1/regions/{}/86/{}'.format('127.0.0.1', region_name)
     req_body=attribute_details
-
-    session = get_session()
-
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Region API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.put(uri, req_body, 'Unable to complete Update Region API request.')
     return res
     
-def update_alias(region_name, ip_address, alias_file):
+def update_alias(session, region_name, ip_address, alias_file):
     """ Updates the aliases on a Micro Focus Server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/alias'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
+    uri = 'native/v1/regions/{}/86/{}/alias'.format(ip_address, region_name)
     try:
         req_body = read_json(alias_file)
     except InputException as exc:
         raise ESCWAException('Unable to read alias file: {}'.format(alias_file)) from exc
-
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Alias API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Alias API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Update Alias API request.')
     return res
 
 
-def add_initiator(region_name, ip_address, template_file):
+def add_initiator(session, region_name, ip_address, template_file):
     """ Adds an initiator to a Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/initiator'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
+    uri = 'native/v1/regions/{}/86/{}/initiator'.format(ip_address, region_name)
     try:
         req_body = read_json(template_file)
     except InputException as exc:
         raise ESCWAException('Unable to read initiator file: {}'.format(template_file))
-
     req_body['CN'] = region_name
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Add Initiator API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add Initiator API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Add Initiator API request.')
     return res
 
 
-def add_datasets(region_name, ip_address, datafile_list, mfdbfh_location):
+def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location):
     """ Adds data sets to a Micro Focus server. """
-
-    req_headers = create_headers('CreateRegion', ip_address)
-
     try:
         dataset_list = [read_json(data_file) for data_file in datafile_list]
     except InputException as exc:
         raise ESCWAException('Unable to read dataset files')
-
     responses = []
-    session = get_session()
-
     for dataset in dataset_list:
-        uri = 'http://{}:10086/v2/native/regions/{}/86/{}/catalog'.format(ip_address, ip_address, region_name)
-        try:
-            if mfdbfh_location is not None:
-                # sql://bank_mfdbfh/VSAM/{}?folder=/data
-                physicalFile = os.path.basename(dataset['physicalFile'])
-                physicalFile = mfdbfh_location.format(physicalFile)
-                dataset['physicalFile'] = physicalFile
-                
-            res = session.post(uri, headers=req_headers, json=dataset)
-            check_http_error(res)
-        except requests.exceptions.RequestException as exc:
-            raise ESCWAException('Unable to complete Add Dataset API request.') from exc
-        except HTTPException as exc:
-            raise ESCWAException('Unable to complete Add Dataset API request.') from exc
-
+        uri = 'v2/native/regions/{}/86/{}/catalog'.format(ip_address, region_name)
+        if mfdbfh_location is not None:
+            # sql://bank_mfdbfh/VSAM/{}?folder=/data
+            physicalFile = os.path.basename(dataset['physicalFile'])
+            physicalFile = mfdbfh_location.format(physicalFile)
+            dataset['physicalFile'] = physicalFile
+        res = session.post(uri, dataset, 'Unable to complete Add Dataset API request.')
         responses.append(res)
-
-    save_cookies(session.cookies)
-
     return responses

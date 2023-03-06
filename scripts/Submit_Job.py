@@ -20,14 +20,16 @@ Description:  A script to submit a JCL job to the Micro Focus JES server region.
 """
 
 import sys
+from ESCWA.escwa_session import EscwaSession
 from utilities.misc import parse_args
 from ESCWA.job_control import submit_jcl, check_job
 from utilities.exceptions import ESCWAException
 
 
 def submit_job(jcl_file, working_folder, ip_address='127.0.0.1', region_name='BANKDEMO'):
+    session = EscwaSession("http", ip_address, 10086)
     try:
-        submit_res = submit_jcl(region_name, ip_address, jcl_file)
+        submit_res = submit_jcl(session, region_name, ip_address, jcl_file)
     except ESCWAException as exc:
         print('Unable to submit job.')
         sys.exit(1)
@@ -38,7 +40,7 @@ def submit_job(jcl_file, working_folder, ip_address='127.0.0.1', region_name='BA
     print('', submit_res['JobMsg'][0], submit_res['JobMsg'][1], sep='\n')
 
     try:
-        run_res = check_job(region_name, ip_address, job_id)
+        run_res = check_job(session, region_name, ip_address, job_id)
     except ESCWAException as exc:
         print('Unable to check job.')
         sys.exit(1)

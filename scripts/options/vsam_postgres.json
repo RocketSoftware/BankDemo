@@ -1,6 +1,8 @@
 {
     "ip_address" : "127.0.0.1",
     "region_name": "BANKMFDB",
+    "regionPort": 9023,
+    "jesPort": 8001,
     "product": "ES",
     "configuration_files":
         {
@@ -20,10 +22,11 @@
     "is64bit": true,
     "database": "VSAM_Postgres",
     "mfdbfh_config": "MFDBFH_VSAM.cfg",
+    "pac_name": "",
     "PAC": {
       "enabled": false,
       "PSOR_type" : "redis",
-      "PSOR_connection": "localhost:6739",
+      "PSOR_connection": "localhost:6379",
       "description": ""
     },
     "database_connection": 

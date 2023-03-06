@@ -20,6 +20,7 @@ Description:  A script to stop a Micro Focus Server.
 """
 
 import sys
+from ESCWA.escwa_session import EscwaSession
 from utilities.misc import parse_args
 from ESCWA.region_control import stop_region
 from ESCWA.region_control import confirm_region_status
@@ -27,14 +28,15 @@ from utilities.exceptions import ESCWAException
 
 
 def stop_server(region_name='BANKDEMO', ip_address='127.0.0.1', mins_allowed=1):
+    session = EscwaSession("http", ip_address, 10086)
     try:
-        stop_res = stop_region(region_name, ip_address)
+        stop_res = stop_region(session, region_name)
     except ESCWAException as exc:
         print('Unable to stop region.')
         sys.exit(1)
 
     try:
-        confirmed = confirm_region_status(region_name, ip_address, mins_allowed, 'Stopped')
+        confirmed = confirm_region_status(session, region_name, mins_allowed, 'Stopped')
     except ESCWAException as exc:
         print('Unable to check region.')
         sys.exit(1)

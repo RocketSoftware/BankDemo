@@ -25,6 +25,7 @@ if sys.platform.startswith('win32'):
 from utilities.output import write_log 
 from utilities.exceptions import HTTPException
 from pathlib import Path
+import subprocess
 
 def get_elem_with_prop(arr, key, value):
     """ Gets an array object with a specific property"""
@@ -57,16 +58,13 @@ def check_http_error(res):
 
 def parse_args(arg_list, short_map, long_map):
     """ Parses arguments passed on the command line. """
-
     short_opts = "".join([key.lstrip('-') for key in short_map.keys()])
     long_opts = [key.lstrip('-') for key in long_map.keys()]
-
     try:
         opts, args = getopt.getopt(arg_list, short_opts, long_opts)
     except getopt.GetoptError as error:
         print(error)
         return None
-
     short_map = {key.rstrip(':'): val for key, val in short_map.items()}
     long_map = {key.rstrip('='): val for key, val in long_map.items()}
     arg_map = {**short_map, **long_map}
@@ -142,3 +140,26 @@ def get_CobdirAntDir (os_type):
                return antDir
 
     return None
+    
+def get_cobdir_bin(is64bit):
+    if sys.platform.startswith('win32') and is64bit:
+        bin = 'bin64'
+    else:
+        bin = 'bin'
+    cobdir = os.path.join(os.environ['COBDIR'], bin)
+    return cobdir
+
+def powershell(cmd):
+    completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+    return completed
+
+def check_elevation():
+    # Check if the current process is running as administator role
+    isAdmin = '$user = [Security.Principal.WindowsIdentity]::GetCurrent();if ((New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {exit 1} else {exit 0}'
+    completed = powershell(isAdmin)
+    return completed.returncode == 1
+
+def check_esuid(esuid):
+    myuid = subprocess.getoutput("whoami")
+    return esuid==myuid
+

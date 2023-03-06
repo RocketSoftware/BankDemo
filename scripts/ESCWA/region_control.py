@@ -25,12 +25,9 @@ from utilities.input import read_json
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 from utilities.output import write_log 
 
-def add_region(region_name, ip_address, port, template_file, is64bit):
+def add_region(session, region_name, port, template_file, is64bit):
     """ Adds a region to the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86'.format(ip_address, '127.0.0.1')
-    req_headers = create_headers('CreateRegion', ip_address)
-
+    uri = 'native/v1/regions/{}/86'.format('127.0.0.1')
     try:
         req_body = read_json(template_file)
     except InputException as exc:
@@ -40,53 +37,24 @@ def add_region(region_name, ip_address, port, template_file, is64bit):
     req_body['mfTN3270ListenerPort'] = port
     if is64bit == True:
         req_body['mfCAS64Bit'] = 1
-        
-    session = get_session()
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Add Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add Region API request. Region may already be defined') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Add Region API request. Region may already be defined')
     return res
 
-
-def start_region(region_name, ip_address):
+def start_region(session, region_name, ip_address):
     """ Starts a previously created region on the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/start'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
+    uri = 'native/v1/regions/{}/86/{}/start'.format('127.0.0.1', region_name)
     req_body = {
         'mfUser': 'SYSAD',
         'mfPassword': 'SYSAD',
         'mfUseSession': True,
-        'mfColdStart': True
+        'mfStartMode': 'cold'
     }
-
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Start Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Start Region API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Start Region API request.')
     return res
 
-
-def stop_region(region_name, ip_address):
+def stop_region(session, region_name):
     """ Stops a previously created region on the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/stop'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
+    uri = 'native/v1/regions/{}/86/{}/stop'.format('127.0.0.1', region_name)
     req_body = {
         'mfUser': 'SYSAD',
         'mfPassword': 'SYSAD',
@@ -94,100 +62,42 @@ def stop_region(region_name, ip_address):
         'mfClearDynamic': True,
         'mfForceStop': True
     }
-
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Stop Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Stop Region API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Stop Region API request.')
     return res
 
-
-def mark_region_stopped(region_name, ip_address):
+def mark_region_stopped(session, region_name):
     """ Marks a previously created region as stopped on the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
+    uri = 'native/v1/regions/{}/86/{}'.format('127.0.0.1', region_name)
     req_body = {
         'mfServerStatus': 'Stopped'
     }
-
+    res = session.put(uri, req_body, 'Unable to complete Mark Region Stopped API request.')
     session = get_session()
-
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Mark Region Stopped API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Mark Region Stopped API request.') from exc
-
-    save_cookies(session.cookies)
-
     return res
 
-
-def del_region(region_name, ip_address):
+def del_region(session, region_name):
     """ Deletes a region from the Micro Focus server. """
-    
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-    session = get_session()
-
-    try:
-        res = session.delete(uri, headers=req_headers)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Delete Region API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Delete Region API request.') from exc
-
-    save_cookies(session.cookies)
-
+    uri = 'native/v1/regions/{}/86/{}'.format('127.0.0.1', region_name)
+    res = session.delete(uri, 'Unable to complete Delete Region API request.')
     return res
 
-
-def get_region_status(region_name, ip_address):
+def get_region_status(session, region_name):
     """ Checks a previously created region's status on the Micro Focus Server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/status'.format(ip_address, '127.0.0.1', region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
-    try:
-        res = session.get(uri, headers=req_headers)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Region Check API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Region Check API request.') from exc
-
-    save_cookies(session.cookies)
-    
+    uri = 'native/v1/regions/{}/86/{}/status'.format('127.0.0.1', region_name)
+    res = session.get(uri, 'Unable to complete Region Check API request.')
     return res
 
-
-def confirm_region_status(region_name, ip_address, mins_allowed, expected):
+def confirm_region_status(session, region_name, mins_allowed, expected):
     """ Checks a previously created region's status for a given value on the Micro Focus Server. """
-
-    while mins_allowed >= 0:
-        status_res = get_region_status(region_name, ip_address)
+    timeout_seconds=mins_allowed*60
+    while timeout_seconds >= 0:
+        status_res = get_region_status(session, region_name)
         status_res = status_res.json()
 
         if status_res['mfServerStatus'] == expected:
             return True
-
-        if mins_allowed != 0:
-            time.sleep(30)
-
-        mins_allowed -= 1
+        if timeout_seconds > 0:
+            time.sleep(10)
+        timeout_seconds -= 10
     
     return False

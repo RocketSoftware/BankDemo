@@ -1,31 +1,35 @@
 {
     "ip_address" : "127.0.0.1",
-    "region_name": "BANKVSAM",
+    "region_name": "BANKPAC1",
     "regionPort": 9023,
     "jesPort": 8001,
-    "product": "EDz",
+    "product": "ES",
     "configuration_files":
         {
             "base_config": "base.json",
             "update_config": "update.json",
-            "env_config": "env.json",
+            "env_config": "env_pg_pac.json",
             "alias_config": "alias.json",
             "init_config": "init.json",
             "data_dir_1": "datasets_po",
             "data_dir_2": "datasets_vsam",
-            "data_dir_3": "datasets_gdg"
+            "data_dir_3": "datasets_gdg",
+            "xa_config": "xa_postgres_pac.json"
         },
     "JES": true,
     "CICS": true,
     "MQ": false,
     "is64bit": true,
-    "database": "VSAM",
-    "pac_name": "",
+    "database": "VSAM_Postgres_PAC",
+    "mfdbfh_config": "MFDBFH_PG_PAC.cfg",
+    "pac_name": "BANKPAC",
     "PAC": {
-      "enabled": false,
+      "enabled": true,
+      "PSOR_name" : "BANKSOR",
       "PSOR_type" : "redis",
       "PSOR_connection": "localhost:6379",
-      "description": ""
+      "description": "",
+      "additional_directory_servers": []
     },
     "database_connection": 
         {

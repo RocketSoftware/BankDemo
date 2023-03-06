@@ -1,0 +1,10 @@
+{
+    "CN": "DBPG",
+    "mfXRMName": "BANKPGSQL",
+    "mfXRMModule": "",
+    "mfXRMOpenString": "DSN=PG.VSAM,LOCALTX=T,ESLOGGING=0001",
+    "mfXRMCloseString": "",
+    "mfXRMReconnect": 3,
+    "mfXRMStatus": "Enabled",
+    "description": "XA Resource Module for Postgres"
+  }

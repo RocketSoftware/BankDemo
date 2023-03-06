@@ -26,6 +26,8 @@
 /BANKVSAM
 /BANKSQL
 /BANKMFDB
+/BANKPAC1
+/BANKPAC2
 /sources/Listing
 /sources/generated
 .terraform*

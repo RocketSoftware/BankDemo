@@ -20,20 +20,22 @@ Description:  A script to reset a Micro Focus server region to stopped.
 """
 
 import sys
+from ESCWA.escwa_session import EscwaSession
 from ESCWA.region_control import mark_region_stopped, confirm_region_status
 from utilities.misc import parse_args
 from utilities.exceptions import ESCWAException
 
 
 def reset_region(region_name='BANKDEMO', ip_address='127.0.0.1', mins_allowed=1):
+    session = EscwaSession("http", ip_address, 10086)
     try:
-        mark_res = mark_region_stopped(region_name, ip_address)
+        mark_res = mark_region_stopped(session, region_name)
     except ESCWAException as exc:
         print('Unable to mark region as stopped.')
         sys.exit(1)
 
     try:
-        confirmed = confirm_region_status(region_name, ip_address, mins_allowed, 'Stopped')
+        confirmed = confirm_region_status(session, region_name, mins_allowed, 'Stopped')
     except ESCWAException as exc:
         print('Unable to confirm region is stopped.')
         sys.exit(1)
