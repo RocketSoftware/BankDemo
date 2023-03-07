@@ -23,7 +23,7 @@ import os
 import sys
 import glob
 from ESCWA.escwa_session import EscwaSession
-from utilities.pac import install_region_into_pac_by_name, create_crossregion_database
+from utilities.pac import install_region_into_pac_by_name, create_crossregion_database, create_region_database
 from utilities.misc import parse_args, set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir, check_elevation, check_esuid
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
@@ -90,6 +90,8 @@ def create_region(main_configfile):
     #retrieve the demo configuration settings
     ip_address = main_config["ip_address"]
     region_name = main_config["region_name"]
+    pac_name = main_config["pac_name"]
+
     if main_config["product"] != '':
         mf_product = main_config["product"]
     else:
@@ -258,6 +260,15 @@ def create_region(main_configfile):
         write_log('Unable to set JES listener.')
         write_log(exc)
         sys.exit(1)
+
+    if len(pac_name) > 0:
+        if database_connection is None:
+            write_log ('Skipping database creation, no connection')
+        else:
+            create_regiondb = database_connection['create_regiondb'] 
+            if create_regiondb == True:
+                write_log ('Creating database')
+                create_region_database(main_config)
 
     try:
         write_log('Region {} being started before further configuration'.format(region_name))
@@ -474,7 +485,6 @@ def create_region(main_configfile):
     else:
         write_log ('Region stopped successfully')
 
-    pac_name = main_config["pac_name"]
     if len(pac_name) > 0:
         if 'PAC' in main_config:
              pac_config = main_config['PAC']

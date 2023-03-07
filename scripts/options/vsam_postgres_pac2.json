@@ -22,9 +22,11 @@
     "pac_name": "BANKPAC",
     "database_connection": 
         {
+            "create_regiondb": false,
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",
             "password" :"postgres"
         }
+    
 }

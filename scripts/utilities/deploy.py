@@ -3,7 +3,6 @@ from utilities.output import write_log
 from utilities.input import read_txt
 from utilities.resource import add_postgresxa, catalog_datasets, write_secret
 from utilities.filesystem import deploy_vsam_data, dbfhdeploy_vsam_data
-from utilities.pac import create_crossregion_database
 from database.odbc import create_windows_dsn, create_linux_dsn
 from ESCWA.region_config import update_region_attribute
 from pathlib import Path
@@ -139,9 +138,6 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
         #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
         write_log ('MFDBFH version required - adding database locations to catalog')
         catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BankPAC/VSAM/{}?folder=/data")
-
-        write_log ('Creating crossregion database')
-        create_crossregion_database(main_config, "BankPAC")
 
 def deploy_vsam(session, os_type, main_config, cwd, esuid):
     write_log ('VSAM version required - datasets being deployed')

@@ -33,6 +33,7 @@
     },
     "database_connection": 
         {
+            "create_regiondb": true,
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",

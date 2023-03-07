@@ -56,9 +56,27 @@ def dbfhadmin(is64bit, cmd):
     result = subprocess.run(arg_list)
     return result
 
-def create_crossregion_database(main_config, pac_name):
+def create_crossregion_database(main_config):
     is64bit = main_config["is64bit"]
+    pac_name = main_config["pac_name"]
+    database_connection = main_config["database_connection"]
+    database_server = database_connection["server_name"]
+    database_user = database_connection["user"]
+    database_pwd = database_connection["password"]
     cmd = "-script -type:crossregion -provider:pg -name:{} -file:create_crossregion_db.sql".format(pac_name)
     dbfhadmin(is64bit, cmd)
-    cmd = "-createdb -provider:pg -type:crossregion -name:{} -file:create_crossregion_db.sql -user:postgres".format(pac_name)
+    cmd = "-createdb -provider:pg -type:crossregion -name:{} -file:create_crossregion_db.sql -user:{} -host:{} -password:{}".format(pac_name, database_user, database_server, database_pwd)
     dbfhadmin(is64bit, cmd)
+
+def create_region_database(main_config):
+    is64bit = main_config["is64bit"]
+    pac_name = main_config["pac_name"]
+    database_connection = main_config["database_connection"]
+    database_server = database_connection["server_name"]
+    database_port = database_connection["server_port"]
+    database_user = database_connection["user"]
+    database_pwd = database_connection["password"]
+    cmd = "-script -type:region -provider:pg -name:{} -db:BANK_ONEDB -file:create_region_db.sql".format(pac_name)
+    dbfhadmin(is64bit, cmd)
+    arg_list = ["psql", "postgresql://{}:{}@{}:{}".format(database_user, database_pwd, database_server, database_port), "-f", "create_region_db.sql"]
+    result = subprocess.run(arg_list)

@@ -15,6 +15,7 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - A Redis server is installed and running
    - The Micro Focus Enterprise Developer products on Windows include AdoptRedis which is suitable for testing and demonstration purposes.
 - PostgreSQL version 12 or later must be installed and running
+- PostgreSQL `psql` command should be on PATH
 - PostgreSQL ODBC driver: 
    - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
    - Ubuntu: sudo apt-get install unixodbc unixodbc-dev odbc-postgresql

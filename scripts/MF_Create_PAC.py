@@ -31,8 +31,8 @@ def create_pac(session, config_dir, pac_name, psor_connection, pac_description="
     write_log("Creating PAC {} with PSOR {}".format(pac_name, psor_connection))
     addsor_config = os.path.join(config_dir, 'addsor.json')
     try:
-        print ('PSOR \033[1m{}\033[0m being added'.format("psor1"))
-        sor=add_sor(session, "psor1", "desc", psor_type, psor_connection, addsor_config).json()
+        print ('PSOR \033[1m{}\033[0m being added'.format("BANKPSOR"))
+        sor=add_sor(session, "BANKPSOR", "desc", psor_type, psor_connection, addsor_config).json()
     except ESCWAException as exc:
         print('Unable to create PSOR.')
         print(exc)
