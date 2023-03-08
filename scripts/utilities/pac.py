@@ -78,5 +78,5 @@ def create_region_database(main_config):
     database_pwd = database_connection["password"]
     cmd = "-script -type:region -provider:pg -name:{} -db:BANK_ONEDB -file:create_region_db.sql".format(pac_name)
     dbfhadmin(is64bit, cmd)
-    arg_list = ["psql", "postgresql://{}:{}@{}:{}".format(database_user, database_pwd, database_server, database_port), "-f", "create_region_db.sql"]
+    arg_list = ["psql", "--file", "create_region_db.sql", "postgresql://{}:{}@{}:{}".format(database_user, database_pwd, database_server, database_port)]
     result = subprocess.run(arg_list)

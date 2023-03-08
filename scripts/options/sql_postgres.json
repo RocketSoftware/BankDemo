@@ -33,5 +33,14 @@
             "server_port": "5432",
             "user": "postgres",
             "password" :"postgres"
+            "db_type": "postgres",
+            "odbc":
+            [
+                {
+                    "dsn_name": "BANK",
+                    "dsn_description": "Bankdemo SQL DB",
+                    "db_name": "bank"
+                }
+            ]
         }
 }

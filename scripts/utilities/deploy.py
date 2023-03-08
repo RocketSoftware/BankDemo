@@ -28,10 +28,17 @@ def deploy_sql_postgres(session, os_type, main_config, cwd, esuid):
     loadlibDir = 'SQL_Postgres'
     database_connection = main_config['database_connection']
     write_log ('Database type {} selected - database being built'.format(database_engine))
-    if os_type == 'Windows':
-        create_windows_dsn('postgres', is64bit, 'bank', 'bank', database_connection)
-    else:
-        create_linux_dsn("postgres", "BANK", "bank", "bank", database_connection)
+    if "odbc" in database_connection:
+        db_type = database_connection["db_type"]
+        for odbc_dsn in database_connection["odbc"]:
+            dsn_name = odbc_dsn["dsn_name"]
+            dsn_description = odbc_dsn["dsn_description"]
+            db_name = odbc_dsn["db_name"]
+            if os_type == 'Windows':
+                create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
+            else:
+                create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
+
     conn = Connect_to_PG_server(database_connection['server_name'],database_connection['server_port'],'postgres',database_connection['user'],database_connection['password'])
     sql_folder = os.path.join(cwd, 'config', 'database', database_engine) 
     sql_file = os.path.join(sql_folder, 'create.sql')
@@ -62,16 +69,18 @@ def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esui
     region_name = main_config["region_name"]
     loadlibDir = 'VSAM'
     database_connection = main_config['database_connection']
-    if os_type == 'Windows':
-        create_windows_dsn('postgres', is64bit, 'BANKVSAM.MASTER', 'postgres', database_connection)
-        create_windows_dsn('postgres', is64bit, 'BANKVSAM.VSAM', 'BANK_ONEDB', database_connection)
-    else:
-        create_linux_dsn("postgres", "BANKVSAM.MASTER", "BANKVSAM.MASTER", "postgres", database_connection)
-        create_linux_dsn("postgres", "BANKVSAM.VSAM", "BANKVSAM.VSAM", "BANK_ONEDB", database_connection)
-
-    write_log("Adding database password to vault for MFDBFH")
-    write_secret(os_type, "microfocus/mfdbfh/espacdatabase.bankvsam.master.password", database_connection['password'], esuid)
-    write_secret(os_type, "microfocus/mfdbfh/espacdatabase.bankvsam.vsam.password", database_connection['password'], esuid)
+    if "odbc" in database_connection:
+        db_type = database_connection["db_type"]
+        db_pwd = database_connection['password']
+        for odbc_dsn in database_connection["odbc"]:
+            dsn_name = odbc_dsn["dsn_name"]
+            dsn_description = odbc_dsn["dsn_description"]
+            db_name = odbc_dsn["db_name"]
+            if os_type == 'Windows':
+                create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
+            else:
+                create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
+            write_secret(os_type, "microfocus/mfdbfh/bankvsam.{}.password".format(dsn_name.lower()), db_pwd, esuid)
 
     configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid)
     update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://ESPacDatabase/VSAM?type=folder;folder=/data"})
@@ -112,23 +121,18 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
     update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BankPAC/VSAM?type=folder;folder=/data"})
 
     if 'data_dir_2' in configuration_files:
-        if os_type == 'Windows':
-            create_windows_dsn('postgres', is64bit, 'PG.MASTER', 'postgres', database_connection)
-            create_windows_dsn('postgres', is64bit, 'PG.VSAM', 'BANK_ONEDB', database_connection)
-            create_windows_dsn('postgres', is64bit, 'PG.REGION', 'BANK_ONEDB', database_connection)
-            create_windows_dsn('postgres', is64bit, 'PG.CROSSREGION', 'BANK_ONEDB', database_connection)
-        else:
-            create_linux_dsn("postgres", "PG.MASTER", "BANKPAC.MASTER", "postgres", database_connection)
-            create_linux_dsn("postgres", "PG.VSAM", "BANKPAC.VSAM", "BANK_ONEDB", database_connection)
-            create_linux_dsn("postgres", "PG.REGION", "BANKPAC.REGION", "BANK_ONEDB", database_connection)
-            create_linux_dsn("postgres", "PG.CROSSREGION", "BANKPAC.CROSSREGION", "BANK_ONEDB", database_connection)
-            
-        write_log("Adding database password to vault for MFDBFH")
-        db_pwd = database_connection['password']
-        write_secret(os_type, "microfocus/mfdbfh/bankpac.pg.master.password", db_pwd, esuid)
-        write_secret(os_type, "microfocus/mfdbfh/bankpac.pg.vsam.password", db_pwd, esuid)
-        write_secret(os_type, "microfocus/mfdbfh/bankpac.pg.region.password", db_pwd, esuid)
-        write_secret(os_type, "microfocus/mfdbfh/bankpac.pg.crossregion.password", db_pwd, esuid)
+        if "odbc" in database_connection:
+            db_type = database_connection["db_type"]
+            db_pwd = database_connection['password']
+            for odbc_dsn in database_connection["odbc"]:
+                dsn_name = odbc_dsn["dsn_name"]
+                dsn_description = odbc_dsn["dsn_description"]
+                db_name = odbc_dsn["db_name"]
+                if os_type == 'Windows':
+                    create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
+                else:
+                    create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
+                write_secret(os_type, "microfocus/mfdbfh/bankpac.{}.password".format(dsn_name.lower()), db_pwd, esuid)
     
         write_log ('MFDBFH version required - datasets being migrated to database')
         os.environ['MFDBFH_CONFIG'] = mfdbfh_config

@@ -37,6 +37,30 @@
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",
-            "password" :"postgres"
+            "password" :"postgres",
+            "db_type": "postgres",
+            "odbc":
+            [
+                {
+                    "dsn_name": "PG.MASTER",
+                    "dsn_description": "MFDBFH Control",
+                    "db_name": "postgres"
+                },
+                {
+                    "dsn_name": "PG.VSAM",
+                    "dsn_description": "VSAM Datasets",
+                    "db_name": "BANK_ONEDB"
+                },
+                {
+                    "dsn_name": "PG.REGION",
+                    "dsn_description": "PAC DB",
+                    "db_name": "BANK_ONEDB"
+                },
+                {
+                    "dsn_name": "PG.CROSSREGION",
+                    "dsn_description": "Cross PAC DB",
+                    "db_name": "BANK_ONEDB"
+                }
+            ]
         }
 }
