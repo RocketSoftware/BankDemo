@@ -80,19 +80,19 @@ def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esui
                 create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
             else:
                 create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
-            write_secret(os_type, "microfocus/mfdbfh/bankvsam.{}.password".format(dsn_name.lower()), db_pwd, esuid)
+            write_secret(os_type, "microfocus/mfdbfh/bankmfdb.{}.password".format(dsn_name.lower()), db_pwd, esuid)
 
     configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid)
-    update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://ESPacDatabase/VSAM?type=folder;folder=/data"})
+    update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BANKMFDB/VSAM?type=folder;folder=/data"})
 
     write_log ('MFDBFH version required - datasets being migrated to database')
     os.environ['MFDBFH_CONFIG'] = mfdbfh_config
     parentdir = str(Path(cwd).parents[0])
-    dbfhdeploy_vsam_data(parentdir, os_type, is64bit, configuration_files, "sql://ESPacDatabase/VSAM/{}?folder=/data")
+    dbfhdeploy_vsam_data(parentdir, os_type, is64bit, configuration_files, "sql://BANKMFDB/VSAM/{}?folder=/data")
 
     #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
     write_log ('MFDBFH version required - adding database locations to catalog')
-    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://ESPacDatabase/VSAM/{}?folder=/data")
+    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BANKMFDB/VSAM/{}?folder=/data")
 
 def configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid):
     database_connection = main_config['database_connection']
