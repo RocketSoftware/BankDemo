@@ -54,14 +54,6 @@ def deploy_sql_postgres(session, os_type, main_config, cwd, esuid):
     ## The following code adds XA resource managers as defined in xa.json
     configure_xa(session, os_type, main_config, cwd, esuid)
 
-    xa_config = configuration_files["xa_config"]
-    config_dir = os.path.join(cwd, 'config')
-    xa_config = os.path.join(config_dir, xa_config)
-    xa_openstring = add_postgresxa(session, os_type, is64bit, region_name, ip_address, xa_config, database_connection)
-
-    write_log("Adding XA switch configuration to vault")
-    write_secret(os_type, "Microfocus/XASW/DBPG/XAOpenString", xa_openstring, esuid)
-
 def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esuid):
     configuration_files = main_config["configuration_files"]
     is64bit = main_config["is64bit"]
