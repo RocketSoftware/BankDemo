@@ -52,7 +52,7 @@ def deploy_sql_postgres(session, os_type, main_config, cwd, esuid):
     dconn_res = Disconnect_from_PG_server(conn)
 
     ## The following code adds XA resource managers as defined in xa.json
-    configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid)
+    configure_xa(session, os_type, main_config, cwd, esuid)
 
     xa_config = configuration_files["xa_config"]
     config_dir = os.path.join(cwd, 'config')
@@ -82,7 +82,7 @@ def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esui
                 create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
             write_secret(os_type, "microfocus/mfdbfh/bankmfdb.{}.password".format(dsn_name.lower()), db_pwd, esuid)
 
-    configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid)
+    configure_xa(session, os_type, main_config, cwd, esuid)
     update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BANKMFDB/VSAM?type=folder;folder=/data"})
 
     write_log ('MFDBFH version required - datasets being migrated to database')
@@ -94,7 +94,7 @@ def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esui
     write_log ('MFDBFH version required - adding database locations to catalog')
     catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BANKMFDB/VSAM/{}?folder=/data")
 
-def configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid):
+def configure_xa(session, os_type, main_config, cwd, esuid):
     database_connection = main_config['database_connection']
     configuration_files = main_config["configuration_files"]
     is64bit = main_config["is64bit"]
@@ -117,7 +117,7 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
     ip_address = main_config["ip_address"]
     region_name = main_config["region_name"]
 
-    configure_xa(session, os_type, main_config, cwd, mfdbfh_config, esuid)
+    configure_xa(session, os_type, main_config, cwd, esuid)
     update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BankPAC/VSAM?type=folder;folder=/data"})
 
     if 'data_dir_2' in configuration_files:

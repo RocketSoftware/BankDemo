@@ -32,7 +32,7 @@
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",
-            "password" :"postgres"
+            "password" :"postgres",
             "db_type": "postgres",
             "odbc":
             [
