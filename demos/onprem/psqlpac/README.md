@@ -31,7 +31,7 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 This demonstration shows a simple COBOL CICS "green screen" application accessing VSAM data using EXEC CICS statements where that data is actually stored in a PostreSQL database.
 A Performance and Availability Cluster (PAC) is created containing two Enterprise Server instances.
 
-The demonstration includes a Python script that helps create the Enterprise Server instances which is:
+The demonstration includes a Python script that helps create the Enterprise Server instances which are:
 
    - Created in the `BANKPAC1` and `BANKPAC2` subdirectories of this project
    - Created (almost exclusively) using the ESCWA Admin API
@@ -41,13 +41,15 @@ The demonstration includes a Python script that helps create the Enterprise Serv
    - Uses pre-built application modules
    - Two ODBC system data sources called `PG.MASTER`, `PG.VSAM`, `PG.CROSSREGION` and `PG.REGION` are created
    - The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
-   - The server instance is configured to use the Micro Focus Database File Handler (MFDBFH) by:
+   - The server instances are configured to use the Micro Focus Database File Handler (MFDBFH) by:
        - The credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
         - Specifying the XA switch module espgsqlxa (its source is in the `src/enterpriseserver/xa` directory of the Enterprise Developer installation location)
         - The esxaextcfg module provides encrypted credentials to espgsqlxa        
         - Setting the environment variables MFDBFH_CONFIG and ES_DB_FH
         - Configuring the `CICS File Path` setting to point use an MFDBFH location (i.e., `sql://...`)
         - Cataloging the VSAM datasets with MFDBFH locations (i.e. `sql://...`)
+        - Defining a PAC scale-out repository (BANKPSOR) in the Redis server
+        - Configuring the servers to be members of a Performance and Availability Cluster (BANKPAC) using scale-out repository BANKPSOR
 
 The demonstration also includes some instructions to build the application from the sources (see the next section).
 
@@ -99,5 +101,5 @@ The demonstration also includes some instructions to build the application from 
 
 11. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
 
-12. In ESCWA, select the BANKSOR under **SORs**. Expand BANKPAC and note the two Enterprise Server instances BANKPAC1 and BANKPAC2
+12. In ESCWA, select the BANKPSOR under **SORs**. Expand BANKPAC and note the two Enterprise Server instances BANKPAC1 and BANKPAC2
     
