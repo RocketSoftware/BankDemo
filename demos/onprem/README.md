@@ -16,4 +16,9 @@
     - [Deploying and running Bankdemo with Postgres VSAM](psqlmfdbfh/README.md) 
         - Data stored in a SQL database but accessed using COBOL verbs (READ/WRITE etc)
         - Application built if Enterprise Developer is installed
+    - [Deploying and running Bankdemo in a Performance and Availability Cluster with PostgreSQL](psqlpac/README.md) 
+      - Performance and Availability Cluster (PAC) consisting of two Enterprise Server instances
+        - Data stored in a SQL database but accessed using COBOL verbs (READ/WRITE etc)
+        - Scale-out repository data stored in Redis
+        - Application built if Enterprise Developer is installed
     
