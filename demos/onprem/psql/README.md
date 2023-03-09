@@ -11,6 +11,7 @@ The SQL database is populated with bank account data.
 - The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
+- PostgreSQL `psql` command needs to be available on the PATH
 - PostgreSQL ODBC driver: 
    - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
    - Ubuntu: sudo apt-get install unixodbc unixodbc-dev odbc-postgresql
