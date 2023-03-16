@@ -4,9 +4,7 @@
 
 This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Eclipse. They provide a basic understanding of how the product operates.
 
-These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Eclipse Integrated Development
-
-Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Eclipse to develop and maintain both simple COBOL and mainframe subsystem applications.
+These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Eclipse Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Eclipse to develop and maintain both simple COBOL and mainframe subsystem applications.
 
 Other tutorials, which are designed for Administrators, are available.
 
@@ -51,8 +49,6 @@ You must have the following software installed:
 If you have an active firewall on the machine that is running your Directory Server and enterprise server instances, and you want remote clients to be able to connect to them, you must ensure that the firewall allows access to the ports that you are using.
 
 For example, Directory Server is configured, by default, to use port 86. Your must configure your firewall to allow TCP and UDP access to this port. Similarly, the enterprise server instance you create as part of this tutorial, BANKDEMO, has listeners which use ports 9003 and 9023. For remote clients to be able to submit JCL jobs or connect a TN3270 terminal to these listeners, your firewall must permit access to these ports.
-
-For example, Directory Server is configured, by default, to use port 86. Your must configure your firewall to allow TCP and UDP access to this port. Similarly, the default enterprise server instance, ESDEMO, has a **Web Services and J2EE** listener that uses port 9003. For remote clients to be able to submit requests to this listener, your firewall must permit access to this port.
 
 We recommend that, if you want remote users to access Enterprise Server functionality through the firewall, you use fixed port values so that you can control access via these.
 
