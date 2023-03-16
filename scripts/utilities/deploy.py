@@ -2,7 +2,7 @@ import os
 from utilities.output import write_log 
 from utilities.input import read_txt
 from utilities.resource import add_postgresxa, catalog_datasets, write_secret
-from utilities.filesystem import deploy_vsam_data, dbfhdeploy_vsam_data
+from utilities.filesystem import deploy_vsam_data, dbfhdeploy_vsam_data, dbfhdeploy_dataset
 from database.odbc import create_windows_dsn, create_linux_dsn
 from ESCWA.region_config import update_region_attribute
 from pathlib import Path
@@ -101,6 +101,16 @@ def configure_xa(session, os_type, main_config, cwd, esuid):
     write_secret(os_type, "Microfocus/XASW/DBPG/XAOpenString", xa_openstring, esuid)
     
 
+def deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, source_location):
+    is64bit = main_config["is64bit"]
+    ip_address = main_config["ip_address"]
+    region_name = main_config["region_name"]
+
+    write_log ('MFDBFH version required - CICS resources being migrated to database')
+    os.environ['MFDBFH_CONFIG'] = mfdbfh_config
+
+    dbfhdeploy_dataset (os_type, is64bit, source_location, "sql://BankPAC/VSAM/{}?folder=/system", "dfhdrdat")
+    update_region_attribute(session, region_name, {"mfCASTXRDTP": "sql://BankPAC/VSAM?type=folder;folder=/system"})
 
 def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, esuid):
     database_connection = main_config['database_connection']

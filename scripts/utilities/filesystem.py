@@ -116,3 +116,26 @@ def dbfhdeploy_vsam_data (repo_dir, os_type, is64Bit, configuration_files, mfdbf
             dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, file.path, catalog_location)
             write_log(dbfhdeploy_cmd)
             subprocess.run([dbfhdeploy, "add", file.path, catalog_location])
+
+def dbfhdeploy_dataset (os_type, is64Bit, source_location, mfdbfh_location, filename):
+    if os_type == 'Windows':
+        if is64Bit == True:
+            bin = 'bin64'
+        else:
+            bin = 'bin'
+    else:
+        bin = 'bin'
+        
+    dbfhdeploy = os.path.join(os.environ['COBDIR'], bin, 'dbfhdeploy')
+    db = mfdbfh_location.split('{')
+    dbfhdeploy_cmd = '\"{}\" create \"{}\"'.format(dbfhdeploy, db[0])
+    write_log(dbfhdeploy_cmd)
+    subprocess.run([dbfhdeploy, "create", db[0]])
+
+    catalog_location = mfdbfh_location.format(filename)
+    source_file = "{}/{}".format(source_location, filename)
+
+    dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, source_file, catalog_location)
+    write_log(dbfhdeploy_cmd)
+    subprocess.run([dbfhdeploy, "add", source_file, catalog_location])
+            

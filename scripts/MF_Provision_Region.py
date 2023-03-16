@@ -27,9 +27,9 @@ from utilities.pac import install_region_into_pac_by_name, create_crossregion_da
 from utilities.misc import parse_args, set_MF_environment, get_EclipsePluginsDir, get_CobdirAntDir, check_elevation, check_esuid
 from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
-from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_vsam_data, deploy_partitioned_data, dbfhdeploy_vsam_data
+from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_partitioned_data
 from utilities.resource import add_postgresxa, catalog_datasets, write_secret
-from utilities.deploy import deploy_application_option
+from utilities.deploy import deploy_application_option, deploy_dfhdrdat_postgres_pac
 from database.odbc import check_odbc_driver_installed
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
 from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator
@@ -237,7 +237,7 @@ def create_region(main_configfile):
     try:
         write_log ('Region {} being updated with requested settings'.format(region_name))
         catalog_file=None
-        if database_type == 'VSAM_Postgres_PAC':
+        if database_type == 'VSAM_Postgres_PAC': 
             catalog_file="sql://BankPAC/VSAM/catalog.dat?folder=/"
         update_region(session, region_name, update_config, env_config, 'Test Region', sys_base, catalog_file)
     except ESCWAException as exc:
@@ -409,6 +409,11 @@ def create_region(main_configfile):
             print('Unable to add MQ Listener.')
             write_log(exc)
             sys.exit(1)
+
+   ## Move resource definition file into DB
+    if database_type == 'VSAM_Postgres_PAC': 
+        deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, rdef)
+
     
    ## The following code deploys the application
     deploy_application_option(session, database_type, os_type, main_config, cwd, mfdbfh_config, esuid)
