@@ -110,7 +110,6 @@ def deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, s
     os.environ['MFDBFH_CONFIG'] = mfdbfh_config
 
     dbfhdeploy_dataset (os_type, is64bit, source_location, "sql://BankPAC/VSAM/{}?folder=/system", "dfhdrdat")
-    update_region_attribute(session, region_name, {"mfCASTXRDTP": "sql://BankPAC/VSAM?type=folder;folder=/system"})
 
 def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, esuid):
     database_connection = main_config['database_connection']

@@ -410,10 +410,6 @@ def create_region(main_configfile):
             write_log(exc)
             sys.exit(1)
 
-   ## Move resource definition file into DB
-    if database_type == 'VSAM_Postgres_PAC': 
-        deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, rdef)
-
     
    ## The following code deploys the application
     deploy_application_option(session, database_type, os_type, main_config, cwd, mfdbfh_config, esuid)
@@ -499,7 +495,9 @@ def create_region(main_configfile):
                 psor_connection=pac_config['PSOR_connection']
                 pac_description=pac_config['description']
                 create_pac(session, config_dir, pac_name, psor_connection, pac_description, psor_type)
+                deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, rdef)
 
+        update_region_attribute(session, region_name, {"mfCASTXRDTP": "sql://BankPAC/VSAM?type=folder;folder=/system"})
         install_region_into_pac_by_name(session, ip_address, region_name, pac_name, config_dir)
     else:
         write_log('Not using PAC.')

@@ -13,7 +13,8 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - A Redis server is installed and running
-   - The Micro Focus Enterprise Developer products on Windows include AdoptRedis which is suitable for testing and demonstration purposes.
+   - The Micro Focus Enterprise Developer products on Windows include AdoptRedis which is suitable for testing and demonstration purposes 
+     (e.g. `C:\Program Files (x86)\Micro Focus\Enterprise Developer\AdoptRedis\redis-server.exe`).
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL `psql` command needs to be available on the PATH
 - PostgreSQL ODBC driver: 
@@ -81,7 +82,7 @@ The demonstration also includes some instructions to build the application from 
 7. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` script which creates a PAC called BANKPAC including the BANKPAC1 server, and deploys the desired application configuration.
 
     ```
-    python MF_Provision_Region.py vsam_postgres_pac
+    python MF_Provision_Region.py vsam_postgres_pac1
     ```
 8. A PAC with a single Enterprise Server instance is now running, to create a second Enterprise Server instance within the same PAC edit the file `scripts/options/vsam_postgres_pac2.json` with a text editor:
     - Verify and, if required, modify the values within the `database_connection` section to match the setting of the database you are using.
