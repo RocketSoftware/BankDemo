@@ -65,7 +65,7 @@ Making these associations before you start the server enables the executables bu
 1. To prepare for debugging in Eclipse, create a debug configuration by selecting **Debug Configurations** from the **Run** menu.
 2. On the Debug Configurations dialog, right-click **PL/I Enterprise Server**, and click **New Configuration**.
 3. Change the **Name** from **New_configuration** to something meaningful like **BANK**.
-4. Type **BANKMAIN** in PL/I project, enter **Local** for **Connection**, enter **BANKDEMO** for **Server**, then click **Apply**, and then click **Debug**.
+4. Type **BANKMAIN** in PL/I project, enter **Local** in **ESCWA**, **Default** in **Directory Server**, and **BANKDEMO** in **Region**. Click **Apply** and then click **Debug**.
 5. If a 3270 window does not open automatically, open your preferred TN3270 emulation program, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 6. If you receive a dialog asking whether to automatically switch to the debug perspective, select **Remember my decision**, and click **Yes**.
 7. Eclipse should automatically open the `SBANK00P.PLI` source file with the SBANK00P PROC line highlighted as the current line of execution.
