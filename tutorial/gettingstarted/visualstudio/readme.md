@@ -318,11 +318,13 @@ The individual source files can have their own local properties which override t
     This opens the COBOL-specific file properties.
 
     Notice that **CICS Directives** is set to **CICSECM()**. This has been set when you added the file to the project or performed a directives scan of the COBOL sources in your project.
+    
+    ![](images/bbc0c093cd21e687f30502174231cd3a.jpg)
 
 2.  In Solution Explorer, click the **MBANK10.bms** file in your project.
 3.  Click the **View** main menu and then click **Properties Window**.
 
-    ![](images/bbc0c093cd21e687f30502174231cd3a.jpg)This opens the Visual Studio properties window. Note that the **Build Action** is set to **BMS Compile** which means the build invokes the BMS Compiler.
+    This opens the Visual Studio properties window. Note that the **Build Action** is set to **BMS Compile** which means the build invokes the BMS Compiler.
 
     ![](images/414d19af11750512f75b966ef13ea6a8.jpg)
 
@@ -629,7 +631,7 @@ You can configure the IDE to create a fully expanded Compiler listing file durin
 
     During the build, the Compiler produces a source listing file, **ZBNKPRT1.lst**, in a Listing subfolder in
 
-    the project directory (**C:\\MFETDUSER\\tutorials\\projects\\Studio\\cobol\\Bankdemo\\Listing** in this case). The listing file includes a fully expanded source file together with some Compiler system information at the start and with any Compiler errors highlighted with asterisks. From File Explorer, you can open the file in a text editor such as Microsoft's Notepad and view its contents.
+    the project directory (**C:\\MFETDUSER\\tutorial\\projects\\Studio\\cobol\\Bankdemo\\Listing** in this case). The listing file includes a fully expanded source file together with some Compiler system information at the start and with any Compiler errors highlighted with asterisks. From File Explorer, you can open the file in a text editor such as Microsoft's Notepad and view its contents.
 
 **Example of compiling a COBOL program with errors**
 
@@ -650,7 +652,7 @@ You can introduce some Compiler errors into one of the programs to see how the C
 7. Double-click an error in the list to position the cursor on the line of code that contains the error.
 8. Check the errors in the listing file, **ZBNKPRT.lst** as follows:
 
-    **a.** In File Explorer, navigate to **C:\\MFETDUSER\\tutorials\\projects\\Studio\\cobol\\Bankdemo\\Listing**, and open the file in a text editor.
+    **a.** In File Explorer, navigate to **C:\\MFETDUSER\\tutorial\\projects\\Studio\\cobol\\Bankdemo\\Listing**, and open the file in a text editor.
 
     The lines that include syntax errors are marked with asterisks (\*\*).
 
@@ -674,6 +676,7 @@ This sample provides a PowerShell script that creates the region definition to u
 
 1.  Open File Explorer, and navigate to the **C:\\MFETDUSER\\tutorial** folder.
 2.  Right-click **createdefinition.ps1**, and click **Run with PowerShell**.
+3. Type **A** when prompted for permissions in the PowerShell window.
 
     This executes the script and creates the Enterprise Server region definition file, **BANKDEMO.xml**, in the same folder. The file is configured for the location in which you have saved the sample files.
 
