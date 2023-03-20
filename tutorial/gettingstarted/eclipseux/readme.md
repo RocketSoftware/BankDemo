@@ -675,8 +675,6 @@ These are the steps to start the server manually, and are included for completen
 
     **Note:** You might receive an **ESMAC Sign On** dialog prompting you to provide connection details for the BANKDEMO server. This is a standard security dialog. Click **OK** without specifying any sign on details. Also, you may skip enabling password recovery.
 
-    You may receive a **Windows Security Alert** blocking the **MF Communications** process. Click **Allow access**.
-
     You can check the **Console** view to ensure that the BANKDEMO server has started successfully.
 
 2.  Right-click the BANKDEMO server in Server Explorer, and click **Show Console Log**.
