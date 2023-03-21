@@ -617,7 +617,7 @@ To execute the JCL, you need to run the application in an instance of the Micro 
 This sample provides a PowerShell script that creates the region definition to use in this tutorial:
 
 1.  Open File Explorer, and navigate to the **C:\\MFETDUSER\\tutorial** folder.
-2.  Right-click **createdefinition.ps1**, and click **Run with PowerShell**.
+2.  Right-click **createdefinition.ps1**, and click **Run with PowerShell**. Allow the script to execute, and specify **A** to allow the execution policies.
 
     This executes the script and creates the Enterprise Server region definition file, **BANKDEMO.xml**, in the same folder. The file is configured for the location in which you saved the sample files.
 
