@@ -498,6 +498,8 @@ def create_region(main_configfile):
                 deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, rdef)
 
         update_region_attribute(session, region_name, {"mfCASTXRDTP": "sql://BankPAC/VSAM?type=folder;folder=/system"})
+        update_region_attribute(session, region_name, {"mfCASJCLALLOCLOC": "sql://BankPAC/VSAM?type=folder;folder=/data"})
+
         install_region_into_pac_by_name(session, ip_address, region_name, pac_name, config_dir)
     else:
         write_log('Not using PAC.')
