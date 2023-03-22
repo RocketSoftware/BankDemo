@@ -355,9 +355,7 @@ def create_region(main_configfile):
         if fct_filelist != '':
             for filename in fct_filelist:
                 fct_details = read_json(filename)
-                groupx = filename.split('_')
-                group_name = groupx[2].split('.')
-                add_fct(session, region_name,ip_address,group_name[0], fct_details)
+                add_fct(session, region_name,ip_address,fct_details)
         else:
             write_log('fct match pattern failed')
     ppt_match_pattern = os.path.join(resourcedef_dir, 'rdef_ppt_*.json')
@@ -367,9 +365,7 @@ def create_region(main_configfile):
        write_log ('CICS Resource PPT definitions found - being added') 
        for filename in ppt_filelist:
            ppt_details = read_json(filename)
-           groupx = filename.split('_')
-           group_name = groupx[2].split('.')
-           add_ppt(session, region_name,ip_address,group_name[0], ppt_details)
+           add_ppt(session, region_name,ip_address, ppt_details)
     else:
         write_log('ppt match pattern failed')
     pct_match_pattern = os.path.join(resourcedef_dir, 'rdef_pct_*.json')
@@ -379,9 +375,7 @@ def create_region(main_configfile):
        write_log ('CICS Resource PCT definitions found - being added')  
        for filename in pct_filelist:
            pct_details = read_json(filename)
-           groupx = filename.split('_')
-           group_name = groupx[2].split('.')
-           add_pct(session, region_name,ip_address,group_name[0], pct_details)
+           add_pct(session, region_name,ip_address,pct_details)
     else:
         write_log('pct match pattern failed')
 

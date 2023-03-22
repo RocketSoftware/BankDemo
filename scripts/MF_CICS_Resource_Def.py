@@ -55,9 +55,7 @@ def update_rdef(ip_address='127.0.0.1',region_name='OMPTRAIN'):
     if fct_filelist != '':
        for filename in fct_filelist:
            fct_details = read_json(filename)
-           groupx = filename.split('_')
-           group_name = groupx[2].split('.')
-           add_fct(session, region_name,ip_address,group_name[0], fct_details)
+           add_fct(session, region_name,ip_address,fct_details)
 
     ppt_match_pattern = resourcedef_dir + '\\rdef_ppt_*.json'
     ppt_filelist = glob.glob(ppt_match_pattern)
@@ -65,9 +63,7 @@ def update_rdef(ip_address='127.0.0.1',region_name='OMPTRAIN'):
     if ppt_filelist != '':
        for filename in ppt_filelist:
            ppt_details = read_json(filename)
-           groupx = filename.split('_')
-           group_name = groupx[2].split('.')
-           add_ppt(session, region_name,ip_address,group_name[0], ppt_details)
+           add_ppt(session, region_name,ip_address, ppt_details)
 
     pct_match_pattern = resourcedef_dir + '\\rdef_pct_*.json'
     pct_filelist = glob.glob(pct_match_pattern)
@@ -75,9 +71,7 @@ def update_rdef(ip_address='127.0.0.1',region_name='OMPTRAIN'):
     if pct_filelist != '':
        for filename in pct_filelist:
            pct_details = read_json(filename)
-           groupx = filename.split('_')
-           group_name = groupx[2].split('.')
-           add_pct(session, region_name,ip_address,group_name[0], pct_details)
+           add_pct(session, region_name,ip_address,pct_details)
 
    
 if __name__ == '__main__':

@@ -47,25 +47,22 @@ def add_groups(session, region_name, ip_address, group_details):
         res = session.post(uri, req_body, 'Unable to complete Update Group API request.')
     return res
 
-def add_fct(session, region_name, ip_address, group_name, fct_details):
+def add_fct(session, region_name, ip_address, fct_details):
     for fct_entry in fct_details['FCT_Entries']:
-        resource_name = fct_entry['Resource']
-        req_body = fct_entry['Parameters']
-        uri = 'native/v1/regions/{}/86/{}/fct/detail/{}/{}'.format(ip_address, region_name, group_name, resource_name)
+        req_body = fct_entry
+        uri = 'v2/native/regions/{}/86/{}/fct/defined'.format(ip_address, region_name)
         res = session.post(uri, req_body, 'Unable to complete Update FCT API request.')
 
-def add_ppt(session, region_name, ip_address, group_name, ppt_details):
+def add_ppt(session, region_name, ip_address, ppt_details):
     for ppt_entry in ppt_details['PPT_Entries']:
-        resource_name = ppt_entry['Resource']
-        req_body = ppt_entry['Parameters']
-        uri = 'native/v1/regions/{}/86/{}/ppt/detail/{}/{}'.format(ip_address, region_name, group_name, resource_name)
+        req_body = ppt_entry
+        uri = 'v2/native/regions/{}/86/{}/ppt/defined'.format(ip_address, region_name)
         res = session.post(uri, req_body, 'Unable to complete Update PPT API request.')
 
-def add_pct(session, region_name, ip_address, group_name, pct_details):
+def add_pct(session, region_name, ip_address, pct_details):
     for pct_entry in pct_details['PCT_Entries']:
-        resource_name = pct_entry['Resource']
-        req_body = pct_entry['Parameters']
-        uri = 'native/v1/regions/{}/86/{}/pct/detail/{}/{}'.format(ip_address, region_name, group_name, resource_name)
+        req_body = pct_entry
+        uri = 'v2/native/regions/{}/86/{}/pct/defined'.format(ip_address, region_name)
         res = session.post(uri, req_body, 'Unable to complete Update PCT API request.')
 
 def update_sit_in_use(session, region_name, ip_address, sit_name):
