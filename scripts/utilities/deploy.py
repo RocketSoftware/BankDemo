@@ -121,20 +121,20 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
     configure_xa(session, os_type, main_config, cwd, esuid)
     update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BankPAC/VSAM?type=folder;folder=/data"})
 
+    if "odbc" in database_connection:
+        db_type = database_connection["db_type"]
+        db_pwd = database_connection['password']
+        for odbc_dsn in database_connection["odbc"]:
+            dsn_name = odbc_dsn["dsn_name"]
+            dsn_description = odbc_dsn["dsn_description"]
+            db_name = odbc_dsn["db_name"]
+            if os_type == 'Windows':
+                create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
+            else:
+                create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
+            write_secret(os_type, "microfocus/mfdbfh/bankpac.{}.password".format(dsn_name.lower()), db_pwd, esuid)
+
     if 'data_dir_2' in configuration_files:
-        if "odbc" in database_connection:
-            db_type = database_connection["db_type"]
-            db_pwd = database_connection['password']
-            for odbc_dsn in database_connection["odbc"]:
-                dsn_name = odbc_dsn["dsn_name"]
-                dsn_description = odbc_dsn["dsn_description"]
-                db_name = odbc_dsn["db_name"]
-                if os_type == 'Windows':
-                    create_windows_dsn(db_type, is64bit, dsn_name, db_name, database_connection)
-                else:
-                    create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
-                write_secret(os_type, "microfocus/mfdbfh/bankpac.{}.password".format(dsn_name.lower()), db_pwd, esuid)
-    
         write_log ('MFDBFH version required - datasets being migrated to database')
         os.environ['MFDBFH_CONFIG'] = mfdbfh_config
         parentdir = str(Path(cwd).parents[0])
@@ -143,6 +143,8 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
         #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
         write_log ('MFDBFH version required - adding database locations to catalog')
         catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BankPAC/VSAM/{}?folder=/data")
+    else:
+        write_log ('MFDBFH dataset already in migrated - skipped dataset migration')
 
 def deploy_vsam(session, os_type, main_config, cwd, esuid):
     write_log ('VSAM version required - datasets being deployed')
