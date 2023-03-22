@@ -600,7 +600,9 @@ To execute the JCL, you need to run the application in an instance of the Micro 
 This sample provides a script that creates the region definition to use in this tutorial:
 
 1.  Navigate to the **/home/*username*/MFETDUSER/tutorial** directory and open a terminal from this location.
-2.  Type **./createdefinition.sh**, and press **Enter**.
+2.  Type **./createdefinition.sh**, and press **Enter**. 
+
+    Note: You might need to give execute permissions to this script. To do this, execute: **chmod +x createdefinition.sh**.
 
     This executes the script and creates the Enterprise Server region definition file, BANKDEMO.xml, in the same folder. The file is configured for the location in which you saved the sample files.
 
