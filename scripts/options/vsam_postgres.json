@@ -46,7 +46,7 @@
                 {
                     "dsn_name": "BANKVSAM.VSAM",
                     "dsn_description": "VSAM Datasets",
-                    "db_name": "BANK_ONEDB"
+                    "db_name": "BANK_VSAM"
                 }
             ]
         }

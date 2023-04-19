@@ -71,12 +71,13 @@ def create_crossregion_database(main_config):
 def create_region_database(main_config):
     is64bit = main_config["is64bit"]
     pac_name = main_config["pac_name"]
+    pac_db = main_config["pac_db_name"]
     database_connection = main_config["database_connection"]
     database_server = database_connection["server_name"]
     database_port = database_connection["server_port"]
     database_user = database_connection["user"]
     database_pwd = database_connection["password"]
-    cmd = "-script -type:region -provider:pg -name:{} -db:BANK_ONEDB -file:create_region_db.sql".format(pac_name)
+    cmd = "-script -type:region -provider:pg -name:{} -db:{} -file:create_region_db.sql".format(pac_name, pac_db)
     dbfhadmin(is64bit, cmd)
     arg_list = ["psql", "--file", "create_region_db.sql", "postgresql://{}:{}@{}:{}".format(database_user, database_pwd, database_server, database_port)]
     result = subprocess.run(arg_list)

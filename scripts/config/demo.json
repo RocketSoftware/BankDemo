@@ -23,6 +23,7 @@
     "database": "VSAM",
     "mfdbfh_config": "MFDBFH.cfg",
     "pac_name": "",
+    "pac_db_name": "",
     "PAC": {
       "enabled": false,
       "PSOR_name" : "",

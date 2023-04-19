@@ -23,6 +23,7 @@
     "database": "VSAM_Postgres_PAC",
     "mfdbfh_config": "MFDBFH_PG_PAC.cfg",
     "pac_name": "BANKPAC",
+	"pac_db_name": "BANK_PAC",
     "PAC": {
       "enabled": true,
       "PSOR_name" : "BANKSOR",
@@ -49,17 +50,17 @@
                 {
                     "dsn_name": "PG.VSAM",
                     "dsn_description": "VSAM Datasets",
-                    "db_name": "BANK_ONEDB"
+                    "db_name": "BANK_PAC"
                 },
                 {
                     "dsn_name": "PG.REGION",
                     "dsn_description": "PAC DB",
-                    "db_name": "BANK_ONEDB"
+                    "db_name": "BANK_PAC"
                 },
                 {
                     "dsn_name": "PG.CROSSREGION",
                     "dsn_description": "Cross PAC DB",
-                    "db_name": "BANK_ONEDB"
+                    "db_name": "BANK_PAC"
                 }
             ]
         }
