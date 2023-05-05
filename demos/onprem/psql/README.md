@@ -6,13 +6,20 @@ The SQL database is populated with bank account data.
 ## Prerequisites
 - Micro Focus Enterprise Developer or Enterprise Server
 - A TN3270 terminal emulator:
-   - Micro Focus Rumba is included with Enterprise Developer. 
    - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
 - The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
-- PostgreSQL ODBC driver 
-- On Linux, the ODBC `bank` data source must be configured. For example, you need to specify the database details in the `odbc.ini` file:
+- PostgreSQL ODBC driver: 
+   - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
+   - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
+   - RedHat: sudo yum install unixODBC postgresql-odbc
+   - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
+   - SuSE: sudo zypper install unixODBC psqlODBC
+- On Linux, the ODBC `bank` source must be pre-configured. Check the file locations with `odbcinst -j`. 
+  Specify the following details in the `odbc.ini` file ensuring the `Driver` name is adjusted to match the name of 
+  the PostgreSQL ANSI driver (enclosed by `[]`) in output of `odbcinst -q -d` and the `Servername` and `Port` match 
+  your installed database server:
     ```
     [bank] 
     Driver = PostgreSQL

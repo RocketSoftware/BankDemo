@@ -1,0 +1,17 @@
+{
+    "name": "MFI01V.MFIDEMO.BNKTXN.PATH1",
+    "physicalFile": "<CATALOGFOLDER>/data/MFI01V.MFIDEMO.BNKTXN.dat",
+    "cataloged": true,
+    "dataSetOrganization": "VSAM",
+    "recordFormat": "KS",
+    "codeset": "ASCII",
+    "recordLength": 400,
+    "blockSize": 0,
+    "vsamType": "PATH",
+    "crossRegion": 0,
+    "crossSystem": 0,
+    "keyOffset": 7,
+    "keyLength": 35,
+    "recordAverageLength": 0,
+    "recordMaxLength": 0
+  }

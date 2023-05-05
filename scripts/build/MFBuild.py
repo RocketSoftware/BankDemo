@@ -24,7 +24,7 @@ from utilities.output import write_log
 from utilities.misc import set_MF_environment
 from pathlib import Path
 
-def run_ant_file(build_file, source_dir, load_dir, ant_home, full_build,dataversion, set64bit):
+def run_ant_file(build_file, source_dir, load_dir, ant_home, full_build,dataversion, is64bit):
 
     if sys.platform.startswith('win32'):
         os_type = 'Windows'
@@ -32,6 +32,11 @@ def run_ant_file(build_file, source_dir, load_dir, ant_home, full_build,datavers
     else:
         os_type = 'Linux'
         mfant_dir = 'lib'
+
+    if is64bit == True:
+        set64bit = 'true'
+    else:
+        set64bit = 'false'
 
     #determine where the Micro Focus product has been installed
     install_dir = set_MF_environment (os_type)

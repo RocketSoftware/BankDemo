@@ -278,15 +278,15 @@
                 PERFORM EXTRACT-GET
                 IF WS-END-OF-FILE = 'NO '
                    ADD 1 TO WS-RECORDS-READ
-                   IF WS-RECORDS-READ IS LESS THAN 6
-                      DISPLAY BANKXT01-REC1 UPON CONSOLE
-                   ELSE
-                      IF WS-RECORDS-READ IS EQUAL TO 6
-                         MOVE 'Suppressing record display...'
-                            TO WS-CONSOLE-MESSAGE
-                         PERFORM DISPLAY-CONSOLE-MESSAGE
-                      END-IF
-                   END-IF
+      *            IF WS-RECORDS-READ IS LESS THAN 6
+      *               DISPLAY BANKXT01-REC1 UPON CONSOLE
+      *            ELSE
+      *               IF WS-RECORDS-READ IS EQUAL TO 6
+      *                  MOVE 'Suppressing record display...'
+      *                     TO WS-CONSOLE-MESSAGE
+      *                  PERFORM DISPLAY-CONSOLE-MESSAGE
+      *               END-IF
+      *            END-IF
                    PERFORM FORMAT-AND-PRINT
                 ELSE
                    PERFORM PRINT-TOTAL-TXNS
@@ -298,7 +298,7 @@
            PERFORM EXTRACT-CLOSE.
            PERFORM PRINTOUT-CLOSE.
 
-           PERFORM DISPLAY-CONSOLE-MESSAGE.
+      *    PERFORM DISPLAY-CONSOLE-MESSAGE.
            MOVE 'End Of Job'
              TO WS-CONSOLE-MESSAGE.
            PERFORM DISPLAY-CONSOLE-MESSAGE.

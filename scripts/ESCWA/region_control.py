@@ -63,8 +63,8 @@ def start_region(region_name, ip_address):
     req_body = {
         'mfUser': 'SYSAD',
         'mfPassword': 'SYSAD',
-        'mfUseSession': 'true',
-        'mfColdStart': 'true'
+        'mfUseSession': True,
+        'mfColdStart': True
     }
 
     session = get_session()
@@ -90,9 +90,9 @@ def stop_region(region_name, ip_address):
     req_body = {
         'mfUser': 'SYSAD',
         'mfPassword': 'SYSAD',
-        'mfUseSession': 'true',
-        'mfClearDynamic': 'true',
-        'mfForceStop': 'true'
+        'mfUseSession': True,
+        'mfClearDynamic': True,
+        'mfForceStop': True
     }
 
     session = get_session()

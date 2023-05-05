@@ -1,0 +1,17 @@
+{
+    "name": "MFI01V.MFIDEMO.BNKACC.PATH1",
+    "physicalFile": "<CATALOGFOLDER>/data/MFI01V.MFIDEMO.BNKACC.dat",
+    "cataloged": true,
+    "dataSetOrganization": "VSAM",
+    "recordFormat": "KS",
+    "codeset": "ASCII",
+    "recordLength": 200,
+    "blockSize": 0,
+    "vsamType": "PATH",
+    "crossRegion": 0,
+    "crossSystem": 0,
+    "keyOffset": 5,
+    "keyLength": 9,
+    "recordAverageLength": 0,
+    "recordMaxLength": 0
+  }

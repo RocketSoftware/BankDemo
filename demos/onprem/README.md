@@ -1,7 +1,7 @@
 # Demonstrations of Micro Focus Enterprise Server capabilities "on-premise"
 - Prerequisite software: 
     - Enterprise Server or Enterprise Developer
-    - Python 3 with `requests psycopg2-binary` packages (e.g. `python3 -m pip install requests psycopg2-binary`)
+    - Python 3 with `requests` and for the PostgreSQL demonstration `psycopg2-binary` packages (e.g. `python3 -m pip install requests psycopg2-binary`)
     - See specific demonstration instructions for any additional requirements
 - Prerequisites: 
     - Micro Focus Directory Server (mfds) is running
