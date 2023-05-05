@@ -4,7 +4,6 @@ This demonstration shows how to configure the Bankdemo application to store bank
 ## Prerequisites
 - Micro Focus Enterprise Developer or Enterprise Server
 - A TN3270 terminal emulator. 
-   - Micro Focus Rumba is included with Enterprise Developer. 
    - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
 - The Micro Focus Directory Server (mfds) service must be started and listening on the default port (86).
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be started and listening on the default port (10086).

@@ -14,8 +14,7 @@ This demonstration requires:
 - Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application. 
 
-**Note:**
-Licenses for Micro Focus Rumba+ Desktop and the HACloud Session Server TN3270 emulator are included with Enterprise Developer. If you do not have Rumba+ Desktop installed, please refer to the Micro Focus Web site.
+***Note:** This release includes a license for the Micro Focus Host Access for the Cloud TN3270 emulator (HACloud). A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
 
 ## How to Run the Demonstration
 ### Import the supplied Bankdemo enterprise server:
@@ -76,20 +75,8 @@ If you have already imported the BANKDEMO enterprise server as part of the "[Get
 
 ### Execute the CICS application: bankmain
 
-1.   To start debugging in Visual Studio, press **F5** to put the IDE in wait mode for the BANK application to start.
-2.   If a 3270 window does not open automatically, open a 3270 emulation program such as Micro Focus Rumba Desktop, and connect to **localhost** or **127.0.0.1**) on port **9023**.
-
-     If using Micro Focus Rumba+ Desktop:
-    
-     a. Click Mainframe Display, then click **Connection > Configure**. 
-    
-     b. Select **TN3270** from **Installed Interfaces**.
-    
-     c. On the **TN3270** tab, type **127.0.0.1**.
-    
-     d. Set **Telnet Port** to **User Defined**, and type **9023**.
-    
-     e. Click **Connect**.
+1.  To start debugging in Visual Studio, press **F5** to put the IDE in wait mode for the BANK application to start.
+2.  If a 3270 window does not open automatically, open your preferred TN3270 emulation program, and connect to **localhost** or **127.0.0.1**) on port **9023**.
 3.  Visual Studio should automatically open the `SBANK00P.PLI` source file with the **SBANK00P PROC** line highlighted as the current line of execution.
 4.  Next, you can step through the SBANK00P program, set any breakpoints, and evaluate variables.  
 5.  Once you are ready to run the program to completion, click **F5** (Resume) as many times as necessary to run the program to completion.

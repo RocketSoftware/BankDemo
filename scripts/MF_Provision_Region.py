@@ -42,9 +42,34 @@ from pathlib import Path
 from MF_Create_PAC import create_pac
 
 import shutil
+import subprocess
 if not sys.platform.startswith('win32'):
     from pwd import getpwuid
     from os  import stat
+
+def powershell(cmd):
+    completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+    return completed
+
+def checkElevation():
+    # Check if the current process is running as administator role
+    isAdmin = '$user = [Security.Principal.WindowsIdentity]::GetCurrent();if ((New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {exit 1} else {exit 0}'
+    completed = powershell(isAdmin)
+    return completed.returncode == 1
+
+def createWindowsDSN(database_connection, is_64bit, dsn_name, database_name):
+    driverBitism="32-bit"
+    if is_64bit == True:
+        driverBitism="64-bit"
+
+    findDriver='$Drivers = Get-OdbcDriver -Name "PostgreSQL*ANSI*" -Platform {};\n '.format(driverBitism)
+    ##findDSN='$DSN = Get-OdbcDsn -Name "{}" -Platform {} -DsnType System;\n'.format(dsn_name, driverBitism)
+    deleteDSN ='Remove-OdbcDSN -Name "{}" -Platform {} -DsnType System;\n '.format(dsn_name, driverBitism)
+    addDSN ='Add-OdbcDSN -Name "{}" -Platform {} -DsnType System -DriverName $Drivers[0].Name'.format(dsn_name, driverBitism) 
+    addDSNProperties = ' -SetPropertyValue "Database={}","ServerName={}","Port={}","Username={}","Password={}"\n'.format(database_name, database_connection['server_name'],database_connection['server_port'],database_connection['user'],database_connection['password'])
+    fullCommand=findDriver + deleteDSN + addDSN + addDSNProperties
+    write_log(fullCommand)
+    powershell(fullCommand)
 
 def find_owner(filename):
     return getpwuid(stat(filename,follow_symlinks=False).st_uid).pw_name
@@ -299,7 +324,6 @@ def create_region(main_configfile):
     if len(pac_name) > 0 and pac_config is None:
         write_log ('No PAC config, skipping catalog datasets and resource file updates')
     else:
-
         try:
             write_log('Region {} being started before further configuration'.format(region_name))
             start_region(session, region_name, ip_address)

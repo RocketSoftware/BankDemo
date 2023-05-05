@@ -25,7 +25,7 @@ In the simplest configuration, it demonstrates a CICS/JCL COBOL application that
 
 ## <a name="license"></a>License
 
-Copyright &copy; 2010-2022 Micro Focus.  All Rights Reserved.
+Copyright &copy; 2010-2023 Micro Focus.  All Rights Reserved.
 This software may be used, modified, and distributed 
 (provided this notice is included without modification)
 solely for internal demonstration purposes with other 
