@@ -21,14 +21,15 @@ Description:  A script to get the output from a job previously submitted to the 
 
 import sys
 import os
-from utilities.misc import parse_args
+from ESCWA.escwa_session import EscwaSession
 from ESCWA.job_control import check_job, get_output
+from utilities.misc import parse_args
 from utilities.exceptions import ESCWAException
 
-
 def get_job_output(job_id, working_folder, ip_address='127.0.0.1', region_name='BANKDEMO'):
+    session = EscwaSession("http", ip_address, 10086)
     try:
-        check_res = check_job(region_name, ip_address, job_id)
+        check_res = check_job(session, region_name, ip_address, job_id)
     except ESCWAException as exc:
         print('Unable to check job status.')
         sys.exit(1)
@@ -47,7 +48,7 @@ def get_job_output(job_id, working_folder, ip_address='127.0.0.1', region_name='
 
     for spool_out in check_res['JobDDs']:
         try:
-            out_res = get_output(region_name, ip_address, spool_out['DDEntityName'], spool_out['DDCode'])
+            out_res = get_output(session, region_name, ip_address, spool_out['DDEntityName'], spool_out['DDCode'])
         except ESCWAException as exc:
             print('Unable to get job output.')
             sys.exit(1)

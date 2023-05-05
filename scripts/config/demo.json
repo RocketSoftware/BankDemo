@@ -1,6 +1,8 @@
 {
     "ip_address" : "127.0.0.1",
     "region_name": "BANKDEMO",
+    "regionPort": 9023,
+    "jesPort": 8001,
     "product": "EDz",
     "configuration_files":
         {
@@ -20,10 +22,13 @@
     "is64bit": false,
     "database": "VSAM",
     "mfdbfh_config": "MFDBFH.cfg",
+    "pac_name": "",
+    "pac_db_name": "",
     "PAC": {
       "enabled": false,
+      "PSOR_name" : "",
       "PSOR_type" : "redis",
-      "PSOR_connection": "localhost:6739",
+      "PSOR_connection": "localhost:6379",
       "description": ""
     },
     "database_connection": 

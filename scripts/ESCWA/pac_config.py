@@ -17,47 +17,48 @@ WITH THIS SOFTWARE.
 Description:  Function for configuring a Micro Focus server region. 
 """
 
-import os
-import sys
-import requests
-from utilities.misc import create_headers, check_http_error
-from utilities.input import read_json, read_txt
-from utilities.session import get_session, save_cookies
-from utilities.exceptions import ESCWAException, InputException, HTTPException
+from utilities.input import read_json
+from utilities.exceptions import ESCWAException, InputException
 
-def add_sor(sor_name, ip_address, sor_description, sorType, sorConnectPath, template_file):
+def find_sor(session, sor_name):
     """ Adds a SOR. """
-    uri = 'http://{}:10086/server/v1/config/groups/sors'.format(ip_address)
-    req_headers = create_headers('CreateRegion', ip_address)
+    uri = 'server/v1/config/groups/sors'
+    res = session.get(uri, 'Unable to get SOR information.')
+    sors = res.json()
+    for sor in sors:
+        if sor['SorName'] == sor_name:
+            return sor['Uid']
+    return None
 
-    esp_alias = '$ESP'
+def add_sor(session, sor_name, sor_description, sorType, sorConnectPath, template_file):
+    """ Adds/updates a SOR. """
     try:
         req_body = read_json(template_file)
     except InputException as exc:
         raise ESCWAException('Unable to read template file: {}.'.format(template_file)) from exc
-
     req_body['SorName'] = sor_name
-    req_body['Sor_description'] = sor_description
+    req_body['SorDescription'] = sor_description
     req_body['SorType'] = sorType
     req_body['SorConnectPath'] = sorConnectPath
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Add SOR API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add SOR API request.') from exc
-
-    save_cookies(session.cookies)
+    sorUid = find_sor(session, sor_name)
+    if sorUid is None:
+        uri = 'server/v1/config/groups/sors'
+        res = session.post(uri, req_body, 'Unable to complete Add SOR API request.')
+    else:
+        uri = 'server/v1/config/groups/sors/{}'.format(sorUid)
+        res = session.put(uri, req_body, 'Unable to complete Update SOR API request.')
 
     return res
 
-def add_pac(pac_name, ip_address, pac_description, sorUid, template_file):
+def add_pac(session, pac_name, pac_description, sorUid, template_file):
     """ Adds a PAC. """
-    uri = 'http://{}:10086/server/v1/config/groups/pacs'.format(ip_address)
-    req_headers = create_headers('CreateRegion', ip_address)
+    pacs = get_pacs(session).json()
+    pacUid = None
+    for pac in pacs:
+        if pac['PacName'] == pac_name:
+            pacUid = pac['Uid']
+            break
+
     try:
         req_body = read_json(template_file)
     except InputException as exc:
@@ -65,16 +66,28 @@ def add_pac(pac_name, ip_address, pac_description, sorUid, template_file):
     req_body['PacName'] = pac_name
     req_body['PacDescription'] = pac_description
     req_body['PacResourceSorUid'] = sorUid
-    session = get_session()
+    if pacUid is None:
+        uri = 'server/v1/config/groups/pacs'
+        res = session.post(uri, req_body, 'Unable to complete Add PAC API request.')
+    else:
+        uri = 'server/v1/config/groups/pacs/{}'.format(pacUid)
+        res = session.put(uri, req_body, 'Unable to complete Update PAC API request.')
 
+    return res
+
+def get_pacs(session):
+    uri = 'server/v1/config/groups/pacs'
+    res = session.get(uri, 'Unable to complete get PAC list API request.')
+    return res
+
+def install_region_into_pac(session, ip_address, region_name, pac_uid, template_file):
+    uri = 'native/v1/config/groups/pacs/{}/install'.format(pac_uid)
     try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Add PAC API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add PAC API request.') from exc
-
-    save_cookies(session.cookies)
-
+        req_body = read_json(template_file)
+    except InputException as exc:
+        raise ESCWAException('Unable to read template file: {}.'.format(template_file)) from exc
+    req_body['Regions'][0]['Host'] = ip_address
+    req_body['Regions'][0]['Port'] = "86"
+    req_body['Regions'][0]['CN'] = region_name
+    res = session.post(uri, req_body, 'Unable to complete install PAC region API request.')
     return res

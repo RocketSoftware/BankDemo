@@ -1,498 +1,300 @@
 {"PPT_Entries": [
-  {"Resource":"BBANK10P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"BBANK10P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK20P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"BBANK20P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK30P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"BBANK30P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },  
-  {"Resource":"BBANK40P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"BBANK40P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK50P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"BBANK50P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK60P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"BBANK60P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK70P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"BBANK70P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK80P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"BBANK80P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"BBANK99P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"BBANK99P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK01P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK01P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK02P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK02P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK03P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK03P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK04P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK04P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK05P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK05P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK06P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK06P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK07P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK07P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK08P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK08P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK51P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK51P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DBANK52P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DBANK52P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"DHELP01P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"DHELP01P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK00P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK00P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK10P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK10P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK20P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK20P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK30P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK30P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },  
-  {"Resource":"SBANK40P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK40P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK50P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }
+  {         "name":"SBANK50P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK60P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"SBANK60P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK70P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"SBANK70P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK80P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"SBANK80P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"SBANK99P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"SBANK99P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   }, 
-  {"Resource":"SCUSTOMP",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"SCUSTOMP",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"STRAC00P",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"STRAC00P",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   },
-  {"Resource":"UDATECNV",
-    "Parameters":   
-        {
-            "resDesc": "",
-            "pptEnable": "Y",
-            "pptType": "P",
-            "pptRes": "N",
-            "pptComMax": "0",
-            "pptLang": "C",
-            "pptSave": "N",
-            "pptSys": "",
-            "pptRtrn": "",
-            "pptRprog": ""
-        }     
+  {         "name":"UDATECNV",
+            "group": "BANKGRP2",
+            "description": "",
+            "enabled": true,
+            "type": "PROGRAM",
+            "resident": false,
+            "language": "COBOL",
+            "saveWorkingStorage": false
   }    
 ]
 }

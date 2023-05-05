@@ -14,27 +14,10 @@ The Micro Focus Secrets Vault is used to store the database credentials.
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL ODBC driver: 
    - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
-   - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
+   - Ubuntu: sudo apt-get install unixodbc unixodbc-dev odbc-postgresql
    - RedHat: sudo yum install unixODBC postgresql-odbc
    - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
    - SuSE: sudo zypper install unixODBC psqlODBC
-- On Linux, the ODBC data sources must be pre-configured. Check the configuration file locations with `odbcinst -j`. 
-  Specify the following details in the `odbc.ini` file ensuring the `Driver` name is adjusted to match the name of 
-  the PostgreSQL ANSI driver (enclosed by `[]`) in output of `odbcinst -q -d` and the `Servername` and `Port` match 
-  your installed database server:
-    ```
-    [BANKVSAM.MASTER] 
-    Driver = PostgreSQL
-    Servername = localhost
-    Port = 5432
-    Database = postgres
-    
-    [BANKVSAM.VSAM] 
-    Driver = PostgreSQL
-    Servername = localhost
-    Port = 5432
-    Database = BANK_ONEDB
-    ```
 - Python 3.*n* and the `requests` package. You can install the package after installing Python with the following command: 
   ```
   python -m pip install requests
@@ -51,7 +34,7 @@ The demonstration includes a Python script that helps create the Enterprise Serv
    - Configured for use with JCL and the VSAM datasets are catalogued 
    - Configured as a 64-bit server and can be reconfigured to deploy a 32-bit server (see the next section)
    - Uses pre-built application modules
-   - On Windows, two ODBC system data sources called `BANKVSAM.MASTER` and `BANKVSAM.VSAM` are created
+   - Two ODBC system data sources called `BANKVSAM.MASTER` and `BANKVSAM.VSAM` are created
    - The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
    - The server instance is configured to use the Micro Focus Database File Handler (MFDBFH) by:
        - The credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
@@ -75,25 +58,29 @@ The demonstration also includes some instructions to build the application from 
    b. Ensure there is no region called **BANKMFDB** already defined. If there is one, delete it.
 
 3. Ensure that there are no other demonstration servers running. This is to ensure no other servers use the same ports. The server for this demonstration uses a common server definition with many of the same listener ports as the ones other servers in this repository might use.
-4. Open a command prompt (Windows) or a terminal (Linux), and navigate to the `scripts` directory in the demonstration files.
-5. Edit the file `scripts/options/vsam_postgres.json` with a text editor:
+4. Start an administrator's command prompt (Windows) or a terminal for user under which Enterprise Servers run (Linux).
+
+   **Note:** You need administrator's rights to configure the ODBC data source on Windows. On Linux they are created in the user .odbc.ini file.
+
+5. Navigate to the `scripts` directory in the demonstration files.
+6. Edit the file `scripts/options/vsam_postgres.json` with a text editor:
 
     - Verify and, if required, modify the values within the `database_connection` section to match the setting of the database you are using.
     
     - If you want to deploy a 32-bit enterprise server instance, or build the application from source, you need to change the configuration first as follows:
       - Change the `is64bit` and/or the `product` options as required. For example, `"product"="EDz"` indicates you are going to build the application from the sources, `"product"="ES"` indicates that the pre-built programs will be used.
 
-5. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` script which creates a BANKMFDB server, and deploys the desired application configuration.
+7. Execute the following command at the command prompt or the terminal. This executes the `MF_Provision_Region.py` script which creates a BANKMFDB server, and deploys the desired application configuration.
 
     ```
     python MF_Provision_Region.py vsam_postgres
     ```
 
-6. Start a TN3270 terminal emulator, and connect to port 9023. 
+8. Start a TN3270 terminal emulator, and connect to port 9023. 
 
    The Bankdemo application login screen should load.
 
-7. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
+9. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
 
-8. In ESCWA, select the BANKMFDB server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
+10. In ESCWA, select the BANKMFDB server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
     

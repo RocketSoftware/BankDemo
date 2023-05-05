@@ -1,6 +1,8 @@
 {
     "ip_address" : "127.0.0.1",
     "region_name": "BANKSQL",
+    "regionPort": 9023,
+    "jesPort": 8001,
     "product": "EDz",
     "configuration_files":
         {
@@ -18,10 +20,11 @@
     "MQ": false,
     "is64bit": true,
     "database": "SQL_Postgres",
+    "pac_name": "",
     "PAC": {
       "enabled": false,
       "PSOR_type" : "redis",
-      "PSOR_connection": "localhost:6739",
+      "PSOR_connection": "localhost:6379",
       "description": ""
     },
     "database_connection": 
@@ -29,6 +32,15 @@
             "server_name": "localhost",
             "server_port": "5432",
             "user": "postgres",
-            "password" :"postgres"
+            "password" :"postgres",
+            "db_type": "postgres",
+            "odbc":
+            [
+                {
+                    "dsn_name": "BANK",
+                    "dsn_description": "Bankdemo SQL DB",
+                    "db_name": "bank"
+                }
+            ]
         }
 }

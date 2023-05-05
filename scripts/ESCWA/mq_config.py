@@ -17,30 +17,8 @@ WITH THIS SOFTWARE.
 Description:  A series of utility functions for updating MQ Listeners. 
 """
 
-import os
-import sys
-import requests
-from utilities.misc import create_headers, check_http_error
-from utilities.input import read_json, read_txt
-from utilities.session import get_session, save_cookies
-from utilities.exceptions import ESCWAException, InputException, HTTPException
-
-def add_mq_listener(region_name, ip_address, mq_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/mqlistener'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
-    req_body =mq_details
-    
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-
-    save_cookies(session.cookies)
-
+def add_mq_listener(session, region_name, ip_address, mq_details):
+    uri = 'native/v1/regions/{}/86/{}/mqlistener'.format(ip_address, region_name)
+    req_body = mq_details
+    res = session.post(uri, req_body, 'Unable to complete Update Startup API request.')
     return res

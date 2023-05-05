@@ -93,8 +93,8 @@ def deploy_partitioned_data (repo_dir, sys_base, esuid):
         for file in os.scandir(target_load):
             shutil.chown(file, esuid, esuid)
 
-def dbfhdeploy_vsam_data (repo_dir, os_type, is64Bit, mfdbfh_location):
-    source_load = os.path.join(repo_dir, 'datafiles')
+def dbfhdeploy_vsam_data (repo_dir, os_type, is64Bit, configuration_files, mfdbfh_location):
+    dataset_dir = os.path.join(repo_dir, 'datafiles')
 
     if os_type == 'Windows':
         if is64Bit == True:
@@ -102,17 +102,40 @@ def dbfhdeploy_vsam_data (repo_dir, os_type, is64Bit, mfdbfh_location):
         else:
             bin = 'bin'
     else:
-	    bin = 'bin'
+        bin = 'bin'
     dbfhdeploy = os.path.join(os.environ['COBDIR'], bin, 'dbfhdeploy')
     db = mfdbfh_location.split('{')
     dbfhdeploy_cmd = '\"{}\" create \"{}\"'.format(dbfhdeploy, db[0])
     write_log(dbfhdeploy_cmd)
     subprocess.run([dbfhdeploy, "create", db[0]])
 
-    for file in os.scandir(source_load):
+    for file in os.scandir(dataset_dir):
         if file.name.endswith(".dat"):
             catalog_location = mfdbfh_location.format(file.name)
 
             dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, file.path, catalog_location)
             write_log(dbfhdeploy_cmd)
             subprocess.run([dbfhdeploy, "add", file.path, catalog_location])
+
+def dbfhdeploy_dataset (os_type, is64Bit, source_location, mfdbfh_location, filename):
+    if os_type == 'Windows':
+        if is64Bit == True:
+            bin = 'bin64'
+        else:
+            bin = 'bin'
+    else:
+        bin = 'bin'
+        
+    dbfhdeploy = os.path.join(os.environ['COBDIR'], bin, 'dbfhdeploy')
+    db = mfdbfh_location.split('{')
+    dbfhdeploy_cmd = '\"{}\" create \"{}\"'.format(dbfhdeploy, db[0])
+    write_log(dbfhdeploy_cmd)
+    subprocess.run([dbfhdeploy, "create", db[0]])
+
+    catalog_location = mfdbfh_location.format(filename)
+    source_file = "{}/{}".format(source_location, filename)
+
+    dbfhdeploy_cmd = '\"{}\" add \"{}\" \"{}\"'.format(dbfhdeploy, source_file, catalog_location)
+    write_log(dbfhdeploy_cmd)
+    subprocess.run([dbfhdeploy, "add", source_file, catalog_location])
+            

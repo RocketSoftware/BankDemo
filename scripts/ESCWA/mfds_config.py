@@ -17,54 +17,19 @@ WITH THIS SOFTWARE.
 Description:  Functions for configuration of MFDS lists on the Micro Focus server.
 """
 
-import requests
-from utilities.misc import create_headers, check_http_error
-from utilities.session import get_session, save_cookies
-from utilities.exceptions import ESCWAException, HTTPException
-
-
-def check_mfds_list(ip_address):
+def check_mfds_list(session):
     """ Check the MFDS list of a Micro Focus server. """
-
-    uri = 'http://{}:10086/server/v1/config/mfds'.format(ip_address)
-    req_headers = create_headers('CreateRegion', ip_address)
-    session = get_session()
-
-    try:
-        res = session.get(uri, headers=req_headers)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Check MFDS API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Check MFDS API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.get('server/v1/config/mfds', 'Unable to complete Check MFDS API request.')
     return res
 
-
-def add_mfds_to_list(ip_address, mfds_description):
+def add_mfds_to_list(session, mfds_host, mfds_port, mfds_description):
     """ Add an MFDS to a Micro Focus server. """
-
-    uri = 'http://{}:10086/server/v1/config/mfds'.format(ip_address)
-    req_headers = create_headers('CreateRegion', ip_address)
+    uri = 'server/v1/config/mfds'
     req_body = {
-        'MfdsHost': ip_address,
-        'MfdsPort': "86",
-        'MfdsIdentifier': 'Test',
+        'MfdsHost': mfds_host,
+        'MfdsPort': mfds_port,
+        'MfdsIdentifier': mfds_host,
         'MfdsDescription': mfds_description
     }
-
-    session = get_session()
-
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Add MFDS API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Add MFDS API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post('server/v1/config/mfds', req_body, 'Unable to complete Add MFDS API request.')
     return res

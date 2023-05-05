@@ -1,0 +1,7 @@
+{
+  "Regions": [{
+	"Host": "string",
+	"Port": "86",
+	"CN": "string"
+  }]
+}

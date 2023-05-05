@@ -10,23 +10,13 @@ The SQL database is populated with bank account data.
 - The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
 - The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - PostgreSQL version 12 or later must be installed and running
+- PostgreSQL `psql` command needs to be available on the PATH
 - PostgreSQL ODBC driver: 
    - Windows: [install appropriate driver](https://www.postgresql.org/ftp/odbc/versions/msi/)
-   - Ubuntu: sudo apt-get install unixodbc odbc-postgresql
+   - Ubuntu: sudo apt-get install unixodbc unixodbc-dev odbc-postgresql
    - RedHat: sudo yum install unixODBC postgresql-odbc
    - Amazon Linux 2: sudo yum install unixODBC postgresql-odbc
    - SuSE: sudo zypper install unixODBC psqlODBC
-- On Linux, the ODBC `bank` source must be pre-configured. Check the file locations with `odbcinst -j`. 
-  Specify the following details in the `odbc.ini` file ensuring the `Driver` name is adjusted to match the name of 
-  the PostgreSQL ANSI driver (enclosed by `[]`) in output of `odbcinst -q -d` and the `Servername` and `Port` match 
-  your installed database server:
-    ```
-    [bank] 
-    Driver = PostgreSQL
-    Servername = localhost
-    Port = 5432
-    Database = bank
-    ```
 - Python 3.*n* and the `requests psycopg2-binary` packages. You can install the packages after installing Python with the following command: 
   ```
   python -m pip install requests psycopg2-binary
@@ -43,7 +33,7 @@ The demonstration includes a Python script that helps create the Enterprise Serv
    - Configured for use with JCL and the VSAM datasets are cataloged 
    - Configured as a 64-bit server and can be reconfigured to deploy a 32-bit server (see below)
    - Uses pre-built application modules
-   - On Windows, an ODBC system data source called `bank` is created
+   - An ODBC system data source called `bank` is created
    - The database tables are populated with example data
    - The server instance is configured to use PostgreSQL:
       - The credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
@@ -65,9 +55,9 @@ The demonstration also includes some instructions to build the application from 
 
 3. Ensure that there are no other demonstration servers running. This is to ensure no other servers use the same ports. The server for this demonstration uses a common server definition with many of the same listener ports as the ones other servers in this repository might use.
 
-4. Start an administrator's command prompt (Windows) or a terminal (Linux).
+4. Start an administrator's command prompt (Windows) or a terminal for user under which Enterprise Servers run (Linux).
 
-   **Note:** You need administrator's rights to configure the ODBC data source.
+   **Note:** You need administrator's rights to configure the ODBC data source on Windows. On Linux they are created in the user .odbc.ini file.
 
 5. Navigate to the `scripts` directory in the demonstration.
 6. Edit the file `scripts/options/sql_postgres.json` with a text editor: 

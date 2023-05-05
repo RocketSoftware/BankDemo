@@ -20,6 +20,7 @@ Description:  A script to delete a Micro Focus server region.
 """
 
 import sys
+from ESCWA.escwa_session import EscwaSession
 from utilities.misc import parse_args
 from ESCWA.region_control import confirm_region_status, del_region
 from utilities.exceptions import ESCWAException
@@ -27,9 +28,9 @@ from utilities.exceptions import ESCWAException
 
 def delete_server(region_name='BANKDEMO', ip_address='127.0.0.1'):
     """ Deletes a Micro Focus server. """
-    
+    session = EscwaSession("http", ip_address, 10086)
     try:
-        confirmed = confirm_region_status(region_name, ip_address, 0, 'Stopped')
+        confirmed = confirm_region_status(session, region_name, 0, 'Stopped')
     except ESCWAException as exc:
         # TODO: This triggers when the region is deleted successfully.
         print('Unable to check region status.')
@@ -40,7 +41,7 @@ def delete_server(region_name='BANKDEMO', ip_address='127.0.0.1'):
         sys.exit(1)
 
     try:
-        del_res = del_region(region_name, ip_address)
+        del_res = del_region(session, region_name)
     except ESCWAException as exc:
         print('Unable to delete region.')
         sys.exit(1)

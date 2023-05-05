@@ -27,149 +27,46 @@ from utilities.output import write_log
 from utilities.session import get_session, save_cookies
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 
-def add_sit(region_name, ip_address, sit_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/sit'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
-    req_body =sit_details
-    
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-
-    save_cookies(session.cookies)
-
+def add_sit(session, region_name, ip_address, sit_details):
+    uri = 'native/v1/regions/{}/86/{}/sit'.format(ip_address, region_name)
+    req_body = sit_details
+    res = session.post(uri, req_body, 'Unable to complete Update Startup API request.')
     return res
 
-
-def add_Startup_list(region_name, ip_address, startup_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/startup'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
+def add_Startup_list(session, region_name, ip_address, startup_details):
+    uri = 'native/v1/regions/{}/86/{}/startup'.format(ip_address, region_name)
     req_body =startup_details
-    
-    try:
-        res = session.post(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update Startup API request.') from exc
-
-    save_cookies(session.cookies)
-
+    res = session.post(uri, req_body, 'Unable to complete Update Startup API request.')
     return res
 
-def add_groups(region_name, ip_address, group_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/groups'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
+def add_groups(session, region_name, ip_address, group_details):
+    uri = 'native/v1/regions/{}/86/{}/groups'.format(ip_address, region_name)
     for new_group in group_details['ResourceGroups']:
         req_body =new_group
         write_log('Adding Resource Group {}'.format(req_body["resNm"]))
-        try:
-            res = session.post(uri, headers=req_headers, json=req_body)
-            check_http_error(res)
-        except requests.exceptions.RequestException as exc:
-            raise ESCWAException('Unable to complete Update Group API request.') from exc
-        except HTTPException as exc:
-            raise ESCWAException('Unable to complete Update Group API request.') from exc
-
-        save_cookies(session.cookies)
-
+        res = session.post(uri, req_body, 'Unable to complete Update Group API request.')
     return res
 
-def add_fct(region_name, ip_address, group_name, fct_details):
-    
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
+def add_fct(session, region_name, ip_address, fct_details):
     for fct_entry in fct_details['FCT_Entries']:
-        resource_name = fct_entry['Resource']
-        req_body = fct_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/fct/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        req_body = fct_entry
+        uri = 'v2/native/regions/{}/86/{}/fct/defined'.format(ip_address, region_name)
+        res = session.post(uri, req_body, 'Unable to complete Update FCT API request.')
 
-        try:
-            res = session.post(uri, headers=req_headers, json=req_body)
-            check_http_error(res)
-        except requests.exceptions.RequestException as exc:
-            raise ESCWAException('Unable to complete Update FCT API request.') from exc
-        except HTTPException as exc:
-            raise ESCWAException('Unable to complete Update FCT API request.') from exc
-
-        save_cookies(session.cookies)
-
-def add_ppt(region_name, ip_address, group_name, ppt_details):
-    
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
+def add_ppt(session, region_name, ip_address, ppt_details):
     for ppt_entry in ppt_details['PPT_Entries']:
-        resource_name = ppt_entry['Resource']
-        req_body = ppt_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/ppt/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        req_body = ppt_entry
+        uri = 'v2/native/regions/{}/86/{}/ppt/defined'.format(ip_address, region_name)
+        res = session.post(uri, req_body, 'Unable to complete Update PPT API request.')
 
-        try:
-            res = session.post(uri, headers=req_headers, json=req_body)
-            check_http_error(res)
-        except requests.exceptions.RequestException as exc:
-            raise ESCWAException('Unable to complete Update PPT API request.') from exc
-        except HTTPException as exc:
-            raise ESCWAException('Unable to complete Update PPT API request.') from exc
-
-        save_cookies(session.cookies)
-
-def add_pct(region_name, ip_address, group_name, pct_details):
-    
-    req_headers = create_headers('CreateRegion', ip_address)
-
-    session = get_session()
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-
+def add_pct(session, region_name, ip_address, pct_details):
     for pct_entry in pct_details['PCT_Entries']:
-        resource_name = pct_entry['Resource']
-        req_body = pct_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/pct/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        req_body = pct_entry
+        uri = 'v2/native/regions/{}/86/{}/pct/defined'.format(ip_address, region_name)
+        res = session.post(uri, req_body, 'Unable to complete Update PCT API request.')
 
-        try:
-            res = session.post(uri, headers=req_headers, json=req_body)
-            check_http_error(res)
-        except requests.exceptions.RequestException as exc:
-            raise ESCWAException('Unable to complete Update PCT API request.') from exc
-        except HTTPException as exc:
-            raise ESCWAException('Unable to complete Update PCT API request.') from exc
-
-        save_cookies(session.cookies)
-
-def update_sit_in_use(region_name, ip_address, sit_name):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address) 
-
-    session = get_session()
-
+def update_sit_in_use(session, region_name, ip_address, sit_name):
+    uri = 'native/v1/regions/{}/86/{}'.format(ip_address, region_name)
     sit_attribute ='{\"mfCASCICSSIT\": \"' + sit_name + '\"}'
     req_body = json.loads(sit_attribute)
-
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to complete Update region attribute request.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to complete Update region attribute request.') from exc
-
-    save_cookies(session.cookies)
+    res = session.put(uri, req_body, 'Unable to complete Update region attribute request.')

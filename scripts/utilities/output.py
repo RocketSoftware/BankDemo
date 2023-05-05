@@ -29,5 +29,4 @@ def write_json(file_path, json_obj):
         raise InputException from exc
 
 def write_log(log_message):
-
     print (log_message)

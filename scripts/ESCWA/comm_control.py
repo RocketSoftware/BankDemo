@@ -17,79 +17,31 @@ WITH THIS SOFTWARE.
 Description:  A function to setup a JES listener on the Micro Focus server. 
 """
 
-import requests
-from utilities.misc import get_elem_with_prop, create_headers, check_http_error
-from utilities.session import get_session, save_cookies
-from utilities.exceptions import ESCWAException, HTTPException
+from utilities.misc import get_elem_with_prop
 
-
-def set_jes_listener(region_name, ip_address, port):
+def set_jes_listener(session, region_name, ip_address, port):
     """ Sets a JES listener on the Micro Focus server. """
-
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/commsserver'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-    session = get_session()
-
-    try:
-        res = session.get(uri, headers=req_headers)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to get Comm Server information.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to get Comm Server information.') from exc
-
+    uri = 'native/v1/regions/{}/86/{}/commsserver'.format(ip_address, region_name)
+    res = session.get(uri, 'Unable to get Comm Server information.')
     comm_server = res.json()
     uri += '/{}/listener'.format(comm_server[0]['mfServerUID'])
-
-    try:
-        res = session.get(uri, headers=req_headers)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to get Comm Server Listener information.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to get Comm Server Listener information.') from exc
-
+    res = session.get(uri, 'Unable to get Comm Server Listener information.')
     listener_list = res.json()
     req_body = {'mfRequestedEndpoint': 'tcp:127.0.0.1:{}'.format(port)}
     listener = get_elem_with_prop(listener_list, 'CN', 'Web Services and J2EE')
     uri += '/{}'.format(listener['mfUID'])
-    
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to update Web Services and J2EE Listener.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to update Web Services and J2EE Listener.') from exc
-
-    save_cookies(session.cookies)
-    
+    res = session.put(uri, req_body, 'Unable to update Web Services and J2EE Listener.')
     return res
-	
-def set_commsserver_local(region_name, ip_address):
+
+def set_commsserver_local(session, region_name, ip_address):
     """ Sets a Communications Server to localhost. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/commsserver'.format(ip_address, ip_address, region_name)
-    req_headers = create_headers('CreateRegion', ip_address)
-    session = get_session()
-
-    try:
-        res = session.get(uri, headers=req_headers)
-        check_http_error(res)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to get Comm Server information.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to get Comm Server information.') from exc
+    uri = 'native/v1/regions/{}/86/{}/commsserver'.format(ip_address, region_name)
+    res = session.get(uri, 'Unable to get Comm Server information.')
 
     comm_server = res.json()
     uri += '/{}'.format(comm_server[0]['mfUID'])
     req_body = {'mfRequestedEndpoint': 'tcp:127.0.0.1:*'}
-    
-    try:
-        res = session.put(uri, headers=req_headers, json=req_body)
-    except requests.exceptions.RequestException as exc:
-        raise ESCWAException('Unable to update Comm Server.') from exc
-    except HTTPException as exc:
-        raise ESCWAException('Unable to update Comm Server.') from exc
 
-    save_cookies(session.cookies)
-    
+    res = session.put(uri, req_body, 'Unable to update Comm Server.')
     return res	
