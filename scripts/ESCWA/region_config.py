@@ -106,7 +106,7 @@ def add_initiator(session, region_name, ip_address, template_file):
     return res
 
 
-def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location):
+def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location, catalog_dir):
     """ Adds data sets to a Micro Focus server. """
     try:
         dataset_list = [read_json(data_file) for data_file in datafile_list]
@@ -120,6 +120,9 @@ def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_locatio
             physicalFile = os.path.basename(dataset['physicalFile'])
             physicalFile = mfdbfh_location.format(physicalFile)
             dataset['physicalFile'] = physicalFile
+        else:
+            if catalog_dir is not None and 'physicalFile' in dataset:
+                dataset['physicalFile'] = dataset['physicalFile'].replace('<CATALOGFOLDER>', catalog_dir)
         res = session.post(uri, dataset, 'Unable to complete Add Dataset API request.')
         responses.append(res)
     return responses

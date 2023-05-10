@@ -362,10 +362,11 @@ def create_region(main_configfile):
                 sys.exit(1)
 
         #data_dir_1 hold the directory name, under the cwd that contains definitions of any datasets to be catalogued - this setting is optional
-        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_1', None)
+        catalog_dir = os.path.join(sys_base, 'catalog')
+        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_1', None, catalog_dir)
 
         #data_dir_3 hold the directory name, under the cwd that contains definitions of extra datasets to be catalogued - this setting is optional
-        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_3', None)
+        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_3', None, catalog_dir)
 
         ## The following code updates the CICS Resource Definitions
 

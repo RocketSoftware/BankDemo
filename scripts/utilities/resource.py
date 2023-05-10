@@ -27,14 +27,14 @@ def add_postgresxa(session, os_type, is64bit, region_name, ip_address, xa_config
     secret_open_string = '{},USRPASS={}.{}'.format(xa_open_string,database_connection['user'],database_connection['password'])
     return secret_open_string
 
-def catalog_datasets(session, cwd, region_name, ip_address, configuration_files, dataset_key, mfdbfh_location):
+def catalog_datasets(session, cwd, region_name, ip_address, configuration_files, dataset_key, mfdbfh_location, catalog_dir):
     if  dataset_key in configuration_files:
         data_dir = configuration_files[dataset_key]
         dataset_dir = os.path.join(cwd, data_dir)
         datafile_list = [file for file in os.scandir(dataset_dir)]
         write_log ('Cataloging datasets {} {} {}'.format(region_name,ip_address, datafile_list))
         try:
-            add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location)
+            add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location, catalog_dir)
         except ESCWAException as exc:
             write_log('Unable to catalog datasets in {}.'.format(dataset_dir))
             sys.exit(1)

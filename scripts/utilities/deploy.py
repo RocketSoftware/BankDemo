@@ -84,7 +84,7 @@ def deploy_vsam_postgres(session, os_type, main_config, cwd, mfdbfh_config, esui
 
     #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
     write_log ('MFDBFH version required - adding database locations to catalog')
-    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BANKMFDB/VSAM/{}?folder=/data")
+    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BANKMFDB/VSAM/{}?folder=/data", None)
 
 def configure_xa(session, os_type, main_config, cwd, esuid):
     database_connection = main_config['database_connection']
@@ -142,7 +142,7 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
 
         #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
         write_log ('MFDBFH version required - adding database locations to catalog')
-        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BankPAC/VSAM/{}?folder=/data")
+        catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', "sql://BankPAC/VSAM/{}?folder=/data", None)
     else:
         write_log ('MFDBFH dataset already in migrated - skipped dataset migration')
 
@@ -155,4 +155,4 @@ def deploy_vsam(session, os_type, main_config, cwd, esuid):
     sys_base = os.path.join(parentdir, region_name, 'system')
     deploy_vsam_data(parentdir,sys_base,os_type, esuid)
     #data_dir_2 hold the directory name, under the cwd that contains definitions of any additional (e.g VSAM) datasets to be catalogued - this setting is optional
-    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', None)
+    catalog_datasets(session, cwd, region_name, ip_address, configuration_files, 'data_dir_2', None, None)
