@@ -125,18 +125,23 @@ def create_region(main_configfile):
     if mf_product == 'EDz':
         if pathMfAnt.is_file() != True:
             mf_product = 'ES'
-        elif "JAVA_HOME" not in os.environ:
-            if os_type == 'Windows':
-                pathJDK = Path(os.path.join(cobdir,'AdoptOpenJDK'))
-                if pathJDK.is_dir():
-                    os.environ["JAVA_HOME"] = str(pathJDK)
-                    write_log('Using JAVA_HOME={}'.format(str(pathJDK)))
-                else:
-                    write_log('JAVA_HOME not set, cannot build application')
-                    mf_product = 'ES'
-            else:
+        elif os_type == 'Windows':
+            # Use the product JDK if possible
+            pathJDK = Path(os.path.join(cobdir,'AdoptOpenJDK'))
+            if pathJDK.is_dir():
+                os.environ["JAVA_HOME"] = str(pathJDK)
+                write_log('Using JAVA_HOME={}'.format(str(pathJDK)))
+            elif "JAVA_HOME" not in os.environ:
                 write_log('JAVA_HOME not set, cannot build application')
                 mf_product = 'ES'
+            else:
+                pathJDK = Path(os.environ["JAVA_HOME"])
+                if pathJDK.is_dir() != True:
+                    write_log('JAVA_HOME invalid, cannot build application')
+                    mf_product = 'ES'
+        else:
+            write_log('JAVA_HOME not set, cannot build application')
+            mf_product = 'ES'
 
     write_log('Configured for product: {}'.format(mf_product))
 
