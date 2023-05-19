@@ -42,7 +42,7 @@ As part of this tutorial, you use the supplied standard Eclipse COBOL project in
 You must have the following software installed:
 
 -   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
--   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator. **Note:** A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
+-   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator.
 
 **Using a remote enterprise server instance for the tutorials**
 
