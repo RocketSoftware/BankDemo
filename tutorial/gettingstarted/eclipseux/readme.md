@@ -135,7 +135,7 @@ To add the sample's copybooks to the project:
 
 1.  In Application Explorer view, right-click the **Bankdemo** project, and click **New** \> **Folder\> Folder**.
 2.  Click **Advanced**, and check **Link to alternate location (Linked Folder)**.
-3.  Browse to **/home/*username*/MFETDUSER/sources/copybook**, and click **Select Folder**.
+3.  Browse to **/home/*username*/MFETDUSER/sources/copybook**, and click **Open**.
 4.  Click **Finish**.
 
     This adds the folder storing the copybooks to your project as linked resources.
@@ -146,7 +146,7 @@ To add the other source files to the Bankdemo project:
 
 1.  In Application Explorer view, right-click the **Bankdemo** project, and click **New** \> **Folder\> Folder**.
 2.  Click **Advanced**, and check **Link to alternate location (Linked Folder)**.
-3.  Browse to **/home/*username*/MFETDUSER/sources/cobol**, and click **Select Folder**.
+3.  Browse to **/home/*username*/MFETDUSER/sources/cobol**, and click **Open**.
 4.  Click **Finish**.
 
     This adds the folders storing the source files to your project as linked resources:
