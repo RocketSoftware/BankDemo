@@ -195,17 +195,7 @@ You now need to perform a scan of the COBOL programs in your project to determin
 
     If you are prompted to delete some user files, choose **No**.
 
-    Setting the missing Compiler directives triggers a full rebuild of the project.There are still errors reported for two of the COBOL files as Eclipse has not been able to determine their Compiler directives. The files contain EXEC CICS and you can enable manually the CICS preprocessor for the two files.
-
-To set the compiler directives on **SCASH00P.cbl** and **SBANK80P.cbl** manually:
-
-1.  Right-click one of these two files in the Application Explorer view, and click **Properties**.
-2.  Expand **COBOL**, and click **CICS Preprocessors**.
-3.  Check **Enable file specific directives**, and check **Use CICS Preprocessor**.
-4.  Click **Apply and Close**.
-5.  Repeat the above steps for the other file.
-
-    This triggers a full rebuild of the project. The project should compile cleanly now.
+    Setting the missing Compiler directives triggers a full rebuild of the project. The project should compile cleanly now.
 
 **Adding Data Files**
 
