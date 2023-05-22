@@ -721,8 +721,8 @@ To view the spool:
 
     In the **DD Entries** section, there are:
 
-    -   Two **SYSOUT** results (one for the EXTRACT and one for the SORT). Click these and see the **SYSOUT Details** section.
-    -   The **PRINTOUT** is the final printed results created by your job. Click **PRINTOUT** in the **DD Entries** section to see the results:
+    -   Two **SYSOUT** results (one for the EXTRACT and one for the SORT). Double-click these and see the **SYSOUT Details** section.
+    -   The **PRINTOUT** is the final printed results created by your job. Double-click **PRINTOUT** in the **DD Entries** section to see the results:
     ![](images/1f0ec6c73989be4497cb4346c9d4a7b8.png)
 
 You can now start to look at how to run the online application.
@@ -740,6 +740,15 @@ As with JCL, execution of the jobs requires a previously configured Micro Focus 
 **Executing the CICS application**
 
 The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
+
+**Start the HACloud session server**
+You need to start the HACloud session server before you can use the HACloud TN3270 emulator. To do this you need to start `startsessionserver.sh` script as follows:
+
+1. Ensure that the installed Java is added to the PATH environment variable.
+2. Open a terminal and set up the COBOL environment in it.
+3. Run the following to start the session server:
+        startsessionserver.sh
+4. Check the terminal for the messages that the Micro Focus HACloud Session Server has started.
 
 **Configuring the TN3270 settings in the IDE**
 
