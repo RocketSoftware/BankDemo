@@ -747,7 +747,11 @@ You need to start the HACloud session server before you can use the HACloud TN32
 1. Ensure that the installed Java is added to the PATH environment variable.
 2. Open a terminal and set up the COBOL environment in it.
 3. Run the following to start the session server:
-        startsessionserver.sh
+
+    ```
+       startsessionserver.sh
+    ```
+    
 4. Check the terminal for the messages that the Micro Focus HACloud Session Server has started.
 
 **Configuring the TN3270 settings in the IDE**
