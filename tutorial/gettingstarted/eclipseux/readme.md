@@ -42,7 +42,7 @@ As part of this tutorial, you use the supplied standard Eclipse COBOL project in
 You must have the following software installed:
 
 -   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
--   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator. **Note:** A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
+-   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator.
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -135,7 +135,7 @@ To add the sample's copybooks to the project:
 
 1.  In Application Explorer view, right-click the **Bankdemo** project, and click **New** \> **Folder\> Folder**.
 2.  Click **Advanced**, and check **Link to alternate location (Linked Folder)**.
-3.  Browse to **/home/*username*/MFETDUSER/sources/copybook**, and click **Select Folder**.
+3.  Browse to **/home/*username*/MFETDUSER/sources/copybook**, and click **Open**.
 4.  Click **Finish**.
 
     This adds the folder storing the copybooks to your project as linked resources.
@@ -146,7 +146,7 @@ To add the other source files to the Bankdemo project:
 
 1.  In Application Explorer view, right-click the **Bankdemo** project, and click **New** \> **Folder\> Folder**.
 2.  Click **Advanced**, and check **Link to alternate location (Linked Folder)**.
-3.  Browse to **/home/*username*/MFETDUSER/sources/cobol**, and click **Select Folder**.
+3.  Browse to **/home/*username*/MFETDUSER/sources/cobol**, and click **Open**.
 4.  Click **Finish**.
 
     This adds the folders storing the source files to your project as linked resources:
@@ -195,17 +195,7 @@ You now need to perform a scan of the COBOL programs in your project to determin
 
     If you are prompted to delete some user files, choose **No**.
 
-    Setting the missing Compiler directives triggers a full rebuild of the project.There are still errors reported for two of the COBOL files as Eclipse has not been able to determine their Compiler directives. The files contain EXEC CICS and you can enable manually the CICS preprocessor for the two files.
-
-To set the compiler directives on **SCASH00P.cbl** and **SBANK80P.cbl** manually:
-
-1.  Right-click one of these two files in the Application Explorer view, and click **Properties**.
-2.  Expand **COBOL**, and click **CICS Preprocessors**.
-3.  Check **Enable file specific directives**, and check **Use CICS Preprocessor**.
-4.  Click **Apply and Close**.
-5.  Repeat the above steps for the other file.
-
-    This triggers a full rebuild of the project. The project should compile cleanly now.
+    Setting the missing Compiler directives triggers a full rebuild of the project. The project should compile cleanly now.
 
 **Adding Data Files**
 
@@ -731,8 +721,8 @@ To view the spool:
 
     In the **DD Entries** section, there are:
 
-    -   Two **SYSOUT** results (one for the EXTRACT and one for the SORT). Click these and see the **SYSOUT Details** section.
-    -   The **PRINTOUT** is the final printed results created by your job. Click **PRINTOUT** in the **DD Entries** section to see the results:
+    -   Two **SYSOUT** results (one for the EXTRACT and one for the SORT). Double-click these and see the **SYSOUT Details** section.
+    -   The **PRINTOUT** is the final printed results created by your job. Double-click **PRINTOUT** in the **DD Entries** section to see the results:
     ![](images/1f0ec6c73989be4497cb4346c9d4a7b8.png)
 
 You can now start to look at how to run the online application.
@@ -750,6 +740,20 @@ As with JCL, execution of the jobs requires a previously configured Micro Focus 
 **Executing the CICS application**
 
 The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
+
+**Start the HACloud session server**
+
+You need to start the HACloud session server before you can use the HACloud TN3270 emulator. To do this you need to start `startsessionserver.sh` script as follows:
+
+1. Ensure that the installed Java is added to the PATH environment variable.
+2. Open a terminal and set up the COBOL environment in it.
+3. Run the following to start the session server:
+
+    ```
+       startsessionserver.sh
+    ```
+    
+4. Check the terminal for the messages that the Micro Focus HACloud Session Server has started.
 
 **Configuring the TN3270 settings in the IDE**
 
