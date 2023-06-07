@@ -103,3 +103,4 @@ The demonstration also includes some instructions to build the application from 
 
 12. In ESCWA, select the BANKPSOR under **SORs**. Expand BANKPAC and note the two Enterprise Server instances BANKPAC1 and BANKPAC2
     
+13. The `sources\jcl\ZBNKSTMT.jcl` file can be used run a JCL batch job via the **JES**, **Control** ESCWA dropdown menu.

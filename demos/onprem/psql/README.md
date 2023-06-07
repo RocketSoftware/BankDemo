@@ -79,3 +79,4 @@ The demonstration also includes some instructions to build the application from 
 
 8. In ESCWA, select the BANKSQL server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General**, and click any of the menu items to explore the server configuration.
     
+9. The `sources\jcl\ZBNKSTMS.jcl` file can be used run a JCL batch job via the **JES**, **Control** ESCWA dropdown menu.
