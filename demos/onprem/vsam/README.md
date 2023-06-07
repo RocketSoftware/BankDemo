@@ -56,4 +56,4 @@ The demonstration also includes some instructions to build the application from 
 7. Enter a valid user-id - a suitable user-id is **B0001** with any characters for the password as the password is not validated.
 
 8. In ESCWA, select the BANKVSAM server under **Directory Servers > Default**. See the options on the **General** tab. Also, click the downwards arrow next to **General** and click any of the menu items to explore the server configuration.
-9. The `sources\jcl\ZBNKSTMT.jcl` file can be used run a JCL batch job via the **JES**, **Control** ESCWA dropdown menu.
+9. The `sources\jcl\ZBNKSTMT.jcl` file can be used to run a JCL batch job via the **JES**, **Control** ESCWA dropdown menu.
