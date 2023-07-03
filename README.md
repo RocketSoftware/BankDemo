@@ -1,5 +1,5 @@
 # Micro Focus Bankdemo Application
-This project provides tutorials and demonstrations of features in the Micro Focus Enterprise Developer and Enterprise Server products.
+This project provides tutorials and demonstrations of features in the OpenText&trade; Micro Focus Enterprise Developer and OpenText&trade; Micro Focus Enterprise Server products.
 To use these materials, download the assets of the project [release](https://github.com/MicroFocus/BankDemo/releases) that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
 
 ## Contents
@@ -25,7 +25,7 @@ In the simplest configuration, it demonstrates a CICS/JCL COBOL application that
 
 ## <a name="license"></a>License
 
-Copyright &copy; 2010-2023 Micro Focus.  All Rights Reserved.
+Copyright 2010-2023 Open Text.  All Rights Reserved.
 This software may be used, modified, and distributed 
 (provided this notice is included without modification)
 solely for internal demonstration purposes with other 
