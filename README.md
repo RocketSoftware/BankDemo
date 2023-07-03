@@ -1,5 +1,5 @@
 # Micro Focus Bankdemo Application
-This project provides tutorials and demonstrations of features in the OpenText:tm: Micro Focus Enterprise Developer and OpenText:tm: Micro Focus Enterprise Server products. To use these materials, download the assets of the project release that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
+This project provides tutorials and demonstrations of features in the OpenText&trade; Micro Focus Enterprise Developer and OpenText&trade; Micro Focus Enterprise Server products. To use these materials, download the assets of the project release that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
 To use these materials, download the assets of the project [release](https://github.com/MicroFocus/BankDemo/releases) that matches the version of the Micro Focus product you will be using. Check and follow the appropriate READMEs for instructions.
 
 ## Contents
