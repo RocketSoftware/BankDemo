@@ -17,6 +17,7 @@ WITH THIS SOFTWARE.
 Description:  A function to setup a JES listener on the Micro Focus server. 
 """
 
+import os
 import requests
 from utilities.misc import get_elem_with_prop, create_headers, check_http_error
 from utilities.session import get_session, save_cookies
@@ -26,7 +27,7 @@ from utilities.exceptions import ESCWAException, HTTPException
 def set_jes_listener(region_name, ip_address, port):
     """ Sets a JES listener on the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/commsserver'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/commsserver'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
     session = get_session()
 

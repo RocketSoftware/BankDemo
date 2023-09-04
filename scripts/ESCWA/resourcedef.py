@@ -28,7 +28,7 @@ from utilities.session import get_session, save_cookies
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 
 def add_sit(region_name, ip_address, sit_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/sit'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/sit'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     session = get_session()
@@ -49,7 +49,7 @@ def add_sit(region_name, ip_address, sit_details):
 
 
 def add_Startup_list(region_name, ip_address, startup_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/startup'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/startup'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     session = get_session()
@@ -69,7 +69,7 @@ def add_Startup_list(region_name, ip_address, startup_details):
     return res
 
 def add_groups(region_name, ip_address, group_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/groups'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/groups'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     session = get_session()
@@ -98,7 +98,7 @@ def add_fct(region_name, ip_address, group_name, fct_details):
     for fct_entry in fct_details['FCT_Entries']:
         resource_name = fct_entry['Resource']
         req_body = fct_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/fct/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/fct/detail/{}/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name, group_name, resource_name)
 
         try:
             res = session.post(uri, headers=req_headers, json=req_body)
@@ -119,7 +119,7 @@ def add_ppt(region_name, ip_address, group_name, ppt_details):
     for ppt_entry in ppt_details['PPT_Entries']:
         resource_name = ppt_entry['Resource']
         req_body = ppt_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/ppt/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/ppt/detail/{}/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name, group_name, resource_name)
 
         try:
             res = session.post(uri, headers=req_headers, json=req_body)
@@ -137,13 +137,13 @@ def add_pct(region_name, ip_address, group_name, pct_details):
 
     session = get_session()
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     for pct_entry in pct_details['PCT_Entries']:
         resource_name = pct_entry['Resource']
         req_body = pct_entry['Parameters']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/pct/detail/{}/{}'.format(ip_address, ip_address, region_name, group_name, resource_name)
+        uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/pct/detail/{}/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name, group_name, resource_name)
 
         try:
             res = session.post(uri, headers=req_headers, json=req_body)
@@ -156,7 +156,7 @@ def add_pct(region_name, ip_address, group_name, pct_details):
         save_cookies(session.cookies)
 
 def update_sit_in_use(region_name, ip_address, sit_name):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address) 
 
     session = get_session()

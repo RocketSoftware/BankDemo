@@ -26,7 +26,7 @@ from utilities.session import get_session, save_cookies
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 
 def add_mq_listener(region_name, ip_address, mq_details):
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/mqlistener'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/mqlistener'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     session = get_session()

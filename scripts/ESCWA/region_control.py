@@ -16,7 +16,7 @@ WITH THIS SOFTWARE.
 
 Description:  Functions for control of a Micro Focus server region. 
 """
-
+import os
 import time
 import requests
 from utilities.session import get_session, save_cookies
@@ -28,7 +28,7 @@ from utilities.output import write_log
 def add_region(region_name, ip_address, port, template_file, is64bit):
     """ Adds a region to the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86'.format(ip_address, '127.0.0.1')
+    uri = 'http://{}:10086/native/v1/regions/{}/{}'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"))
     req_headers = create_headers('CreateRegion', ip_address)
 
     try:
@@ -58,7 +58,7 @@ def add_region(region_name, ip_address, port, template_file, is64bit):
 def start_region(region_name, ip_address):
     """ Starts a previously created region on the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/start'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/start'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
     req_body = {
         'mfUser': 'SYSAD',
@@ -85,7 +85,7 @@ def start_region(region_name, ip_address):
 def stop_region(region_name, ip_address):
     """ Stops a previously created region on the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/stop'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/stop'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
     req_body = {
         'mfUser': 'SYSAD',
@@ -113,7 +113,7 @@ def stop_region(region_name, ip_address):
 def mark_region_stopped(region_name, ip_address):
     """ Marks a previously created region as stopped on the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
     req_body = {
         'mfServerStatus': 'Stopped'
@@ -137,7 +137,7 @@ def mark_region_stopped(region_name, ip_address):
 def del_region(region_name, ip_address):
     """ Deletes a region from the Micro Focus server. """
     
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
     session = get_session()
 
@@ -157,7 +157,7 @@ def del_region(region_name, ip_address):
 def get_region_status(region_name, ip_address):
     """ Checks a previously created region's status on the Micro Focus Server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/status'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/status'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     session = get_session()

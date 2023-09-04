@@ -30,7 +30,7 @@ from utilities.exceptions import ESCWAException, InputException, HTTPException
 def update_region(region_name, ip_address, template_file, env_file, region_description, region_base):
     """ Updates the settings of a previously created region on the Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     esp_alias = '$ESP'
@@ -95,7 +95,7 @@ def update_region(region_name, ip_address, template_file, env_file, region_descr
 
 def update_region_attribute(region_name, ip_address, attribute_details):
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}'.format(ip_address, '127.0.0.1', region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}'.format(ip_address, '127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     req_body=attribute_details
@@ -117,7 +117,7 @@ def update_region_attribute(region_name, ip_address, attribute_details):
 def update_alias(region_name, ip_address, alias_file):
     """ Updates the aliases on a Micro Focus Server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/alias'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/alias'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     try:
@@ -143,7 +143,7 @@ def update_alias(region_name, ip_address, alias_file):
 def add_initiator(region_name, ip_address, template_file):
     """ Adds an initiator to a Micro Focus server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/initiator'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/initiator'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name)
     req_headers = create_headers('CreateRegion', ip_address)
 
     try:
@@ -182,7 +182,7 @@ def add_datasets(region_name, ip_address, datafile_list, mfdbfh_location):
 
     for dataset in dataset_list:
         jDSN = dataset['jDSN']
-        uri = 'http://{}:10086/native/v1/regions/{}/86/{}/catalog/{}'.format(ip_address, ip_address, region_name, jDSN)
+        uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/catalog/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"), region_name, jDSN)
         try:
             if mfdbfh_location is not None:
                 # sql://bank_mfdbfh/VSAM/{}?folder=/data

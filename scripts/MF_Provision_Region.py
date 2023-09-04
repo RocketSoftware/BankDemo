@@ -29,7 +29,7 @@ from utilities.input import read_json, read_txt
 from utilities.output import write_json, write_log 
 from utilities.filesystem import create_new_system, deploy_application, deploy_system_modules, deploy_vsam_data, deploy_partitioned_data, dbfhdeploy_vsam_data
 
-from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list
+from ESCWA.mfds_config import add_mfds_to_list, check_mfds_list, amend_mfds_port
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
 from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator, add_datasets
 from ESCWA.comm_control import set_jes_listener
@@ -233,7 +233,11 @@ def create_region(main_configfile):
     template_base = os.path.join(parentdir, 'system')
     sys_base = os.path.join(parentdir, region_name, 'system')
 
-    create_new_system(template_base,sys_base)
+    try:
+        create_new_system(template_base,sys_base)
+    except FileExistsError as exc:
+        write_log('Unable to create new system.')
+        write_log(exc)
     
     #create an empty resource definition file
     caspcrd = os.path.join(install_dir, 'caspcrd')
@@ -348,6 +352,15 @@ def create_region(main_configfile):
             add_initiator(region_name, ip_address, init_config)
         except ESCWAException as exc:
             write_log('Unable to add initiator.')
+            write_log(exc)
+            sys.exit(1)
+
+    if os.getenv("CCITCP2_PORT","-1") != "-1":
+        write_log ('MFDS Port being changed to {}'.format(os.getenv("CCITCP2_PORT")))
+        try:
+            amend_mfds_port(ip_address, os.getenv("CCITCP2_PORT"))
+        except ESCWAException as exc:
+            write_log('Unable to amend DS port.')
             write_log(exc)
             sys.exit(1)
 
@@ -578,8 +591,9 @@ def create_region(main_configfile):
                 set64bit = 'false'
 
             run_ant_file(build_file,source_dir,load_dir,ant_home, full_build, dataversion, set64bit)
+            write_log(' (see built.txt for results)')
+            write_log('Compiled system executables being deployed'.format(mf_product))
 
-        write_log('Precompiled system executables being deployed'.format(mf_product))
         deploy_system_modules(parentdir, sys_base, os_type, is64bit, loadlibDir)
 
     ## Following the update of the SIT and other attributes, the region must be restarted

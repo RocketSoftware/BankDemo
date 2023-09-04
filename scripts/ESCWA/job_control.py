@@ -17,6 +17,7 @@ WITH THIS SOFTWARE.
 Description:  Functions for control of jobs sent to the Micro Focus server region. 
 """
 
+import os
 import time
 import requests
 from utilities.misc import create_headers, check_http_error
@@ -27,7 +28,7 @@ from utilities.exceptions import ESCWAException, HTTPException
 def submit_jcl(region_name, ip_address, jcl_file):
     """ Submits a JCL to the Micro Focus JES Server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/jescontrol'.format(ip_address, ip_address, region_name)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/jescontrol'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     req_headers = create_headers('JESProcess', ip_address)
     req_body = {
         'ctlSubmit': 'Submit',
@@ -53,7 +54,7 @@ def submit_jcl(region_name, ip_address, jcl_file):
 def check_job(region_name, ip_address, job_id):
     """ Checks on the status of a job previously submitted to the Micro Focus JES server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/jobview/{}'.format(ip_address, ip_address, region_name, job_id)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/jobview/{}'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"), region_name, job_id)
     req_headers = create_headers('JESProcess', ip_address)
     session = get_session()
 
@@ -82,7 +83,7 @@ def check_job(region_name, ip_address, job_id):
 def get_output(region_name, ip_address, job_id, charset):
     """ Gets the output of a job previously submitted to the Micro Focus JES server. """
 
-    uri = 'http://{}:10086/native/v1/regions/{}/86/{}/spool/{}/display'.format(ip_address, ip_address, region_name, job_id)
+    uri = 'http://{}:10086/native/v1/regions/{}/{}/{}/spool/{}/display'.format(ip_address, ip_address, os.getenv("CCITCP2_PORT","86"),region_name, job_id)
     req_headers = create_headers('JESProcess', ip_address)
     req_params = {
         'jSvStart': 1,
