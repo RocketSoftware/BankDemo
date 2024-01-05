@@ -23,7 +23,6 @@ import subprocess
 from utilities.exceptions import HTTPException
 from utilities.output import write_log 
 from pathlib import Path
-from distutils.dir_util import copy_tree
 import shutil
 
 def create_new_system(template_base, sys_base):
@@ -32,7 +31,7 @@ def create_new_system(template_base, sys_base):
     os.mkdir(parentdir)
     os.mkdir(sys_base)
     
-    copy_tree(template_base, sys_base)
+    shutil.copytree(template_base, sys_base, dirs_exist_ok=True)
     
 
 def deploy_application (repo_dir, sys_base, os_type, is64bit, database_type):
@@ -46,10 +45,10 @@ def deploy_application (repo_dir, sys_base, os_type, is64bit, database_type):
     exec_load = os.path.join(repo_dir, 'executables', os_type, chip)
     
     source_load = os.path.join(exec_load, 'data', database_type)
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
 
     source_load = os.path.join(exec_load, 'core')
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
 
 def deploy_system_modules (repo_dir, sys_base, os_type, is64bit, database_type):
 
@@ -62,14 +61,14 @@ def deploy_system_modules (repo_dir, sys_base, os_type, is64bit, database_type):
     exec_load = os.path.join(repo_dir, 'executables', os_type, chip)
     
     source_load = os.path.join(exec_load, 'system')
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
 
 def deploy_vsam_data (repo_dir, sys_base, os_type, esuid):
 
     target_load = os.path.join(sys_base, 'catalog', 'data')
     source_load = os.path.join(repo_dir, 'datafiles')
 
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
     if esuid != '':
         shutil.chown(target_load, esuid, esuid)
         for file in os.scandir(target_load):
@@ -79,7 +78,7 @@ def deploy_partitioned_data (repo_dir, sys_base, esuid):
 
     target_load = os.path.join(sys_base, 'catalog', 'data', 'proclib')
     source_load = os.path.join(repo_dir, 'sources', 'proclib')
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
     if esuid != '':
         shutil.chown(target_load, esuid, esuid)
         for file in os.scandir(target_load):
@@ -87,7 +86,7 @@ def deploy_partitioned_data (repo_dir, sys_base, esuid):
 
     target_load = os.path.join(sys_base, 'catalog', 'data', 'ctlcards')
     source_load = os.path.join(repo_dir, 'sources', 'ctlcards')
-    copy_tree(source_load, target_load)
+    shutil.copytree(source_load, target_load, dirs_exist_ok=True)
     if esuid != '':
         shutil.chown(target_load, esuid, esuid)
         for file in os.scandir(target_load):
