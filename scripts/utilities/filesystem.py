@@ -1,5 +1,5 @@
 """
-Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
+Copyright (C) 2010-2024 Micro Focus.  All Rights Reserved.
 This software may be used, modified, and distributed 
 (provided this notice is included without modification)
 solely for internal demonstration purposes with other 
