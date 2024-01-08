@@ -614,7 +614,7 @@ To execute the JCL, you need to run the application in an instance of the Micro 
 
 Before you proceed, ensure that the default settings are applied to the Directory Sever:
 
-1.  Click the **Start** menu and open the **Services** application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
+1.  Click the Start menu and open the Services application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
 
 2.  In Eclipse, click the Server Explorer view.
 

@@ -683,7 +683,7 @@ This sample provides a PowerShell script that creates the region definition to u
 
 Ensure that the default settings are applied to the Directory Sever:
 
-1.  Click the **Start** menu and open the **Services** application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
+1.  Click the Start menu and open the Services application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
 
 2.  In Visual Studio, open the Server Explorer window.
 
