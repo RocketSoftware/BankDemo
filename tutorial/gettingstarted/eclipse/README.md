@@ -11,7 +11,7 @@ Other tutorials, which are designed for Administrators, are available.
 * [Creating a Project and Adding the Source Files](#creating-a-project-and-adding-the-source-files)
 * [Editing Source Files](#editing-source-files)
 * [Compiling the Source Code](#unit-testing-the-batch-application)
-* [Unit Testing the Batch Application](#unit-testing-the-online-application)
+* [Unit Testing the Batch Application](#unit-testing-the-batch-application)
 * [Unit Testing the Online Application](#unit-testing-the-online-application)
 * [Debugging the Batch Application](#debugging-the-batch-application)
 * [Debugging the Online Application](#debugging-the-online-application)
@@ -612,6 +612,16 @@ To execute the JCL, you need to run the application in an instance of the Micro 
 
 **Important:** You need Enterprise Developer or Enterprise Developer for z Systems to execute the application as running applications is not supported in Enterprise Developer Connect.
 
+Before you proceed, ensure that the default settings are applied to the Directory Sever:
+
+1.  Click the Start menu and open the Services application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
+
+2.  In Eclipse, click the Server Explorer view.
+
+   If the window is not visible, click **Window** \> **Show View** \> **Other**, then expand **Micro Focus**, click **Server Explorer**, and click **Open**.
+
+3.  Click **Default [127.0.0.1:86]** and in the Properties pane, check the value of the directory server field. If it does not say Default, right-click the value and select **Restore Default Value**.
+
 **Importing the Bankdemo server**
 
 This sample provides a PowerShell script that creates the region definition to use in this tutorial:
@@ -624,9 +634,6 @@ This sample provides a PowerShell script that creates the region definition to u
 Now you can import the definition of the BANKDEMO logical server (LSER) in Enterprise Server:
 
 1.  In Eclipse, click the Server Explorer view.
-
-    If the window is not visible, click **View** \> **Show View** \> **Other**, then expand **Micro Focus**, click **Server Explorer**, and click **Open**.
-
 2.  Right-click **Default [127.0.0.1:86]**, and click **Import Server**.
 3.  In the **Import Server** dialog box, click **Browse** for **Import file**.
 4.  Set the file extension field to **.xml**.
@@ -735,6 +742,14 @@ In the previous step, Unit Testing the Batch Application, you used the BANKDEMO 
 As with JCL, execution of the jobs requires a previously configured Micro Focus enterprise server.
 
 **Important:** You need Enterprise Developer or Enterprise Developer for z Systems to execute the application as running applications is not supported in Enterprise Developer Connect.
+
+Before you proceed, ensure that Micro Focus Host Access for the Cloud (HA Cloud) is running:
+
+1. Go the the Start menu and open the Services application.
+
+2. Navigate to the Micro Focus HA Cloud service and check that its status is set to **Running**.
+
+3. If it is not running, right-click and click **Start**.
 
 **Executing the CICS application**
 

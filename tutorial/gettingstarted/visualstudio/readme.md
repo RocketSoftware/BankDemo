@@ -1,6 +1,7 @@
 # Getting started with Micro Focus Enterprise Developer for Visual Studio 2022
 
 ## Overview
+
 This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates.
 
 These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Visual Studio Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Visual Studio 2022 to develop and maintain both simple COBOL and mainframe subsystem applications.
@@ -46,7 +47,7 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
 
    If you have an active firewall on the machine that is running your Directory Server and enterprise server instances, and you want remote clients to be able to connect to them, you must ensure that the firewall allows access to the ports that you are using.
     
-   For example, Directory Server is configured, by default, to use port 86. Your must configure your firewall to allow TCP and UDP access to this port. Similarly, the enterprise server instance you create as part of this tutorial, BANKDEMO, has listeners which use ports 9003 and 9023. For remote clients to be able to submit JCL jobs or connect a TN3270 terminal to these listeners, your firewall must permit access to these ports.
+   For example, Directory Server is configured, by default, to use port 86. You must configure your firewall to allow TCP and UDP access to this port. Similarly, the enterprise server instance you create as part of this tutorial, BANKDEMO, has listeners which use ports 9003 and 9023. For remote clients to be able to submit JCL jobs or connect a TN3270 terminal to these listeners, your firewall must permit access to these ports.
 
    We recommend that, if you want remote users to access Enterprise Server functionality through the firewall, you use fixed port values so that you can control access via these.
 
@@ -680,13 +681,23 @@ This sample provides a PowerShell script that creates the region definition to u
 
     This executes the script and creates the Enterprise Server region definition file, **BANKDEMO.xml**, in the same folder. The file is configured for the location in which you have saved the sample files.
 
-To import the definition of the Bankdemo logical server (LSER) in Enterprise Server:
+Ensure that the default settings are applied to the Directory Sever:
 
-1.  In Visual Studio, open the Server Explorer window.
+1.  Click the Start menu and open the Services application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
+
+2.  In Visual Studio, open the Server Explorer window.
 
     If the window is not visible, click **View** \> **Server Explorer** (or **View** \> **Other Windows** \> **Server Explorer**).
 
     ![](images/03218b9fa5693aaca14ff3cf3aa3dd1b.jpg) **Tip:** Use the Auto Hide button (![](images/bf74b6a329048075497d723393231eba.jpg)) in the Server Explorer toolbar to pin the window to the IDE window.
+
+3.  Right-click **Micro Focus Servers** and select **Directory Server Configuration**. This opens the Micro Focus Directory Server window. 
+
+4.  Ensure that Host name is localhost and the Port number is 86.
+
+To import the definition of the Bankdemo logical server (LSER) in Enterprise Server:
+
+1.  In Visual Studio, open the Server Explorer window.
 
 2.  Expand **Micro Focus Servers**.
 
@@ -809,6 +820,14 @@ To view the spool:
 In the previous step, Unit Testing the Batch Application, you used the BANKDEMO enterprise server. You are going to use it again for online testing.
 
 As with JCL, execution of the jobs requires a previously configured Micro Focus enterprise server.
+
+Before you proceed, ensure that Micro Focus Host Access for the Cloud (HA Cloud) is running:
+
+1. Go the the Start menu and open the Services application.
+
+2. Navigate to the Micro Focus HA Cloud service and check that its status is set to **Running**.
+
+3. If it is not running, right-click and click **Start**.
 
 **Executing the CICS application**
 
