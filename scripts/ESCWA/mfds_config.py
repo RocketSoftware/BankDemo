@@ -73,7 +73,23 @@ def add_mfds_to_list(ip_address, mfds_description):
 def amend_mfds_port(ip_address,newport):
     """ Add an MFDS to a Micro Focus server. """
 
-    uri = 'http://{}:10086/server/v1/config/mfds/4ac7ed63-5ccd-4630-bbfc-c8df212abc6e'.format(ip_address)
+    uri_uid = 'http://{}:10086/server/v1/config/mfds/'.format(ip_address)
+    req_headers = create_headers('CreateRegion', ip_address)
+
+    session = get_session()
+
+    try:
+        uid_res = session.get(uri_uid, headers=req_headers)
+        check_http_error(uid_res)
+    except requests.exceptions.RequestException as exc:
+        raise ESCWAException('Unable to UID') from exc
+    except HTTPException as exc:
+        raise ESCWAException('Unable to UID') from exc
+    
+    uid_res = uid_res.json()
+    uid = uid_res[0]['Uid']
+    
+    uri = 'http://{}:10086/server/v1/config/mfds/{}'.format(ip_address,uid)
     req_headers = create_headers('CreateRegion', ip_address)
     req_body = {
         'MfdsPort': newport

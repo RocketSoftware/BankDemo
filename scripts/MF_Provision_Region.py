@@ -576,6 +576,7 @@ def create_region(main_configfile):
         if ant_home is None:
             write_log('ANT_HOME not set. Precompiled executables therefore being deployed')
             deploy_application(parentdir, sys_base, os_type, is64bit, loadlibDir)
+            write_log('Precompiled system executables being deployed'.format(mf_product))
         else:
             write_log('Application being built')
 
