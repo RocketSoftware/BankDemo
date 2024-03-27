@@ -18,10 +18,11 @@ Description:  A function to setup a JES listener on the Micro Focus server.
 """
 
 from utilities.misc import get_elem_with_prop
+import os
 
 def set_jes_listener(session, region_name, ip_address, port):
     """ Sets a JES listener on the Micro Focus server. """
-    uri = 'native/v1/regions/{}/86/{}/commsserver'.format(ip_address, region_name)
+    uri = 'native/v1/regions/{}/{}/{}/commsserver'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     res = session.get(uri, 'Unable to get Comm Server information.')
     comm_server = res.json()
     uri += '/{}/listener'.format(comm_server[0]['mfServerUID'])
@@ -36,7 +37,7 @@ def set_jes_listener(session, region_name, ip_address, port):
 def set_commsserver_local(session, region_name, ip_address):
     """ Sets a Communications Server to localhost. """
 
-    uri = 'native/v1/regions/{}/86/{}/commsserver'.format(ip_address, region_name)
+    uri = 'native/v1/regions/{}/{}/{}/commsserver'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     res = session.get(uri, 'Unable to get Comm Server information.')
 
     comm_server = res.json()
