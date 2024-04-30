@@ -70,7 +70,7 @@ The demonstration also includes some instructions to build the application from 
    **Note:** You need administrator's rights to configure the ODBC data source on Windows. On Linux they are created in the user .odbc.ini file.
 
 5. Navigate to the `scripts` directory in the demonstration files.
-6. Edit the file `scripts/options/vsam_postgres_pac.json` with a text editor:
+6. Edit the file `scripts/options/vsam_postgres_pac1.json` with a text editor:
 
     - Verify and, if required, modify the values within the `database_connection` section to match the setting of the database you are using.
     - Verify and, if required, modify the values within the `PAC` section to match the setting of the Redis server you are using.
