@@ -18,7 +18,7 @@ Description:  A series of utility functions for updating XA resource defs.
 """
 
 def add_xa_rm(session, region_name, ip_address, xa_detail):
-    uri = 'native/v1/regions/{}/86/{}/xaresource'.format(ip_address, region_name)
+    uri = 'native/v1/regions/{}/{}/{}/xaresource'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     req_body =xa_detail
     res = session.post(uri, req_body, 'Unable to complete Update XA RM API request.')
     return res

@@ -18,10 +18,11 @@ Description:  Functions for control of jobs sent to the Micro Focus server regio
 """
 
 import time
+import os
 
 def submit_jcl(session, region_name, ip_address, jcl_file):
     """ Submits a JCL to the Micro Focus JES Server. """
-    uri = 'native/v1/regions/{}/86/{}/jescontrol'.format(ip_address, region_name)
+    uri = 'native/v1/regions/{}/{}/{}/jescontrol'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     req_body = {
         'ctlSubmit': 'Submit',
         'subJes': 2,
@@ -33,7 +34,7 @@ def submit_jcl(session, region_name, ip_address, jcl_file):
 
 def check_job(session, region_name, ip_address, job_id):
     """ Checks on the status of a job previously submitted to the Micro Focus JES server. """
-    uri = 'native/v1/regions/{}/86/{}/jobview/{}'.format(ip_address, region_name, job_id)
+    uri = 'native/v1/regions/{}/{}/{}/jobview/{}'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name, job_id)
     for i in range(3):
         res = session.get(uri, 'Unable to complete Job Check API request.')
         if res.json()['JobStatus'] == 'Complete ':
@@ -45,7 +46,7 @@ def check_job(session, region_name, ip_address, job_id):
 
 def get_output(session, region_name, ip_address, job_id, charset):
     """ Gets the output of a job previously submitted to the Micro Focus JES server. """
-    uri = 'native/v1/regions/{}/86/{}/spool/{}/display'.format(ip_address, region_name, job_id)
+    uri = 'native/v1/regions/{}/{}/{}/spool/{}/display'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name, job_id)
     req_params = {
         'jSvStart': 1,
         'jSvFor': 10000,

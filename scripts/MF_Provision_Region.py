@@ -140,8 +140,9 @@ def create_region(main_configfile):
                     write_log('JAVA_HOME invalid, cannot build application')
                     mf_product = 'ES'
         else:
-            write_log('JAVA_HOME not set, cannot build application')
-            mf_product = 'ES'
+            if "JAVA_HOME" not in os.environ:
+                write_log('JAVA_HOME not set, cannot build application')
+                mf_product = 'ES'
 
     write_log('Configured for product: {}'.format(mf_product))
 
