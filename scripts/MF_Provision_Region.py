@@ -32,7 +32,7 @@ from utilities.resource import add_postgresxa, catalog_datasets, write_secret
 from utilities.deploy import deploy_application_option, deploy_dfhdrdat_postgres_pac
 from database.odbc import check_odbc_driver_installed
 from ESCWA.region_control import add_region, start_region, del_region, confirm_region_status, stop_region
-from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator
+from ESCWA.region_config import update_region, update_region_attribute, update_alias, add_initiator, check_security
 from ESCWA.comm_control import set_jes_listener, set_commsserver_local
 from utilities.exceptions import ESCWAException
 from ESCWA.resourcedef import  add_sit, add_Startup_list, add_groups, add_fct, add_ppt, add_pct, update_sit_in_use
@@ -197,6 +197,9 @@ def create_region(main_configfile):
     #env_config is used to set the environment space details for the region
     env_config = configuration_files["env_config"]
 
+    #secrets_config is used to set the secrets details for the region
+    secrets_config = configuration_files["secrets_config"]
+
     #alias_config and JES Alias updates that are region for a region - this setting is optional
     if 'alias_config' not in configuration_files:
         alias_config = 'none'
@@ -261,10 +264,33 @@ def create_region(main_configfile):
     alias_config = os.path.join(config_dir, alias_config)
     init_config = os.path.join(config_dir, init_config)
     env_config = os.path.join(config_dir, env_config)
+    secrets_config = os.path.join(config_dir, secrets_config)
     resourcedef_dir = os.path.join(config_dir, 'CSD')
 
     session = EscwaSession("http", ip_address, 10086)
         
+    try:
+        write_log ('check if VSAM ESM is enabled')
+        check_security(session)
+    except ESCWAException as exc:
+        write_log(exc)
+        try:
+            write_log('logon to ESCWA.')
+            try:
+                req_body = read_json(secrets_config)
+                login_secrets_location=req_body["login_location"]
+            except InputException as exc:
+                raise ESCWAException('Unable to read template file: {}.'.format(secrets_config)) from exc
+            if os_type == 'Linux':
+                mfsecretsadmin = os.path.join(install_dir, 'mfsecretsadmin')
+            else:
+                mfsecretsadmin = os.path.join(install_dir, 'mfsecretsadmin.exe')
+            session.logon(mfsecretsadmin, login_secrets_location)
+        except ESCWAException as exc:
+            write_log('Unable to logon to ESCWA.')
+            write_log(exc)
+            sys.exit(1)
+
     try:
         write_log ('Region \033[1m{}\033[0m being added'.format(region_name))
         add_region(session, region_name, region_port, base_config, is64bit)

@@ -93,6 +93,11 @@ def update_alias(session, region_name, ip_address, alias_file):
     res = session.post(uri, req_body, 'Unable to complete Update Alias API request.')
     return res
 
+def check_security(session):
+    """ check if vsam esm is enabled. """
+    uri = 'validate'
+    res = session.get(uri, 'Security is enabled')
+    return res
 
 def add_initiator(session, region_name, ip_address, template_file):
     """ Adds an initiator to a Micro Focus server. """

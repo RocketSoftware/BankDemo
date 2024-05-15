@@ -1,6 +1,10 @@
 import requests
 from utilities.misc import create_headers, check_http_error
 from utilities.exceptions import ESCWAException, HTTPException
+from utilities.output import write_json, write_log 
+import subprocess
+import json
+import os
 
 class EscwaSession:
     def __init__(self, protocol, escwa_hostname, escwa_port):
@@ -69,3 +73,17 @@ class EscwaSession:
         except HTTPException as exc:
             desc = error_description if len(error_description) > 0 else "DELETE {} failed".format(uri)
             raise ESCWAException(desc) from exc
+            
+    def logon(self, mfsecretsadmin, location):
+        """ Logs on to ESCWA. """
+        uri = 'logon'
+        try:
+            write_log(mfsecretsadmin)
+            write_log(location)
+            creds_body = subprocess.check_output('{} read {}'.format(mfsecretsadmin, location), -1).decode()
+            req_body = json.loads(creds_body)
+        except InputException as exc:
+            raise ESCWAException('Unable to get logon credentials.') from exc
+
+        res = self.post(uri, req_body, 'Unable to logon')
+        return res
