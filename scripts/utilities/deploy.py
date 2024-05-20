@@ -111,15 +111,10 @@ def deploy_dfhdrdat_postgres_pac(session, os_type, main_config, mfdbfh_config, s
 
     dbfhdeploy_dataset (os_type, is64bit, source_location, "sql://BankPAC/VSAM/{}?folder=/system", "dfhdrdat")
 
-def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, esuid):
+def create_db_vault_secrets(os_type, main_config, esuid):
+    write_log ('creating db vaults secrets')
     database_connection = main_config['database_connection']
-    configuration_files = main_config["configuration_files"]
     is64bit = main_config["is64bit"]
-    ip_address = main_config["ip_address"]
-    region_name = main_config["region_name"]
-
-    configure_xa(session, os_type, main_config, cwd, esuid)
-    update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BankPAC/VSAM?type=folder;folder=/data"})
 
     if "odbc" in database_connection:
         db_type = database_connection["db_type"]
@@ -133,6 +128,27 @@ def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, 
             else:
                 create_linux_dsn(db_type, dsn_name, dsn_description, db_name, database_connection)
             write_secret(os_type, "microfocus/mfdbfh/bankpac.{}.password".format(dsn_name.lower()), db_pwd, esuid)
+
+def deploy_vsam_postgres_pac(session, os_type, main_config, cwd, mfdbfh_config, esuid):
+    database_connection = main_config['database_connection']
+    configuration_files = main_config["configuration_files"]
+    is64bit = main_config["is64bit"]
+    ip_address = main_config["ip_address"]
+    region_name = main_config["region_name"]
+
+    configure_xa(session, os_type, main_config, cwd, esuid)
+    update_region_attribute(session, region_name, {"mfCASTXFILEP": "sql://BankPAC/VSAM?type=folder;folder=/data"})
+
+    create_db_vault_secrets(os_type, main_config, esuid)
+
+    write_log ('out of deploy_vsam_postgres_pac')
+
+def catalog_pac_datasets(session, os_type, main_config, cwd, mfdbfh_config, esuid):
+    database_connection = main_config['database_connection']
+    configuration_files = main_config["configuration_files"]
+    is64bit = main_config["is64bit"]
+    ip_address = main_config["ip_address"]
+    region_name = main_config["region_name"]
 
     if 'data_dir_2' in configuration_files:
         write_log ('MFDBFH version required - datasets being migrated to database')

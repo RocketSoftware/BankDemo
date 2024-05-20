@@ -52,21 +52,25 @@ def add_fct(session, region_name, ip_address, fct_details):
         req_body = fct_entry
         uri = 'v2/native/regions/{}/{}/{}/fct/defined'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
         res = session.post(uri, req_body, 'Unable to complete Update FCT API request.')
+    return res
 
 def add_ppt(session, region_name, ip_address, ppt_details):
     for ppt_entry in ppt_details['PPT_Entries']:
         req_body = ppt_entry
         uri = 'v2/native/regions/{}/{}/{}/ppt/defined'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
         res = session.post(uri, req_body, 'Unable to complete Update PPT API request.')
+    return res
 
 def add_pct(session, region_name, ip_address, pct_details):
     for pct_entry in pct_details['PCT_Entries']:
         req_body = pct_entry
         uri = 'v2/native/regions/{}/{}/{}/pct/defined'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
         res = session.post(uri, req_body, 'Unable to complete Update PCT API request.')
+    return res
 
 def update_sit_in_use(session, region_name, ip_address, sit_name):
     uri = 'native/v1/regions/{}/{}/{}'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     sit_attribute ='{\"mfCASCICSSIT\": \"' + sit_name + '\"}'
     req_body = json.loads(sit_attribute)
     res = session.put(uri, req_body, 'Unable to complete Update region attribute request.')
+    return res
