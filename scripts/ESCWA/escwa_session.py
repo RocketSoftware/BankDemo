@@ -78,9 +78,7 @@ class EscwaSession:
         """ Logs on to ESCWA. """
         uri = 'logon'
         try:
-            write_log(mfsecretsadmin)
-            write_log(location)
-            creds_body = subprocess.check_output('{} read {}'.format(mfsecretsadmin, location), -1).decode()
+            creds_body = subprocess.check_output([mfsecretsadmin, 'read', location]).decode()
             req_body = json.loads(creds_body)
         except InputException as exc:
             raise ESCWAException('Unable to get logon credentials.') from exc
