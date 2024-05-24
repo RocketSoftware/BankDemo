@@ -13,12 +13,27 @@ You must have the following software installed:
 -   Micro Focus Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application.
 
-**Note:** This release includes a license for the Micro Focus Host Access for the Cloud TN3270 emulator (HACloud). A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
+**Note:** A license for Micro Focus Host Access for the Cloud (HACloud) Session Server TN3270 emulator is included with Enterprise Developer. 
 
 Before running this demo remotely, be sure you have a Micro Focus RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
 Please see the Micro Focus product documentation for more information.
 
 ## How to Run the Demonstration
+
+### Connect to the default ESCWA server
+
+Ensure that **Server Explorer** contains a connection to the default Enterprise Server Common Web Administration (ESCWA) server. Note that existing workspaces may already have this connection.
+
+1. In the **Server Explorer** view, right-click and select **New > Enterprise Server Common Web Administration Connection**.
+
+    The **New Enterprise Server Common Web Administration Connection** dialog box is displayed.
+2. In the **Name** field, type **Local**.
+3. In the **Server address** field, type **localhost**.
+4. In the **Server port** field, leave as the default 10086.
+5. If the server connection is TLS-enabled, select **TLS Enabled**, and then click **Browse** and select the appropriate certificate.
+>**Note**: If **TLS Enabled** is selected, but you do not specify a certificate, the default Java keystore is searched for a valid one.
+6. Click **Finish**.
+The new ESCWA connection is displayed at the top level, in the **Server Explorer**.
 
 ### Import the supplied BANKDEMO enterprise server:
 
@@ -28,6 +43,32 @@ Please see the Micro Focus product documentation for more information.
 2. On the **Server Explorer** tab, right-click **Local** and select **Import Server**.
 4. Click **Browse**, select the `tutorial/BANKDEMO.xml` file, and then click **Finish**.
     The BANKDEMO server should appear in Server Explorer under **Local**.
+
+### Start the HACloud session server
+
+You must start the HACloud session server before attempting to use the HACloud TN3270 terminal emulator. To do this you need to start the respective Windows service (Windows) or the `startsessionserver.sh` script (UNIX).
+
+**Windows**
+
+1. Ensure you have a 64-bit Java installed and added to the PATH environment variable.
+2. Open the Windows Service Manager.
+3. Go to **Micro Focus HA Cloud** and click **Start the service**. 
+4. Alternatively, you can start the session by opening a command prompt as administrator and executing the following command:
+
+    ```
+    net start mfhacloud
+    ```
+
+**UNIX**
+
+1. Ensure that the installed Java is added to the PATH environment variable.
+2. Start the Enterprise Server region that runs the application you want to connect to.
+3. Open a terminal and set up the COBOL environment in it.
+4. Run the following to start the session server:
+
+    ```
+    startsessionserver.sh
+    ```
 
 ### Import the INCLUDES, FETCHABLES, and BANKMAIN projects into an Eclipse workspace:
 
@@ -66,7 +107,7 @@ Making these associations before you start the server enables the executables bu
 2. On the Debug Configurations dialog, right-click **PL/I Enterprise Server**, and click **New Configuration**.
 3. Change the **Name** from **New_configuration** to something meaningful like **BANK**.
 4. Type **BANKMAIN** in PL/I project, enter **Local** in **ESCWA**, **Default** in **Directory Server**, and **BANKDEMO** in **Region**. Click **Apply** and then click **Debug**.
-5. If a 3270 window does not open automatically, open your preferred TN3270 emulation program, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
+5. Open a TN3270 emulation program like Micro Focus Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 6. If you receive a dialog asking whether to automatically switch to the debug perspective, select **Remember my decision**, and click **Yes**.
 7. Eclipse should automatically open the `SBANK00P.PLI` source file with the SBANK00P PROC line highlighted as the current line of execution.
 8. If line numbers are not turned on in the source window, right-click in the left-hand column of the source pane, and click **Show Line Numbers**.

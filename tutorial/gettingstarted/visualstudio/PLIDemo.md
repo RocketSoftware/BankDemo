@@ -14,7 +14,8 @@ This demonstration requires:
 - Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application. 
 
-***Note:** This release includes a license for the Micro Focus Host Access for the Cloud TN3270 emulator (HACloud). A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
+**Note:**
+A license for Micro Focus Host Access for the Cloud (HACloud) TN3270 emulator is included with Enterprise Developer. 
 
 ## How to Run the Demonstration
 ### Import the supplied Bankdemo enterprise server:
@@ -29,6 +30,19 @@ If you have already imported the BANKDEMO enterprise server as part of the "[Get
 3. Click **Import server definition file**, and select the **tutorial\BANKDEMO.xml** file, then click **OK**.
     
    The BANKDEMO server should appear in Server Explorer under **Local**.
+
+### Start the HACloud session server
+
+You must start the HACloud session server before attempting to use the HACloud TN3270 terminal emulator. To do this you need to start the respective Windows service.
+
+1. Ensure you have a 64-bit Java installed and added to the PATH environment variable.
+2. Open the Windows Service Manager.
+3. Go to **Micro Focus HA Cloud** and click **Start the service**. 
+4. Alternatively, you can start the session by opening a command prompt as administrator and executing the following command:
+
+    ```
+    net start mfhacloud
+    ```
 
 
 ### Configure the BANKDEMO enterprise server for PL/I:
@@ -75,8 +89,8 @@ If you have already imported the BANKDEMO enterprise server as part of the "[Get
 
 ### Execute the CICS application: bankmain
 
-1.  To start debugging in Visual Studio, press **F5** to put the IDE in wait mode for the BANK application to start.
-2.  If a 3270 window does not open automatically, open your preferred TN3270 emulation program, and connect to **localhost** or **127.0.0.1**) on port **9023**.
+1.   To start debugging in Visual Studio, press **F5** to put the IDE in wait mode for the BANK application to start.
+2.  Open a TN3270 emulation program like Micro Focus Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 3.  Visual Studio should automatically open the `SBANK00P.PLI` source file with the **SBANK00P PROC** line highlighted as the current line of execution.
 4.  Next, you can step through the SBANK00P program, set any breakpoints, and evaluate variables.  
 5.  Once you are ready to run the program to completion, click **F5** (Resume) as many times as necessary to run the program to completion.
