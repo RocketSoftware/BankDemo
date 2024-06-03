@@ -11,6 +11,7 @@
             "env_config": "env_pg_pac.json",
             "alias_config": "alias.json",
             "init_config": "init.json",
+            "secrets_config": "mfsecrets_login.json",
             "xa_config": "xa_postgres_pac.json"
         },
     "JES": true,
