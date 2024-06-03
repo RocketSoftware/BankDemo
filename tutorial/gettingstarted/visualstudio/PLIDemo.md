@@ -30,6 +30,16 @@ If you have already imported the BANKDEMO enterprise server as part of the "[Get
     
    The BANKDEMO server should appear in Server Explorer under **Local**.
 
+### Disable the default Enterprise Server security configuration
+
+In this release, the Enterprise Server security features are enabled by default. Tutorials that use enterprise server regions, however, assume that Enterprise Server security is not configured. To perform this tutorial without modification, you must disable the default configured Enterprise Server security. See *To Disable the Default Enterprise Server Security Configuration* for more information.
+
+> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+
+1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd` (Windows) or `DisableESDefaultSecurity.sh` (UNIX). You will see a series of messages as the script disables default security.
+2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
+3. Restart any running enterprise server region to have them pick up the configuration changes. Regions will no longer require credentials for starting/stopping and other actions.
+
 
 ### Configure the BANKDEMO enterprise server for PL/I:
     
@@ -95,3 +105,5 @@ Now that you have finished running the CICS demo, you can stop the associated th
  
 1.  In Server Explorer, right-click the **BANKDEMO** server, and click **Stop**.
 2.  Check the **Output** window for messages that the server has been stopped. A number of messages also appear in the **Enterprise Server Console Daemon** window outside of Visual Studio before it closes down.
+
+> **Note**: You should re-enable Enterprise Server security if you have not already done so. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
