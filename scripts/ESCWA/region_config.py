@@ -125,3 +125,10 @@ def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_locatio
         res = session.post(uri, dataset, 'Unable to complete Add Dataset API request.')
         responses.append(res)
     return responses
+
+def check_security(session):
+    """ check if vsam esm is enabled. """
+    uri = 'validate'
+    res = session.get(uri, 'Security is enabled')
+    return res
+
