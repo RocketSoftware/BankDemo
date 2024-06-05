@@ -84,6 +84,21 @@ We recommend that, if you want remote users to access Enterprise Server function
 2.  If you close a view, click **Window** \> **Show View** \> **View Name** to restore it.
 3.  At any time, you can reset the complete layout of the Team Developer Perspective to its default using **Window \> Perspective \> Reset Perspective**.
 
+### Connect to the default ESCWA server
+
+Ensure that **Server Explorer** contains a connection to the default Enterprise Server Common Web Administration (ESCWA) server. Note that existing workspaces may already have this connection.
+
+1. In the **Server Explorer** view, right-click and select **New > Enterprise Server Common Web Administration Connection**.
+
+    The **New Enterprise Server Common Web Administration Connection** dialog box is displayed.
+2. In the **Name** field, type **Local**.
+3. In the **Server address** field, type **localhost**.
+4. In the **Server port** field, leave as the default 10086.
+5. If the server connection is TLS-enabled, select **TLS Enabled**, and then click **Browse** and select the appropriate certificate.
+>**Note**: If **TLS Enabled** is selected, but you do not specify a certificate, the default Java keystore is searched for a valid one.
+6. Click **Finish**.
+The new ESCWA connection is displayed at the top level, in the **Server Explorer**.
+
 ## Creating a Project and Adding the Source Files
 
 [Back to Top](#overview)
