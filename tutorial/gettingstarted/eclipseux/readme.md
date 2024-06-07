@@ -60,9 +60,9 @@ In this release, the Enterprise Server security features are enabled by default.
 
 > **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
-1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd` (Windows) or `DisableESDefaultSecurity.sh` (UNIX). You will see a series of messages as the script disables default security.
+1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.sh`. You will see a series of messages as the script disables default security.
 2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
-3. Restart any running enterprise server region to have them pick up the configuration changes. Regions will no longer require credentials for starting/stopping and other actions.
+3. Restart any running enterprise server regions to have them pick up the configuration changes. Regions will no longer require credentials for starting/stopping and other actions.
 
 ## Starting the Eclipse Integrated Development Environment (IDE)
 
