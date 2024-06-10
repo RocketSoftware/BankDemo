@@ -51,6 +51,19 @@ For example, Directory Server is configured, by default, to use port 86. Your mu
 
 We recommend that, if you want remote users to access Enterprise Server functionality through the firewall, you use fixed port values so that you can control access via these.
 
+## Enterprise Server security
+
+In this release, the Enterprise Server security features are enabled by default. Tutorials that use enterprise server regions, however, assume that Enterprise Server security is not configured. To perform this tutorial without modification, you must disable the default configured Enterprise Server security. See *To Disable the Default Enterprise Server Security Configuration* for more information.
+
+### Disable the default Enterprise Server security configuration
+
+> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+
+1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd`. You will see a series of messages as the script disables default security.
+2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
+3. Restart any running enterprise server regions to have them pick up the configuration changes. Regions will no longer require credentials for starting/stopping and other actions.
+
+
 ## Starting the Eclipse Integrated Development Environment (IDE)
 
 [Back to Top](#overview)
@@ -325,7 +338,7 @@ You can either use the mouse to mark a block of text or click ![](images/2a6ec09
 You can use rename refactoring to rename all occurrences of a variable:
 
 1.  Scroll down to line 228 in the file.
-2.  Cclick WS-EXEC-PARM-LL in the editor, right-click it, and click **Refactor \> Rename**.
+2.  Click WS-EXEC-PARM-LL in the editor, right-click it, and click **Refactor \> Rename**.
 
     A pop-up is displayed prompting you to enter a new name for the variable.
     ![](images/2e15eb9d708cff50ce53b2564221fcf8.jpg)
@@ -430,7 +443,8 @@ A much more suitable and less error-prone way to edit BMS files is to use the BM
 1.  Close the BMS text editor.
 2.  In the Application Explorer view, **right-click MBANK10.bms** in the **bms\\cobol** folder of your project, and click **Open With** \> **BMS Paint**.
 
-    ![](images/ad53b86263c5a5de6c2f308fe5433ac3.png)This starts the external Micro Focus BMS Painter.
+    ![](images/ad53b86263c5a5de6c2f308fe5433ac3.png)
+    This starts the external Micro Focus BMS Painter.
 
 3.  In BMS Painter, you can click fields and move them by dragging.
 
@@ -1044,5 +1058,7 @@ You use the same features as previously to debug the application.
 2. Finally, click the **Team Developer** perspective button, ![](images/88f58bfeb3fd128cb2fe55172b59806e.jpg), to switch back to editing your application.
 
 This concludes this set of tutorials that introduce Enterprise Developer.
+
+> **Note**: You should re-enable Enterprise Server security if you have not already done so. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
 [Back to Top](#overview)
