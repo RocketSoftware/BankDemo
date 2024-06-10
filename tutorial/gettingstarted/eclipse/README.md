@@ -97,6 +97,21 @@ In this release, the Enterprise Server security features are enabled by default.
 2.  If you close a view, click **Window** \> **Show View** \> **View Name** to restore it.
 3.  At any time, you can reset the complete layout of the Team Developer Perspective to its default using **Window \> Perspective \> Reset Perspective**.
 
+### Connect to the default ESCWA server
+
+Ensure that **Server Explorer** contains a connection to the default Enterprise Server Common Web Administration (ESCWA) server. Note that existing workspaces may already have this connection.
+
+1. In the **Server Explorer** view, right-click and select **New > Enterprise Server Common Web Administration Connection**.
+
+    The **New Enterprise Server Common Web Administration Connection** dialog box is displayed.
+2. In the **Name** field, type **Local**.
+3. In the **Server address** field, type **localhost**.
+4. In the **Server port** field, leave as the default 10086.
+5. If the server connection is TLS-enabled, select **TLS Enabled**, and then click **Browse** and select the appropriate certificate.
+>**Note**: If **TLS Enabled** is selected, but you do not specify a certificate, the default Java keystore is searched for a valid one.
+6. Click **Finish**.
+The new ESCWA connection is displayed at the top level, in the **Server Explorer**.
+
 ## Creating a Project and Adding the Source Files
 
 [Back to Top](#overview)
@@ -303,7 +318,7 @@ Notice that some data items in the Data Division are crossed out. This is becaus
 
 **Viewing data definitions**
 
-1. Hover over a data item in the Procedure Division to see information about the data item and how ma times it is used in the program. 
+1. Hover over a data item in the Procedure Division to see information about the data item and how many times it is used in the program. 
 2. Double-click a data item or paragraph name to see the IDE highlights all their occurrences in the code.
 
 **Breadcrumbs**              
@@ -317,9 +332,6 @@ The ![](images/65bc336b21e1ecd824bc6e2a37508068.jpg) (**Toggle Context Breadcrum
 **Marking text and block mode**
 
 You can either use the mouse to mark a block of text or click ![](images/2a6ec092a713afe86e854b35e22548db.jpg) (**Toggle Block Selection Mode**) and select square blocks of text. When a selection is made, you can cut or copy it. 
-
-This turns the data items and the paragraph names you hover over into hyperlinks.
-
 
 **Rename** 
 
@@ -757,7 +769,7 @@ As with JCL, execution of the jobs requires a previously configured Micro Focus 
 
 **Important:** You need Enterprise Developer or Enterprise Developer for z Systems to execute the application as running applications is not supported in Enterprise Developer Connect.
 
-Before you proceed, ensure that Micro Focus Host Access for the Cloud (HA Cloud) is running:
+Before you proceed, ensure that Micro Focus Host Access for the Cloud (HACloud) is running:
 
 1. Go the the Start menu and open the Services application.
 
