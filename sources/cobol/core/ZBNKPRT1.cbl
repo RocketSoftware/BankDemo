@@ -1,18 +1,18 @@
       *****************************************************************
       *                                                               *
-      * Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved     *
+      * Copyright 2010-2021 Rocket Software, Inc. or its affiliates.  *
       * This software may be used, modified, and distributed          *
       * (provided this notice is included without modification)       *
       * solely for internal demonstration purposes with other         *
-      * Micro Focus software, and is otherwise subject to the EULA at *
-      * https://www.microfocus.com/en-us/legal/software-licensing.    *
+      * Rocket® products, and is otherwise subject to the EULA at     *
+      * https://www.rocketsoftware.com/company/trust/agreements.      *
       *                                                               *
       * THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED             *
       * WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF               *
       * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,         *
       * SHALL NOT APPLY.                                              *
       * TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL              *
-      * MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION       *
+      * ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION   *
       * WITH THIS SOFTWARE.                                           *
       *                                                               *
       *****************************************************************
@@ -127,8 +127,8 @@
                VALUE '1'.
            10  FILLER                              PIC X(40)
                VALUE SPACES.
-           10  WS-LINE1-HEAD                       PIC X(21)
-               VALUE 'Micro Focus Demo Bank'.
+           10  WS-LINE1-HEAD                       PIC X(25)
+               VALUE 'Rocket Software Demo Bank'.
 
          05  WS-LINE2.
            10  WS-LINE2-CC                         PIC X(1)

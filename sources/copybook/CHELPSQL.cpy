@@ -1,6 +1,6 @@
 000100***************************************************************** chelpsql
 000200*                                                               * chelpsql
-000300*  Copyright(C) 1998-2012 Micro Focus. All Rights Reserved.     * chelpsql
+000300* Copyright 1998 – 2024 Rocket Software, Inc. or its affiliates.* chelpsql
 000400*                                                               * chelpsql
 000500***************************************************************** chelpsql
 000600                                                                  chelpsql

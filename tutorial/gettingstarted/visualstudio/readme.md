@@ -1,8 +1,8 @@
-# Getting started with Micro Focus Enterprise Developer for Visual Studio 2022
+# Getting started with Rocket Enterprise Developer for Visual Studio 2022
 
 ## Overview
 
-This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates.
+This set of tutorials guides you through the use of Rocket Enterprise Developer for Visual Studio 2022. They provide a basic understanding of how the product operates.
 
 These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Visual Studio Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Visual Studio 2022 to develop and maintain both simple COBOL and mainframe subsystem applications.
 
@@ -20,7 +20,7 @@ Other tutorials, which are designed for Administrators, are available.
 
 **Download the demonstration application**
 
-A preconfigured, fully executing application, BankDemo, is available from the Micro Focus GitHub repository - [*click here*](https://github.com/MicroFocus/BankDemo). Download the sample's sources as follows:
+A preconfigured, fully executing application, BankDemo, is available from the Rocket Software GitHub repository - [*click here*](https://github.com/RocketSoftware/BankDemo). Download the sample's sources as follows:
 
 1.  In the GitHub repository for the BankDemo demonstration, click **Releases** in the right-hand side part of the page.
 2.  In the list of releases, locate and click the one that corresponds to the Enterprise Developer product release you have installed.
@@ -40,8 +40,8 @@ A preconfigured, fully executing application, BankDemo, is available from the Mi
 
     You must have the following software installed:
 
-    -   Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
-    -   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator. **Note:** A license for Micro Focus Rumba+ Desktop was included with Enterprise Developer product releases 8.0 and earlier, and can be used to run this tutorial.
+    -   Rocket Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
+    -   A TN3270 terminal emulator to run the CICS application. This tutorial uses Rocket Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator.
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -57,7 +57,7 @@ In this release, the Enterprise Server security features are enabled by default.
 
 ### Disable the default Enterprise Server security configuration
 
-> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+> **Important**: Rocket Software does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
 1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd`. You will see a series of messages as the script disables default security.
 2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
@@ -521,7 +521,7 @@ The editor enables you to edit JCL files in text view and offers a basic level o
 
 **BMS editing**
 
-There are two ways to edit BMS files. The first one is to use the basic BMS text editor available in the IDE. The other is to use a WYSIWYG version, the Micro Focus BMS Painter, which is available as a separate utility installed with this product.
+There are two ways to edit BMS files. The first one is to use the basic BMS text editor available in the IDE. The other is to use a WYSIWYG version, the Rocket BMS Painter, which is available as a separate utility installed with this product.
 
 To open the BMS file in the IDE text view:
 
@@ -535,7 +535,7 @@ A much more suitable and less error-prone way to edit BMS files is to use the BM
 1.  Close the BMS text editor.
 2.  In Solution Explorer, right-click **MBANK10.bms** in the **bms** folder, and click **Open BMS Painter**.
 
-    This starts the external Micro Focus BMS Painter.
+    This starts the external Rocket BMS Painter.
     ![](images/bc3927fe772d2feba8915dd3c18e2c45.png)
 
 3.  In BMS Painter, you can click fields and move them by dragging.
@@ -552,7 +552,7 @@ A much more suitable and less error-prone way to edit BMS files is to use the BM
 
 **Editing data files**
 
-You can edit data files using one of two available Micro Focus Data File Editor tools.
+You can edit data files using one of two available Rocket Data File Editor tools.
 
 By default, Visual Studio is configured to use the new Data File Tools utility. To check where this is enabled:
 
@@ -608,7 +608,7 @@ To compile the application:
 
 **COBOL Compiler control**
 
-The Micro Focus COBOL Compiler can compile many different COBOL dialect variations. It can also compile COBOL code that contains EXEC CICS or EXEC SQL statements. The Compiler is controlled through a series of "directives" which are passed to the Compiler at build time. You can set directives at either a project or component level.
+The Rocket COBOL Compiler can compile many different COBOL dialect variations. It can also compile COBOL code that contains EXEC CICS or EXEC SQL statements. The Compiler is controlled through a series of "directives" which are passed to the Compiler at build time. You can set directives at either a project or component level.
 
 Often the directives can be set only at the project level, which means that all component files in the project use them. Sometimes, you have a component which you need to compile with different directives. In this case, you can set the directives at the component level which overrides the project settings.
 
@@ -681,7 +681,7 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
 The first thing you need to do is check that the Bankdemo application is executing correctly.
 
-To execute the JCL, you need to run the application in an instance of the Micro Focus Enterprise Server (sometimes abbreviated to Enterprise Server). This demonstration includes a pre-configured enterprise server instance called BANKDEMO which you need to import in Enterprise Server and start before you execute the Bankdemo application.
+To execute the JCL, you need to run the application in an instance of the Rocket Enterprise Server (sometimes abbreviated to Enterprise Server). This demonstration includes a pre-configured enterprise server instance called BANKDEMO which you need to import in Enterprise Server and start before you execute the Bankdemo application.
 
 **Importing the Bankdemo server**
 
@@ -695,7 +695,7 @@ This sample provides a PowerShell script that creates the region definition to u
 
 Ensure that the default settings are applied to the Directory Sever:
 
-1.  Click the Start menu and open the Services application. Navigate to Micro Focus Directory Server to view its status and set it to **Running** if it is not already started.
+1.  Click the Start menu and open the Services application. Navigate to Rocket Directory Server to view its status and set it to **Running** if it is not already started.
 
 2.  In Visual Studio, open the Server Explorer window.
 
@@ -703,7 +703,7 @@ Ensure that the default settings are applied to the Directory Sever:
 
     ![](images/03218b9fa5693aaca14ff3cf3aa3dd1b.jpg) **Tip:** Use the Auto Hide button (![](images/bf74b6a329048075497d723393231eba.jpg)) in the Server Explorer toolbar to pin the window to the IDE window.
 
-3.  Right-click **Micro Focus Servers** and select **Directory Server Configuration**. This opens the Micro Focus Directory Server window. 
+3.  Right-click **Micro Focus Servers** and select **Directory Server Configuration**. This opens the Rocket Directory Server window. 
 
 4.  Ensure that Host name is localhost and the Port number is 86.
 
@@ -831,19 +831,19 @@ To view the spool:
 
 In the previous step, Unit Testing the Batch Application, you used the BANKDEMO enterprise server. You are going to use it again for online testing.
 
-As with JCL, execution of the jobs requires a previously configured Micro Focus enterprise server.
+As with JCL, execution of the jobs requires a previously configured enterprise server.
 
-Before you proceed, ensure that Micro Focus Host Access for the Cloud (HACloud) is running:
+Before you proceed, ensure that Rocket Host Access for the Cloud (HACloud) is running:
 
 1. Go the the Start menu and open the Services application.
 
-2. Navigate to the Micro Focus HA Cloud service and check that its status is set to **Running**.
+2. Navigate to the HA Cloud service and check that its status is set to **Running**.
 
 3. If it is not running, right-click and click **Start**.
 
 **Executing the CICS application**
 
-The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
+The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Rocket Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
 
 **Configuring the TN3270 settings in the IDE** 
 
@@ -1112,7 +1112,7 @@ Although the job has completed, the debugger is still waiting for the next event
 
 **1.** Click **Debug** \> **Stop Debugging**.
 
-This concludes this set of tutorials that introduce Micro Focus Enterprise Developer.
+This concludes this set of tutorials that introduce Rocket Enterprise Developer.
 
 > **Note**: You should re-enable Enterprise Server security if you have not already done so. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 

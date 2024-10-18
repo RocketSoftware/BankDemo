@@ -1,13 +1,21 @@
- /****************************************************************
- *
- *   Copyright (C) 1998-2010 Micro Focus All Rights Reserved
- *   This demonstration program is provided for use by users
- *   of Micro Focus products and may be used, modified and
- *   distributed as part of your application provided that
- *   you properly acknowledge the copyright of Micro Focus
- *   in this material.
- *
- ****************************************************************/
+  /****************************************************************
+  *
+  * Copyright 1998 – 2024 Rocket Software, Inc. or its affiliates.
+  * This software may be used, modified, and distributed
+  * (provided this notice is included without modification)
+  * solely for internal demonstration purposes with other
+  * Rocket® products, and is otherwise subject to the EULA at
+  * https://www.rocketsoftware.com/company/trust/agreements.
+  *
+  * THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
+  * WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
+  * SHALL NOT APPLY.
+  * TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
+  * ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+  * WITH THIS SOFTWARE.
+  *
+  ****************************************************************/
 
  /****************************************************************
  * Program:     ZBNKPRT1.PLI
@@ -130,8 +138,8 @@
           INIT('1'),
       10  FILL01                              CHAR(40)
           INIT(''),
-      10  WS_LINE1_HEAD                       CHAR(21)
-          INIT('Micro Focus Demo Bank'),
+      10  WS_LINE1_HEAD                       CHAR(25)
+          INIT('Rocket Software Demo Bank'),
 
     05  WS_LINE2,
       10  WS_LINE2_CC                         CHAR(1)

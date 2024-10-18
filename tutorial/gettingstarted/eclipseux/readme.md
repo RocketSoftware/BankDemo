@@ -1,8 +1,8 @@
-# Getting started with Micro Focus Enterprise Developer for Eclipse (Linux)
+# Getting started with Rocket Enterprise Developer for Eclipse (Linux)
 
 ## Overview
 
-This set of tutorials guides you through the use of Micro Focus Enterprise Developer for Eclipse. They provide a basic understanding of how the product operates.
+This set of tutorials guides you through the use of Rocket Enterprise Developer for Eclipse. They provide a basic understanding of how the product operates.
 
 These tutorials are designed for developers who have experience with developing COBOL on the mainframe but do not necessarily have a working knowledge of the Eclipse Integrated Development Environment (IDE). The tutorials provide a basic understanding of the features offered in Enterprise Developer for Eclipse to develop and maintain both simple COBOL and mainframe subsystem applications.
 
@@ -19,7 +19,7 @@ Other tutorials, which are designed for Administrators, are available.
 
 **Download the demonstration application**
 
-A preconfigured, fully executing application, Bankdemo, is available from the Micro Focus GitHub repository - [*click here*](https://github.com/MicroFocus/BankDemo). Download the sample's sources as follows:
+A preconfigured, fully executing application, Bankdemo, is available from the Rocket Software GitHub repository - [*click here*](https://github.com/RocketSoftware/BankDemo). Download the sample's sources as follows:
 
 1.  In the GitHub repository for the Bankdemo demonstration, click **Releases** in the right-hand side part of the page.
 2.  In the list of releases, locate and click the one that corresponds to the Enterprise Developer product release you have installed.
@@ -41,8 +41,8 @@ As part of this tutorial, you use the supplied standard Eclipse COBOL project in
 
 You must have the following software installed:
 
--   Micro Focus Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
--   A TN3270 terminal emulator to run the CICS application. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator.
+-   Rocket Enterprise Developer for Eclipse (Linux). [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
+-   A TN3270 terminal emulator to run the CICS application. This tutorial uses Rocket Host Access for the Cloud (HACloud), which is installed with Enterprise Developer, but you may use an alternative terminal emulator.
 
 **Using a remote enterprise server instance for the tutorials**
 
@@ -58,7 +58,7 @@ In this release, the Enterprise Server security features are enabled by default.
 
 ### Disable the default Enterprise Server security configuration
 
-> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+> **Important**: Rocket Software does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
 1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.sh`. You will see a series of messages as the script disables default security.
 2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
@@ -236,7 +236,7 @@ To add the data file to your project:
 4. Select **MFI01V.MFIDEMO.BNKACC.dat**, and then click **Open**.
 5.  Click **Finish**.
 
-    This adds the file to the Bankdemo project and also automatically opens it in the Micro Focus Data Files Tools utility. You can close the utility for now.
+    This adds the file to the Bankdemo project and also automatically opens it in the Rocket Data Files Tools utility. You can close the utility for now.
 
 6.  Repeat steps 1 to 5 to add the **MFI01V.MFIDEMO.BNKACC.str** file to the project.
 
@@ -454,7 +454,7 @@ You can also explore your BMS maps and mapsets in the BMS Preview view:
 
 **Editing data files**
 
-Next, you can edit the data file using the Micro Focus Data Tools Editor:
+Next, you can edit the data file using the Rocket Data Tools Editor:
 
 1.  In the Application Explorer view, right-click the **.dat** file, and click **Open With \> Data File Tools**.
 
@@ -509,7 +509,7 @@ Turn the automatic build on:
 
 **COBOL Compiler control**
 
-The Micro Focus COBOL Compiler can compile many different COBOL dialect variations. It can also compile COBOL code that contains EXEC CICS or EXEC SQL statements. The Compiler is controlled through a series of "directives" which are passed to the Compiler at build time. You can set directives at either a project or component level.
+The Rocket COBOL compiler can compile many different COBOL dialect variations. It can also compile COBOL code that contains EXEC CICS or EXEC SQL statements. The Compiler is controlled through a series of "directives" which are passed to the Compiler at build time. You can set directives at either a project or component level.
 
 Often the directives can be set only at the project level, which means that all component files in the project use them. Sometimes, you have a component which you need to compile with different directives. In this case, you can set the directives at the component level which overrides the project settings.
 
@@ -608,7 +608,7 @@ You can introduce some Compiler errors into one of the programs to see how the C
 
 The first thing you need to do is check that the Bankdemo application is executing correctly.
 
-To execute the JCL, you need to run the application in an instance of the Micro Focus Enterprise Server (sometimes abbreviated to Enterprise Server). This demonstration includes a pre-configured enterprise server instance called BANKDEMO which you need to import in Enterprise Server and start before you execute the Bankdemo application.
+To execute the JCL, you need to run the application in an instance of the Rocket Enterprise Server (sometimes abbreviated to Enterprise Server). This demonstration includes a pre-configured enterprise server instance called BANKDEMO which you need to import in Enterprise Server and start before you execute the Bankdemo application.
 
 **Important:** You need Enterprise Developer or Enterprise Developer for z Systems to execute the application as running applications is not supported in Enterprise Developer Connect.
 
@@ -631,7 +631,7 @@ Next, ensure that the following two services are running on your machine:
         nohup escwa < /dev/null > escwa.out 2>&1 &
         ```
 
-   -   Micro Focus Directory Server - from a terminal that has the COBOL environment set, execute the following as root if you need to start this:
+   -   Rocket Directory Server - from a terminal that has the COBOL environment set, execute the following as root if you need to start this:
 
         ```
         mfds64 &
@@ -760,13 +760,13 @@ You can now start to look at how to run the online application.
 
 In the previous step, Unit Testing the Batch Application, you used the BANKDEMO enterprise server. You are going to use it again for online testing.
 
-As with JCL, execution of the jobs requires a previously configured Micro Focus enterprise server.
+As with JCL, execution of the jobs requires a previously configured Rocket enterprise server.
 
 **Important:** You need Enterprise Developer or Enterprise Developer for z Systems to execute the application as running applications is not supported in Enterprise Developer Connect.
 
 **Executing the CICS application**
 
-The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Micro Focus Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
+The CICS application requires that you use a 3270 terminal emulator. This tutorial uses Rocket Host Access for the Cloud (HACloud), but you may adapt the tutorial to suit your terminal emulator of choice. 
 
 **Start the HACloud session server**
 
@@ -780,7 +780,7 @@ You need to start the HACloud session server before you can use the HACloud TN32
        startsessionserver.sh
     ```
     
-4. Check the terminal for the messages that the Micro Focus HACloud Session Server has started.
+4. Check the terminal for the messages that the HACloud Session Server has started.
 
 **Configuring the TN3270 settings in the IDE**
 
@@ -869,7 +869,7 @@ You can now start the debugger. It starts in the background until a program whic
 3.  Click **JCL Debug**, and then click **Debug**.
 4.  You might receive a message about opening the Debug perspective when it launches. If you do, click **Yes**.
 
-    This opens a new **Debug** view, showing that the Micro Focus Debugger is waiting for attachment.
+    This opens a new **Debug** view, showing that the COBOL Debugger is waiting for attachment.
 
     In addition, in the top right of the main screen, the view has changed from **Team Developer** to **Debug**:
 

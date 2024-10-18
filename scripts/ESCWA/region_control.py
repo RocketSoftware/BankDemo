@@ -1,20 +1,20 @@
 """
-Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
-This software may be used, modified, and distributed 
+Copyright 2010 – 2024 Rocket Software, Inc. or its affiliates. 
+This software may be used, modified, and distributed
 (provided this notice is included without modification)
-solely for internal demonstration purposes with other 
-Micro Focus software, and is otherwise subject to the EULA at
-https://www.microfocus.com/en-us/legal/software-licensing.
+solely for internal demonstration purposes with other
+Rocket® products, and is otherwise subject to the EULA at
+https://www.rocketsoftware.com/company/trust/agreements.
 
-THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED 
+THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
 WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
 SHALL NOT APPLY.
-TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL 
-MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
+ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
-Description:  Functions for control of a Micro Focus server region. 
+Description:  Functions for control of a server region. 
 """
 
 import time
@@ -28,7 +28,7 @@ from utilities.exceptions import ESCWAException, InputException, HTTPException
 from utilities.output import write_log 
 
 def add_region(session, region_name, port, template_file, is64bit):
-    """ Adds a region to the Micro Focus server. """
+    """ Adds a region to the server region. """
     uri = 'native/v1/regions/{}/{}'.format('127.0.0.1',os.getenv("CCITCP2_PORT","86"))
     try:
         req_body = read_json(template_file)
@@ -43,7 +43,7 @@ def add_region(session, region_name, port, template_file, is64bit):
     return res
 
 def start_region(session, region_name, ip_address):
-    """ Starts a previously created region on the Micro Focus server. """
+    """ Starts a previously created region on the server region. """
     uri = 'native/v1/regions/{}/{}/{}/start'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_body = {
         'mfUser': 'SYSAD',
@@ -55,7 +55,7 @@ def start_region(session, region_name, ip_address):
     return res
 
 def stop_region(session, region_name):
-    """ Stops a previously created region on the Micro Focus server. """
+    """ Stops a previously created region on the server region. """
     uri = 'native/v1/regions/{}/{}/{}/stop'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_body = {
         'mfUser': 'SYSAD',
@@ -68,7 +68,7 @@ def stop_region(session, region_name):
     return res
 
 def mark_region_stopped(session, region_name):
-    """ Marks a previously created region as stopped on the Micro Focus server. """
+    """ Marks a previously created region as stopped on the server region. """
     uri = 'native/v1/regions/{}/{}/{}'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     req_body = {
         'mfServerStatus': 'Stopped'
@@ -78,19 +78,19 @@ def mark_region_stopped(session, region_name):
     return res
 
 def del_region(session, region_name):
-    """ Deletes a region from the Micro Focus server. """
+    """ Deletes a region from the server region. """
     uri = 'native/v1/regions/{}/{}/{}'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     res = session.delete(uri, 'Unable to complete Delete Region API request.')
     return res
 
 def get_region_status(session, region_name):
-    """ Checks a previously created region's status on the Micro Focus Server. """
+    """ Checks a previously created region's status on the server region. """
     uri = 'native/v1/regions/{}/{}/{}/status'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     res = session.get(uri, 'Unable to complete Region Check API request.')
     return res
 
 def confirm_region_status(session, region_name, mins_allowed, expected):
-    """ Checks a previously created region's status for a given value on the Micro Focus Server. """
+    """ Checks a previously created region's status for a given value on the server region. """
     timeout_seconds=mins_allowed*60
     while timeout_seconds >= 0:
         status_res = get_region_status(session, region_name)

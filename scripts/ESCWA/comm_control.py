@@ -1,27 +1,27 @@
 """
-Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
-This software may be used, modified, and distributed 
+Copyright 2010 – 2024 Rocket Software, Inc. or its affiliates. 
+This software may be used, modified, and distributed
 (provided this notice is included without modification)
-solely for internal demonstration purposes with other 
-Micro Focus software, and is otherwise subject to the EULA at
-https://www.microfocus.com/en-us/legal/software-licensing.
+solely for internal demonstration purposes with other
+Rocket® products, and is otherwise subject to the EULA at
+https://www.rocketsoftware.com/company/trust/agreements.
 
-THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED 
+THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
 WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
 SHALL NOT APPLY.
-TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL 
-MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
+ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
-Description:  A function to setup a JES listener on the Micro Focus server. 
+Description:  A function to setup a JES listener on the server region. 
 """
 
 from utilities.misc import get_elem_with_prop
 import os
 
 def set_jes_listener(session, region_name, ip_address, port):
-    """ Sets a JES listener on the Micro Focus server. """
+    """ Sets a JES listener on the server region. """
     uri = 'native/v1/regions/{}/{}/{}/commsserver'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     res = session.get(uri, 'Unable to get Comm Server information.')
     comm_server = res.json()

@@ -1,5 +1,5 @@
-      *   Micro Focus COBOL 2017  7.0.00247
-      *   Micro Focus BMS Screen Painter
+      *   Rocket Visual COBOL 2017  7.0.00247
+      *   Rocket BMS Screen Painter
       *   MapSet Name   MBANK60
       *   Date Created  11/08/2021
       *   Time Created  19:41:42

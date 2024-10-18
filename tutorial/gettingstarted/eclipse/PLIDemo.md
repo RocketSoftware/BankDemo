@@ -10,13 +10,13 @@ If you decide to use the remote debug instructions, please check with your syste
 
 You must have the following software installed:
 
--   Micro Focus Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
+- Rocket Enterprise Developer for Eclipse. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application.
 
-**Note:** A license for Micro Focus Host Access for the Cloud (HACloud) Session Server TN3270 emulator is included with Enterprise Developer. 
+**Note:** A license for Rocket Host Access for the Cloud (HACloud) Session Server TN3270 emulator is included with Enterprise Developer. 
 
-Before running this demo remotely, be sure you have a Micro Focus RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
-Please see the Micro Focus product documentation for more information.
+Before running this demo remotely, be sure you have an RDO and MFDS agent already configured and running on the remote UNIX/Linux machine.
+Please see the Rocket product documentation for more information.
 
 ## How to Run the Demonstration
 
@@ -52,7 +52,7 @@ You must start the HACloud session server before attempting to use the HACloud T
 
 1. Ensure you have a 64-bit Java installed and added to the PATH environment variable.
 2. Open the Windows Service Manager.
-3. Go to **Micro Focus HA Cloud** and click **Start the service**. 
+3. Go to **Rocket HA Cloud** and click **Start the service**. 
 4. Alternatively, you can start the session by opening a command prompt as administrator and executing the following command:
 
     ```
@@ -87,7 +87,7 @@ You must start the HACloud session server before attempting to use the HACloud T
 
 In this release, the Enterprise Server security features are enabled by default. Tutorials that use enterprise server regions, however, assume that Enterprise Server security is not configured. To perform this tutorial without modification, you must disable the default configured Enterprise Server security. See *To Disable the Default Enterprise Server Security Configuration* for more information.
 
-> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+> **Important**: Rocket Software does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
 1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd`. You will see a series of messages as the script disables default security.
 2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
@@ -132,7 +132,7 @@ Making these associations before you start the server enables the executables bu
 2. On the Debug Configurations dialog, right-click **PL/I Enterprise Server**, and click **New Configuration**.
 3. Change the **Name** from **New_configuration** to something meaningful like **BANK**.
 4. Type **BANKMAIN** in PL/I project, enter **Local** in **ESCWA**, **Default** in **Directory Server**, and **BANKDEMO** in **Region**. Click **Apply** and then click **Debug**.
-5. Open a TN3270 emulation program like Micro Focus Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
+5. Open a TN3270 emulation program like Rocket Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 6. If you receive a dialog asking whether to automatically switch to the debug perspective, select **Remember my decision**, and click **Yes**.
 7. Eclipse should automatically open the `SBANK00P.PLI` source file with the SBANK00P PROC line highlighted as the current line of execution.
 8. If line numbers are not turned on in the source window, right-click in the left-hand column of the source pane, and click **Show Line Numbers**.

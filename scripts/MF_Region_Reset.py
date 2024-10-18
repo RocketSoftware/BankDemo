@@ -1,22 +1,22 @@
 #!/usr/bin/python3
 
 """
-Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
-This software may be used, modified, and distributed 
+Copyright 2010 – 2024 Rocket Software, Inc. or its affiliates. 
+This software may be used, modified, and distributed
 (provided this notice is included without modification)
-solely for internal demonstration purposes with other 
-Micro Focus software, and is otherwise subject to the EULA at
-https://www.microfocus.com/en-us/legal/software-licensing.
+solely for internal demonstration purposes with other
+Rocket® products, and is otherwise subject to the EULA at
+https://www.rocketsoftware.com/company/trust/agreements.
 
-THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED 
+THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
 WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
 SHALL NOT APPLY.
-TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL 
-MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
+ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
-Description:  A script to reset a Micro Focus server region to stopped. 
+Description:  A script to reset a server region to stopped. 
 """
 
 import sys
@@ -44,7 +44,7 @@ def reset_region(region_name='BANKDEMO', ip_address='127.0.0.1', mins_allowed=1)
         print('Unable to confirm region is stopped.')
         sys.exit(1)
 
-    print('Micro Focus JES Batch Server has been successfully set to Stopped')       
+    print('JES Batch Server has been successfully set to Stopped')       
 
 
 if __name__ == '__main__':

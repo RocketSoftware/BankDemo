@@ -1,20 +1,20 @@
 """
-Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved.
-This software may be used, modified, and distributed 
+Copyright 2010 – 2024 Rocket Software, Inc. or its affiliates. 
+This software may be used, modified, and distributed
 (provided this notice is included without modification)
-solely for internal demonstration purposes with other 
-Micro Focus software, and is otherwise subject to the EULA at
-https://www.microfocus.com/en-us/legal/software-licensing.
+solely for internal demonstration purposes with other
+Rocket® products, and is otherwise subject to the EULA at
+https://www.rocketsoftware.com/company/trust/agreements.
 
-THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED 
+THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
 WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
 SHALL NOT APPLY.
-TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL 
-MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
+ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
-Description:  Function for configuring a Micro Focus server region. 
+Description:  Function for configuring a server region. 
 """
 
 import os
@@ -27,7 +27,7 @@ from utilities.session import get_session, save_cookies
 from utilities.exceptions import ESCWAException, InputException, HTTPException
 
 def update_region(session, region_name, template_file, env_file, region_description, region_base, catalog_file):
-    """ Updates the settings of a previously created region on the Micro Focus server. """
+    """ Updates the settings of a previously created region on the  server region. """
     uri = 'native/v1/regions/{}/{}/{}'.format('127.0.0.1', os.getenv("CCITCP2_PORT","86"), region_name)
     esp_alias = '$ESP'
     if sys.platform.startswith('win32'):
@@ -84,7 +84,7 @@ def update_region_attribute(session, region_name, attribute_details):
     return res
     
 def update_alias(session, region_name, ip_address, alias_file):
-    """ Updates the aliases on a Micro Focus Server. """
+    """ Updates the aliases on a server region. """
     uri = 'native/v1/regions/{}/{}/{}/alias'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     try:
         req_body = read_json(alias_file)
@@ -94,7 +94,7 @@ def update_alias(session, region_name, ip_address, alias_file):
     return res
 
 def add_initiator(session, region_name, ip_address, template_file):
-    """ Adds an initiator to a Micro Focus server. """
+    """ Adds an initiator to a server region. """
     uri = 'native/v1/regions/{}/{}/{}/initiator'.format(ip_address, os.getenv("CCITCP2_PORT","86"), region_name)
     try:
         req_body = read_json(template_file)
@@ -106,7 +106,7 @@ def add_initiator(session, region_name, ip_address, template_file):
 
 
 def add_datasets(session, region_name, ip_address, datafile_list, mfdbfh_location, catalog_dir):
-    """ Adds data sets to a Micro Focus server. """
+    """ Adds data sets to a server region. """
     try:
         dataset_list = [read_json(data_file) for data_file in datafile_list]
     except InputException as exc:

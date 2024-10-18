@@ -1,6 +1,7 @@
  /****************************************************************
  *
- *  Copyright(C) 1998-2010 Micro Focus. All Rights Reserved.
+ *  (C) 2010 – 2024 Rocket Software, Inc. or its affiliates. 
+ *  All Rights Reserved.
  *
  ****************************************************************/
 

@@ -4,27 +4,27 @@
 
 .GUID ed19390e-7e65-446b-a237-a29860708ac4
 
-.AUTHOR Micro Focus
+.AUTHOR Rocket Software
 
-.COMPANYNAME Micro Focus
+.COMPANYNAME Rocket Software
 
-.COPYRIGHT Copyright (C) 2010-2021 Micro Focus.  All Rights Reserved
+.COPYRIGHT Copyright 2010 – 2024 Rocket Software, Inc. or its affiliates. 
 This software may be used, modified, and distributed
 (provided this notice is included without modification)
 solely for internal demonstration purposes with other
-Micro Focus software, and is otherwise subject to the EULA at
-https://www.microfocus.com/en-us/legal/software-licensing.
+Rocket® products, and is otherwise subject to the EULA at
+https://www.rocketsoftware.com/company/trust/agreements.
 THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
 WARRANTIES, INCLUDING THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE,
 SHALL NOT APPLY.
 TO THE EXTENT PERMITTED BY LAW, IN NO EVENT WILL
-MICRO FOCUS HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
+ROCKET SOFTWARE HAVE ANY LIABILITY WHATSOEVER IN CONNECTION
 WITH THIS SOFTWARE.
 
-.LICENSEURI https://www.microfocus.com/en-us/legal/software-licensing
+.LICENSEURI https://www.rocketsoftware.com/company/trust/agreements
 
-.PROJECTURI https://github.com/MicroFocus/BankDemo
+.PROJECTURI https://github.com/RocketSoftware/BankDemo
 
 #>
 

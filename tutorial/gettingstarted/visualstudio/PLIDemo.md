@@ -11,17 +11,17 @@ This demonstration shows how you can compile, link, and debug an Open PL/I BANK 
 ## Prerequisites
 
 This demonstration requires:
-- Micro Focus Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
+- Rocket Enterprise Developer for Visual Studio 2022. [*Click here*](https://www.microfocus.com/documentation/enterprise-developer/) to access the product Help and the release notes of Enterprise Developer.
 - A TN3270 terminal emulator to run the CICS application. 
 
 **Note:**
-A license for Micro Focus Host Access for the Cloud (HACloud) TN3270 emulator is included with Enterprise Developer. 
+A license for Rocket Host Access for the Cloud (HACloud) TN3270 emulator is included with Enterprise Developer. 
 
 ## How to Run the Demonstration
 ### Import the supplied Bankdemo enterprise server:
   
 **Note:**
-If you have already imported the BANKDEMO enterprise server as part of the "[Getting started with Micro Focus Enterprise Developer for Visual Studio 2022](..\README.md)" tutorial, you can skip these steps.
+If you have already imported the BANKDEMO enterprise server as part of the "[Getting started with Rocket Enterprise Developer for Visual Studio 2022](..\README.md)" tutorial, you can skip these steps.
     
 1. Execute the `tutorial\createdefinition.ps1` PowerShell script to create the **BANKDEMO.xml** region definition file. 
     
@@ -37,7 +37,7 @@ You must start the HACloud session server before attempting to use the HACloud T
 
 1. Ensure you have a 64-bit Java installed and added to the PATH environment variable.
 2. Open the Windows Service Manager.
-3. Go to **Micro Focus HA Cloud** and click **Start the service**. 
+3. Go to **Rocket HA Cloud** and click **Start the service**. 
 4. Alternatively, you can start the session by opening a command prompt as administrator and executing the following command:
 
     ```
@@ -48,7 +48,7 @@ You must start the HACloud session server before attempting to use the HACloud T
 
 In this release, the Enterprise Server security features are enabled by default. Tutorials that use enterprise server regions, however, assume that Enterprise Server security is not configured. To perform this tutorial without modification, you must disable the default configured Enterprise Server security. See *To Disable the Default Enterprise Server Security Configuration* for more information.
 
-> **Important**: Micro Focus does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
+> **Important**: Rocket Software does not recommend disabling Enterprise Server security permanently. If you disable the default Enterprise Server security to facilitate running tutorials then this should be performed on a network isolated machine. Re-enable security as soon as possible after completing the tutorial. See *To recreate the Default Enterprise Server Security Configuration* in the product documentation for steps on how to re-enable security. 
 
 1. In an Enterprise Developer command prompt, run the command `DisableESDefaultSecurity.cmd`. You will see a series of messages as the script disables default security.
 2. Restart MFDS and ESCWA to pick up the configuration changes. You will now be able to use ESCWA without having to log in.
@@ -100,7 +100,7 @@ In this release, the Enterprise Server security features are enabled by default.
 ### Execute the CICS application: bankmain
 
 1.   To start debugging in Visual Studio, press **F5** to put the IDE in wait mode for the BANK application to start.
-2.  Open a TN3270 emulation program like Micro Focus Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
+2.  Open a TN3270 emulation program like Rocket Host Access for the Cloud, and connect to **localhost** (or **127.0.0.1**) on port **9023**.
 3.  Visual Studio should automatically open the `SBANK00P.PLI` source file with the **SBANK00P PROC** line highlighted as the current line of execution.
 4.  Next, you can step through the SBANK00P program, set any breakpoints, and evaluate variables.  
 5.  Once you are ready to run the program to completion, click **F5** (Resume) as many times as necessary to run the program to completion.

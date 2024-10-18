@@ -1,19 +1,18 @@
-# Micro Focus Bankdemo Performance and Availability Cluster
+# Bankdemo Performance and Availability Cluster
 This demonstration configures the Bankdemo application to run in Performance and Availability Cluster (PAC), storing banking data in VSAM datasets stored within a PostgreSQL database. The database is accessed from COBOL programs using `EXEC CICS` statements such as: `STARTBR FILE`, `READ FILE`, and `WRITE FILE`. The cluster is formed of two Enterprise Server instances running on the same machine.
 
 The COBOL modules used to access the data are stored in the `sources/cobol/data/vsam` directory of this project and are unchanged from when the data is stored in indexed sequential files on disk and when not running in a PAC.
 
-The Micro Focus Secrets Vault is used to store the database credentials.
+The Rocket Secrets Vault is used to store the database credentials.
 
 ## Prerequisites
-- Micro Focus Enterprise Developer or Enterprise Server
+- Rocket Enterprise Developer or Enterprise Server
 - A TN3270 terminal emulator:
-   - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
-- The Micro Focus Directory Server (mfds) must be running and listening on the default port (86)
-- The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
+   - The Rocket Host Access for the Cloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
+- The Rocket Directory Server (mfds) must be running and listening on the default port (86)
+- The Enterprise Server Common Web Administration (ESCWA) service must be running and listening on the default port (10086).
 - A Redis server is installed and running
-   - The Micro Focus Enterprise Developer products on Windows include AdoptRedis which is suitable for testing and demonstration purposes 
-     (e.g. `C:\Program Files (x86)\Micro Focus\Enterprise Developer\AdoptRedis\redis-server.exe`).
+   - The Rocket Enterprise Developer products on Windows include AdoptRedis which is suitable for testing and demonstration purposes 
 - PostgreSQL version 12 or later must be installed and running
 - PostgreSQL `psql` command needs to be available on the PATH
 - PostgreSQL ODBC driver: 
@@ -41,7 +40,7 @@ The demonstration includes a Python script that helps create the Enterprise Serv
    - Uses pre-built application modules
    - Two ODBC system data sources called `PG.MASTER`, `PG.VSAM`, `PG.CROSSREGION` and `PG.REGION` are created
    - The VSAM data is uploaded to the database using `dbfhdeploy add` commands 
-   - The server instances are configured to use the Micro Focus Database File Handler (MFDBFH) by:
+   - The server instances are configured to use the Rocket Database File Handler (MFDBFH) by:
        - The credentials vault is populated with database credentials (using the `mfsecretsadmin` command)
         - Specifying the XA switch module espgsqlxa (its source is in the `src/enterpriseserver/xa` directory of the Enterprise Developer installation location)
         - The esxaextcfg module provides encrypted credentials to espgsqlxa        

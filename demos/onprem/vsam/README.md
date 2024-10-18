@@ -1,12 +1,12 @@
-# Micro Focus Bankdemo Application Using Disk Files
+# Bankdemo Application Using Disk Files
 This demonstration shows how to configure the Bankdemo application to store banking data in VSAM datasets on disk. You access the datasets from COBOL programs using `EXEC CICS` statements such as `STARTBR FILE`, `READ FILE`, `WRITE FILE`. The COBOL modules are stored in the `sources/cobol/data/vsam` directory of this project.
 
 ## Prerequisites
-- Micro Focus Enterprise Developer or Enterprise Server
+- Rocket Enterprise Developer or Enterprise Server
 - A TN3270 terminal emulator. 
-   - The Micro Focus HACloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
-- The Micro Focus Directory Server (mfds) service must be started and listening on the default port (86).
-- The Micro Focus Enterprise Server Common Web Administration (ESCWA) service must be started and listening on the default port (10086).
+   - The Rocket Host Access for the Cloud session server and TN3270 emulator is included with both Enterprise Developer and Enterprise Server.
+- The Rocket Directory Server (mfds) service must be started and listening on the default port (86).
+- The Enterprise Server Common Web Administration (ESCWA) service must be started and listening on the default port (10086).
 - Python 3.*n* and the `requests` package from Python.org. You can install the package after installing Python with the following command: 
   ```
   python -m pip install requests
