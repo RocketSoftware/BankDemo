@@ -5,7 +5,7 @@
 //* This software may be used, modified, and distributed
 //* (provided this notice is included without modification)
 //* solely for internal demonstration purposes with other
-//* Rocket® products, and is otherwise subject to the EULA at
+//* Rocket products, and is otherwise subject to the EULA at
 //* https://www.rocketsoftware.com/company/trust/agreements.
 //*
 //* THIS SOFTWARE IS PROVIDED "AS IS" AND ALL IMPLIED
