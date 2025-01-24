@@ -66,10 +66,10 @@ TIME    DFHMDF ATTRB=(NORM,PROT),                                      -
                INITIAL='hh:mm:ss'
 TXT03   DFHMDF ATTRB=(ASKIP,NORM),                                     -
                COLOR=TURQUOISE,                                        -
-               LENGTH=82,                                              -
+               LENGTH=78,                                              -
                POS=(4,1),                                              -
-               INITIAL='Welcome to Rocket Software'' demonstration system b-
-               ased on a mythical bank.        '
+               INITIAL='Welcome to Rocket Software'' demonstration syst-
+               em based on a mythical bank.    '
 TXT04   DFHMDF ATTRB=(ASKIP,NORM),                                     -
                COLOR=TURQUOISE,                                        -
                LENGTH=72,                                              -
